@@ -30,9 +30,9 @@ class NameViewController: UIViewController, UITextFieldDelegate {
                 print(err)
             } else {
                 let document = snapShot!.data()
-                self.firstNameTextField.text = String(describing: document!["firstName"])
-                self.lastNameTextField.text = String(describing: document!["secondName"])
                 
+                self.firstNameTextField.text = (document!["firstName"]! as! String)
+                self.lastNameTextField.text = (document!["secondName"]! as! String)
             }
         })
 

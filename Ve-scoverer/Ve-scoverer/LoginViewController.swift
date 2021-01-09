@@ -142,7 +142,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
                         let user = user.profile
                         self.firstName = (user?.givenName)!
                         self.secondName = (user?.familyName)!
-                        self.emailId = (user?.email)!
+                        self.emailId = (self.user?.email)!
                         self.userlocation = self.location.coordinate
                         
                         self.db.collection("users").document((self.user?.email)!).setData([
@@ -188,7 +188,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
                         let user = user.profile
                         self.firstName = (user?.givenName)!
                         self.secondName = (user?.familyName)!
-                        self.emailId = (user?.email)!
+                        self.emailId = (self.user?.email)!
                         self.userlocation = self.location.coordinate
                         
                         self.db.collection("users").document((self.user?.email)!).setData([

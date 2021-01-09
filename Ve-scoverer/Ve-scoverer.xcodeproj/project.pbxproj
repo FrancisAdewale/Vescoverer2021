@@ -12,6 +12,8 @@
 		761CBC1C258D3CD7003136FB /* SocialsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761CBC1B258D3CD7003136FB /* SocialsViewController.swift */; };
 		762503212555D8DB002F92E2 /* FoundTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762503202555D8DB002F92E2 /* FoundTableViewController.swift */; };
 		7625033C25570169002F92E2 /* UserCore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7625033A25570169002F92E2 /* UserCore.xcdatamodeld */; };
+		7626C4A425AA004800F7E4EF /* ImageViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7626C4A225AA004800F7E4EF /* ImageViewCell.swift */; };
+		7626C4A525AA004800F7E4EF /* ImageViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7626C4A325AA004800F7E4EF /* ImageViewCell.xib */; };
 		763EFF8D2552EE4200CEAA41 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763EFF8C2552EE4200CEAA41 /* User.swift */; };
 		763EFF9025530CD700CEAA41 /* DashboardTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763EFF8F25530CD700CEAA41 /* DashboardTabController.swift */; };
 		763EFF94255311CE00CEAA41 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763EFF93255311CE00CEAA41 /* LoginViewController.swift */; };
@@ -48,6 +50,8 @@
 		761CBC1B258D3CD7003136FB /* SocialsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialsViewController.swift; sourceTree = "<group>"; };
 		762503202555D8DB002F92E2 /* FoundTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundTableViewController.swift; sourceTree = "<group>"; };
 		7625033B25570169002F92E2 /* UserCore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserCore.xcdatamodel; sourceTree = "<group>"; };
+		7626C4A225AA004800F7E4EF /* ImageViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewCell.swift; sourceTree = "<group>"; };
+		7626C4A325AA004800F7E4EF /* ImageViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageViewCell.xib; sourceTree = "<group>"; };
 		763EFF8C2552EE4200CEAA41 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		763EFF8F25530CD700CEAA41 /* DashboardTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTabController.swift; sourceTree = "<group>"; };
 		763EFF93255311CE00CEAA41 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -123,6 +127,15 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		7626C4A125AA000100F7E4EF /* UserImageCell */ = {
+			isa = PBXGroup;
+			children = (
+				7626C4A225AA004800F7E4EF /* ImageViewCell.swift */,
+				7626C4A325AA004800F7E4EF /* ImageViewCell.xib */,
+			);
+			path = UserImageCell;
+			sourceTree = "<group>";
+		};
 		767EAE51256EB1AC00B67811 /* fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -152,6 +165,7 @@
 		76912B5B2551DB1B001C38DE /* Ve-scoverer */ = {
 			isa = PBXGroup;
 			children = (
+				7626C4A125AA000100F7E4EF /* UserImageCell */,
 				76EAC831258B9D3500615A9F /* Register */,
 				76BAC638258A2A7A0031A3EB /* Ve-scoverer.entitlements */,
 				767EAE51256EB1AC00B67811 /* fonts */,
@@ -259,6 +273,7 @@
 				76912B692551DB1B001C38DE /* LaunchScreen.storyboard in Resources */,
 				76912B662551DB1B001C38DE /* Assets.xcassets in Resources */,
 				767EAE53256EB1C600B67811 /* Lato in Resources */,
+				7626C4A525AA004800F7E4EF /* ImageViewCell.xib in Resources */,
 				76912B642551DB1B001C38DE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -349,6 +364,7 @@
 				763EFFA5255457C000CEAA41 /* ProfileTableViewController.swift in Sources */,
 				763EFF9B2554558900CEAA41 /* DiscoverViewController.swift in Sources */,
 				763EFF8D2552EE4200CEAA41 /* User.swift in Sources */,
+				7626C4A425AA004800F7E4EF /* ImageViewCell.swift in Sources */,
 				76912B762551E400001C38DE /* RegisterViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -27,6 +27,8 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
     var isUserVerified = Bool()
     let user = Auth.auth().currentUser
     let db = Firestore.firestore()
+    var imagefilepath = ""
+    var userFirstName = ""
 
     
 
@@ -39,30 +41,11 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
     @IBOutlet weak var tab: UITabBarItem!
  
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-       
-
-
-
-        load()
-        
-//        if let user = user {
-//            let verified = user.isEmailVerified
-//
-//            if verified {
-//                isVerified.image = UIImage(named: "verified")
-//
-//            } else {
-////                self.label.text = self.label.text
-//            }
-//
-//        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        load()
         
+
 
         
         self.navigationController?.navigationBar.prefersLargeTitles = true
@@ -72,6 +55,10 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         picker.delegate = self
         picker.allowsEditing = true
         picker.sourceType = .photoLibrary
+        
+        tableView.register(UINib(nibName: "ImageViewCell", bundle: nil), forCellReuseIdentifier: "ImageCell")
+        
+
         
     }
     
@@ -107,10 +94,18 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
     
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ImageCell", for: indexPath) as! ImageViewCell
         cell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
         cell.contentView.layer.borderWidth = 0.05
         cell.layer.cornerRadius = 8
+        cell.userFirstName.text = userFirstName
+        if let documentUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+            
+            let url = documentUrl.appendPathComponent(self.path)
+            let data = try! Data(contentsOf: url!)
+            cell.userImage.image = UIImage(data: data)
+        }
+        
         return cell
         
     }
@@ -128,15 +123,17 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
             button.frame = CGRect(x: 20, y: 10, width: 300, height: 50)
             button.setTitle("Logout", for: .normal)
             button.tintColor = .black
-            
-            let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapSignOut(_:)))
-                 tap.cancelsTouchesInView = false
-                 view.addGestureRecognizer(tap)
+            button.addTarget(self, action: #selector(didTapSignOut(_:)), for: .touchUpInside)
             footerView.addSubview(button)
         }
         return footerView
 
     }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100.0
+    }
+    
     
     
     
@@ -265,11 +262,6 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
 //
 //    }
     
-    
-    
-    
-    
-    
     @IBAction func didTapSignOut(_ sender: AnyObject) {
         GIDSignIn.sharedInstance().signOut()
         print("signed out \(String(describing: user?.email))")
@@ -290,24 +282,16 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
 //        twitterButton.isEnabled = buttonIsEnabled
 
 
-//
-//        db.collection("users").document(user?.email ?? "Email").collection("socials").document("instagram").getDocument(completion: { (documentSnap, err) in
-//            if let err = err {
-//                print(err.localizedDescription)
-//            }
-//
-//            if let data = documentSnap?.data() {
-//                for document in data {
-//
-//                    self.editedInstagram = document.value as! String
-//
-//                }
-//
-//            }
-            
-            
-           
-            
+
+        db.collection("users").document((user?.email)!).getDocument { (snapshot, err) in
+            if let err = err {
+                print(err)
+            }
+            let data = snapshot?.data()
+            self.imagefilepath = data!["imagepath"] as! String
+            self.userFirstName = data!["firstName"] as! String
+        }
+
 //        })
         
 //        db.collection("users").document(user?.email ?? "Email").collection("socials").document("twitter").getDocument(completion: { (documentSnap, err) in
