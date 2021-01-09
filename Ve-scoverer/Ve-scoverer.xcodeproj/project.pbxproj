@@ -1,0 +1,583 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		261A50C52DBAA16C2E84EF47 /* Pods_Ve_scoverer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5662CB65AC2CCD879E168FB8 /* Pods_Ve_scoverer.framework */; };
+		761CBC18258D343D003136FB /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761CBC17258D343D003136FB /* UploadViewController.swift */; };
+		761CBC1C258D3CD7003136FB /* SocialsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761CBC1B258D3CD7003136FB /* SocialsViewController.swift */; };
+		762503212555D8DB002F92E2 /* FoundTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762503202555D8DB002F92E2 /* FoundTableViewController.swift */; };
+		7625033C25570169002F92E2 /* UserCore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7625033A25570169002F92E2 /* UserCore.xcdatamodeld */; };
+		763EFF8D2552EE4200CEAA41 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763EFF8C2552EE4200CEAA41 /* User.swift */; };
+		763EFF9025530CD700CEAA41 /* DashboardTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763EFF8F25530CD700CEAA41 /* DashboardTabController.swift */; };
+		763EFF94255311CE00CEAA41 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763EFF93255311CE00CEAA41 /* LoginViewController.swift */; };
+		763EFF9B2554558900CEAA41 /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763EFF9A2554558900CEAA41 /* DiscoverViewController.swift */; };
+		763EFFA22554573D00CEAA41 /* VerifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763EFFA12554573D00CEAA41 /* VerifyViewController.swift */; };
+		763EFFA5255457C000CEAA41 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763EFFA4255457C000CEAA41 /* ProfileTableViewController.swift */; };
+		7669AE08259374F8000E2A1C /* InstagramAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7669AE07259374F8000E2A1C /* InstagramAPI.swift */; };
+		7669AE0B2593779B000E2A1C /* InstagramResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7669AE0A2593779B000E2A1C /* InstagramResponse.swift */; };
+		767E81C925A23BF400BC40EC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 767E81C825A23BF400BC40EC /* GoogleService-Info.plist */; };
+		767EAE53256EB1C600B67811 /* Lato in Resources */ = {isa = PBXBuildFile; fileRef = 767EAE52256EB1C600B67811 /* Lato */; };
+		767F0EDC2591104A00615FB5 /* NormalUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767F0EDB2591104A00615FB5 /* NormalUser.swift */; };
+		76912B5D2551DB1B001C38DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76912B5C2551DB1B001C38DE /* AppDelegate.swift */; };
+		76912B5F2551DB1B001C38DE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76912B5E2551DB1B001C38DE /* SceneDelegate.swift */; };
+		76912B612551DB1B001C38DE /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76912B602551DB1B001C38DE /* HomeViewController.swift */; };
+		76912B642551DB1B001C38DE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76912B622551DB1B001C38DE /* Main.storyboard */; };
+		76912B662551DB1B001C38DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76912B652551DB1B001C38DE /* Assets.xcassets */; };
+		76912B692551DB1B001C38DE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76912B672551DB1B001C38DE /* LaunchScreen.storyboard */; };
+		76912B762551E400001C38DE /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76912B752551E400001C38DE /* RegisterViewController.swift */; };
+		76BAC65F258A7A830031A3EB /* GoogleSignIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76BAC65E258A7A830031A3EB /* GoogleSignIn.framework */; };
+		76BAC662258A7A930031A3EB /* GoogleSignInDependencies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76BAC661258A7A930031A3EB /* GoogleSignInDependencies.framework */; };
+		76BAC664258A7BC20031A3EB /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76BAC663258A7BC20031A3EB /* LocalAuthentication.framework */; };
+		76BAC666258A7BD10031A3EB /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76BAC665258A7BD10031A3EB /* SafariServices.framework */; };
+		76BAC668258A7BDE0031A3EB /* AuthenticationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76BAC667258A7BDE0031A3EB /* AuthenticationServices.framework */; };
+		76BAC66A258A7BE60031A3EB /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76BAC669258A7BE60031A3EB /* SystemConfiguration.framework */; };
+		76EAC834258B9D7600615A9F /* VeganViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EAC833258B9D7600615A9F /* VeganViewController.swift */; };
+		76EAC838258BC76400615A9F /* NameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EAC837258BC76400615A9F /* NameViewController.swift */; };
+		76EAC83B258BCE8500615A9F /* AgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EAC83A258BCE8500615A9F /* AgeViewController.swift */; };
+		76EAC83E258CD9B500615A9F /* GenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EAC83D258CD9B500615A9F /* GenderViewController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		5662CB65AC2CCD879E168FB8 /* Pods_Ve_scoverer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ve_scoverer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		761CBC17258D343D003136FB /* UploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
+		761CBC1B258D3CD7003136FB /* SocialsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialsViewController.swift; sourceTree = "<group>"; };
+		762503202555D8DB002F92E2 /* FoundTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundTableViewController.swift; sourceTree = "<group>"; };
+		7625033B25570169002F92E2 /* UserCore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserCore.xcdatamodel; sourceTree = "<group>"; };
+		763EFF8C2552EE4200CEAA41 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		763EFF8F25530CD700CEAA41 /* DashboardTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTabController.swift; sourceTree = "<group>"; };
+		763EFF93255311CE00CEAA41 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		763EFF9A2554558900CEAA41 /* DiscoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverViewController.swift; sourceTree = "<group>"; };
+		763EFFA12554573D00CEAA41 /* VerifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyViewController.swift; sourceTree = "<group>"; };
+		763EFFA4255457C000CEAA41 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
+		7669AE07259374F8000E2A1C /* InstagramAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramAPI.swift; sourceTree = "<group>"; };
+		7669AE0A2593779B000E2A1C /* InstagramResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramResponse.swift; sourceTree = "<group>"; };
+		767E81C825A23BF400BC40EC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		767EAE52256EB1C600B67811 /* Lato */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Lato; sourceTree = "<group>"; };
+		767F0EDB2591104A00615FB5 /* NormalUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NormalUser.swift; sourceTree = "<group>"; };
+		76912B592551DB1B001C38DE /* Ve-scoverer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ve-scoverer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		76912B5C2551DB1B001C38DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		76912B5E2551DB1B001C38DE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		76912B602551DB1B001C38DE /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		76912B632551DB1B001C38DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		76912B652551DB1B001C38DE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		76912B682551DB1B001C38DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		76912B6A2551DB1B001C38DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		76912B752551E400001C38DE /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		76BAC638258A2A7A0031A3EB /* Ve-scoverer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Ve-scoverer.entitlements"; sourceTree = "<group>"; };
+		76BAC65B258A7A730031A3EB /* GoogleSignIn.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GoogleSignIn.bundle; sourceTree = "<group>"; };
+		76BAC65E258A7A830031A3EB /* GoogleSignIn.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleSignIn.framework; sourceTree = "<group>"; };
+		76BAC661258A7A930031A3EB /* GoogleSignInDependencies.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleSignInDependencies.framework; sourceTree = "<group>"; };
+		76BAC663258A7BC20031A3EB /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
+		76BAC665258A7BD10031A3EB /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
+		76BAC667258A7BDE0031A3EB /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = System/Library/Frameworks/AuthenticationServices.framework; sourceTree = SDKROOT; };
+		76BAC669258A7BE60031A3EB /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		76EAC833258B9D7600615A9F /* VeganViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VeganViewController.swift; sourceTree = "<group>"; };
+		76EAC837258BC76400615A9F /* NameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameViewController.swift; sourceTree = "<group>"; };
+		76EAC83A258BCE8500615A9F /* AgeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeViewController.swift; sourceTree = "<group>"; };
+		76EAC83D258CD9B500615A9F /* GenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderViewController.swift; sourceTree = "<group>"; };
+		8A6F67F00767E389B6D529C1 /* Pods-Ve-scoverer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ve-scoverer.debug.xcconfig"; path = "Target Support Files/Pods-Ve-scoverer/Pods-Ve-scoverer.debug.xcconfig"; sourceTree = "<group>"; };
+		F9D0C6F224B814B83095557C /* Pods-Ve-scoverer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ve-scoverer.release.xcconfig"; path = "Target Support Files/Pods-Ve-scoverer/Pods-Ve-scoverer.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		76912B562551DB1B001C38DE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				76BAC668258A7BDE0031A3EB /* AuthenticationServices.framework in Frameworks */,
+				76BAC66A258A7BE60031A3EB /* SystemConfiguration.framework in Frameworks */,
+				76BAC664258A7BC20031A3EB /* LocalAuthentication.framework in Frameworks */,
+				76BAC662258A7A930031A3EB /* GoogleSignInDependencies.framework in Frameworks */,
+				261A50C52DBAA16C2E84EF47 /* Pods_Ve_scoverer.framework in Frameworks */,
+				76BAC65F258A7A830031A3EB /* GoogleSignIn.framework in Frameworks */,
+				76BAC666258A7BD10031A3EB /* SafariServices.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		01B790A68FC7AF795E674182 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				76BAC669258A7BE60031A3EB /* SystemConfiguration.framework */,
+				76BAC667258A7BDE0031A3EB /* AuthenticationServices.framework */,
+				76BAC665258A7BD10031A3EB /* SafariServices.framework */,
+				76BAC663258A7BC20031A3EB /* LocalAuthentication.framework */,
+				5662CB65AC2CCD879E168FB8 /* Pods_Ve_scoverer.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2658E028AB40644FFF89A8E3 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8A6F67F00767E389B6D529C1 /* Pods-Ve-scoverer.debug.xcconfig */,
+				F9D0C6F224B814B83095557C /* Pods-Ve-scoverer.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		767EAE51256EB1AC00B67811 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				767EAE52256EB1C600B67811 /* Lato */,
+			);
+			path = fonts;
+			sourceTree = "<group>";
+		};
+		76912B502551DB1B001C38DE = {
+			isa = PBXGroup;
+			children = (
+				76912B5B2551DB1B001C38DE /* Ve-scoverer */,
+				76912B5A2551DB1B001C38DE /* Products */,
+				2658E028AB40644FFF89A8E3 /* Pods */,
+				01B790A68FC7AF795E674182 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		76912B5A2551DB1B001C38DE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				76912B592551DB1B001C38DE /* Ve-scoverer.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		76912B5B2551DB1B001C38DE /* Ve-scoverer */ = {
+			isa = PBXGroup;
+			children = (
+				76EAC831258B9D3500615A9F /* Register */,
+				76BAC638258A2A7A0031A3EB /* Ve-scoverer.entitlements */,
+				767EAE51256EB1AC00B67811 /* fonts */,
+				76912B5C2551DB1B001C38DE /* AppDelegate.swift */,
+				763EFF8C2552EE4200CEAA41 /* User.swift */,
+				76912B5E2551DB1B001C38DE /* SceneDelegate.swift */,
+				76912B602551DB1B001C38DE /* HomeViewController.swift */,
+				76912B622551DB1B001C38DE /* Main.storyboard */,
+				76912B652551DB1B001C38DE /* Assets.xcassets */,
+				763EFF93255311CE00CEAA41 /* LoginViewController.swift */,
+				763EFF8F25530CD700CEAA41 /* DashboardTabController.swift */,
+				76912B752551E400001C38DE /* RegisterViewController.swift */,
+				763EFF9A2554558900CEAA41 /* DiscoverViewController.swift */,
+				76912B672551DB1B001C38DE /* LaunchScreen.storyboard */,
+				76912B6A2551DB1B001C38DE /* Info.plist */,
+				767E81C825A23BF400BC40EC /* GoogleService-Info.plist */,
+				763EFFA12554573D00CEAA41 /* VerifyViewController.swift */,
+				763EFFA4255457C000CEAA41 /* ProfileTableViewController.swift */,
+				762503202555D8DB002F92E2 /* FoundTableViewController.swift */,
+				76BAC661258A7A930031A3EB /* GoogleSignInDependencies.framework */,
+				76BAC65E258A7A830031A3EB /* GoogleSignIn.framework */,
+				76BAC65B258A7A730031A3EB /* GoogleSignIn.bundle */,
+				7625033A25570169002F92E2 /* UserCore.xcdatamodeld */,
+			);
+			path = "Ve-scoverer";
+			sourceTree = "<group>";
+		};
+		76EAC831258B9D3500615A9F /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				76EAC833258B9D7600615A9F /* VeganViewController.swift */,
+				76EAC837258BC76400615A9F /* NameViewController.swift */,
+				76EAC83A258BCE8500615A9F /* AgeViewController.swift */,
+				76EAC83D258CD9B500615A9F /* GenderViewController.swift */,
+				761CBC17258D343D003136FB /* UploadViewController.swift */,
+				761CBC1B258D3CD7003136FB /* SocialsViewController.swift */,
+				767F0EDB2591104A00615FB5 /* NormalUser.swift */,
+				7669AE07259374F8000E2A1C /* InstagramAPI.swift */,
+				7669AE0A2593779B000E2A1C /* InstagramResponse.swift */,
+			);
+			path = Register;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		76912B582551DB1B001C38DE /* Ve-scoverer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 76912B6D2551DB1B001C38DE /* Build configuration list for PBXNativeTarget "Ve-scoverer" */;
+			buildPhases = (
+				EB3887DE06FD82A1663FE24F /* [CP] Check Pods Manifest.lock */,
+				76912B552551DB1B001C38DE /* Sources */,
+				76912B562551DB1B001C38DE /* Frameworks */,
+				76912B572551DB1B001C38DE /* Resources */,
+				30B80B0F328758045E21C59A /* [CP] Embed Pods Frameworks */,
+				7B19C64228A8E8D1E9667550 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Ve-scoverer";
+			productName = "Ve-scoverer";
+			productReference = 76912B592551DB1B001C38DE /* Ve-scoverer.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		76912B512551DB1B001C38DE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1210;
+				LastUpgradeCheck = 1210;
+				TargetAttributes = {
+					76912B582551DB1B001C38DE = {
+						CreatedOnToolsVersion = 12.1;
+					};
+				};
+			};
+			buildConfigurationList = 76912B542551DB1B001C38DE /* Build configuration list for PBXProject "Ve-scoverer" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 76912B502551DB1B001C38DE;
+			productRefGroup = 76912B5A2551DB1B001C38DE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				76912B582551DB1B001C38DE /* Ve-scoverer */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		76912B572551DB1B001C38DE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				767E81C925A23BF400BC40EC /* GoogleService-Info.plist in Resources */,
+				76912B692551DB1B001C38DE /* LaunchScreen.storyboard in Resources */,
+				76912B662551DB1B001C38DE /* Assets.xcassets in Resources */,
+				767EAE53256EB1C600B67811 /* Lato in Resources */,
+				76912B642551DB1B001C38DE /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		30B80B0F328758045E21C59A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Ve-scoverer/Pods-Ve-scoverer-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Ve-scoverer/Pods-Ve-scoverer-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Ve-scoverer/Pods-Ve-scoverer-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7B19C64228A8E8D1E9667550 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Ve-scoverer/Pods-Ve-scoverer-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Ve-scoverer/Pods-Ve-scoverer-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Ve-scoverer/Pods-Ve-scoverer-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EB3887DE06FD82A1663FE24F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Ve-scoverer-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		76912B552551DB1B001C38DE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				76EAC834258B9D7600615A9F /* VeganViewController.swift in Sources */,
+				761CBC18258D343D003136FB /* UploadViewController.swift in Sources */,
+				762503212555D8DB002F92E2 /* FoundTableViewController.swift in Sources */,
+				76EAC83B258BCE8500615A9F /* AgeViewController.swift in Sources */,
+				7625033C25570169002F92E2 /* UserCore.xcdatamodeld in Sources */,
+				7669AE08259374F8000E2A1C /* InstagramAPI.swift in Sources */,
+				767F0EDC2591104A00615FB5 /* NormalUser.swift in Sources */,
+				763EFF94255311CE00CEAA41 /* LoginViewController.swift in Sources */,
+				763EFF9025530CD700CEAA41 /* DashboardTabController.swift in Sources */,
+				76912B612551DB1B001C38DE /* HomeViewController.swift in Sources */,
+				763EFFA22554573D00CEAA41 /* VerifyViewController.swift in Sources */,
+				76912B5D2551DB1B001C38DE /* AppDelegate.swift in Sources */,
+				76EAC83E258CD9B500615A9F /* GenderViewController.swift in Sources */,
+				761CBC1C258D3CD7003136FB /* SocialsViewController.swift in Sources */,
+				76912B5F2551DB1B001C38DE /* SceneDelegate.swift in Sources */,
+				7669AE0B2593779B000E2A1C /* InstagramResponse.swift in Sources */,
+				76EAC838258BC76400615A9F /* NameViewController.swift in Sources */,
+				763EFFA5255457C000CEAA41 /* ProfileTableViewController.swift in Sources */,
+				763EFF9B2554558900CEAA41 /* DiscoverViewController.swift in Sources */,
+				763EFF8D2552EE4200CEAA41 /* User.swift in Sources */,
+				76912B762551E400001C38DE /* RegisterViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		76912B622551DB1B001C38DE /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				76912B632551DB1B001C38DE /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		76912B672551DB1B001C38DE /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				76912B682551DB1B001C38DE /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		76912B6B2551DB1B001C38DE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		76912B6C2551DB1B001C38DE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		76912B6E2551DB1B001C38DE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8A6F67F00767E389B6D529C1 /* Pods-Ve-scoverer.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Ve-scoverer/Ve-scoverer.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 88XF5QGDBG;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Ve-scoverer",
+				);
+				INFOPLIST_FILE = "Ve-scoverer/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.FrancisAdewale.Ve-scoverer";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		76912B6F2551DB1B001C38DE /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F9D0C6F224B814B83095557C /* Pods-Ve-scoverer.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Ve-scoverer/Ve-scoverer.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 88XF5QGDBG;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Ve-scoverer",
+				);
+				INFOPLIST_FILE = "Ve-scoverer/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.FrancisAdewale.Ve-scoverer";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		76912B542551DB1B001C38DE /* Build configuration list for PBXProject "Ve-scoverer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				76912B6B2551DB1B001C38DE /* Debug */,
+				76912B6C2551DB1B001C38DE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		76912B6D2551DB1B001C38DE /* Build configuration list for PBXNativeTarget "Ve-scoverer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				76912B6E2551DB1B001C38DE /* Debug */,
+				76912B6F2551DB1B001C38DE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		7625033A25570169002F92E2 /* UserCore.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				7625033B25570169002F92E2 /* UserCore.xcdatamodel */,
+			);
+			currentVersion = 7625033B25570169002F92E2 /* UserCore.xcdatamodel */;
+			path = UserCore.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 76912B512551DB1B001C38DE /* Project object */;
+}

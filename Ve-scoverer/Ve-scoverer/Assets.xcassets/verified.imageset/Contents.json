@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "%E2%80%94Pngtree%E2%80%94vector%20valid%20icon_3997427.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "%E2%80%94Pngtree%E2%80%94vector%20valid%20icon_3997427-1.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "%E2%80%94Pngtree%E2%80%94vector%20valid%20icon_3997427-2.png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
