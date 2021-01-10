@@ -14,12 +14,13 @@ import GoogleSignIn
 
 
 class ProfileTableViewController: UITableViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+
+    
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var editedInstagram = String()
     var editedTwitter = String()
     let picker = UIImagePickerController()
-//    let storage = Storage.storage()
     var expectedString = ""
     var expectedImage = UIImage()
     var buttonIsEnabled = true
@@ -30,7 +31,16 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
     var imagefilepath = ""
     var userFirstName = ""
     
+    var profileUser = ProfileUser()
+    var section1 = [String]()
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        load()
+        
 
+    }
     
 
     @IBOutlet weak var twitterButton: UIButton!
@@ -41,16 +51,10 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
     @IBOutlet weak var uploadImage: UIButton!
     @IBOutlet weak var tab: UITabBarItem!
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        load()
-
-    }
- 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+
         self.navigationController?.navigationBar.prefersLargeTitles = true
         title = "Account"
       
@@ -60,6 +64,8 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         picker.sourceType = .photoLibrary
         
         tableView.register(UINib(nibName: "ImageViewCell", bundle: nil), forCellReuseIdentifier: "ImageCell")
+        tableView.register(UINib(nibName: "NormalViewCell", bundle: nil), forCellReuseIdentifier: "NormalCell")
+
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -67,8 +73,16 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        
+        if section == 0 {
+            return 3
+
+        } else {
+            return 4
+        }
     }
+    
+    
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
@@ -92,6 +106,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         tableView.deselectRow(at: indexpath!, animated: true)
     }
     
+  
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -100,32 +115,41 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
             cell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
             cell.contentView.layer.borderWidth = 0.05
             cell.layer.cornerRadius = 8
-            cell.userFirstName.text = userFirstName
+            cell.userFirstName.text = profileUser.firstName
             return cell
         } else if indexPath.section == 0 && indexPath.row == 1 {
-            let otherCell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-            otherCell.textLabel?.text = "Age  cell"
+            
+        
+            let otherCell = tableView.dequeueReusableCell(withIdentifier: "NormalCell", for: indexPath) as! NormalViewCell
             otherCell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
+            otherCell.fillerInfo.text = profileUser.age.description
             otherCell.contentView.layer.borderWidth = 0.05
             otherCell.layer.cornerRadius = 8
             return otherCell
         } else if indexPath.section == 0 && indexPath.row == 2 {
-            let otherCell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-            otherCell.textLabel?.text = "Vegan Since Cell"
+            let otherCell = tableView.dequeueReusableCell(withIdentifier: "NormalCell", for: indexPath) as! NormalViewCell
+            otherCell.fillerInfo.text = profileUser.veganSince
             otherCell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
             otherCell.contentView.layer.borderWidth = 0.05
             otherCell.layer.cornerRadius = 8
             return otherCell
         } else if indexPath.section == 1 && indexPath.row == 0 {
             let otherCell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-            otherCell.textLabel?.text = "Gender Cell"
+            otherCell.textLabel?.text = profileUser.gender
             otherCell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
             otherCell.contentView.layer.borderWidth = 0.05
             otherCell.layer.cornerRadius = 8
             return otherCell
         } else if indexPath.section == 1 && indexPath.row == 1 {
             let otherCell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-            otherCell.textLabel?.text = "Twitter  cell"
+            otherCell.textLabel?.text = profileUser.twitter
+            otherCell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
+            otherCell.contentView.layer.borderWidth = 0.05
+            otherCell.layer.cornerRadius = 8
+            return otherCell
+        } else if indexPath.section == 1 && indexPath.row == 2 {
+            let otherCell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+            otherCell.textLabel?.text = profileUser.instagram
             otherCell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
             otherCell.contentView.layer.borderWidth = 0.05
             otherCell.layer.cornerRadius = 8
@@ -134,7 +158,8 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         
         else {
             let otherCell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-            otherCell.textLabel?.text = "Instagram cell"
+            otherCell.textLabel?.text = profileUser.latitude.description
+            otherCell.textLabel?.text! += profileUser.longitude.description
             otherCell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
             otherCell.contentView.layer.borderWidth = 0.05
             otherCell.layer.cornerRadius = 8
@@ -313,15 +338,29 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
 
 
 
-        db.collection("users").document((user?.email)!).getDocument { (snapshot, err) in
+        db.collection("users").document((user?.email)!).addSnapshotListener { (snapShot, err) in
             if let err = err {
                 print(err)
             }
-            let data = snapshot?.data()
-            self.imagefilepath = data!["imagepath"] as! String
-            self.userFirstName = data!["firstName"] as! String
+            
+            let data = snapShot?.data()
+            
+            self.profileUser.firstName = data!["firstName"] as! String
+            self.profileUser.veganSince = data!["veganSince"] as! String
+            self.profileUser.age = data!["age"] as! Int
+            self.profileUser.gender = data!["gender"] as! String
+            self.profileUser.instagram = data!["instagram"] as! String
+            self.profileUser.twitter = data!["twitter"] as! String
+            self.profileUser.image = data!["imagepath"] as! String
+            self.profileUser.latitude = data!["age"] as! Double
+            self.profileUser.longitude = data!["age"] as! Double
+            
+            
         }
-
+        
+            //self.imagefilepath = data!["imagepath"] as! String
+     
+        }
 //        })
         
 //        db.collection("users").document(user?.email ?? "Email").collection("socials").document("twitter").getDocument(completion: { (documentSnap, err) in
@@ -345,5 +384,3 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
 
     
     
-    
-}
