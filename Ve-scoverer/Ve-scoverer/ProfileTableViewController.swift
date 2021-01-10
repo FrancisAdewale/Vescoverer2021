@@ -29,6 +29,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
     let db = Firestore.firestore()
     var imagefilepath = ""
     var userFirstName = ""
+    
 
     
 
@@ -39,15 +40,17 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
     @IBOutlet weak var profileName: UILabel!
     @IBOutlet weak var uploadImage: UIButton!
     @IBOutlet weak var tab: UITabBarItem!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        load()
+
+    }
  
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        load()
-        
-
-
-        
+    
         self.navigationController?.navigationBar.prefersLargeTitles = true
         title = "Account"
       
@@ -57,9 +60,6 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         picker.sourceType = .photoLibrary
         
         tableView.register(UINib(nibName: "ImageViewCell", bundle: nil), forCellReuseIdentifier: "ImageCell")
-        
-
-        
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -94,19 +94,57 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
     
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ImageCell", for: indexPath) as! ImageViewCell
-        cell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
-        cell.contentView.layer.borderWidth = 0.05
-        cell.layer.cornerRadius = 8
-        cell.userFirstName.text = userFirstName
-        if let documentUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-            
-            let url = documentUrl.appendPathComponent(self.path)
-            let data = try! Data(contentsOf: url!)
-            cell.userImage.image = UIImage(data: data)
+        
+        if indexPath.section == 0 && indexPath.row == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ImageCell", for: indexPath) as! ImageViewCell
+            cell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
+            cell.contentView.layer.borderWidth = 0.05
+            cell.layer.cornerRadius = 8
+            cell.userFirstName.text = userFirstName
+            return cell
+        } else if indexPath.section == 0 && indexPath.row == 1 {
+            let otherCell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+            otherCell.textLabel?.text = "Age  cell"
+            otherCell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
+            otherCell.contentView.layer.borderWidth = 0.05
+            otherCell.layer.cornerRadius = 8
+            return otherCell
+        } else if indexPath.section == 0 && indexPath.row == 2 {
+            let otherCell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+            otherCell.textLabel?.text = "Vegan Since Cell"
+            otherCell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
+            otherCell.contentView.layer.borderWidth = 0.05
+            otherCell.layer.cornerRadius = 8
+            return otherCell
+        } else if indexPath.section == 1 && indexPath.row == 0 {
+            let otherCell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+            otherCell.textLabel?.text = "Gender Cell"
+            otherCell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
+            otherCell.contentView.layer.borderWidth = 0.05
+            otherCell.layer.cornerRadius = 8
+            return otherCell
+        } else if indexPath.section == 1 && indexPath.row == 1 {
+            let otherCell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+            otherCell.textLabel?.text = "Twitter  cell"
+            otherCell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
+            otherCell.contentView.layer.borderWidth = 0.05
+            otherCell.layer.cornerRadius = 8
+            return otherCell
         }
         
-        return cell
+        else {
+            let otherCell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+            otherCell.textLabel?.text = "Instagram cell"
+            otherCell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
+            otherCell.contentView.layer.borderWidth = 0.05
+            otherCell.layer.cornerRadius = 8
+            return otherCell
+            
+        }
+        
+//        var DocumentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+//        DocumentsDirectory.appendPathComponent(imagefilepath)
+    
         
     }
     
@@ -134,12 +172,6 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         return 100.0
     }
     
-    
-    
-    
-    
-    
-    
     @IBAction func uploadImagePressed(_ sender: UIButton) {
         present(picker, animated: true, completion: nil)
     }
@@ -160,8 +192,6 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
 
         uploadImage.setImage(UIImage(data: jpegImage!), for: .normal)
         dismiss(animated: true, completion: nil)
-
-            
 
     }
     
