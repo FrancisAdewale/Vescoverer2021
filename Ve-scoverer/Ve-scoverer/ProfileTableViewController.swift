@@ -117,7 +117,10 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
             cell.contentView.layer.borderWidth = 0.05
             cell.layer.cornerRadius = 8
             cell.userFirstName.text = section1.first?.firstName
-            //cell.userImage.image = UIImage(contentsOfFile: section1.first!.image)
+//            self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2;
+//               self.profileImage.clipsToBounds = true;
+//
+//            //cell.userImage.image = UIImage(contentsOfFile: section1.first!.image)
             return cell
         } else if indexPath.section == 0 && indexPath.row == 1 {
             

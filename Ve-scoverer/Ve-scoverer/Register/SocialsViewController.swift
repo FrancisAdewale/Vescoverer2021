@@ -50,7 +50,8 @@ class SocialsViewController: UIViewController {
         db.collection("users").document(currentuser).setData([
             "instagram": instagram,
             "twitter": twitter,
-            "completedRegistration": true
+            "completedRegistration": true,
+            "isVerified": false
         ], merge: true)
         
             
