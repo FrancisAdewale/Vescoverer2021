@@ -13,10 +13,13 @@ import ChameleonFramework
 import GoogleSignIn
 
 
-class ProfileTableViewController: UITableViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+class ProfileTableViewController: UITableViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate, UITableViewDataSourcePrefetching {
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        //
+    }
+    
 
-    
-    
+
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var editedInstagram = String()
     var editedTwitter = String()
@@ -30,16 +33,16 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
     let db = Firestore.firestore()
     var imagefilepath = ""
     var userFirstName = ""
-    
     var profileUser = ProfileUser()
-    var section1 = [String]()
     
+    var section1: [ProfileUser] = []
+    var section2: [ProfileUser] = []
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         load()
         
-
+        print(section1.count)
     }
     
 
@@ -62,6 +65,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         picker.delegate = self
         picker.allowsEditing = true
         picker.sourceType = .photoLibrary
+        tableView.dataSource = self
         
         tableView.register(UINib(nibName: "ImageViewCell", bundle: nil), forCellReuseIdentifier: "ImageCell")
         tableView.register(UINib(nibName: "NormalViewCell", bundle: nil), forCellReuseIdentifier: "NormalCell")
@@ -115,20 +119,21 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
             cell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
             cell.contentView.layer.borderWidth = 0.05
             cell.layer.cornerRadius = 8
-            cell.userFirstName.text = profileUser.firstName
+            cell.userFirstName.text = section1.first?.firstName
+            cell.userImage.image = UIImage(contentsOfFile: section1.first!.image)
             return cell
         } else if indexPath.section == 0 && indexPath.row == 1 {
             
         
             let otherCell = tableView.dequeueReusableCell(withIdentifier: "NormalCell", for: indexPath) as! NormalViewCell
             otherCell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
-            otherCell.fillerInfo.text = profileUser.age.description
+            otherCell.fillerInfo.text = section1.first?.age.description
             otherCell.contentView.layer.borderWidth = 0.05
             otherCell.layer.cornerRadius = 8
             return otherCell
         } else if indexPath.section == 0 && indexPath.row == 2 {
             let otherCell = tableView.dequeueReusableCell(withIdentifier: "NormalCell", for: indexPath) as! NormalViewCell
-            otherCell.fillerInfo.text = profileUser.veganSince
+            otherCell.fillerInfo.text = section1.first?.veganSince
             otherCell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
             otherCell.contentView.layer.borderWidth = 0.05
             otherCell.layer.cornerRadius = 8
@@ -159,7 +164,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         else {
             let otherCell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
             otherCell.textLabel?.text = profileUser.latitude.description
-            otherCell.textLabel?.text! += profileUser.longitude.description
+            otherCell.textLabel?.text! += " " + profileUser.longitude.description
             otherCell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
             otherCell.contentView.layer.borderWidth = 0.05
             otherCell.layer.cornerRadius = 8
@@ -169,8 +174,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         
 //        var DocumentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
 //        DocumentsDirectory.appendPathComponent(imagefilepath)
-    
-        
+
     }
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -341,26 +345,35 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         db.collection("users").document((user?.email)!).addSnapshotListener { (snapShot, err) in
             if let err = err {
                 print(err)
+            } else {
+                
+                let data = snapShot?.data()
+                
+                
+                self.profileUser.firstName = data!["firstName"] as! String
+                self.profileUser.veganSince = data!["veganSince"] as! String
+                self.profileUser.age = data!["age"] as! Int
+                self.profileUser.gender = data!["gender"] as! String
+                self.profileUser.instagram = data!["instagram"] as! String
+                self.profileUser.twitter = data!["twitter"] as! String
+                self.profileUser.image = data!["imagepath"] as! String
+                self.profileUser.latitude = data!["latitude"] as! Double
+                self.profileUser.longitude = data!["longitude"] as! Double
+                
+                
+                self.section1.append(self.profileUser)
+                self.section2.append(self.profileUser)
+                
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
             }
-            
-            let data = snapShot?.data()
-            
-            self.profileUser.firstName = data!["firstName"] as! String
-            self.profileUser.veganSince = data!["veganSince"] as! String
-            self.profileUser.age = data!["age"] as! Int
-            self.profileUser.gender = data!["gender"] as! String
-            self.profileUser.instagram = data!["instagram"] as! String
-            self.profileUser.twitter = data!["twitter"] as! String
-            self.profileUser.image = data!["imagepath"] as! String
-            self.profileUser.latitude = data!["age"] as! Double
-            self.profileUser.longitude = data!["age"] as! Double
-            
             
         }
         
-            //self.imagefilepath = data!["imagepath"] as! String
-     
-        }
+        //self.imagefilepath = data!["imagepath"] as! String
+        
+    }
 //        })
         
 //        db.collection("users").document(user?.email ?? "Email").collection("socials").document("twitter").getDocument(completion: { (documentSnap, err) in
