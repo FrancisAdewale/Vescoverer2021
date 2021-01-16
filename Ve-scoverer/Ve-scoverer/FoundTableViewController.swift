@@ -56,41 +56,41 @@ class FoundTableViewController: UITableViewController {
         
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        
-        guard let pvc = segue.destination as? ProfileTableViewController else { return }
-        let indexpath = tableView.indexPathForSelectedRow
-        
-        if let unwrappedPath = indexpath {
-            tableView.deselectRow(at: unwrappedPath, animated: true)
-            pvc.expectedString = userList[unwrappedPath.row]
-            
-            db.collection("users").document(pvc.expectedString).collection("userimage").getDocuments { (querySnapshot, err) in
-
-                if let err = err {
-                    print("Error getting documents: \(err)")
-                } else {
-                    for document in querySnapshot!.documents {
-                        let data = document.data()
-                       // let image = UIImage(data: data["image"] as! Data)
-                        pvc.expectedImage = UIImage(named: "placeholder")!
-                        do {
-                        let users = try? Auth.auth().getStoredUser(forAccessGroup: "users")
-                            if users?.email == pvc.expectedString && users!.isEmailVerified == true {
-                                pvc.isUserVerified = true
-                            }
-                        } catch {
-                            print(error)
-                        }
-
-                    }
-                }
-            }
-        }
-        pvc.expectedBool = true
-        pvc.buttonIsEnabled = false
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//
+//
+//        guard let pvc = segue.destination as? ProfileTableViewController else { return }
+//        let indexpath = tableView.indexPathForSelectedRow
+//
+//        if let unwrappedPath = indexpath {
+//            tableView.deselectRow(at: unwrappedPath, animated: true)
+//            pvc.expectedString = userList[unwrappedPath.row]
+//
+//            db.collection("users").document(pvc.expectedString).collection("userimage").getDocuments { (querySnapshot, err) in
+//
+//                if let err = err {
+//                    print("Error getting documents: \(err)")
+//                } else {
+//                    for document in querySnapshot!.documents {
+//                        let data = document.data()
+//                       // let image = UIImage(data: data["image"] as! Data)
+//                        pvc.expectedImage = UIImage(named: "placeholder")!
+//                        do {
+//                        let users = try? Auth.auth().getStoredUser(forAccessGroup: "users")
+//                            if users?.email == pvc.expectedString && users!.isEmailVerified == true {
+//                                pvc.isUserVerified = true
+//                            }
+//                        } catch {
+//                            print(error)
+//                        }
+//
+//                    }
+//                }
+//            }
+//        }
+//        pvc.expectedBool = true
+//        pvc.buttonIsEnabled = false
+//    }
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let user = Auth.auth().currentUser
@@ -101,9 +101,11 @@ class FoundTableViewController: UITableViewController {
         }
     
     func load() {
-                
+            
+        let user = Auth.auth().currentUser
+
         
-        db.collection("users").document(currentUser).collection("found").getDocuments { (querySnapshot, err) in
+        db.collection("users").document((user?.email!)!).collection("found").getDocuments { (querySnapshot, err) in
 
             if let err = err {
                 print("Error getting documents: \(err)")

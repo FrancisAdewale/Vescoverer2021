@@ -13,10 +13,8 @@ import ChameleonFramework
 import GoogleSignIn
 
 
-class ProfileTableViewController: UITableViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate, UITableViewDataSourcePrefetching {
-    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        //
-    }
+class ProfileTableViewController: UITableViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+   
     
 
 
@@ -42,7 +40,6 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         super.viewWillAppear(animated)
         load()
         
-        print(section1.count)
     }
     
 
@@ -120,7 +117,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
             cell.contentView.layer.borderWidth = 0.05
             cell.layer.cornerRadius = 8
             cell.userFirstName.text = section1.first?.firstName
-            cell.userImage.image = UIImage(contentsOfFile: section1.first!.image)
+            //cell.userImage.image = UIImage(contentsOfFile: section1.first!.image)
             return cell
         } else if indexPath.section == 0 && indexPath.row == 1 {
             
@@ -172,9 +169,6 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
             
         }
         
-//        var DocumentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-//        DocumentsDirectory.appendPathComponent(imagefilepath)
-
     }
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
