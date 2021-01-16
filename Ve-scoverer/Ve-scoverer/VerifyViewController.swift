@@ -12,19 +12,22 @@ import Firebase
 //could change to a calander to schedule meetups. minimum of 6 people more females than male.
 class VerifyViewController : UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     
+    
+    let db  = Firestore.firestore()
     let storage = Storage.storage()
-    
     let user = Auth.auth().currentUser
-    
+    var isVerified = false
     let picker = UIImagePickerController()
 
     @IBOutlet weak var userVerificationImage: UIImageView!
     @IBOutlet weak var progress: UIProgressView!
-    
     @IBOutlet weak var verifiedImage: UIImageView!
     @IBOutlet weak var label: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        load()
         
         userVerificationImage.isUserInteractionEnabled = true
         let tap = UITapGestureRecognizer(target: self, action: #selector(takeSelfie))
@@ -40,27 +43,10 @@ class VerifyViewController : UIViewController, UIImagePickerControllerDelegate &
         
         view.backgroundColor = UIColor(hexString: "8bcdcd")
         
-        let user = Auth.auth().currentUser
+//        let user = Auth.auth().currentUser
         
-        if let user = user {
-            if user.isEmailVerified {
-                self.progress.progress = 1.0
-                self.label.text = "All Done!"
-                verifiedImage.image = UIImage(systemName: "checkmark")
 
-                self.viewWillAppear(true)
-            } else {
-                Auth.auth().currentUser?.sendEmailVerification
-                {
-                    (error) in
-                    if error != nil {
-                        print(error!.localizedDescription)
-                        return
-                    } else {
-                    }
-                }
-            }
-        }
+        
    
     }
     
@@ -101,5 +87,26 @@ class VerifyViewController : UIViewController, UIImagePickerControllerDelegate &
 
         dismiss(animated: true, completion: nil)
 
+    }
+    
+    func load() {
+        
+        db.collection("users").document((user?.email)!).addSnapshotListener { (snapShot, error) in
+            let data = snapShot?.data()!
+            
+            self.isVerified = data!["isVerified"] as! Bool
+            
+            if self.isVerified == true {
+                self.progress.progress = 1.0
+                self.label.text = "Verified!"
+                self.verifiedImage.image = UIImage(systemName: "checkmark")
+                self.viewWillAppear(true)
+            } else {
+                self.progress.progress = 0.5
+                self.label.text = "Upload clear spoon selfie"
+            }
+            print(self.isVerified)
+        }
+        
     }
 }

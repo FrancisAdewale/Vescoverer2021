@@ -15,9 +15,6 @@ import GoogleSignIn
 
 class ProfileTableViewController: UITableViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
    
-    
-
-
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var editedInstagram = String()
     var editedTwitter = String()
@@ -32,6 +29,8 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
     var imagefilepath = ""
     var userFirstName = ""
     var profileUser = ProfileUser()
+    
+    var userCity = ""
     
     var section1: [ProfileUser] = []
     var section2: [ProfileUser] = []
@@ -141,6 +140,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         } else if indexPath.section == 1 && indexPath.row == 0 {
             let otherCell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
             otherCell.textLabel?.text = profileUser.gender
+            otherCell.accessoryType = .none
             otherCell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
             otherCell.contentView.layer.borderWidth = 0.05
             otherCell.layer.cornerRadius = 8
@@ -148,6 +148,10 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         } else if indexPath.section == 1 && indexPath.row == 1 {
             let otherCell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
             otherCell.textLabel?.text = profileUser.twitter
+            otherCell.accessoryType = .none
+
+            otherCell.accessoryType = .none
+
             otherCell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
             otherCell.contentView.layer.borderWidth = 0.05
             otherCell.layer.cornerRadius = 8
@@ -155,6 +159,8 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         } else if indexPath.section == 1 && indexPath.row == 2 {
             let otherCell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
             otherCell.textLabel?.text = profileUser.instagram
+            otherCell.accessoryType = .none
+
             otherCell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
             otherCell.contentView.layer.borderWidth = 0.05
             otherCell.layer.cornerRadius = 8
@@ -163,8 +169,8 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         
         else {
             let otherCell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-            otherCell.textLabel?.text = profileUser.latitude.description
-            otherCell.textLabel?.text! += " " + profileUser.longitude.description
+            otherCell.textLabel?.text = userCity
+            otherCell.accessoryType = .none
             otherCell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
             otherCell.contentView.layer.borderWidth = 0.05
             otherCell.layer.cornerRadius = 8
@@ -186,7 +192,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
             let button = UIButton()
             button.frame = CGRect(x: 20, y: 10, width: 300, height: 50)
             button.setTitle("Logout", for: .normal)
-            button.tintColor = .black
+            button.setTitleColor(.black, for: .normal)
             button.addTarget(self, action: #selector(didTapSignOut(_:)), for: .touchUpInside)
             footerView.addSubview(button)
         }
@@ -336,6 +342,9 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
 //        logOutButton.isHidden = expectedBool
 //        igButton.isEnabled = buttonIsEnabled
 //        twitterButton.isEnabled = buttonIsEnabled
+        
+        
+        
 
 
 
@@ -356,6 +365,13 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
                 self.profileUser.image = data!["imagepath"] as! String
                 self.profileUser.latitude = data!["latitude"] as! Double
                 self.profileUser.longitude = data!["longitude"] as! Double
+                
+                
+                let location = CLLocation(latitude: self.profileUser.latitude, longitude: self.profileUser.longitude)
+                location.fetchCityAndCountry { city, country, error in
+                    guard let city = city, let country = country, error == nil else { return }
+                    self.userCity = city + ", " + country
+                }
                 
                 
                 self.section1.append(self.profileUser)
@@ -392,5 +408,9 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
                   
         }
 
-    
+extension CLLocation {
+    func fetchCityAndCountry(completion: @escaping (_ city: String?, _ country:  String?, _ error: Error?) -> ()) {
+        CLGeocoder().reverseGeocodeLocation(self) { completion($0?.first?.locality, $0?.first?.country, $1) }
+    }
+}
     
