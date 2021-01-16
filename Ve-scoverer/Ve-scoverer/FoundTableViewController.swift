@@ -22,13 +22,13 @@ class FoundTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         load()
-        
+        view.backgroundColor = UIColor(hexString: "57AAB7")
+
         
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(hexString: "8bcdcd")
         
     }
     
@@ -44,7 +44,7 @@ class FoundTableViewController: UITableViewController {
         let label = userList[indexPath.row]
         cell.textLabel?.text = label
         cell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
-        cell.backgroundColor = UIColor(hexString: "3797A4")
+        cell.backgroundColor = UIColor(hexString: "57AAB7")
         cell.textLabel?.textColor = .black
         
         return cell

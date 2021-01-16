@@ -36,11 +36,16 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
     //    @IBOutlet weak var registerBar: UIToolbar!
     //    @IBOutlet weak var emailTextField: UITextField!
     //    @IBOutlet weak var passwordTextField: UITextField!
-    
+ 
     override func viewWillAppear(_ animated: Bool) {
         self.modalPresentationStyle = .fullScreen
         view.backgroundColor = UIColor(hexString: "3797A4")
         navigationItem.hidesBackButton = true
+
+        navigationController?.navigationBar.barTintColor = UIColor(hexString: "3797A4")
+
+            
+
         
         let docRef = db.collection("users").document((user?.email)!)
 

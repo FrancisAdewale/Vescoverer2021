@@ -39,34 +39,25 @@ class VerifyViewController : UIViewController, UIImagePickerControllerDelegate &
         picker.allowsEditing = true
         picker.sourceType = .camera
         
-        progress.backgroundColor = UIColor(hexString: "3797a4")
-        
-        view.backgroundColor = UIColor(hexString: "8bcdcd")
-        
-//        let user = Auth.auth().currentUser
-        
+        progress.backgroundColor = .black
+        view.backgroundColor = UIColor(hexString: "3797A4")
 
-        
-   
+//        let user = Auth.auth().currentUser
     }
     
     @objc func takeSelfie() {
         
         present(picker, animated: true, completion: nil)
-
-        
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         let storageRef = storage.reference()
-
         
         let userImage = info[.editedImage] as! UIImage
         
         guard let imageData = userImage.jpegData(compressionQuality: 0.5) else { return }
-            
-        
+
         let imageRef = storageRef.child("\((user!.email)!)").child("spoonpic.jpg")
         
         let uploadTask = imageRef.putData(imageData, metadata: nil) { (metadata, error) in

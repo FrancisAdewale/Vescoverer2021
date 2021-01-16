@@ -45,7 +45,7 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         guard let navBar = navigationController?.navigationBar else {fatalError("Navigation controller does not exist.")}
 
-        navBar.barTintColor = UIColor(hexString: "3797A4")
+        navBar.barTintColor = UIColor(hexString: "606060")
         veganLabel.textColor = .white
         isVegan.onTintColor = UIColor(hexString: "3797A4")
         isVegan.isOn = false
