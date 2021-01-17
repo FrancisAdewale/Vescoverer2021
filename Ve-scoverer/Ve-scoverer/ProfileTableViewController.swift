@@ -65,6 +65,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         
         tableView.register(UINib(nibName: "ImageViewCell", bundle: nil), forCellReuseIdentifier: "ImageCell")
         tableView.register(UINib(nibName: "NormalViewCell", bundle: nil), forCellReuseIdentifier: "NormalCell")
+        tableView.register(UINib(nibName: "SocialsTableViewCell", bundle: nil), forCellReuseIdentifier: "SocialsCell")
 
     }
     
@@ -78,7 +79,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
             return 3
 
         } else {
-            return 4
+            return 3
         }
     }
     
@@ -146,28 +147,15 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
             otherCell.layer.cornerRadius = 8
             return otherCell
         } else if indexPath.section == 1 && indexPath.row == 1 {
-            let otherCell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-            otherCell.textLabel?.text = profileUser.twitter
+            let otherCell = tableView.dequeueReusableCell(withIdentifier: "SocialsCell", for: indexPath) as! SocialsTableViewCell
+            //otherCell.textLabel?.text = profileUser.twitter
             otherCell.accessoryType = .none
 
-            otherCell.accessoryType = .none
-
-            otherCell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
+            //otherCell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
             otherCell.contentView.layer.borderWidth = 0.05
             otherCell.layer.cornerRadius = 8
             return otherCell
-        } else if indexPath.section == 1 && indexPath.row == 2 {
-            let otherCell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-            otherCell.textLabel?.text = profileUser.instagram
-            otherCell.accessoryType = .none
-
-            otherCell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
-            otherCell.contentView.layer.borderWidth = 0.05
-            otherCell.layer.cornerRadius = 8
-            return otherCell
-        }
-        
-        else {
+        } else {
             let otherCell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
             otherCell.textLabel?.text = userCity
             otherCell.accessoryType = .none
@@ -344,10 +332,6 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
 //        twitterButton.isEnabled = buttonIsEnabled
         
         
-        
-
-
-
         db.collection("users").document((user?.email)!).addSnapshotListener { (snapShot, err) in
             if let err = err {
                 print(err)
