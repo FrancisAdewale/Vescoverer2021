@@ -11,15 +11,14 @@ import CoreLocation
 import CoreData
 import AuthenticationServices
 import GoogleSignIn
-
+import CryptoKit
 
 class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignInDelegate {
     
     let context = (UIApplication.shared.delegate as! AppDelegate)
-    
-    
+    fileprivate var currentNonce: String?
+
     let db = Firestore.firestore()
-    let btnAuthorization = ASAuthorizationAppleIDButton(authorizationButtonType: .signUp, authorizationButtonStyle: .white)
     var location = CLLocation()
     private let locationManager = CLLocationManager()
     var firstName = ""
@@ -29,7 +28,8 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
     var userlocation = CLLocationCoordinate2D()
     var hasCompletedRegistration: Bool?
     
-    
+    let appleButton = ASAuthorizationAppleIDButton(type: .continue, style: .black)
+
     
     //    @IBOutlet weak var loginLabel: UIButton!
     //    @IBOutlet weak var registerLabel: UIBarButtonItem!
@@ -42,11 +42,9 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
         view.backgroundColor = UIColor(hexString: "3797A4")
         navigationItem.hidesBackButton = true
 
+
         navigationController?.navigationBar.barTintColor = UIColor(hexString: "3797A4")
 
-            
-
-        
         let docRef = db.collection("users").document((user?.email)!)
 
         docRef.getDocument { (document, error) in
@@ -61,8 +59,10 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setupSOAppleSignIn()
-//        GIDSignIn.sharedInstance()?.restorePreviousSignIn()
+        setupAppleButton()
+
+        //       GIDSignIn.sharedInstance()?.restorePreviousSignIn()
+    
         GIDSignIn.sharedInstance()?.presentingViewController = self
         GIDSignIn.sharedInstance()?.delegate = self
         
@@ -75,34 +75,44 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
             locationManager.startUpdatingLocation()
         }
         
+
+        
         // Automatically sign in the user.
         //        hideKeyboardWhenTappedAround()
     }
     
+    
+    
+    func setupAppleButton() {
+            view.addSubview(appleButton)
+            //appleButton.cornerRadius = 12
+            appleButton.addTarget(self, action: #selector(startSignInWithAppleFlow), for: .touchUpInside)
+            appleButton.frame = CGRect(x: 0, y: 0, width: 250, height: 50)
+            appleButton.center = self.view.center
+        }
 
-    func setupSOAppleSignIn() {
-        
-        btnAuthorization.frame = CGRect(x: 0, y: 0, width: 200, height: 40)
-        btnAuthorization.center = self.view.center
-        
-        btnAuthorization.addTarget(self, action: #selector(handleAuthorizationAppleIDButtonPress), for: .touchUpInside)
-        
-        self.view.addSubview(btnAuthorization)
-        
-    }
+    
+//    @objc
+//    func handleAuthorizationAppleIDButtonPress() {
+//        let appleIDProvider = ASAuthorizationAppleIDProvider()
+//        let request = appleIDProvider.createRequest()
+//        request.requestedScopes = [.fullName, .email,]
+//
+//        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+//        authorizationController.delegate = self
+//        authorizationController.presentationContextProvider = self
+//        authorizationController.performRequests()
+//    }
+//
     
     
-    @objc
-    func handleAuthorizationAppleIDButtonPress() {
-        let appleIDProvider = ASAuthorizationAppleIDProvider()
-        let request = appleIDProvider.createRequest()
-        request.requestedScopes = [.fullName, .email,]
-        
-        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
-        authorizationController.delegate = self
-        authorizationController.presentationContextProvider = self
-        authorizationController.performRequests()
-    }
+//    func setupSOAppleSignIn() {
+//
+//        buttonApple.frame = CGRect(x: 0, y: 0, width: 250, height: 50)
+//        buttonApple.center = self.view.center
+//       // buttonApple.addTarget(self, action: #selector(startSignInWithAppleFlow), for: .touchUpInside)
+//
+//    }
     
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -161,7 +171,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
                             if let err = err {
                                 print("Error writing document: \(err)")
                             } else {
-                                NotificationCenter.default.post(name: .signInGoogleCompleted, object: nil)
+                               // NotificationCenter.default.post(name: .signInGoogleCompleted, object: nil)
                                 
                                 print("Document successfully written!")
                             }
@@ -207,49 +217,52 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
                             if let err = err {
                                 print("Error writing document: \(err)")
                             } else {
-                                NotificationCenter.default.post(name: .signInGoogleCompleted, object: nil)
-                                
+                                //NotificationCenter.default.post(name: .signInGoogleCompleted, object: nil)
+                                let vVc = storyboard.instantiateViewController(withIdentifier: "Vegan") as! VeganViewController
+                                vVc.modalPresentationStyle = .overFullScreen
+                                self.present(vVc, animated: false, completion: nil)
                                 print("Document successfully written!")
                             }
                         }
                         
                     }
-                    let vVc = storyboard.instantiateViewController(withIdentifier: "Vegan") as! VeganViewController
-                    vVc.modalPresentationStyle = .overFullScreen
-                    self.present(vVc, animated: false, completion: nil)
+
                 }
             }
         }
-    }
+    
+    
+
+   }
 
 
-extension LoginViewController: ASAuthorizationControllerDelegate {
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
-        
-        if let appleIDCredential = authorization.credential as?  ASAuthorizationAppleIDCredential {
-            
-            let userIdentifier = appleIDCredential.user
-            let fullName = appleIDCredential.fullName
-            let email = appleIDCredential.email
-            
-            print("\(userIdentifier) \(String(describing: fullName)) \(String(describing: email))")
-            
-            
-        }
-        
-    }
-}
+//extension LoginViewController: ASAuthorizationControllerDelegate {
+//    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+//
+//        if let appleIDCredential = authorization.credential as?  ASAuthorizationAppleIDCredential {
+//
+//            let userIdentifier = appleIDCredential.user
+//            let fullName = appleIDCredential.fullName
+//            let email = appleIDCredential.email
+//
+//            print("\(userIdentifier) \(String(describing: fullName)) \(String(describing: email))")
+//
+//
+//        }
+//
+//    }
+//}
 
 extension LoginViewController: ASAuthorizationControllerPresentationContextProviding {
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         return self.view.window!
     }
-    
-    
+
+
 }
 
 extension Notification.Name {
-    
+
     /// Notification when user successfully sign in using Google
     static var signInGoogleCompleted: Notification.Name {
         return .init(rawValue: #function)
@@ -258,3 +271,126 @@ extension Notification.Name {
 
 
 
+@available(iOS 13.0, *)
+extension LoginViewController: ASAuthorizationControllerDelegate {
+    
+    // Adapted from https://auth0.com/docs/api-auth/tutorials/nonce#generate-a-cryptographically-random-nonce
+    private func randomNonceString(length: Int = 32) -> String {
+      precondition(length > 0)
+      let charset: Array<Character> =
+          Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
+      var result = ""
+      var remainingLength = length
+
+      while remainingLength > 0 {
+        let randoms: [UInt8] = (0 ..< 16).map { _ in
+          var random: UInt8 = 0
+          let errorCode = SecRandomCopyBytes(kSecRandomDefault, 1, &random)
+          if errorCode != errSecSuccess {
+            fatalError("Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)")
+          }
+          return random
+        }
+
+        randoms.forEach { random in
+          if remainingLength == 0 {
+            return
+          }
+
+          if random < charset.count {
+            result.append(charset[Int(random)])
+            remainingLength -= 1
+          }
+        }
+      }
+
+      return result
+    }
+    
+    @available(iOS 13, *)
+    @objc func startSignInWithAppleFlow() {
+        
+        let nonce = randomNonceString()
+        currentNonce = nonce
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        let request = appleIDProvider.createRequest()
+        request.requestedScopes = [.fullName, .email]
+        request.nonce = sha256(nonce)
+        
+        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+        authorizationController.delegate = self
+        authorizationController.presentationContextProvider = self
+        authorizationController.performRequests()
+        
+    }
+
+    @available(iOS 13, *)
+    private func sha256(_ input: String) -> String {
+      let inputData = Data(input.utf8)
+      let hashedData = SHA256.hash(data: inputData)
+      let hashString = hashedData.compactMap {
+        return String(format: "%02x", $0)
+      }.joined()
+
+      return hashString
+    }
+
+
+  func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+    if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
+      guard let nonce = currentNonce else {
+        fatalError("Invalid state: A login callback was received, but no login request was sent.")
+      }
+      guard let appleIDToken = appleIDCredential.identityToken else {
+        print("Unable to fetch identity token")
+        return
+      }
+      guard let idTokenString = String(data: appleIDToken, encoding: .utf8) else {
+        print("Unable to serialize token string from data: \(appleIDToken.debugDescription)")
+        return
+      }
+      // Initialize a Firebase credential.
+      let credential = OAuthProvider.credential(withProviderID: "apple.com",
+                                                idToken: idTokenString,
+                                                rawNonce: nonce)
+      // Sign in with Firebase.
+      Auth.auth().signIn(with: credential) { (authResult, error) in
+        if (error != nil) {
+          // Error. If error.code == .MissingOrInvalidNonce, make sure
+          // you're sending the SHA256-hashed nonce as a hex string with
+          // your request to Apple.
+            print(error!.localizedDescription)
+          return
+        }
+        
+        guard let user = authResult?.user else { return }
+        let email = user.email ?? ""
+        let displayName = user.displayName ?? ""
+        print(email)
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        let db = Firestore.firestore()
+        db.collection("users").document(email).setData([
+            "email": email,
+            "firstName": displayName,
+            "secondName": self.secondName,
+            "longitude": Double(self.userlocation.longitude),
+            "latitude": Double(self.userlocation.latitude),
+            "completedRegistration": false
+        ]) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                print("the user has sign up or is logged in")
+            }
+        }
+      }
+    }
+    
+  }
+    
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+      // Handle error.
+      print("Sign in with Apple errored: \(error)")
+    }
+
+}

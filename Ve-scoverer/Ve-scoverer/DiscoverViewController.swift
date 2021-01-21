@@ -27,6 +27,8 @@ class DiscoverViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        title = "Vescover"
         db.collection("users").document(user!).collection("found").getDocuments { (querySnapshot, err) in
             
             if let err = err {

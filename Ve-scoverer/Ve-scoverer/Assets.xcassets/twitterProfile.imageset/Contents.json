@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "twitter-4-128.jpg",
+      "filename" : "twitter-3-128.jpg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "twitter-4-129.jpg",
+      "filename" : "twitter-3-129.jpg",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "twitter-4-130.jpg",
+      "filename" : "twitter-3-130.jpg",
       "idiom" : "universal",
       "scale" : "3x"
     }

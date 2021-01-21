@@ -29,6 +29,7 @@ class FoundTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Vescovered"
         
     }
     

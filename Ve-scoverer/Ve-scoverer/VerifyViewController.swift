@@ -12,7 +12,6 @@ import Firebase
 //could change to a calander to schedule meetups. minimum of 6 people more females than male.
 class VerifyViewController : UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     
-    
     let db  = Firestore.firestore()
     let storage = Storage.storage()
     let user = Auth.auth().currentUser
@@ -26,27 +25,21 @@ class VerifyViewController : UIViewController, UIImagePickerControllerDelegate &
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         load()
         
         userVerificationImage.isUserInteractionEnabled = true
         let tap = UITapGestureRecognizer(target: self, action: #selector(takeSelfie))
         tap.numberOfTapsRequired = 1
         userVerificationImage.addGestureRecognizer(tap)
-     
-        
         picker.delegate = self
         picker.allowsEditing = true
         picker.sourceType = .camera
-        
         progress.backgroundColor = .black
         view.backgroundColor = UIColor(hexString: "3797A4")
-
 //        let user = Auth.auth().currentUser
     }
     
     @objc func takeSelfie() {
-        
         present(picker, animated: true, completion: nil)
     }
     

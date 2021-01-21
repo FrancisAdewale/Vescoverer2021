@@ -9,12 +9,16 @@ import UIKit
 import Firebase
 import CoreData
 import GoogleSignIn
+import CryptoKit
+
 
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var signedIn = false
+    
+
         
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
@@ -24,11 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let db = Firestore.firestore()
        // GIDSignIn.sharedInstance().clientID = "452250904688-duk6irc1fadc7l6suokch7d2aifor27n.apps.googleusercontent.com"
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
-
-        
-
-
-                
+       
         return true
     }
 
@@ -99,6 +99,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
+    
+    
+    
+   
 
     
  

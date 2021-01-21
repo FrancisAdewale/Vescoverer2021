@@ -96,7 +96,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="222-t8-5Ee" customClass="GIDSignInButton">
-                                <rect key="frame" x="58" y="207" width="200" height="76"/>
+                                <rect key="frame" x="60" y="201" width="200" height="76"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <accessibility key="accessibilityConfiguration">
@@ -113,7 +113,7 @@
             </objects>
             <point key="canvasLocation" x="2362.5" y="509.15492957746477"/>
         </scene>
-        <!--Vescover-->
+        <!--Discover View Controller-->
         <scene sceneID="DPj-ba-NUF">
             <objects>
                 <viewController id="geu-5S-loU" customClass="DiscoverViewController" customModule="Ve_scoverer" customModuleProvider="target" sceneMemberID="viewController">
@@ -125,25 +125,18 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </mapView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Vescover" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4K8-h9-QR3">
-                                <rect key="frame" x="120" y="30" width="71" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="1xJ-qs-FrR"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Vescover" image="location" catalog="system" selectedImage="location" id="Jyf-Ba-6uu"/>
+                    <navigationItem key="navigationItem" id="c7N-IE-Zw9"/>
                     <connections>
                         <outlet property="nearbyUsers" destination="few-wb-5eq" id="HhQ-F0-S8v"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h4Y-hB-Hu6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3759" y="1294"/>
+            <point key="canvasLocation" x="5452.5" y="1757.7464788732395"/>
         </scene>
         <!--Verify-->
         <scene sceneID="QMW-4b-Qy1">
@@ -159,13 +152,6 @@
                                 <color key="progressTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="trackTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </progressView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Verification" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qKi-P5-88S">
-                                <rect key="frame" x="85" y="20" width="148" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="28"/>
-                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="xmark" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="4UI-Fd-geq">
                                 <rect key="frame" x="69" y="322" width="195" height="84"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -182,6 +168,13 @@
                                 <rect key="frame" x="25" y="66" width="279" height="186"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Verify" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qKi-P5-88S">
+                                <rect key="frame" x="122" y="20" width="77" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="28"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="K7y-7c-8j7"/>
                         <color key="backgroundColor" red="0.21568627450980393" green="0.59215686274509804" blue="0.64313725490196072" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -196,7 +189,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZPS-JS-V43" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4325.625" y="-1129.2253521126761"/>
+            <point key="canvasLocation" x="4020" y="-1403"/>
         </scene>
         <!--Gender View Controller-->
         <scene sceneID="Eq0-kf-yWI">
@@ -242,7 +235,7 @@
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="bYZ-ei-wUA"/>
-                        <color key="backgroundColor" red="0.46485835310000001" green="0.73280841109999995" blue="0.77901667360000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.21568627450980393" green="0.59215686274509804" blue="0.64313725490196072" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
                         <outlet property="genderLabel" destination="KkV-ln-dy3" id="kyV-ur-dSF"/>
@@ -302,7 +295,7 @@
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="qO7-Lc-IJ0"/>
-                        <color key="backgroundColor" red="0.52506667380000005" green="0.76181739569999996" blue="0.80734521150000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.21568627450980393" green="0.59215686274509804" blue="0.64313725490196072" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zQN-XM-hV8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -380,7 +373,7 @@
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="kmD-jW-LXl"/>
-                        <color key="backgroundColor" red="0.52506667380000005" green="0.76181739569999996" blue="0.80734521150000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.21568627450980393" green="0.59215686274509804" blue="0.64313725490196072" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
                         <outlet property="fullInstagramLink" destination="Odb-Mq-RAF" id="HMv-cc-FbS"/>
@@ -434,7 +427,7 @@
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="8uX-9e-gjO"/>
-                        <color key="backgroundColor" red="0.3411764705882353" green="0.66666666666666663" blue="0.71764705882352942" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.21568627450980393" green="0.59215686274509804" blue="0.64313725490196072" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
                         <outlet property="veganQuestion" destination="Bkj-GG-LT8" id="u1b-kI-c55"/>
@@ -508,7 +501,7 @@
                             </progressView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="5nL-0l-mcn"/>
-                        <color key="backgroundColor" red="0.40392156862745099" green="0.70196078431372544" blue="0.74901960784313726" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.21568627450980393" green="0.59215686274509804" blue="0.64313725490196072" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
                         <outlet property="firstNameTextField" destination="dv4-Tp-Szi" id="eEi-Mf-9He"/>
@@ -582,7 +575,7 @@
                             </progressView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="11G-eK-CRn"/>
-                        <color key="backgroundColor" red="0.40392156862745099" green="0.70196078431372544" blue="0.74901960784313726" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.21568627450980393" green="0.59215686274509804" blue="0.64313725490196072" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
                         <outlet property="age" destination="g68-8y-k3j" id="fFd-gH-GxN"/>
@@ -608,15 +601,15 @@
                         <outlet property="dashboardTab" destination="Zx0-zZ-lqm" id="bw8-nv-jA7"/>
                         <segue destination="WF5-oy-Znk" kind="relationship" relationship="viewControllers" id="KLT-yW-R0U"/>
                         <segue destination="HAz-Iu-oEn" kind="relationship" relationship="viewControllers" id="Hns-Sn-koT"/>
-                        <segue destination="geu-5S-loU" kind="relationship" relationship="viewControllers" id="3b7-A6-Dmu"/>
-                        <segue destination="rYg-8Z-ZJO" kind="relationship" relationship="viewControllers" destinationCreationSelector="goToFound" id="SRc-uV-EkK"/>
+                        <segue destination="inQ-0c-OLI" kind="relationship" relationship="viewControllers" id="3b7-A6-Dmu"/>
+                        <segue destination="qAr-ks-OLN" kind="relationship" relationship="viewControllers" id="SRc-uV-EkK"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bdc-2C-oGn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3336" y="-64"/>
         </scene>
-        <!--Vescovered-->
+        <!--Found Table View Controller-->
         <scene sceneID="3Q0-yL-tso">
             <objects>
                 <tableViewController storyboardIdentifier="Found" id="rYg-8Z-ZJO" customClass="FoundTableViewController" customModule="Ve_scoverer" customModuleProvider="target" sceneMemberID="viewController">
@@ -641,13 +634,11 @@
                             <outlet property="delegate" destination="rYg-8Z-ZJO" id="rdx-mO-Zwm"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Vescovered" image="folder.fill" catalog="system" selectedImage="folder.fill" id="opb-lE-LFn">
-                        <color key="badgeColor" red="0.1084735468" green="0.26224452259999997" blue="0.28235775229999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                    </tabBarItem>
+                    <navigationItem key="navigationItem" id="8rQ-I9-zbo"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8ez-0M-GO5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4883" y="371"/>
+            <point key="canvasLocation" x="5880" y="370.77464788732397"/>
         </scene>
         <!--Profile Table View Controller-->
         <scene sceneID="DJJ-Ll-BHY">
@@ -702,6 +693,46 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jS8-uJ-aWe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4882.5" y="-394.01408450704224"/>
+        </scene>
+        <!--Vescovered-->
+        <scene sceneID="eDK-DF-CrC">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qAr-ks-OLN" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Vescovered" image="folder.fill" catalog="system" selectedImage="folder.fill" id="opb-lE-LFn">
+                        <color key="badgeColor" red="0.1084735468" green="0.26224452259999997" blue="0.28235775229999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    </tabBarItem>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="eY8-hb-vA4">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="rYg-8Z-ZJO" kind="relationship" relationship="rootViewController" id="CHE-B6-hYq"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kpk-7B-29h" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4882.5" y="370.77464788732397"/>
+        </scene>
+        <!--Vescover-->
+        <scene sceneID="7RD-BD-jP8">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="inQ-0c-OLI" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Vescover" image="location" catalog="system" selectedImage="location" id="Jyf-Ba-6uu"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Z7k-nf-WcV">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="geu-5S-loU" kind="relationship" relationship="rootViewController" id="A9y-9V-LuM"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9bV-qZ-DGA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4455" y="1757.7464788732395"/>
         </scene>
     </scenes>
     <resources>
