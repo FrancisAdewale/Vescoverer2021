@@ -11,6 +11,7 @@ import Firebase
 import FirebaseStorage
 import ChameleonFramework
 import GoogleSignIn
+import AuthenticationServices
 
 
 class ProfileTableViewController: UITableViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
@@ -313,8 +314,16 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
 //    }
     
     @IBAction func didTapSignOut(_ sender: AnyObject) {
-        GIDSignIn.sharedInstance().signOut()
+        
         print("signed out \(String(describing: user?.email))")
+        
+        let firebaseAuth = Auth.auth()
+    do {
+      try firebaseAuth.signOut()
+    } catch let signOutError as NSError {
+      print ("Error signing out: %@", signOutError)
+    }
+      
         
         let lvc = storyboard?.instantiateViewController(identifier: "Login") as! LoginViewController
         lvc.modalPresentationStyle = .fullScreen
@@ -340,7 +349,8 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
                 let data = snapShot?.data()
                 
                 
-                self.profileUser.firstName = data!["firstName"] as! String
+                
+                self.profileUser.firstName = (data!["firstName"] as? String ?? "")
                 self.profileUser.veganSince = data!["veganSince"] as! String
                 self.profileUser.age = data!["age"] as! Int
                 self.profileUser.gender = data!["gender"] as! String
@@ -356,8 +366,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
                     guard let city = city, let country = country, error == nil else { return }
                     self.userCity = city + ", " + country
                 }
-                
-                
+            
                 self.section1.append(self.profileUser)
                 self.section2.append(self.profileUser)
                 

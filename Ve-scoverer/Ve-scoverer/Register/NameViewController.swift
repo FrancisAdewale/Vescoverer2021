@@ -29,10 +29,10 @@ class NameViewController: UIViewController, UITextFieldDelegate {
             if let err = err {
                 print(err)
             } else {
-                let document = snapShot!.data()
-                
-                self.firstNameTextField.text = (document!["firstName"]! as! String)
-                self.lastNameTextField.text = (document!["secondName"]! as! String)
+                if let document = snapShot!.data() {
+                    self.firstNameTextField.text = (document["firstName"] as? String)
+                    self.lastNameTextField.text = (document["secondName"] as? String)
+                }
             }
         })
 
@@ -59,6 +59,10 @@ class NameViewController: UIViewController, UITextFieldDelegate {
         view.endEditing(true)
     }
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+    }
+    
     @IBAction func next(_ sender: Any) {
         let avc = storyboard?.instantiateViewController(withIdentifier: "Age") as! AgeViewController
 
@@ -66,6 +70,8 @@ class NameViewController: UIViewController, UITextFieldDelegate {
         
         if let user = user?.email {
             avc.currentuser = user
+            self.db.collection("users").document(user).setData(["firstName" : self.firstNameTextField.text!,"secondName": self.lastNameTextField.text!], merge: true)
+
             avc.modalPresentationStyle = .overFullScreen
             present(avc, animated: true, completion: nil)
 

@@ -44,17 +44,21 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
 
 
         navigationController?.navigationBar.barTintColor = UIColor(hexString: "3797A4")
-
-        let docRef = db.collection("users").document((user?.email)!)
-
-        docRef.getDocument { (document, error) in
-            if let document = document, document.exists {
-                let dataDescription = document.data()
-                self.hasCompletedRegistration = (dataDescription?["completedRegistration"] as! Bool)
-            } else {
-                print("Document does not exist")
+        
+        if let user = user {
+            db.collection("users").document(user.email!).getDocument { (document, error) in
+                if let document = document {
+                    let dataDescription = document.data()
+                    print(dataDescription)
+                    self.hasCompletedRegistration = (dataDescription?["completedRegistration"] as! Bool)
+                } else {
+                    print("Document does not exist")
+                }
             }
+            
         }
+
+
     }
     
     override func viewDidLoad() {
@@ -148,7 +152,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
             var storyboard = UIStoryboard(name: "Main", bundle: nil)
             storyboard = UIStoryboard(name: "Main", bundle: nil)
             
-            if self.hasCompletedRegistration == nil {
+            if self.hasCompletedRegistration == false {
                 
                 Auth.auth().signIn(with: credential) {(authResult, error) in
                     if let error = error {
@@ -157,10 +161,10 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
                         let user = user.profile
                         self.firstName = (user?.givenName)!
                         self.secondName = (user?.familyName)!
-                        self.emailId = (self.user?.email)!
+                        self.emailId = (user?.email)!
                         self.userlocation = self.location.coordinate
                         
-                        self.db.collection("users").document((self.user?.email)!).setData([
+                        self.db.collection("users").document(self.emailId).setData([
                             "email": self.emailId,
                             "firstName": self.firstName,
                             "secondName": self.secondName,
@@ -183,7 +187,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
                     self.present(vVc, animated: false, completion: nil)
                 }
                 
-            } else if self.hasCompletedRegistration! == true {
+            } else {
                 Auth.auth().signIn(with: credential) {(authResult, error) in
                     if let error = error {
                         print("Error occurs when authenticate with Firebase: \(error.localizedDescription)")
@@ -195,40 +199,41 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
                     self.present(dvc, animated: false, completion: nil)
                 }
                 
-            } else {
-                Auth.auth().signIn(with: credential) {(authResult, error) in
-                    if let error = error {
-                        print("Error occurs when authenticate with Firebase: \(error.localizedDescription)")
-                    } else  {
-                        let user = user.profile
-                        self.firstName = (user?.givenName)!
-                        self.secondName = (user?.familyName)!
-                        self.emailId = (self.user?.email)!
-                        self.userlocation = self.location.coordinate
-                        
-                        self.db.collection("users").document((self.user?.email)!).setData([
-                            "email": self.emailId,
-                            "firstName": self.firstName,
-                            "secondName": self.secondName,
-                            "longitude": Double(self.userlocation.longitude),
-                            "latitude": Double(self.userlocation.latitude),
-                            "completedRegistration": false
-                        ]) { err in
-                            if let err = err {
-                                print("Error writing document: \(err)")
-                            } else {
-                                //NotificationCenter.default.post(name: .signInGoogleCompleted, object: nil)
-                                let vVc = storyboard.instantiateViewController(withIdentifier: "Vegan") as! VeganViewController
-                                vVc.modalPresentationStyle = .overFullScreen
-                                self.present(vVc, animated: false, completion: nil)
-                                print("Document successfully written!")
-                            }
-                        }
-                        
-                    }
-
-                }
-            }
+          }
+                //else {
+//                Auth.auth().signIn(with: credential) {(authResult, error) in
+//                    if let error = error {
+//                        print("Error occurs when authenticate with Firebase: \(error.localizedDescription)")
+//                    } else  {
+//                        let user = user.profile
+//                        self.firstName = (user?.givenName)!
+//                        self.secondName = (user?.familyName)!
+//                        self.emailId = (user?.email)!
+//                        self.userlocation = self.location.coordinate
+//
+//                        self.db.collection("users").document(self.emailId).setData([
+//                            "email": self.emailId,
+//                            "firstName": self.firstName,
+//                            "secondName": self.secondName,
+//                            "longitude": Double(self.userlocation.longitude),
+//                            "latitude": Double(self.userlocation.latitude),
+//                            "completedRegistration": false
+//                        ]) { err in
+//                            if let err = err {
+//                                print("Error writing document: \(err)")
+//                            } else {
+//                                //NotificationCenter.default.post(name: .signInGoogleCompleted, object: nil)
+//                                let vVc = storyboard.instantiateViewController(withIdentifier: "Vegan") as! VeganViewController
+//                                vVc.modalPresentationStyle = .overFullScreen
+//                                self.present(vVc, animated: false, completion: nil)
+//                                print("Document successfully written!")
+//                            }
+//                        }
+//
+//                    }
+//
+//                }
+//            }
         }
     
     
@@ -353,37 +358,93 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
       let credential = OAuthProvider.credential(withProviderID: "apple.com",
                                                 idToken: idTokenString,
                                                 rawNonce: nonce)
-      // Sign in with Firebase.
-      Auth.auth().signIn(with: credential) { (authResult, error) in
-        if (error != nil) {
-          // Error. If error.code == .MissingOrInvalidNonce, make sure
-          // you're sending the SHA256-hashed nonce as a hex string with
-          // your request to Apple.
-            print(error!.localizedDescription)
-          return
-        }
         
-        guard let user = authResult?.user else { return }
-        let email = user.email ?? ""
-        let displayName = user.displayName ?? ""
-        print(email)
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        let db = Firestore.firestore()
-        db.collection("users").document(email).setData([
-            "email": email,
-            "firstName": displayName,
-            "secondName": self.secondName,
-            "longitude": Double(self.userlocation.longitude),
-            "latitude": Double(self.userlocation.latitude),
-            "completedRegistration": false
-        ]) { err in
-            if let err = err {
-                print("Error writing document: \(err)")
-            } else {
-                print("the user has sign up or is logged in")
+        if self.hasCompletedRegistration == false {
+            // Sign in with Firebase.
+            Auth.auth().signIn(with: credential) { (authResult, error) in
+                if (error != nil) {
+                    
+
+                    // Error. If error.code == .MissingOrInvalidNonce, make sure
+                    // you're sending the SHA256-hashed nonce as a hex string with
+                    // your request to Apple.
+                    print(error!.localizedDescription)
+                    return
+                }
+                
+                guard let user = authResult?.user else { return }
+                let email = user.email!
+                let displayName = user.displayName ?? ""
+                guard let uid = Auth.auth().currentUser?.uid else { return }
+                let db = Firestore.firestore()
+                self.userlocation = self.location.coordinate
+                
+                db.collection("users").document(email).setData([
+                    "email": email,
+                    "firstName": "",
+                    "secondName":"",
+                    "longitude": Double(self.userlocation.longitude),
+                    "latitude": Double(self.userlocation.latitude),
+                    "completedRegistration": false
+                    
+                    
+                ]) { err in
+                    if let err = err {
+                        print("Error writing document: \(err)")
+                    } else {
+                        let vVc = self.storyboard!.instantiateViewController(withIdentifier: "Vegan") as! VeganViewController
+                        vVc.modalPresentationStyle = .overFullScreen
+                        self.present(vVc, animated: false, completion: nil)
+                        print("the user has sign up or is logged in")
+                    }
+                }
             }
+        } else  {
+            Auth.auth().signIn(with: credential) {(authResult, error) in
+                if let error = error {
+                    print("Error occurs when authenticate with Firebase: \(error.localizedDescription)")
+                }
+                let dvc = self.storyboard!.instantiateViewController(withIdentifier: "Dashboard") as! DashboardTabController
+                
+                dvc.modalPresentationStyle = .overFullScreen
+                
+                self.present(dvc, animated: false, completion: nil)
+            }
+            
         }
-      }
+//        else {
+//            Auth.auth().signIn(with: credential) {(authResult, error) in
+//                if let error = error {
+//                    print("Error occurs when authenticate with Firebase: \(error.localizedDescription)")
+//                } else  {
+//                    guard let user = authResult?.user else { return }
+//                    let email = user.email ?? ""
+//
+//                    self.userlocation = self.location.coordinate
+//
+//                    self.db.collection("users").document(email).setData([
+//                        "email": self.emailId,
+//                        "firstName": " ",
+//                        "secondName":" ",
+//                        "longitude": Double(self.userlocation.longitude),
+//                        "latitude": Double(self.userlocation.latitude),
+//                        "completedRegistration": false
+//                    ]) { err in
+//                        if let err = err {
+//                            print("Error writing document: \(err)")
+//                        } else {
+//                            let vVc = self.storyboard!.instantiateViewController(withIdentifier: "Vegan") as! VeganViewController
+//                            vVc.modalPresentationStyle = .overFullScreen
+//                            self.present(vVc, animated: false, completion: nil)
+//                            print("Document successfully written!")
+//                        }
+//                    }
+//
+//                }
+//
+//            }
+//        }
+
     }
     
   }
