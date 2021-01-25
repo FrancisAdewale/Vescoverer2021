@@ -78,7 +78,8 @@ class DiscoverViewController: UIViewController {
                     
                     let annotation = MKPointAnnotation()
                     
-                    annotation.title = document.documentID
+                    annotation.title = data["email"] as! String
+                
                     
                     annotation.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
                     self.nearbyUsers.addAnnotation(annotation)
@@ -138,7 +139,9 @@ extension DiscoverViewController: MKMapViewDelegate {
         let action = UIAlertAction(title: "Add", style: .default) { (action) in
             if let user = view.annotation?.title {
                 
-                self.db.collection("users").document(self.user!).collection("found").document(user!).setData(["userFound": user!,"latitude":Double((view.annotation?.coordinate.longitude)!), "longitude": Double((view.annotation?.coordinate.latitude)!)])
+                self.db.collection("users").document(self.user!).collection("found").document(user!).setData(["latitude":Double((view.annotation?.coordinate.longitude)!), "longitude": Double((view.annotation?.coordinate.latitude)!), "email":user!
+                                                                                                              
+                ])
             }
         }
         alert.addAction(action)

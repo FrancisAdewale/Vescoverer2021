@@ -23,7 +23,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var logo: UIImageView!
     @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var veganLabel: UILabel!
-    @IBOutlet private weak var isVegan: UISwitch! // may need coredata
+    @IBOutlet weak var isVegan: UISwitch! // may need coredata
     
 
     
@@ -38,7 +38,9 @@ class HomeViewController: UIViewController {
         if !vegan.isEmpty {
             lvc!.modalPresentationStyle = .fullScreen
             present(lvc!, animated: true, completion: nil)
-        } 
+        }
+        
+        
     }
     
     override func viewDidLoad() {

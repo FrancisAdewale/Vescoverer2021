@@ -19,4 +19,5 @@ struct ProfileUser {
     var longitude: Double = 0
     var latitude: Double = 0
     
+    
 }

@@ -2,10 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>need to access your photos</string>
-	<key>NSCameraUsageDescription</key>
-	<string>to take your selfie</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -35,10 +31,14 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>to take your selfie</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Need to share your location</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Need to share your Location</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>need to access your photos</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>need to access your photos</string>
 	<key>UIAppFonts</key>
@@ -77,8 +77,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>

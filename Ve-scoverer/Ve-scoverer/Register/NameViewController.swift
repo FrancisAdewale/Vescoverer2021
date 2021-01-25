@@ -59,8 +59,17 @@ class NameViewController: UIViewController, UITextFieldDelegate {
         view.endEditing(true)
     }
     
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if !firstNameTextField.text!.isEmpty && !lastNameTextField.text!.isEmpty {
+            firstNameTextField.backgroundColor = .green
+            lastNameTextField.backgroundColor = .green
+        } else {
+            if firstNameTextField.text!.isEmpty {
+                firstNameTextField.backgroundColor = .red
+            } else if lastNameTextField.text!.isEmpty {
+                lastNameTextField.backgroundColor = .red
+            }
+        }
     }
     
     @IBAction func next(_ sender: Any) {
@@ -71,9 +80,9 @@ class NameViewController: UIViewController, UITextFieldDelegate {
         if let user = user?.email {
             avc.currentuser = user
             self.db.collection("users").document(user).setData(["firstName" : self.firstNameTextField.text!,"secondName": self.lastNameTextField.text!], merge: true)
-
-            avc.modalPresentationStyle = .overFullScreen
-            present(avc, animated: true, completion: nil)
+            
+                avc.modalPresentationStyle = .overFullScreen
+                present(avc, animated: true, completion: nil)
 
         }
     }

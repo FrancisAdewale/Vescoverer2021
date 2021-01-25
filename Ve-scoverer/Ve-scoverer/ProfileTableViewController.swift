@@ -30,6 +30,8 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
     var imagefilepath = ""
     var userFirstName = ""
     var profileUser = ProfileUser()
+    let button = UIButton()
+
     
     var userCity = ""
     
@@ -39,7 +41,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         load()
-        
+                
     }
     
 
@@ -178,7 +180,6 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         if section == 1 {
             footerView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height:
             100)
-            let button = UIButton()
             button.frame = CGRect(x: 20, y: 10, width: 300, height: 50)
             button.setTitle("Logout", for: .normal)
             button.setTitleColor(.black, for: .normal)
@@ -320,14 +321,15 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         let firebaseAuth = Auth.auth()
     do {
       try firebaseAuth.signOut()
+          let lvc = storyboard?.instantiateViewController(identifier: "Login") as! LoginViewController
+          lvc.modalPresentationStyle = .fullScreen
+         present(lvc, animated: true, completion: nil)
+
+
     } catch let signOutError as NSError {
       print ("Error signing out: %@", signOutError)
     }
       
-        
-        let lvc = storyboard?.instantiateViewController(identifier: "Login") as! LoginViewController
-        lvc.modalPresentationStyle = .fullScreen
-        present(lvc, animated: true, completion: nil)
     }
     
     
@@ -348,17 +350,15 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
                 
                 let data = snapShot?.data()
                 
-                
-                
-                self.profileUser.firstName = (data!["firstName"] as? String ?? "")
-                self.profileUser.veganSince = data!["veganSince"] as! String
-                self.profileUser.age = data!["age"] as! Int
-                self.profileUser.gender = data!["gender"] as! String
-                self.profileUser.instagram = data!["instagram"] as! String
-                self.profileUser.twitter = data!["twitter"] as! String
-                self.profileUser.image = data!["imagepath"] as! String
-                self.profileUser.latitude = data!["latitude"] as! Double
-                self.profileUser.longitude = data!["longitude"] as! Double
+                self.profileUser.firstName = data?["firstName"] as? String ?? ""
+                self.profileUser.veganSince = data?["veganSince"] as? String ?? ""
+                self.profileUser.age = data?["age"] as? Int ?? 0
+                self.profileUser.gender = data?["gender"] as? String ?? ""
+                self.profileUser.instagram = data?["instagram"] as? String ?? ""
+                self.profileUser.twitter = data?["twitter"] as? String ?? ""
+                self.profileUser.image = data?["imagepath"] as? String ?? ""
+                self.profileUser.latitude = data?["latitude"] as? Double ?? 0
+                self.profileUser.longitude = data?["longitude"] as? Double ?? 0
                 
                 
                 let location = CLLocation(latitude: self.profileUser.latitude, longitude: self.profileUser.longitude)

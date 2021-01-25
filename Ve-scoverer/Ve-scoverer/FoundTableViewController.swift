@@ -17,7 +17,13 @@ class FoundTableViewController: UITableViewController {
     var userList = [String]()
     let currentUser = ""
     var loadUser = String()
-    
+    var section1: [ProfileUser] = []
+    var section2: [ProfileUser] = []
+    let user = Auth.auth().currentUser
+    var profileUser = ProfileUser()
+    var userCity = ""
+
+
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -30,7 +36,7 @@ class FoundTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Vescovered"
-        
+
     }
     
     // MARK: - Table view data source
@@ -57,41 +63,53 @@ class FoundTableViewController: UITableViewController {
         
     }
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//
-//
-//        guard let pvc = segue.destination as? ProfileTableViewController else { return }
-//        let indexpath = tableView.indexPathForSelectedRow
-//
-//        if let unwrappedPath = indexpath {
-//            tableView.deselectRow(at: unwrappedPath, animated: true)
-//            pvc.expectedString = userList[unwrappedPath.row]
-//
-//            db.collection("users").document(pvc.expectedString).collection("userimage").getDocuments { (querySnapshot, err) in
-//
-//                if let err = err {
-//                    print("Error getting documents: \(err)")
-//                } else {
-//                    for document in querySnapshot!.documents {
-//                        let data = document.data()
-//                       // let image = UIImage(data: data["image"] as! Data)
-//                        pvc.expectedImage = UIImage(named: "placeholder")!
-//                        do {
-//                        let users = try? Auth.auth().getStoredUser(forAccessGroup: "users")
-//                            if users?.email == pvc.expectedString && users!.isEmailVerified == true {
-//                                pvc.isUserVerified = true
-//                            }
-//                        } catch {
-//                            print(error)
-//                        }
-//
-//                    }
-//                }
-//            }
-//        }
-//        pvc.expectedBool = true
-//        pvc.buttonIsEnabled = false
-//    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+
+        guard let pvc = segue.destination as? ProfileTableViewController else { return }
+        let indexpath = tableView.indexPathForSelectedRow
+
+        if let unwrappedPath = indexpath {
+            tableView.deselectRow(at: unwrappedPath, animated: true)
+            pvc.expectedString = userList[unwrappedPath.row]
+            pvc.button.isHidden = true
+            
+            db.collection("users").document(pvc.expectedString).addSnapshotListener { (snapShot, err) in
+                if let err = err {
+                    print(err)
+                } else {
+                    
+                    let data = snapShot?.data()
+                    
+                    self.profileUser.firstName = data?["firstName"] as? String ?? ""
+                    self.profileUser.veganSince = data?["veganSince"] as? String ?? ""
+                    self.profileUser.age = data?["age"] as? Int ?? 0
+                    self.profileUser.gender = data?["gender"] as? String ?? ""
+                    self.profileUser.instagram = data?["instagram"] as? String ?? ""
+                    self.profileUser.twitter = data?["twitter"] as? String ?? ""
+                    self.profileUser.image = data?["imagepath"] as? String ?? ""
+                    self.profileUser.latitude = data?["latitude"] as? Double ?? 0
+                    self.profileUser.longitude = data?["longitude"] as? Double ?? 0
+                    
+                    let location = CLLocation(latitude: self.profileUser.latitude, longitude: self.profileUser.longitude)
+                    location.fetchCityAndCountry { city, country, error in
+                        guard let city = city, let country = country, error == nil else { return }
+                        self.userCity = city + ", " + country
+                    }
+                
+                    self.section1.append(self.profileUser)
+                    self.section2.append(self.profileUser)
+                    
+                    print(self.section1)
+                    print(self.section2)
+                    
+                }
+                
+            }
+      
+            }
+        
+    }
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let user = Auth.auth().currentUser
@@ -113,8 +131,8 @@ class FoundTableViewController: UITableViewController {
             } else {
 
                 for document in querySnapshot!.documents {
-                    if !self.userList.contains(document["userFound"] as! String){
-                        self.userList.append(document["userFound"] as! String)
+                    if !self.userList.contains(document["email"] as! String){
+                        self.userList.append(document["email"] as! String)
 
                     }
                 }
