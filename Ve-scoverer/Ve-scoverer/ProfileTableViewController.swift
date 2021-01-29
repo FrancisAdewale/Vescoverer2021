@@ -119,7 +119,8 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
             cell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
             cell.contentView.layer.borderWidth = 0.05
             cell.layer.cornerRadius = 8
-            cell.userFirstName.text = section1.first?.firstName
+            cell.userFirstName.text = profileUser.firstName
+            cell.userImage.image = UIImage(contentsOfFile: profileUser.image)
 //            self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2;
 //               self.profileImage.clipsToBounds = true;
 //

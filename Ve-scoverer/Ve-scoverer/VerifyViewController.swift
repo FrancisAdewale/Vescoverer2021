@@ -26,6 +26,7 @@ class VerifyViewController : UIViewController, UIImagePickerControllerDelegate &
     override func viewDidLoad() {
         super.viewDidLoad()
         load()
+        title = "Verify"
         
         userVerificationImage.isUserInteractionEnabled = true
         let tap = UITapGestureRecognizer(target: self, action: #selector(takeSelfie))
