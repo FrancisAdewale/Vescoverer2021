@@ -78,7 +78,7 @@ class DiscoverViewController: UIViewController {
                     
                     let annotation = MKPointAnnotation()
                     
-                    annotation.title = data["email"] as! String
+                    annotation.title = (data["email"] as! String)
                 
                     
                     annotation.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
@@ -116,7 +116,7 @@ extension DiscoverViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         self.locationManager.stopUpdatingLocation()
         
-        var insertion = MKPointAnnotation()
+        let insertion = MKPointAnnotation()
         insertion.coordinate.longitude = (locations.last?.coordinate.longitude)!
         insertion.coordinate.latitude = (locations.last?.coordinate.latitude)!
         annoationsArray.append(insertion)

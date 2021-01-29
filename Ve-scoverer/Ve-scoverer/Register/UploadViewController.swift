@@ -18,12 +18,22 @@ class UploadViewController: UIViewController,UIImagePickerControllerDelegate & U
     
     let db = Firestore.firestore()
     
+    @IBOutlet weak var progressBar: UIProgressView!
+    
     override func viewDidLoad() {
-        
         super.viewDidLoad()
+        
         picker.delegate = self
         picker.allowsEditing = true
         picker.sourceType = .photoLibrary
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.progressBar.tintColor = .black
+
+
     }
     
 
@@ -49,6 +59,8 @@ class UploadViewController: UIViewController,UIImagePickerControllerDelegate & U
     
     @IBAction func next(_ sender: Any) {
         
+        
+        
         let svc = storyboard?.instantiateViewController(withIdentifier: "Social") as! SocialsViewController
         
         let user = Auth.auth().currentUser
@@ -56,6 +68,7 @@ class UploadViewController: UIViewController,UIImagePickerControllerDelegate & U
         if let user = user?.email {
             svc.currentuser = user
             db.collection("users").document(currentuser).setData(["imagepath" : imagePath], merge: true)
+            
 
             svc.modalPresentationStyle = .overFullScreen
             present(svc, animated: true, completion: nil)

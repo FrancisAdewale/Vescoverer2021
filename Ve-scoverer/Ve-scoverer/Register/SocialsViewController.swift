@@ -14,6 +14,7 @@ class SocialsViewController: UIViewController {
     var twitterWebLink = "https://twitter.com/"
     
     
+    @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var fullInstagramLink: UILabel!
     @IBOutlet weak var fullTwitterLink: UILabel!
     var editedInstagram = String()
@@ -25,6 +26,12 @@ class SocialsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         hideKeyboardWhenTappedAround()
+
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+     
 
     }
     

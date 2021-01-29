@@ -17,6 +17,7 @@ class AgeViewController: UIViewController {
     let db = Firestore.firestore()
     
     
+    @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var ageSelector: UIDatePicker!
     @IBOutlet weak var age: UILabel!
     
@@ -33,7 +34,6 @@ class AgeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
     
         let date = dateFormatter.string(from: ageSelector.date)
 
@@ -43,6 +43,13 @@ class AgeViewController: UIViewController {
         age.text = calculatedAge.description
 
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.progressBar.tintColor = .black
+
+
     }
     
 
@@ -86,7 +93,9 @@ class AgeViewController: UIViewController {
         if let user = user?.email {
             gvc.currentuser = user
             self.db.collection("users").document(user).setData(["age" : Int(age.text!)!], merge: true)
-
+            
+       
+            
             gvc.modalPresentationStyle = .overFullScreen
             present(gvc, animated: true, completion: nil)
 

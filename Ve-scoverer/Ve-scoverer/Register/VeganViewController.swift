@@ -16,12 +16,14 @@ class VeganViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
     
     let db =  Firestore.firestore()
 
+    @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var veganSince: UIPickerView!
     @IBOutlet weak var veganQuestion: UILabel!
     let times = ["<20 years","<10 years","<5 years","<2 years", "<1 year", "<6 months" ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
+      
         
         db.collection("users").getDocuments { (snapShot, err) in
             if let err = err {
@@ -45,6 +47,16 @@ class VeganViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
         veganSince.delegate = self
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.progressBar.tintColor = .black
+
+      
+
+
+    }
+    
     
 
     func numberOfComponents(in pickerView: UIPickerView) -> Int {

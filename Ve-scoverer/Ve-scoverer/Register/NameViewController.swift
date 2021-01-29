@@ -19,12 +19,20 @@ class NameViewController: UIViewController, UITextFieldDelegate {
     var usersid = ""
 
 
+    @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.progressBar.tintColor = .black
+
+        
+      
+
+        
+
         
         db.collection("users").document((user?.email)!).getDocument(completion: { (snapShot, err) in
             if let err = err {
@@ -41,8 +49,8 @@ class NameViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        nameLabel.frame.origin
         
+      
         let lvc = LoginViewController()
         
         firstName = lvc.firstName
@@ -75,6 +83,8 @@ class NameViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func next(_ sender: Any) {
+        
+        
         let avc = storyboard?.instantiateViewController(withIdentifier: "Age") as! AgeViewController
 
         let user = Auth.auth().currentUser
@@ -82,6 +92,9 @@ class NameViewController: UIViewController, UITextFieldDelegate {
         if let user = user?.email {
             avc.currentuser = user
             self.db.collection("users").document(user).setData(["firstName" : self.firstNameTextField.text!,"secondName": self.lastNameTextField.text!], merge: true)
+            
+          
+            
             
                 avc.modalPresentationStyle = .overFullScreen
                 present(avc, animated: true, completion: nil)

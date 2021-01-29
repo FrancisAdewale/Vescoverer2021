@@ -59,7 +59,7 @@ class VerifyViewController : UIViewController, UIImagePickerControllerDelegate &
                 return
               }
             // Metadata contains file metadata such as size, content-type.
-            let size = metadata.size
+           // let size = metadata.size
             // You can also access to download URL after upload.
             imageRef.downloadURL { (url, error) in
               guard let downloadURL = url else {

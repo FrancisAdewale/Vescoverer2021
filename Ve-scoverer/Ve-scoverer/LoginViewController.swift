@@ -47,22 +47,26 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
 
         navigationController?.navigationBar.barTintColor = UIColor(hexString: "3797A4")
         
-        
-        self.db.collection("users").document((user?.email!)!).getDocument { (document, error) in
+        if let user = user {
             
-            if let err = error {
-                print(err)
-            } else {
-                if let dataDescription = document!.data() {
-                    self.hasCompletedRegistration = (dataDescription["completedRegistration"] as! Bool)
-                    print(self.hasCompletedRegistration!)
-                }
+            self.db.collection("users").document(user.email!).getDocument { (document, error) in
                 
-              
+                if let err = error {
+                    print(err)
+                } else {
+                    if let dataDescription = document!.data() {
+                        self.hasCompletedRegistration = (dataDescription["completedRegistration"] as! Bool)
+                        print(self.hasCompletedRegistration!)
+                    }
                     
+                    
+                    
+                }
             }
+            
         }
-
+        
+        
     }
 
     override func viewDidLoad() {
@@ -397,8 +401,8 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
 
                 guard let user = authResult?.user else { return }
                 let email = user.email!
-                let displayName = user.displayName ?? ""
-                guard let uid = Auth.auth().currentUser?.uid else { return }
+                //let displayName = user.displayName ?? ""
+                //guard let uid = Auth.auth().currentUser?.uid else { return }
                 let db = Firestore.firestore()
                 self.userlocation = self.location.coordinate
 

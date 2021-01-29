@@ -15,6 +15,7 @@ class GenderViewController: UIViewController,  UIPickerViewDataSource, UIPickerV
     
     var selectedGender = ""
     
+    @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var genderPicker: UIPickerView!
     
     @IBOutlet weak var genderLabel: UILabel!
@@ -26,6 +27,16 @@ class GenderViewController: UIViewController,  UIPickerViewDataSource, UIPickerV
         genderPicker.dataSource = self
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.progressBar.tintColor = .black
+
+      
+        
+
+
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -60,6 +71,7 @@ class GenderViewController: UIViewController,  UIPickerViewDataSource, UIPickerV
         if let user = user?.email {
             uvc.currentuser = user
             db.collection("users").document(currentuser).setData(["gender" : selectedGender], merge: true)
+            
 
             uvc.modalPresentationStyle = .overFullScreen
             
