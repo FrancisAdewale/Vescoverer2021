@@ -244,13 +244,19 @@
                                 </constraints>
                             </pickerView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gen" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Sb-7J-5pf">
-                                <rect key="frame" x="40" y="438.5" width="74.5" height="76.5"/>
-                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="41"/>
+                                <rect key="frame" x="40" y="438.5" width="62" height="76.5"/>
+                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="34"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gender?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H9r-K7-jUN">
+                                <rect key="frame" x="40" y="46.5" width="126" height="41"/>
+                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="34"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OpV-nG-7KR">
-                                <rect key="frame" x="207.5" y="438.5" width="80" height="76.5"/>
+                                <rect key="frame" x="212" y="438" width="80" height="76.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="UZW-63-uZr"/>
                                 </constraints>
@@ -262,19 +268,13 @@
                                     <action selector="next:" destination="UtU-I1-FsP" eventType="touchUpInside" id="yEW-6H-wFo"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gender?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H9r-K7-jUN">
-                                <rect key="frame" x="40" y="46.5" width="126" height="41"/>
-                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="34"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="bYZ-ei-wUA"/>
                         <color key="backgroundColor" red="0.21568627450980393" green="0.59215686274509804" blue="0.64313725490196072" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="H9r-K7-jUN" firstAttribute="top" secondItem="ibK-17-aQZ" secondAttribute="bottom" constant="16.5" id="0qv-Vh-ymV"/>
                             <constraint firstItem="ibK-17-aQZ" firstAttribute="leading" secondItem="wOl-vY-NPn" secondAttribute="leadingMargin" constant="24" id="31c-7m-fmq"/>
-                            <constraint firstItem="OpV-nG-7KR" firstAttribute="leading" secondItem="2Sb-7J-5pf" secondAttribute="trailing" constant="93" id="67X-fu-qDf"/>
+                            <constraint firstItem="OpV-nG-7KR" firstAttribute="leading" secondItem="2Sb-7J-5pf" secondAttribute="trailing" constant="110" id="67X-fu-qDf"/>
                             <constraint firstItem="bYZ-ei-wUA" firstAttribute="bottom" secondItem="OpV-nG-7KR" secondAttribute="bottom" constant="53" id="863-bK-sMu"/>
                             <constraint firstItem="OpV-nG-7KR" firstAttribute="top" secondItem="2Sb-7J-5pf" secondAttribute="top" id="Aci-AA-KoT"/>
                             <constraint firstItem="2Sb-7J-5pf" firstAttribute="top" secondItem="6Oi-rp-SKx" secondAttribute="bottom" constant="75" id="DXM-Ix-Vcx"/>
@@ -746,7 +746,7 @@
                                 </tableViewCellContentView>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
-                                    <segue destination="Izc-O1-HzH" kind="presentation" identifier="goToProfile" trigger="accessoryAction" modalPresentationStyle="automatic" id="5Uh-bk-JFm"/>
+                                    <segue destination="KN0-AC-j2N" kind="show" identifier="goToProfile" trigger="accessoryAction" id="dWn-d0-MZC"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -766,7 +766,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="Profile" id="Izc-O1-HzH" customClass="ProfileTableViewController" customModule="Ve_scoverer" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="btU-fe-g32">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemGray5Color"/>
                         <color key="sectionIndexColor" red="0.14474067090000001" green="0.13513386250000001" blue="0.17722848059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -874,10 +874,40 @@
             </objects>
             <point key="canvasLocation" x="4020" y="-1403.8732394366198"/>
         </scene>
+        <!--View User Table View Controller-->
+        <scene sceneID="DIw-Fd-IkS">
+            <objects>
+                <tableViewController storyboardIdentifier="ViewProfile" id="KN0-AC-j2N" customClass="ViewUserTableViewController" customModule="Ve_scoverer" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="rZl-X5-U4G">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemGray5Color"/>
+                        <color key="sectionIndexColor" red="0.14474067090000001" green="0.13513386250000001" blue="0.17722848059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="sectionIndexBackgroundColor" red="0.98823529409999999" green="0.97254901959999995" blue="0.46274509800000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" alpha="0.20000000298023224" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="55" id="uPp-dR-T7o">
+                                <rect key="frame" x="0.0" y="55.5" width="320" height="55"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uPp-dR-T7o" id="jhq-dP-DXt">
+                                    <rect key="frame" x="0.0" y="0.0" width="293" height="55"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="KN0-AC-j2N" id="nTF-Sh-xOa"/>
+                            <outlet property="delegate" destination="KN0-AC-j2N" id="XVr-jV-YGY"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="hva-8U-Bql"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="94d-Kn-hzG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6743" y="75"/>
+        </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="5Uh-bk-JFm"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <image name="checkmark" catalog="system" width="128" height="114"/>
         <image name="folder.fill" catalog="system" width="128" height="97"/>

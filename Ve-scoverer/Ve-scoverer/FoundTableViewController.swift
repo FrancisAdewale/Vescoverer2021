@@ -30,7 +30,6 @@ class FoundTableViewController: UITableViewController {
         load()
         view.backgroundColor = UIColor(hexString: "57AAB7")
 
-        
     }
     
     override func viewDidLoad() {
@@ -58,6 +57,7 @@ class FoundTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         performSegue(withIdentifier: "goToProfile", sender: self)
         
         
@@ -66,42 +66,60 @@ class FoundTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
 
-        guard let pvc = segue.destination as? ProfileTableViewController else { return }
+        guard let vup = segue.destination as? ViewUserTableViewController else { return }
         let indexpath = tableView.indexPathForSelectedRow
 
         if let unwrappedPath = indexpath {
             tableView.deselectRow(at: unwrappedPath, animated: true)
-            pvc.expectedString = userList[unwrappedPath.row]
-            pvc.button.isHidden = true
+            let user = userList[unwrappedPath.row]
+            print("i am the \(user)")
+            vup.button.isHidden = true
+
             
-            db.collection("users").document(pvc.expectedString).addSnapshotListener { (snapShot, err) in
+            db.collection("users").document(user)
+                .addSnapshotListener{ (snapShot, err) in
                 if let err = err {
                     print(err)
                 } else {
                     
                     let data = snapShot?.data()
                     
-                    self.profileUser.firstName = data?["firstName"] as? String ?? ""
-                    self.profileUser.veganSince = data?["veganSince"] as? String ?? ""
-                    self.profileUser.age = data?["age"] as? Int ?? 0
-                    self.profileUser.gender = data?["gender"] as? String ?? ""
-                    self.profileUser.instagram = data?["instagram"] as? String ?? ""
-                    self.profileUser.twitter = data?["twitter"] as? String ?? ""
-                    self.profileUser.image = data?["imagepath"] as? String ?? ""
-                    self.profileUser.latitude = data?["latitude"] as? Double ?? 0
-                    self.profileUser.longitude = data?["longitude"] as? Double ?? 0
+                    vup.viewUser.firstName = data?["firstName"] as? String ?? ""
+                    vup.viewUser.veganSince = data?["veganSince"] as? String ?? ""
+                    vup.viewUser.age = data?["age"] as? Int ?? 0
+                    vup.viewUser.gender = data?["gender"] as? String ?? ""
+                    vup.viewUser.instagram = data?["instagram"] as? String ?? ""
+                    vup.viewUser.twitter = data?["twitter"] as? String ?? ""
+                    vup.viewUser.image = data?["imagepath"] as? String ?? ""
+                    vup.viewUser.latitude = data?["latitude"] as? Double ?? 0
+                    vup.viewUser.longitude = data?["longitude"] as? Double ?? 0
                     
-                    let location = CLLocation(latitude: self.profileUser.latitude, longitude: self.profileUser.longitude)
+                                    
+                    
+                    
+                    let location = CLLocation(latitude: vup.viewUser.latitude, longitude: vup.viewUser.longitude)
                     location.fetchCityAndCountry { city, country, error in
                         guard let city = city, let country = country, error == nil else { return }
-                        self.userCity = city + ", " + country
+                        vup.userCity = city + ", " + country
                     }
-                
-                    self.section1.append(self.profileUser)
-                    self.section2.append(self.profileUser)
                     
-                    print(self.section1)
-                    print(self.section2)
+                    DispatchQueue.main.async {
+                        vup.tableView.reloadData()
+                    }
+                    
+                    
+                    //self.profileUser.firstName = data?["firstName"] as? String ?? ""
+                    //self.profileUser.veganSince = data?["veganSince"] as? String ?? ""
+                    //self.profileUser.age = data?["age"] as? Int ?? 0
+                    //self.profileUser.gender = data?["gender"] as? String ?? ""
+                    //self.profileUser.instagram = data?["instagram"] as? String ?? ""
+                    //self.profileUser.twitter = data?["twitter"] as? String ?? ""
+                    //self.profileUser.image = data?["imagepath"] as? String ?? ""
+                    //self.profileUser.latitude = data?["latitude"] as? Double ?? 0
+                    //self.profileUser.longitude = data?["longitude"] as? Double ?? 0
+                    
+                
+               
                     
                 }
                 
@@ -144,6 +162,9 @@ class FoundTableViewController: UITableViewController {
     }
 }
 
-        
+//extension CLLocation {
+//    func fetchCityAndCountry(completion: @escaping (_ city: String?, _ country:  String?, _ error: Error?) -> ()) {
+//        CLGeocoder().reverseGeocodeLocation(self) { completion($0?.first?.locality, $0?.first?.country, $1) }
+//    }
+//}
     
- 

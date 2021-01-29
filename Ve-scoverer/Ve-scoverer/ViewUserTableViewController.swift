@@ -14,7 +14,7 @@ import GoogleSignIn
 import AuthenticationServices
 
 
-class ProfileTableViewController: UITableViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+class ViewUserTableViewController: UITableViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
    
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var editedInstagram = String()
@@ -30,9 +30,10 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
     var imagefilepath = ""
     var userFirstName = ""
     var profileUser = ProfileUser()
+    var viewUser = ViewUser()
     let button = UIButton()
 
-    
+    var userImage = ""
     var userCity = ""
     
     var section1: [ProfileUser] = []
@@ -40,7 +41,9 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        load()
+        userImage = profileUser.image
+        
+
                 
     }
     
@@ -58,7 +61,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         super.viewDidLoad()
 
         self.navigationController?.navigationBar.prefersLargeTitles = true
-        title = "Account"
+        title = profileUser.firstName
       
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         picker.delegate = self
@@ -119,8 +122,8 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
             cell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
             cell.contentView.layer.borderWidth = 0.05
             cell.layer.cornerRadius = 8
-            cell.userFirstName.text = profileUser.firstName
-            cell.userImage.image = UIImage(contentsOfFile: profileUser.image)
+            cell.userFirstName.text = viewUser.firstName
+            cell.userImage.image = UIImage(contentsOfFile: userImage)
 //            self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2;
 //               self.profileImage.clipsToBounds = true;
 //
@@ -131,20 +134,20 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         
             let otherCell = tableView.dequeueReusableCell(withIdentifier: "NormalCell", for: indexPath) as! NormalViewCell
             otherCell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
-            otherCell.fillerInfo.text = profileUser.age.description
+            otherCell.fillerInfo.text = viewUser.age.description
             otherCell.contentView.layer.borderWidth = 0.05
             otherCell.layer.cornerRadius = 8
             return otherCell
         } else if indexPath.section == 0 && indexPath.row == 2 {
             let otherCell = tableView.dequeueReusableCell(withIdentifier: "NormalCell", for: indexPath) as! NormalViewCell
-            otherCell.fillerInfo.text = profileUser.veganSince
+            otherCell.fillerInfo.text = viewUser.veganSince
             otherCell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
             otherCell.contentView.layer.borderWidth = 0.05
             otherCell.layer.cornerRadius = 8
             return otherCell
         } else if indexPath.section == 1 && indexPath.row == 0 {
             let otherCell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-            otherCell.textLabel?.text = profileUser.gender
+            otherCell.textLabel?.text = viewUser.gender
             otherCell.accessoryType = .none
             otherCell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
             otherCell.contentView.layer.borderWidth = 0.05
@@ -184,7 +187,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
             button.frame = CGRect(x: 20, y: 10, width: 300, height: 50)
             button.setTitle("Logout", for: .normal)
             button.setTitleColor(.black, for: .normal)
-            button.addTarget(self, action: #selector(didTapSignOut(_:)), for: .touchUpInside)
+            //button.addTarget(self, action: #selector(didTapSignOut(_:)), for: .touchUpInside)
             footerView.addSubview(button)
         }
         return footerView
@@ -195,28 +198,28 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         return 100.0
     }
     
-    @IBAction func uploadImagePressed(_ sender: UIButton) {
-        present(picker, animated: true, completion: nil)
-    }
+//    @IBAction func uploadImagePressed(_ sender: UIButton) {
+//        present(picker, animated: true, completion: nil)
+//    }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        let userImage = info[.editedImage] as! UIImage
-        let jpegImage = userImage.jpegData(compressionQuality: 1.0)
-            //.pngData()
-        let coreImage = Image(context: context)
-        coreImage.img = jpegImage
-
-        do {
-            try! context.save()
-       }
-        
-       // db.collection("users").document((user?.email!)!).collection("userimage").document("image").setData(["image": jpegImage as Any])
-
-
-        uploadImage.setImage(UIImage(data: jpegImage!), for: .normal)
-        dismiss(animated: true, completion: nil)
-
-    }
+//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+//        let userImage = info[.editedImage] as! UIImage
+//        let jpegImage = userImage.jpegData(compressionQuality: 1.0)
+//            //.pngData()
+//        let coreImage = Image(context: context)
+//        coreImage.img = jpegImage
+//
+//        do {
+//            try! context.save()
+//       }
+//
+//       // db.collection("users").document((user?.email!)!).collection("userimage").document("image").setData(["image": jpegImage as Any])
+//
+//
+//        uploadImage.setImage(UIImage(data: jpegImage!), for: .normal)
+//        dismiss(animated: true, completion: nil)
+//
+//    }
     
     //i need to add social media lnks to USER MODEL.
     
@@ -315,72 +318,72 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
 //
 //    }
     
-    @IBAction func didTapSignOut(_ sender: AnyObject) {
-        
-        print("signed out \(String(describing: user?.email))")
-        
-        let firebaseAuth = Auth.auth()
-    do {
-      try firebaseAuth.signOut()
-          let lvc = storyboard?.instantiateViewController(identifier: "Login") as! LoginViewController
-          lvc.modalPresentationStyle = .fullScreen
-         present(lvc, animated: true, completion: nil)
-
-
-    } catch let signOutError as NSError {
-      print ("Error signing out: %@", signOutError)
-    }
-      
-    }
+//    @IBAction func didTapSignOut(_ sender: AnyObject) {
+//
+//        print("signed out \(String(describing: user?.email))")
+//
+//        let firebaseAuth = Auth.auth()
+//    do {
+//      try firebaseAuth.signOut()
+//          let lvc = storyboard?.instantiateViewController(identifier: "Login") as! LoginViewController
+//          lvc.modalPresentationStyle = .fullScreen
+//         present(lvc, animated: true, completion: nil)
+//
+//
+//    } catch let signOutError as NSError {
+//      print ("Error signing out: %@", signOutError)
+//    }
+//
+//    }
     
     
     
-    func load() {
-        
-        //profileName.text = expectedString
-//        uploadImage.imageView?.image = expectedImage
-//        logOutButton.isHidden = expectedBool
-//        igButton.isEnabled = buttonIsEnabled
-//        twitterButton.isEnabled = buttonIsEnabled
-        
-        
-        db.collection("users").document((user?.email)!).addSnapshotListener { (snapShot, err) in
-            if let err = err {
-                print(err)
-            } else {
-                
-                let data = snapShot?.data()
-                
-                self.profileUser.firstName = data?["firstName"] as? String ?? ""
-                self.profileUser.veganSince = data?["veganSince"] as? String ?? ""
-                self.profileUser.age = data?["age"] as? Int ?? 0
-                self.profileUser.gender = data?["gender"] as? String ?? ""
-                self.profileUser.instagram = data?["instagram"] as? String ?? ""
-                self.profileUser.twitter = data?["twitter"] as? String ?? ""
-                self.profileUser.image = data?["imagepath"] as? String ?? ""
-                self.profileUser.latitude = data?["latitude"] as? Double ?? 0
-                self.profileUser.longitude = data?["longitude"] as? Double ?? 0
-                
-                
-                let location = CLLocation(latitude: self.profileUser.latitude, longitude: self.profileUser.longitude)
-                location.fetchCityAndCountry { city, country, error in
-                    guard let city = city, let country = country, error == nil else { return }
-                    self.userCity = city + ", " + country
-                }
-            
-                self.section1.append(self.profileUser)
-                self.section2.append(self.profileUser)
-                
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-            }
-            
-        }
-        
-        //self.imagefilepath = data!["imagepath"] as! String
-        
-    }
+//    func load() {
+//
+//        //profileName.text = expectedString
+////        uploadImage.imageView?.image = expectedImage
+////        logOutButton.isHidden = expectedBool
+////        igButton.isEnabled = buttonIsEnabled
+////        twitterButton.isEnabled = buttonIsEnabled
+//
+//
+//        db.collection("users").document((user?.email)!).addSnapshotListener { (snapShot, err) in
+//            if let err = err {
+//                print(err)
+//            } else {
+//
+//                let data = snapShot?.data()
+//
+//                self.profileUser.firstName = data?["firstName"] as? String ?? ""
+//                self.profileUser.veganSince = data?["veganSince"] as? String ?? ""
+//                self.profileUser.age = data?["age"] as? Int ?? 0
+//                self.profileUser.gender = data?["gender"] as? String ?? ""
+//                self.profileUser.instagram = data?["instagram"] as? String ?? ""
+//                self.profileUser.twitter = data?["twitter"] as? String ?? ""
+//                self.profileUser.image = data?["imagepath"] as? String ?? ""
+//                self.profileUser.latitude = data?["latitude"] as? Double ?? 0
+//                self.profileUser.longitude = data?["longitude"] as? Double ?? 0
+//
+//
+////                let location = CLLocation(latitude: self.profileUser.latitude, longitude: self.profileUser.longitude)
+////                location.fetchCityAndCountry { city, country, error in
+////                    guard let city = city, let country = country, error == nil else { return }
+////                    self.userCity = city + ", " + country
+////                }
+//
+//                self.section1.append(self.profileUser)
+//                self.section2.append(self.profileUser)
+//
+//                DispatchQueue.main.async {
+//                    self.tableView.reloadData()
+//                }
+//            }
+//
+//        }
+//
+//        //self.imagefilepath = data!["imagepath"] as! String
+//
+//    }
 //        })
         
 //        db.collection("users").document(user?.email ?? "Email").collection("socials").document("twitter").getDocument(completion: { (documentSnap, err) in
@@ -402,9 +405,5 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
                   
         }
 
-extension CLLocation {
-    func fetchCityAndCountry(completion: @escaping (_ city: String?, _ country:  String?, _ error: Error?) -> ()) {
-        CLGeocoder().reverseGeocodeLocation(self) { completion($0?.first?.locality, $0?.first?.country, $1) }
-    }
-}
+
     
