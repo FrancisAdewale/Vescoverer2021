@@ -36,6 +36,7 @@ class FoundTableViewController: UITableViewController {
         super.viewDidLoad()
         title = "Vescovered"
 
+
     }
     
     // MARK: - Table view data source
@@ -90,9 +91,12 @@ class FoundTableViewController: UITableViewController {
                     vup.viewUser.gender = data?["gender"] as? String ?? ""
                     vup.viewUser.instagram = data?["instagram"] as? String ?? ""
                     vup.viewUser.twitter = data?["twitter"] as? String ?? ""
-                    vup.viewUser.image = data?["imagepath"] as? String ?? ""
+                    //vup.viewUser.image = data?["imagepath"] as? String ?? ""
                     vup.viewUser.latitude = data?["latitude"] as? Double ?? 0
                     vup.viewUser.longitude = data?["longitude"] as? Double ?? 0
+                    vup.loadUserEmail = data?["email"] as? String ?? ""
+                    
+                    vup.tableView.reloadData()
    
                     let location = CLLocation(latitude: vup.viewUser.latitude, longitude: vup.viewUser.longitude)
                     location.fetchCityAndCountry { city, country, error in
@@ -100,10 +104,7 @@ class FoundTableViewController: UITableViewController {
                         vup.userCity = city + ", " + country
                     }
                     
-                    DispatchQueue.main.async {
-                        vup.tableView.reloadData()
-                    }
-                    
+                
                     
                     //self.profileUser.firstName = data?["firstName"] as? String ?? ""
                     //self.profileUser.veganSince = data?["veganSince"] as? String ?? ""

@@ -24,6 +24,8 @@
 		763EFFA5255457C000CEAA41 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763EFFA4255457C000CEAA41 /* ProfileTableViewController.swift */; };
 		7669AE08259374F8000E2A1C /* InstagramAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7669AE07259374F8000E2A1C /* InstagramAPI.swift */; };
 		7669AE0B2593779B000E2A1C /* InstagramResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7669AE0A2593779B000E2A1C /* InstagramResponse.swift */; };
+		766CE12725C5D35900465FE9 /* ViewImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766CE12525C5D35900465FE9 /* ViewImageCell.swift */; };
+		766CE12825C5D35900465FE9 /* ViewImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 766CE12625C5D35900465FE9 /* ViewImageCell.xib */; };
 		767E81C925A23BF400BC40EC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 767E81C825A23BF400BC40EC /* GoogleService-Info.plist */; };
 		767EAE53256EB1C600B67811 /* Lato in Resources */ = {isa = PBXBuildFile; fileRef = 767EAE52256EB1C600B67811 /* Lato */; };
 		767F0EDC2591104A00615FB5 /* NormalUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767F0EDB2591104A00615FB5 /* NormalUser.swift */; };
@@ -69,6 +71,8 @@
 		763EFFA4255457C000CEAA41 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
 		7669AE07259374F8000E2A1C /* InstagramAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramAPI.swift; sourceTree = "<group>"; };
 		7669AE0A2593779B000E2A1C /* InstagramResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramResponse.swift; sourceTree = "<group>"; };
+		766CE12525C5D35900465FE9 /* ViewImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewImageCell.swift; sourceTree = "<group>"; };
+		766CE12625C5D35900465FE9 /* ViewImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewImageCell.xib; sourceTree = "<group>"; };
 		767E81C825A23BF400BC40EC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		767EAE52256EB1C600B67811 /* Lato */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Lato; sourceTree = "<group>"; };
 		767F0EDB2591104A00615FB5 /* NormalUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NormalUser.swift; sourceTree = "<group>"; };
@@ -150,6 +154,15 @@
 			path = UserImageCell;
 			sourceTree = "<group>";
 		};
+		766CE12425C5D30300465FE9 /* ViewedImageCell */ = {
+			isa = PBXGroup;
+			children = (
+				766CE12525C5D35900465FE9 /* ViewImageCell.swift */,
+				766CE12625C5D35900465FE9 /* ViewImageCell.xib */,
+			);
+			path = ViewedImageCell;
+			sourceTree = "<group>";
+		};
 		767EAE51256EB1AC00B67811 /* fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -179,6 +192,7 @@
 		76912B5B2551DB1B001C38DE /* Ve-scoverer */ = {
 			isa = PBXGroup;
 			children = (
+				766CE12425C5D30300465FE9 /* ViewedImageCell */,
 				76F4CDAB25B3B2300039C597 /* SocialsCell */,
 				76D36D2B25AB6DFE00D98ED5 /* NormalCell */,
 				7626C4A125AA000100F7E4EF /* UserImageCell */,
@@ -319,6 +333,7 @@
 				76F4CDAF25B3B25A0039C597 /* SocialsTableViewCell.xib in Resources */,
 				76E0D21E25C35B0300D6F40D /* Main.storyboard in Resources */,
 				76912B662551DB1B001C38DE /* Assets.xcassets in Resources */,
+				766CE12825C5D35900465FE9 /* ViewImageCell.xib in Resources */,
 				767EAE53256EB1C600B67811 /* Lato in Resources */,
 				76D36D2F25AB6E1F00D98ED5 /* NormalViewCell.xib in Resources */,
 				7626C4A525AA004800F7E4EF /* ImageViewCell.xib in Resources */,
@@ -395,6 +410,7 @@
 				761CBC18258D343D003136FB /* UploadViewController.swift in Sources */,
 				76D36D2925AB515300D98ED5 /* ProfileUser.swift in Sources */,
 				76D36D2E25AB6E1F00D98ED5 /* NormalViewCell.swift in Sources */,
+				766CE12725C5D35900465FE9 /* ViewImageCell.swift in Sources */,
 				76F4CDAE25B3B25A0039C597 /* SocialsTableViewCell.swift in Sources */,
 				761A796525C472FE004C59E4 /* ViewUserTableViewController.swift in Sources */,
 				762503212555D8DB002F92E2 /* FoundTableViewController.swift in Sources */,

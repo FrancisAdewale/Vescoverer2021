@@ -12,6 +12,7 @@ import FirebaseStorage
 import ChameleonFramework
 import GoogleSignIn
 import AuthenticationServices
+import SDWebImage
 
 
 class ViewUserTableViewController: UITableViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
@@ -27,11 +28,14 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
     var isUserVerified = Bool()
     let user = Auth.auth().currentUser
     let db = Firestore.firestore()
-    var imagefilepath = ""
+    var imagefilepath: URL? = nil
     var userFirstName = ""
     var profileUser = ProfileUser()
     var viewUser = ViewUser()
     let button = UIButton()
+    let storage = Storage.storage()
+    var loadUserEmail = ""
+
 
     var userImage = ""
     var userCity = ""
@@ -41,8 +45,6 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        userImage = profileUser.image
-        
 
                 
     }
@@ -59,6 +61,10 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        
+
 
         self.navigationController?.navigationBar.prefersLargeTitles = true
         title = profileUser.firstName
@@ -69,7 +75,7 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
         picker.sourceType = .photoLibrary
         tableView.dataSource = self
         
-        tableView.register(UINib(nibName: "ImageViewCell", bundle: nil), forCellReuseIdentifier: "ImageCell")
+        tableView.register(UINib(nibName: "ViewImageCell", bundle: nil), forCellReuseIdentifier: "ViewCell")
         tableView.register(UINib(nibName: "NormalViewCell", bundle: nil), forCellReuseIdentifier: "NormalCell")
         tableView.register(UINib(nibName: "SocialsTableViewCell", bundle: nil), forCellReuseIdentifier: "SocialsCell")
 
@@ -118,12 +124,41 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.section == 0 && indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ImageCell", for: indexPath) as! ImageViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ViewCell", for: indexPath) as! ViewImageCell
             cell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
             cell.contentView.layer.borderWidth = 0.05
             cell.layer.cornerRadius = 8
-            cell.userFirstName.text = viewUser.firstName
-            cell.userImage.image = UIImage(contentsOfFile: userImage)
+            cell.usernameCell.text = viewUser.firstName
+            
+            
+            print("this is the view user image \(viewUser.image)")
+            
+            
+            
+            DispatchQueue.main.async {
+                let ref = self.storage.reference().child(self.loadUserEmail).child("profile/profile.jpg")
+                
+                
+                ref.downloadURL { (url, error) in
+                    if let error = error {
+                        print(error)
+                    } else {
+                        
+                        cell.imageCell.sd_setImage(with: url, completed: nil)
+                        tableView.reloadData()
+                        
+                    }
+                }
+            }
+            
+            
+            
+
+            
+                
+                //.sd_setImage(with: URL(fileURLWithPath: viewUser.image), completed: nil)
+
+           // cell.userImage.image = UIImage(contentsOfFile: userImage)
 //            self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2;
 //               self.profileImage.clipsToBounds = true;
 //
@@ -171,7 +206,11 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
             otherCell.layer.cornerRadius = 8
             return otherCell
             
+            
+            
         }
+        
+   
         
     }
     
@@ -197,6 +236,26 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100.0
     }
+    
+    
+//    func loadImage() {
+//
+//        let ref = storage.reference().child("\(loadUserEmail)/\(loadUserEmail)Profile.jpg")
+//
+//        ref.downloadURL { (url, error) in
+//            if let error = error {
+//                print(error)
+//            } else {
+//                self.imagefilepath = url!
+//                print(self.imagefilepath)
+//            }
+//        }
+//
+//
+//            self.tableView.reloadData()
+//
+//
+//    }
     
 //    @IBAction func uploadImagePressed(_ sender: UIButton) {
 //        present(picker, animated: true, completion: nil)

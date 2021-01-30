@@ -15,7 +15,8 @@ class UploadViewController: UIViewController,UIImagePickerControllerDelegate & U
     var currentuser = ""
     
     var imagePath = ""
-    
+    let storage = Storage.storage()
+
     let db = Firestore.firestore()
     
     @IBOutlet weak var progressBar: UIProgressView!
@@ -45,12 +46,36 @@ class UploadViewController: UIViewController,UIImagePickerControllerDelegate & U
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
+        let user = Auth.auth().currentUser!
+        
         let userImage = info[.imageURL]
+        let profileStorage = info[.originalImage] as! UIImage
         
         let url = userImage as! URL
         
         imagePath = url.path
         
+        let storageRef = storage.reference()
+
+        guard let imageData = profileStorage.jpegData(compressionQuality: 0.5) else { return }
+        
+        let imageRef = storageRef.child("\((user.email)!)").child("profile/profile.jpg")
+        let uploadTask = imageRef.putData(imageData, metadata: nil) { (metadata, error) in
+            guard let metadata = metadata else {
+                // Uh-oh, an error occurred!
+                return
+              }
+            // Metadata contains file metadata such as size, content-type.
+           // let size = metadata.size
+            // You can also access to download URL after upload.
+            imageRef.downloadURL { (url, error) in
+              guard let downloadURL = url else {
+                // Uh-oh, an error occurred!
+                return
+              }
+            }
+        }
+
 
         dismiss(animated: true, completion: nil)
 
@@ -58,6 +83,7 @@ class UploadViewController: UIViewController,UIImagePickerControllerDelegate & U
     
     
     @IBAction func next(_ sender: Any) {
+        
         
         
         
