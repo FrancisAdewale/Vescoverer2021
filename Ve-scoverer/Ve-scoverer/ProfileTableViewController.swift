@@ -12,6 +12,7 @@ import FirebaseStorage
 import ChameleonFramework
 import GoogleSignIn
 import AuthenticationServices
+import SDWebImage
 
 
 class ProfileTableViewController: UITableViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
@@ -110,6 +111,8 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         tableView.deselectRow(at: indexpath!, animated: true)
     }
     
+    
+    
   
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -120,7 +123,11 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
             cell.contentView.layer.borderWidth = 0.05
             cell.layer.cornerRadius = 8
             cell.userFirstName.text = profileUser.firstName
-            cell.userImage.image = UIImage(contentsOfFile: profileUser.image)
+            cell.userImage.sd_setImage(with: URL(fileURLWithPath: profileUser.image), completed: nil)
+                
+               // UIImage(contentsOfFile: self.profileUser.image)
+            
+            
 //            self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2;
 //               self.profileImage.clipsToBounds = true;
 //

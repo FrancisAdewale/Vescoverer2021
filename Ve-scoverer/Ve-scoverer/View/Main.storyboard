@@ -174,7 +174,7 @@
                                 <color key="progressTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="trackTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </progressView>
-                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Psa-IZ-Flt">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Psa-IZ-Flt">
                                 <rect key="frame" x="32" y="283" width="256" height="128"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Please Upload a spoon pic, yes a spoon pic." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VSr-Zh-cd1">
@@ -244,8 +244,8 @@
                                 </constraints>
                             </pickerView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gen" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Sb-7J-5pf">
-                                <rect key="frame" x="40" y="438.5" width="62" height="76.5"/>
-                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="34"/>
+                                <rect key="frame" x="40" y="438.5" width="44" height="76.5"/>
+                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="24"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -255,8 +255,8 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OpV-nG-7KR">
-                                <rect key="frame" x="212" y="438" width="80" height="76.5"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OpV-nG-7KR">
+                                <rect key="frame" x="211" y="438" width="80" height="76.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="UZW-63-uZr"/>
                                 </constraints>
@@ -640,11 +640,11 @@
                                     <action selector="selectedAge:" destination="kre-u1-MDP" eventType="valueChanged" id="aKz-jJ-Cc3"/>
                                 </connections>
                             </datePicker>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="M4I-Vv-ofU">
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="71" translatesAutoresizingMaskIntoConstraints="NO" id="M4I-Vv-ofU">
                                 <rect key="frame" x="33" y="432" width="250" height="80"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g68-8y-k3j">
-                                        <rect key="frame" x="0.0" y="0.0" width="159" height="80"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="99" height="80"/>
                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="60"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>

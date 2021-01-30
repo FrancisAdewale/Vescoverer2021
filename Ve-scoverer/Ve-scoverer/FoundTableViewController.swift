@@ -77,7 +77,7 @@ class FoundTableViewController: UITableViewController {
 
             
             db.collection("users").document(user)
-                .addSnapshotListener{ (snapShot, err) in
+                .getDocument() { (snapShot, err) in
                 if let err = err {
                     print(err)
                 } else {
@@ -93,10 +93,7 @@ class FoundTableViewController: UITableViewController {
                     vup.viewUser.image = data?["imagepath"] as? String ?? ""
                     vup.viewUser.latitude = data?["latitude"] as? Double ?? 0
                     vup.viewUser.longitude = data?["longitude"] as? Double ?? 0
-                    
-                                    
-                    
-                    
+   
                     let location = CLLocation(latitude: vup.viewUser.latitude, longitude: vup.viewUser.longitude)
                     location.fetchCityAndCountry { city, country, error in
                         guard let city = city, let country = country, error == nil else { return }
