@@ -142,10 +142,16 @@ extension DiscoverViewController: MKMapViewDelegate {
                 self.db.collection("users").document(self.user!).collection("found").document(user!).setData(["latitude":Double((view.annotation?.coordinate.longitude)!), "longitude": Double((view.annotation?.coordinate.latitude)!), "email":user!
                                                                                                               
                 ])
+                
+                if let tabItems = self.tabBarController?.tabBar.items {
+                    // In this case we want to modify the badge number of the third tab:
+                    let tabItem = tabItems[3]
+                    tabItem.badgeValue = "1"
+                }
             }
         }
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
-        
+      
     }
 }

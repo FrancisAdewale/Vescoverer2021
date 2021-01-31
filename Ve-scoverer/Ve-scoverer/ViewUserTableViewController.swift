@@ -35,7 +35,7 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
     let button = UIButton()
     let storage = Storage.storage()
     var loadUserEmail = ""
-
+    var floatNum = CGFloat()
 
     var userImage = ""
     var userCity = ""
@@ -62,7 +62,9 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        floatNum = CGFloat.random(in: 0...1)
         
+
         
 
 
@@ -111,6 +113,7 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let vw = UIView()
+        vw.backgroundColor = UIColor(hexString: "3797A4")
         return vw
     }
     
@@ -123,13 +126,13 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        
         if indexPath.section == 0 && indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ViewCell", for: indexPath) as! ViewImageCell
             cell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
             cell.contentView.layer.borderWidth = 0.05
-            cell.layer.cornerRadius = 8
+//            cell.backgroundColor = UIColor(hexString: "3797A4")!.lighten(byPercentage: self.floatNum)
             cell.usernameCell.text = viewUser.firstName
-            
             
             print("this is the view user image \(viewUser.image)")
             
@@ -170,40 +173,47 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
             let otherCell = tableView.dequeueReusableCell(withIdentifier: "NormalCell", for: indexPath) as! NormalViewCell
             otherCell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
             otherCell.fillerInfo.text = viewUser.age.description
+//            otherCell.backgroundColor = UIColor(hexString: "3797A4")!.lighten(byPercentage: self.floatNum)
+
             otherCell.contentView.layer.borderWidth = 0.05
-            otherCell.layer.cornerRadius = 8
             return otherCell
         } else if indexPath.section == 0 && indexPath.row == 2 {
             let otherCell = tableView.dequeueReusableCell(withIdentifier: "NormalCell", for: indexPath) as! NormalViewCell
             otherCell.fillerInfo.text = viewUser.veganSince
             otherCell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
             otherCell.contentView.layer.borderWidth = 0.05
-            otherCell.layer.cornerRadius = 8
+//            otherCell.backgroundColor = UIColor(hexString: "3797A4")!.lighten(byPercentage: self.floatNum)
+
             return otherCell
         } else if indexPath.section == 1 && indexPath.row == 0 {
-            let otherCell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+            let otherCell = tableView.dequeueReusableCell(withIdentifier: "NormalCell", for: indexPath) as! NormalViewCell
+//            otherCell.backgroundColor = UIColor(hexString: "3797A4")!.lighten(byPercentage: self.floatNum)
+
             otherCell.textLabel?.text = viewUser.gender
             otherCell.accessoryType = .none
             otherCell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
             otherCell.contentView.layer.borderWidth = 0.05
-            otherCell.layer.cornerRadius = 8
+
             return otherCell
         } else if indexPath.section == 1 && indexPath.row == 1 {
             let otherCell = tableView.dequeueReusableCell(withIdentifier: "SocialsCell", for: indexPath) as! SocialsTableViewCell
             //otherCell.textLabel?.text = profileUser.twitter
+            //otherCell.backgroundColor = UIColor(hexString: "3797A4")!.lighten(byPercentage: self.floatNum)
+
             otherCell.accessoryType = .none
 
             //otherCell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
             otherCell.contentView.layer.borderWidth = 0.05
-            otherCell.layer.cornerRadius = 8
             return otherCell
         } else {
-            let otherCell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+            let otherCell = tableView.dequeueReusableCell(withIdentifier: "NormalCell", for: indexPath) as! NormalViewCell
+
             otherCell.textLabel?.text = userCity
             otherCell.accessoryType = .none
             otherCell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
             otherCell.contentView.layer.borderWidth = 0.05
-            otherCell.layer.cornerRadius = 8
+//            otherCell.backgroundColor = UIColor(hexString: "3797A4")!.lighten(byPercentage: self.floatNum)
+
             return otherCell
             
             
@@ -223,11 +233,8 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
         if section == 1 {
             footerView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height:
             100)
-            button.frame = CGRect(x: 20, y: 10, width: 300, height: 50)
-            button.setTitle("Logout", for: .normal)
-            button.setTitleColor(.black, for: .normal)
-            //button.addTarget(self, action: #selector(didTapSignOut(_:)), for: .touchUpInside)
-            footerView.addSubview(button)
+         
+//            footerView.backgroundColor = UIColor(hexString: "3797A4")
         }
         return footerView
 

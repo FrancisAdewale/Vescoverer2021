@@ -29,6 +29,16 @@ class FoundTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         load()
         view.backgroundColor = UIColor(hexString: "57AAB7")
+        
+        if let tabItems = self.tabBarController?.tabBar.items {
+            // In this case we want to modify the badge number of the third tab:
+            let tabItem = tabItems[3]
+            if tabItem.badgeValue == "1" {
+                tabItem.badgeValue = nil
+            }
+        }
+
+
 
     }
     
