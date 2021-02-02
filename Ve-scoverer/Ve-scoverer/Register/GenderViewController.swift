@@ -17,6 +17,7 @@ class GenderViewController: UIViewController,  UIPickerViewDataSource, UIPickerV
     
     @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var genderPicker: UIPickerView!
+    @IBOutlet weak var nextButton: UIButton!
     
     @IBOutlet weak var genderLabel: UILabel!
     let gender = ["Male","Female","Trans"]
@@ -32,6 +33,8 @@ class GenderViewController: UIViewController,  UIPickerViewDataSource, UIPickerV
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.progressBar.tintColor = .black
+        progressBar.frame = CGRect(x: 36.0, y: 37.5, width: 240.0, height: 2.5)
+        nextButton.frame = CGRect(x: 211.0, y: 433.0, width: 80.0, height: 80.0)
 
       
         

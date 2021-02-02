@@ -16,6 +16,7 @@ class VeganViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
     
     let db =  Firestore.firestore()
 
+    @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var veganSince: UIPickerView!
     @IBOutlet weak var veganQuestion: UILabel!
@@ -23,7 +24,9 @@ class VeganViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
       
+        print("\(progressBar.frame)")
         
         db.collection("users").getDocuments { (snapShot, err) in
             if let err = err {
@@ -51,6 +54,10 @@ class VeganViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.progressBar.tintColor = .black
+        print("tHIS IS PROGRESS BAR COORDINATES \(progressBar.frame)")
+        print("THIS IS LABEL COORDINATES \(veganQuestion.frame)")
+        print("THIS IS PICKER COORDINATES\(veganSince.frame)")
+        print("THIS IS NET BUTTON COORDINATES\(nextButton.frame)")
 
       
 

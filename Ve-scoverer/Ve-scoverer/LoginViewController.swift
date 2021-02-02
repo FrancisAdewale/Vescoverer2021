@@ -41,7 +41,6 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //self.modalPresentationStyle = .fullScreen
-        view.backgroundColor = UIColor(hexString: "3797A4")
         navigationItem.hidesBackButton = true
         
 

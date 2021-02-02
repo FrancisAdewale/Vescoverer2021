@@ -19,6 +19,8 @@ class NameViewController: UIViewController, UITextFieldDelegate {
     var usersid = ""
 
 
+    @IBOutlet weak var background: UIImageView!
+    @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var firstNameTextField: UITextField!
@@ -26,12 +28,12 @@ class NameViewController: UIViewController, UITextFieldDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.progressBar.tintColor = .black
+        progressBar.frame = CGRect(x: 36.0, y: 37.5, width: 240.0, height: 2.5)
+        nameLabel.frame = CGRect(x: 36.0, y: 58.0, width: 207.5, height: 70.0)
+        nextButton.frame = CGRect(x: 211.0, y: 433.0, width: 80, height: 80)
 
-        
-      
+        self.view.insertSubview(self.background, at: 0)
 
-        
 
         
         db.collection("users").document((user?.email)!).getDocument(completion: { (snapShot, err) in
