@@ -105,8 +105,9 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
         view.addSubview(appleButton)
         //appleButton.cornerRadius = 12
         appleButton.addTarget(self, action: #selector(startSignInWithAppleFlow), for: .touchUpInside)
-        appleButton.frame = CGRect(x: 0, y: 0, width: 250, height: 50)
+        appleButton.frame = CGRect(x: 0, y: 0, width: 145.0, height: 30.0)
         appleButton.center = self.view.center
+        appleButton.cornerRadius = 0
     }
     
     
