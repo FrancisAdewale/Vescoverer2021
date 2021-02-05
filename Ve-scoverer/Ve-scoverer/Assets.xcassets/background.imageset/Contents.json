@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "background (1).png",
+      "filename" : "iphone12back.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "background (1)-1.png",
+      "filename" : "iphone12back-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "background (1)-2.png",
+      "filename" : "iphone12back-2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

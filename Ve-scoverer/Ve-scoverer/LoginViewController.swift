@@ -44,7 +44,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
         navigationItem.hidesBackButton = true
         
 
-        navigationController?.navigationBar.barTintColor = UIColor(hexString: "3797A4")
+        //navigationController?.navigationBar.barTintColor = UIColor(hexString: "3797A4")
         
         if let user = user {
             

@@ -28,9 +28,12 @@ class NameViewController: UIViewController, UITextFieldDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        progressBar.frame = CGRect(x: 36.0, y: 37.5, width: 240.0, height: 2.5)
-        nameLabel.frame = CGRect(x: 36.0, y: 58.0, width: 207.5, height: 70.0)
-        nextButton.frame = CGRect(x: 211.0, y: 433.0, width: 80, height: 80)
+
+        
+//        tHIS IS PROGRESS BAR COORDINATES (40.0, 78.0, 340.0, 2.6666666666666665)
+//        THIS IS LABEL COORDINATES (40.0, 122.0, 163.33333333333334, 70.0)
+//        THIS IS PICKER COORDINATES(79.0, 332.0, 262.0, 158.0)
+//        THIS IS NET BUTTON COORDINATES(328.0, 778.0, 80.0, 80.0)
 
         self.view.insertSubview(self.background, at: 0)
 
