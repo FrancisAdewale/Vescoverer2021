@@ -17,6 +17,7 @@ class AgeViewController: UIViewController {
     let db = Firestore.firestore()
     
     
+    @IBOutlet weak var background: UIImageView!
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var ageLabel: UILabel!
     @IBOutlet weak var progressBar: UIProgressView!
@@ -43,6 +44,8 @@ class AgeViewController: UIViewController {
         let timeInterval = birthday?.timeIntervalSinceNow
         let calculatedAge = abs(Int(timeInterval! / 31556926.0))
         age.text = calculatedAge.description
+        background.backgroundColor = UIColor(hexString: "3797A4")
+
 
         
     }

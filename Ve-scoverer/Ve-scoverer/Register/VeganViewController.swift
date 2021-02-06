@@ -28,6 +28,8 @@ class VeganViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
         super.viewDidLoad()
         
         self.view.insertSubview(self.background, at: 0)
+        background.backgroundColor = UIColor(hexString: "3797A4")
+
 
         print("\(progressBar.frame)")
         

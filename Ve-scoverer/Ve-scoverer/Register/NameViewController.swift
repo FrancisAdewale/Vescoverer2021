@@ -36,6 +36,7 @@ class NameViewController: UIViewController, UITextFieldDelegate {
 //        THIS IS NET BUTTON COORDINATES(328.0, 778.0, 80.0, 80.0)
 
         self.view.insertSubview(self.background, at: 0)
+        background.backgroundColor = UIColor(hexString: "3797A4")
 
 
         

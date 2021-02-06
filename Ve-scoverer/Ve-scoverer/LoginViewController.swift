@@ -18,6 +18,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
     let context = (UIApplication.shared.delegate as! AppDelegate)
     fileprivate var currentNonce: String?
     
+    @IBOutlet weak var background: UIImageView!
     let db = Firestore.firestore()
     var location = CLLocation()
     private let locationManager = CLLocationManager()
@@ -42,7 +43,8 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
         super.viewWillAppear(animated)
         //self.modalPresentationStyle = .fullScreen
         navigationItem.hidesBackButton = true
-        
+        background.backgroundColor = UIColor(hexString: "3797A4")
+
 
         //navigationController?.navigationBar.barTintColor = UIColor(hexString: "3797A4")
         
