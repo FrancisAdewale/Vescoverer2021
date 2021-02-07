@@ -45,20 +45,16 @@ class AgeViewController: UIViewController {
         let calculatedAge = abs(Int(timeInterval! / 31556926.0))
         age.text = calculatedAge.description
         background.backgroundColor = UIColor(hexString: "3797A4")
+        self.view.insertSubview(self.background, at: 0)
 
 
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-      
-        
     }
     
-
-
     @IBAction func selectedAge(_ sender: UIDatePicker) {
         
         let date = dateFormatter.string(from: sender.date)
@@ -69,28 +65,11 @@ class AgeViewController: UIViewController {
         
         print(calculatedAge)
         age.text = calculatedAge.description
-        
-        
-        
-        if (calculatedAge < 20) {
-            questionLabel.text = "Aww, a baby"
-        } else if (calculatedAge < 30) {
-            questionLabel.text = "Roaring 20's"
-        } else if (calculatedAge < 40) {
-            questionLabel.text = "You're still young"
-        } else if (calculatedAge < 50) {
-            questionLabel.text = "Cheer Up"
-        } else {
-            questionLabel.text = "V-gang!"
-        }
-        
-        
+         
     }
     
     @IBAction func next(_ sender: UIButton) {
         
-        db.collection("users").document(currentuser).setData(["age" : Int(age.text!)!], merge: true)
-
         let gvc = storyboard?.instantiateViewController(withIdentifier: "Gender") as! GenderViewController
         
         let user = Auth.auth().currentUser
@@ -98,9 +77,7 @@ class AgeViewController: UIViewController {
         if let user = user?.email {
             gvc.currentuser = user
             self.db.collection("users").document(user).setData(["age" : Int(age.text!)!], merge: true)
-            
-       
-            
+
             gvc.modalPresentationStyle = .overFullScreen
             present(gvc, animated: true, completion: nil)
 

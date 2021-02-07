@@ -15,6 +15,7 @@ class GenderViewController: UIViewController,  UIPickerViewDataSource, UIPickerV
     
     var selectedGender = ""
     
+    @IBOutlet weak var background: UIImageView!
     @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var genderPicker: UIPickerView!
     @IBOutlet weak var nextButton: UIButton!
@@ -26,19 +27,12 @@ class GenderViewController: UIViewController,  UIPickerViewDataSource, UIPickerV
         super.viewDidLoad()
         genderPicker.delegate = self
         genderPicker.dataSource = self
+        self.view.insertSubview(self.background, at: 0)
+        background.backgroundColor = UIColor(hexString: "3797A4")
 
         // Do any additional setup after loading the view.
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-
-      
-        
-
-
-    }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -50,11 +44,8 @@ class GenderViewController: UIViewController,  UIPickerViewDataSource, UIPickerV
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         
-        genderLabel.text = gender[row]
         selectedGender = gender[row]
         return gender[row]
-
-        
     }
     
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
@@ -66,16 +57,12 @@ class GenderViewController: UIViewController,  UIPickerViewDataSource, UIPickerV
         
         let uvc = storyboard?.instantiateViewController(withIdentifier: "Upload") as! UploadViewController
         
-        
         let user = Auth.auth().currentUser
         
         if let user = user?.email {
             uvc.currentuser = user
             db.collection("users").document(currentuser).setData(["gender" : selectedGender], merge: true)
-            
-
             uvc.modalPresentationStyle = .overFullScreen
-            
             present(uvc, animated: true, completion: nil)
         }
     }

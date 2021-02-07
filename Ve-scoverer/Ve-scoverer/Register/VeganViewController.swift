@@ -58,13 +58,8 @@ class VeganViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
- 
-
-
 
     }
-    
-    
 
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -88,9 +83,7 @@ class VeganViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
     @IBAction func next(_ sender: Any) {
         let nvc = storyboard?.instantiateViewController(withIdentifier: "Name") as! NameViewController
         
-        
-        
-            
+
         let user = Auth.auth().currentUser
                             
         if let user = user?.email {
@@ -99,8 +92,6 @@ class VeganViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
 
             nvc.modalPresentationStyle = .overFullScreen
             present(nvc, animated: true, completion: nil)
-
-
 
         }
         

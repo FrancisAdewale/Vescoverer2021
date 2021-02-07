@@ -116,18 +116,6 @@ class FoundTableViewController: UITableViewController {
                     
                 
                     
-                    //self.profileUser.firstName = data?["firstName"] as? String ?? ""
-                    //self.profileUser.veganSince = data?["veganSince"] as? String ?? ""
-                    //self.profileUser.age = data?["age"] as? Int ?? 0
-                    //self.profileUser.gender = data?["gender"] as? String ?? ""
-                    //self.profileUser.instagram = data?["instagram"] as? String ?? ""
-                    //self.profileUser.twitter = data?["twitter"] as? String ?? ""
-                    //self.profileUser.image = data?["imagepath"] as? String ?? ""
-                    //self.profileUser.latitude = data?["latitude"] as? Double ?? 0
-                    //self.profileUser.longitude = data?["longitude"] as? Double ?? 0
-                    
-                
-               
                     
                 }
                 
@@ -170,9 +158,3 @@ class FoundTableViewController: UITableViewController {
     }
 }
 
-//extension CLLocation {
-//    func fetchCityAndCountry(completion: @escaping (_ city: String?, _ country:  String?, _ error: Error?) -> ()) {
-//        CLGeocoder().reverseGeocodeLocation(self) { completion($0?.first?.locality, $0?.first?.country, $1) }
-//    }
-//}
-    

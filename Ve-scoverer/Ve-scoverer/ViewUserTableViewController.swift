@@ -155,17 +155,7 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
             }
             
             
-            
-
-            
-                
-                //.sd_setImage(with: URL(fileURLWithPath: viewUser.image), completed: nil)
-
-           // cell.userImage.image = UIImage(contentsOfFile: userImage)
-//            self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2;
-//               self.profileImage.clipsToBounds = true;
-//
-//            //cell.userImage.image = UIImage(contentsOfFile: section1.first!.image)
+        
             return cell
         } else if indexPath.section == 0 && indexPath.row == 1 {
             
@@ -245,47 +235,11 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
     }
     
     
-//    func loadImage() {
-//
-//        let ref = storage.reference().child("\(loadUserEmail)/\(loadUserEmail)Profile.jpg")
-//
-//        ref.downloadURL { (url, error) in
-//            if let error = error {
-//                print(error)
-//            } else {
-//                self.imagefilepath = url!
-//                print(self.imagefilepath)
-//            }
-//        }
-//
-//
-//            self.tableView.reloadData()
-//
-//
-//    }
+
     
-//    @IBAction func uploadImagePressed(_ sender: UIButton) {
-//        present(picker, animated: true, completion: nil)
-//    }
+
     
-//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-//        let userImage = info[.editedImage] as! UIImage
-//        let jpegImage = userImage.jpegData(compressionQuality: 1.0)
-//            //.pngData()
-//        let coreImage = Image(context: context)
-//        coreImage.img = jpegImage
-//
-//        do {
-//            try! context.save()
-//       }
-//
-//       // db.collection("users").document((user?.email!)!).collection("userimage").document("image").setData(["image": jpegImage as Any])
-//
-//
-//        uploadImage.setImage(UIImage(data: jpegImage!), for: .normal)
-//        dismiss(animated: true, completion: nil)
-//
-//    }
+
     
     //i need to add social media lnks to USER MODEL.
     
@@ -384,92 +338,10 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
 //
 //    }
     
-//    @IBAction func didTapSignOut(_ sender: AnyObject) {
-//
-//        print("signed out \(String(describing: user?.email))")
-//
-//        let firebaseAuth = Auth.auth()
-//    do {
-//      try firebaseAuth.signOut()
-//          let lvc = storyboard?.instantiateViewController(identifier: "Login") as! LoginViewController
-//          lvc.modalPresentationStyle = .fullScreen
-//         present(lvc, animated: true, completion: nil)
-//
-//
-//    } catch let signOutError as NSError {
-//      print ("Error signing out: %@", signOutError)
-//    }
-//
-//    }
     
     
     
-//    func load() {
-//
-//        //profileName.text = expectedString
-////        uploadImage.imageView?.image = expectedImage
-////        logOutButton.isHidden = expectedBool
-////        igButton.isEnabled = buttonIsEnabled
-////        twitterButton.isEnabled = buttonIsEnabled
-//
-//
-//        db.collection("users").document((user?.email)!).addSnapshotListener { (snapShot, err) in
-//            if let err = err {
-//                print(err)
-//            } else {
-//
-//                let data = snapShot?.data()
-//
-//                self.profileUser.firstName = data?["firstName"] as? String ?? ""
-//                self.profileUser.veganSince = data?["veganSince"] as? String ?? ""
-//                self.profileUser.age = data?["age"] as? Int ?? 0
-//                self.profileUser.gender = data?["gender"] as? String ?? ""
-//                self.profileUser.instagram = data?["instagram"] as? String ?? ""
-//                self.profileUser.twitter = data?["twitter"] as? String ?? ""
-//                self.profileUser.image = data?["imagepath"] as? String ?? ""
-//                self.profileUser.latitude = data?["latitude"] as? Double ?? 0
-//                self.profileUser.longitude = data?["longitude"] as? Double ?? 0
-//
-//
-////                let location = CLLocation(latitude: self.profileUser.latitude, longitude: self.profileUser.longitude)
-////                location.fetchCityAndCountry { city, country, error in
-////                    guard let city = city, let country = country, error == nil else { return }
-////                    self.userCity = city + ", " + country
-////                }
-//
-//                self.section1.append(self.profileUser)
-//                self.section2.append(self.profileUser)
-//
-//                DispatchQueue.main.async {
-//                    self.tableView.reloadData()
-//                }
-//            }
-//
-//        }
-//
-//        //self.imagefilepath = data!["imagepath"] as! String
-//
-//    }
-//        })
-        
-//        db.collection("users").document(user?.email ?? "Email").collection("socials").document("twitter").getDocument(completion: { (documentSnap, err) in
-//            if let err = err {
-//                print(err.localizedDescription)
-//            }
-//
-//
-//            if let data = documentSnap?.data() {
-//                for document in data {
-//
-//                    self.editedTwitter = document.value as! String
-//
-//                }
-//
-//            }
-//
-//        })
-                  
-        }
+}
 
 
     

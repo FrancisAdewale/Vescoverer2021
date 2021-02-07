@@ -28,18 +28,10 @@ class NameViewController: UIViewController, UITextFieldDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
         
-//        tHIS IS PROGRESS BAR COORDINATES (40.0, 78.0, 340.0, 2.6666666666666665)
-//        THIS IS LABEL COORDINATES (40.0, 122.0, 163.33333333333334, 70.0)
-//        THIS IS PICKER COORDINATES(79.0, 332.0, 262.0, 158.0)
-//        THIS IS NET BUTTON COORDINATES(328.0, 778.0, 80.0, 80.0)
-
         self.view.insertSubview(self.background, at: 0)
         background.backgroundColor = UIColor(hexString: "3797A4")
 
-
-        
         db.collection("users").document((user?.email)!).getDocument(completion: { (snapShot, err) in
             if let err = err {
                 print(err)
@@ -56,7 +48,6 @@ class NameViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-      
         let lvc = LoginViewController()
         
         firstName = lvc.firstName
@@ -90,18 +81,13 @@ class NameViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func next(_ sender: Any) {
         
-        
         let avc = storyboard?.instantiateViewController(withIdentifier: "Age") as! AgeViewController
-
         let user = Auth.auth().currentUser
         
         if let user = user?.email {
             avc.currentuser = user
             self.db.collection("users").document(user).setData(["firstName" : self.firstNameTextField.text!,"secondName": self.lastNameTextField.text!], merge: true)
-            
-          
-            
-            
+
                 avc.modalPresentationStyle = .overFullScreen
                 present(avc, animated: true, completion: nil)
 

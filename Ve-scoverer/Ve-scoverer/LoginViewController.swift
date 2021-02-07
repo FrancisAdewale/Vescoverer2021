@@ -33,17 +33,14 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
     let appleButton = ASAuthorizationAppleIDButton(type: .continue, style: .black)
     
     
-    //    @IBOutlet weak var loginLabel: UIButton!
-    //    @IBOutlet weak var registerLabel: UIBarButtonItem!
-    //    @IBOutlet weak var registerBar: UIToolbar!
-    //    @IBOutlet weak var emailTextField: UITextField!
-    //    @IBOutlet weak var passwordTextField: UITextField!
+   
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //self.modalPresentationStyle = .fullScreen
         navigationItem.hidesBackButton = true
         background.backgroundColor = UIColor(hexString: "3797A4")
+        navigationController?.navigationBar.backgroundColor = .white
 
 
         //navigationController?.navigationBar.barTintColor = UIColor(hexString: "3797A4")
@@ -88,12 +85,6 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
             locationManager.startUpdatingLocation()
         }
         
-                
-
-        
-        
-        // Automatically sign in the user.
-        //        hideKeyboardWhenTappedAround()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -113,27 +104,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
     }
     
     
-    //    @objc
-    //    func handleAuthorizationAppleIDButtonPress() {
-    //        let appleIDProvider = ASAuthorizationAppleIDProvider()
-    //        let request = appleIDProvider.createRequest()
-    //        request.requestedScopes = [.fullName, .email,]
-    //
-    //        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
-    //        authorizationController.delegate = self
-    //        authorizationController.presentationContextProvider = self
-    //        authorizationController.performRequests()
-    //    }
-    //
-    
-    
-    //    func setupSOAppleSignIn() {
-    //
-    //        buttonApple.frame = CGRect(x: 0, y: 0, width: 250, height: 50)
-    //        buttonApple.center = self.view.center
-    //       // buttonApple.addTarget(self, action: #selector(startSignInWithAppleFlow), for: .touchUpInside)
-    //
-    //    }
+
     
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -269,22 +240,6 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
    }
 
 
-//extension LoginViewController: ASAuthorizationControllerDelegate {
-//    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
-//
-//        if let appleIDCredential = authorization.credential as?  ASAuthorizationAppleIDCredential {
-//
-//            let userIdentifier = appleIDCredential.user
-//            let fullName = appleIDCredential.fullName
-//            let email = appleIDCredential.email
-//
-//            print("\(userIdentifier) \(String(describing: fullName)) \(String(describing: email))")
-//
-//
-//        }
-//
-//    }
-//}
 
 extension LoginViewController: ASAuthorizationControllerPresentationContextProviding {
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {

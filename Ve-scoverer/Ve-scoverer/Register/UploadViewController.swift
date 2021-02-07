@@ -22,6 +22,7 @@ class UploadViewController: UIViewController,UIImagePickerControllerDelegate & U
     @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var uploadLabel: UILabel!
     @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var background: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +34,8 @@ class UploadViewController: UIViewController,UIImagePickerControllerDelegate & U
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        self.view.insertSubview(self.background, at: 0)
+        background.backgroundColor = UIColor(hexString: "3797A4")
 
     }
     
@@ -83,10 +85,7 @@ class UploadViewController: UIViewController,UIImagePickerControllerDelegate & U
     
     
     @IBAction func next(_ sender: Any) {
-        
-        
-        
-        
+
         let svc = storyboard?.instantiateViewController(withIdentifier: "Social") as! SocialsViewController
         
         let user = Auth.auth().currentUser
@@ -95,14 +94,10 @@ class UploadViewController: UIViewController,UIImagePickerControllerDelegate & U
             svc.currentuser = user
             db.collection("users").document(currentuser).setData(["imagepath" : imagePath], merge: true)
             
-
             svc.modalPresentationStyle = .overFullScreen
             present(svc, animated: true, completion: nil)
 
-            
         }
-        
-        
     }
     
 }

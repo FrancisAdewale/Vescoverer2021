@@ -30,6 +30,7 @@ class SocialsViewController: UIViewController {
         super.viewDidLoad()
         hideKeyboardWhenTappedAround()
         self.view.insertSubview(self.background, at: 0)
+        background.backgroundColor = UIColor(hexString: "3797A4")
 
     }
     

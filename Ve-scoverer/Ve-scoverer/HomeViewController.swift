@@ -6,7 +6,6 @@
 //
 
 import UIKit
-//import Firebase
 import CoreData
 import ChameleonFramework
 import GoogleSignIn
@@ -17,13 +16,12 @@ class HomeViewController: UIViewController {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var vegan: [UserCore] = []
-//    let db = Firestore.firestore()
 
 
     @IBOutlet weak var logo: UIImageView!
     @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var veganLabel: UILabel!
-    @IBOutlet weak var isVegan: UISwitch! // may need coredata
+    @IBOutlet weak var isVegan: UISwitch!
     
 
     
@@ -33,13 +31,11 @@ class HomeViewController: UIViewController {
 
         load()
         
-        
         let lvc = storyboard?.instantiateViewController(withIdentifier: "Login")
         if !vegan.isEmpty {
             lvc!.modalPresentationStyle = .fullScreen
             present(lvc!, animated: true, completion: nil)
         }
-        
         
     }
     

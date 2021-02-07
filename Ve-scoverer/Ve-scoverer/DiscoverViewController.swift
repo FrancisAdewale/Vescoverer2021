@@ -30,22 +30,7 @@ class DiscoverViewController: UIViewController {
         self.nearbyUsers.isRotateEnabled = false
 
         title = "Vescover"
-//        db.collection("users").document(user!).collection("found").getDocuments { (querySnapshot, err) in
-//
-//            if let err = err {
-//                print("Error getting documents: \(err)")
-//            } else {
-//
-//                for document in querySnapshot!.documents {
-//
-//                    let data = document.data()
-//
-//                    //                            self.annotation.title = data["userFound"] as! String
-//
-//                }
-//
-//            }
-//        }
+
         
         
         view.backgroundColor = UIColor(hexString: "8bcdcd")
