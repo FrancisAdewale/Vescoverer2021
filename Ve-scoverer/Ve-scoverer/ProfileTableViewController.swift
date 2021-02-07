@@ -124,14 +124,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
             cell.layer.cornerRadius = 8
             cell.userFirstName.text = profileUser.firstName
             cell.userImage.sd_setImage(with: URL(fileURLWithPath: profileUser.image), completed: nil)
-                
-               // UIImage(contentsOfFile: self.profileUser.image)
-            
-            
-//            self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2;
-//               self.profileImage.clipsToBounds = true;
-//
-//            //cell.userImage.image = UIImage(contentsOfFile: section1.first!.image)
+
             return cell
         } else if indexPath.section == 0 && indexPath.row == 1 {
             
@@ -141,6 +134,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
             otherCell.fillerInfo.text = profileUser.age.description
             otherCell.contentView.layer.borderWidth = 0.05
             otherCell.layer.cornerRadius = 8
+            
             return otherCell
         } else if indexPath.section == 0 && indexPath.row == 2 {
             let otherCell = tableView.dequeueReusableCell(withIdentifier: "NormalCell", for: indexPath) as! NormalViewCell
@@ -148,6 +142,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
             otherCell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
             otherCell.contentView.layer.borderWidth = 0.05
             otherCell.layer.cornerRadius = 8
+            
             return otherCell
         } else if indexPath.section == 1 && indexPath.row == 0 {
             let otherCell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
@@ -156,6 +151,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
             otherCell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
             otherCell.contentView.layer.borderWidth = 0.05
             otherCell.layer.cornerRadius = 8
+            
             return otherCell
         } else if indexPath.section == 1 && indexPath.row == 1 {
             let otherCell = tableView.dequeueReusableCell(withIdentifier: "SocialsCell", for: indexPath) as! SocialsTableViewCell
@@ -173,6 +169,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
             otherCell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
             otherCell.contentView.layer.borderWidth = 0.05
             otherCell.layer.cornerRadius = 8
+            
             return otherCell
             
         }

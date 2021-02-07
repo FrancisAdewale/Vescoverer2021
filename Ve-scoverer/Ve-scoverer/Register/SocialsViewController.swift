@@ -10,10 +10,13 @@ import Firebase
 
 class SocialsViewController: UIViewController {
     
-    var instagramLink = "https://instagram.com/"
-    var twitterWebLink = "https://twitter.com/"
+    var instagramLink = ""
+    var twitterWebLink = ""
+    var instagram: String?
+    var twitter: String?
     
     
+    @IBOutlet weak var socials: UIStackView!
     @IBOutlet weak var background: UIImageView!
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var socialsLabel: UILabel!
@@ -53,23 +56,36 @@ class SocialsViewController: UIViewController {
     
     @IBAction func completeRegistration(_ sender: UIButton) {
         
+        let animation = CABasicAnimation(keyPath: "position")
+        animation.duration = 0.07
+        animation.repeatCount = 4
+        animation.autoreverses = true
+        animation.fromValue = NSValue(cgPoint: CGPoint(x: socials.center.x - 10, y: socials.center.y))
+        animation.toValue = NSValue(cgPoint: CGPoint(x: socials.center.x + 10, y: socials.center.y))
+        
         let dvc = storyboard?.instantiateViewController(withIdentifier: "Dashboard") as! DashboardTabController
+     
+        
+        if instagram == nil || twitter == nil {
+            socials.layer.add(animation, forKey: "position")
+
+        } else {
+            
+            db.collection("users").document(currentuser).setData([
+                "instagram": instagram,
+                "twitter": twitter,
+                "completedRegistration": true,
+                "isVerified": false
+            ], merge: true)
+            
+                
+            dvc.modalPresentationStyle = .currentContext
+            
+            present(dvc, animated: true, completion: nil)
+        }
 
         
-        let instagram = instagramLink
-        let twitter = twitterWebLink
-        
-        db.collection("users").document(currentuser).setData([
-            "instagram": instagram,
-            "twitter": twitter,
-            "completedRegistration": true,
-            "isVerified": false
-        ], merge: true)
-        
-            
-        dvc.modalPresentationStyle = .currentContext
-        
-        present(dvc, animated: true, completion: nil)
+    
 
         
     }
@@ -85,8 +101,8 @@ class SocialsViewController: UIViewController {
             let alert = UIAlertController(title: "Edit your @", message: "only your account name(not including @)", preferredStyle: .alert)
             
             let action = UIAlertAction(title: "Edit", style: .default) { (action) in
-                self.instagramLink += textField.text!
-                
+                self.instagramLink += "https://instagram.com/\(textField.text!)"
+                self.instagram = self.instagramLink
             }
             alert.addTextField { (alertTextField) in
                 textField = alertTextField
@@ -121,8 +137,10 @@ class SocialsViewController: UIViewController {
             
             let action = UIAlertAction(title: "Edit", style: .default) { (action) in
                 
-                self.twitterWebLink += textField.text!
-                print(self.twitterWebLink)
+                
+                
+                self.twitterWebLink += "https://twitter.com/\(textField.text!)"
+                self.twitter = self.twitterWebLink
 
             }
             alert.addTextField { (alertTextField) in

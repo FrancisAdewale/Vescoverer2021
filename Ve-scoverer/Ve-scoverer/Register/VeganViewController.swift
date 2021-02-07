@@ -31,26 +31,26 @@ class VeganViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
         background.backgroundColor = UIColor(hexString: "3797A4")
 
 
-        print("\(progressBar.frame)")
+        //print("\(progressBar.frame)")
         
-        db.collection("users").getDocuments { (snapShot, err) in
-            if let err = err {
-                print(err)
-            } else {
-                let documents = snapShot?.documents
-                for document in documents! {
-                    let data = document.data()
-                    for (k,v) in data {
-                        if k == "email" {
-                            self.currentuser = v as! String
-                            print(self.currentuser)
-                        }
-                        
-                    }
-                    
-                }
-            }
-        }
+//        db.collection("users").getDocuments { (snapShot, err) in
+//            if let err = err {
+//                print(err)
+//            } else {
+//                let documents = snapShot?.documents
+//                for document in documents! {
+//                    let data = document.data()
+//                    for (k,v) in data {
+//                        if k == "email" {
+//                            self.currentuser = v as! String
+//                            print(self.currentuser)
+//                        }
+//
+//                    }
+//
+//                }
+//            }
+//        }
         veganSince.dataSource = self
         veganSince.delegate = self
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
@@ -92,6 +92,8 @@ class VeganViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
 
             nvc.modalPresentationStyle = .overFullScreen
             present(nvc, animated: true, completion: nil)
+            
+            
 
         }
         

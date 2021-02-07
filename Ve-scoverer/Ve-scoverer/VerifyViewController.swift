@@ -19,7 +19,6 @@ class VerifyViewController : UIViewController, UIImagePickerControllerDelegate &
     let picker = UIImagePickerController()
 
     @IBOutlet weak var userVerificationImage: UIImageView!
-    @IBOutlet weak var progress: UIProgressView!
     @IBOutlet weak var verifiedImage: UIImageView!
     @IBOutlet weak var label: UILabel!
     
@@ -35,7 +34,6 @@ class VerifyViewController : UIViewController, UIImagePickerControllerDelegate &
         picker.delegate = self
         picker.allowsEditing = true
         picker.sourceType = .camera
-        progress.backgroundColor = .black
         view.backgroundColor = UIColor(hexString: "3797A4")
 //        let user = Auth.auth().currentUser
     }
@@ -82,12 +80,10 @@ class VerifyViewController : UIViewController, UIImagePickerControllerDelegate &
             self.isVerified = data!["isVerified"] as! Bool
             
             if self.isVerified == true {
-                self.progress.progress = 1.0
                 self.label.text = "Verified!"
                 self.verifiedImage.image = UIImage(systemName: "checkmark")
                 self.viewWillAppear(true)
             } else {
-                self.progress.progress = 0.5
                 self.label.text = "Upload clear spoon selfie"
             }
             print(self.isVerified)

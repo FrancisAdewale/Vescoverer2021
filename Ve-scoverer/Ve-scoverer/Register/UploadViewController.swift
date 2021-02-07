@@ -14,11 +14,12 @@ class UploadViewController: UIViewController,UIImagePickerControllerDelegate & U
     
     var currentuser = ""
     
-    var imagePath = ""
+    var imagePath: String?
     let storage = Storage.storage()
 
     let db = Firestore.firestore()
     
+    @IBOutlet weak var uploadImage: UIButton!
     @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var uploadLabel: UILabel!
     @IBOutlet weak var nextButton: UIButton!
@@ -85,18 +86,35 @@ class UploadViewController: UIViewController,UIImagePickerControllerDelegate & U
     
     
     @IBAction func next(_ sender: Any) {
-
+        
+        let animation = CABasicAnimation(keyPath: "position")
+        animation.duration = 0.07
+        animation.repeatCount = 4
+        animation.autoreverses = true
+        animation.fromValue = NSValue(cgPoint: CGPoint(x: uploadImage.center.x - 10, y: uploadImage.center.y))
+        animation.toValue = NSValue(cgPoint: CGPoint(x: uploadImage.center.x + 10, y: uploadImage.center.y))
+        
+        
         let svc = storyboard?.instantiateViewController(withIdentifier: "Social") as! SocialsViewController
         
         let user = Auth.auth().currentUser
         
         if let user = user?.email {
             svc.currentuser = user
-            db.collection("users").document(currentuser).setData(["imagepath" : imagePath], merge: true)
+            if let path = imagePath {
+                db.collection("users").document(currentuser).setData(["imagepath" : path], merge: true)
+            }
             
             svc.modalPresentationStyle = .overFullScreen
-            present(svc, animated: true, completion: nil)
-
+            
+            if imagePath == nil {
+                uploadImage.layer.add(animation, forKey: "position")
+                
+            } else {
+                present(svc, animated: true, completion: nil)
+                
+            }
+            
         }
     }
     

@@ -34,7 +34,6 @@
 		76912B612551DB1B001C38DE /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76912B602551DB1B001C38DE /* HomeViewController.swift */; };
 		76912B662551DB1B001C38DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76912B652551DB1B001C38DE /* Assets.xcassets */; };
 		76912B692551DB1B001C38DE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76912B672551DB1B001C38DE /* LaunchScreen.storyboard */; };
-		76912B762551E400001C38DE /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76912B752551E400001C38DE /* RegisterViewController.swift */; };
 		76BAC65F258A7A830031A3EB /* GoogleSignIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76BAC65E258A7A830031A3EB /* GoogleSignIn.framework */; };
 		76BAC662258A7A930031A3EB /* GoogleSignInDependencies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76BAC661258A7A930031A3EB /* GoogleSignInDependencies.framework */; };
 		76BAC664258A7BC20031A3EB /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76BAC663258A7BC20031A3EB /* LocalAuthentication.framework */; };
@@ -83,7 +82,6 @@
 		76912B652551DB1B001C38DE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		76912B682551DB1B001C38DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		76912B6A2551DB1B001C38DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		76912B752551E400001C38DE /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		76BAC638258A2A7A0031A3EB /* Ve-scoverer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Ve-scoverer.entitlements"; sourceTree = "<group>"; };
 		76BAC65B258A7A730031A3EB /* GoogleSignIn.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GoogleSignIn.bundle; sourceTree = "<group>"; };
 		76BAC65E258A7A830031A3EB /* GoogleSignIn.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleSignIn.framework; sourceTree = "<group>"; };
@@ -206,7 +204,6 @@
 				76912B652551DB1B001C38DE /* Assets.xcassets */,
 				763EFF93255311CE00CEAA41 /* LoginViewController.swift */,
 				763EFF8F25530CD700CEAA41 /* DashboardTabController.swift */,
-				76912B752551E400001C38DE /* RegisterViewController.swift */,
 				763EFF9A2554558900CEAA41 /* DiscoverViewController.swift */,
 				76E0D22225C35F3F00D6F40D /* View */,
 				76912B6A2551DB1B001C38DE /* Info.plist */,
@@ -433,7 +430,6 @@
 				763EFF9B2554558900CEAA41 /* DiscoverViewController.swift in Sources */,
 				763EFF8D2552EE4200CEAA41 /* User.swift in Sources */,
 				7626C4A425AA004800F7E4EF /* ImageViewCell.swift in Sources */,
-				76912B762551E400001C38DE /* RegisterViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

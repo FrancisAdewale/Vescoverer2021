@@ -18,6 +18,8 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
     let context = (UIApplication.shared.delegate as! AppDelegate)
     fileprivate var currentNonce: String?
     
+    @IBOutlet weak var appleView: ASAuthorizationAppleIDButton!
+    @IBOutlet weak var googleView: GIDSignInButton!
     @IBOutlet weak var background: UIImageView!
     let db = Firestore.firestore()
     var location = CLLocation()
@@ -29,21 +31,17 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
     var userlocation = CLLocationCoordinate2D()
     var hasCompletedRegistration: Bool?
 
-    
-    let appleButton = ASAuthorizationAppleIDButton(type: .continue, style: .black)
-    
-    
-   
-    
+//    let appleButton = ASAuthorizationAppleIDButton(type: .continue, style: .black)
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //self.modalPresentationStyle = .fullScreen
+        print(view.center)
+       // googleView.center = view.center
         navigationItem.hidesBackButton = true
         background.backgroundColor = UIColor(hexString: "3797A4")
         navigationController?.navigationBar.backgroundColor = .white
-
-
-        //navigationController?.navigationBar.barTintColor = UIColor(hexString: "3797A4")
+//        appleButton.backgroundColor = .gray
+        navigationController?.navigationBar.barTintColor = .white
         
         if let user = user {
             
@@ -95,12 +93,10 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
     
     
     func setupAppleButton() {
-        view.addSubview(appleButton)
-        //appleButton.cornerRadius = 12
-        appleButton.addTarget(self, action: #selector(startSignInWithAppleFlow), for: .touchUpInside)
-        appleButton.frame = CGRect(x: 0, y: 0, width: 145.0, height: 30.0)
-        appleButton.center = self.view.center
-        appleButton.cornerRadius = 0
+        appleView.addTarget(self, action: #selector(startSignInWithAppleFlow), for: .touchUpInside)
+        appleView.frame = CGRect(x: 117.0, y: 200, width: 194.0, height: 48.0)
+        appleView.center = view.center
+      
     }
     
     

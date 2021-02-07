@@ -121,12 +121,22 @@
                                 <rect key="frame" x="0.0" y="490" width="428" height="402"/>
                                 <color key="backgroundColor" red="0.21568627450980393" green="0.59215686274509804" blue="0.64313725490196072" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="402" id="jxT-cB-BME"/>
+                                    <constraint firstAttribute="height" constant="402" id="YVi-ke-qjf"/>
                                 </constraints>
                             </imageView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Rk-0O-VU3" customClass="ASAuthorizationAppleIDButton">
+                                <rect key="frame" x="117" y="379" width="184" height="73"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="222-t8-5Ee" customClass="GIDSignInButton">
-                                <rect key="frame" x="82" y="197" width="153" height="119"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="117" y="200" width="194" height="92"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" button="YES"/>
@@ -136,14 +146,16 @@
                         <viewLayoutGuide key="safeArea" id="ok3-1a-VmZ"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="obO-NG-YJ4" firstAttribute="centerX" secondItem="AMU-hP-VFf" secondAttribute="centerX" id="gU1-VE-DQe"/>
-                            <constraint firstItem="obO-NG-YJ4" firstAttribute="leading" secondItem="ok3-1a-VmZ" secondAttribute="leading" id="gyc-HA-YY0"/>
-                            <constraint firstItem="obO-NG-YJ4" firstAttribute="bottom" secondItem="ok3-1a-VmZ" secondAttribute="bottom" id="omj-OS-vNe"/>
+                            <constraint firstItem="obO-NG-YJ4" firstAttribute="centerX" secondItem="AMU-hP-VFf" secondAttribute="centerX" id="KWe-7e-LiJ"/>
+                            <constraint firstItem="obO-NG-YJ4" firstAttribute="bottom" secondItem="ok3-1a-VmZ" secondAttribute="bottom" id="eWA-8L-icH"/>
+                            <constraint firstItem="obO-NG-YJ4" firstAttribute="leading" secondItem="ok3-1a-VmZ" secondAttribute="leading" id="jVk-3p-pcY"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Login" id="nzx-4f-6Ns"/>
                     <connections>
+                        <outlet property="appleView" destination="2Rk-0O-VU3" id="PuZ-xu-rso"/>
                         <outlet property="background" destination="obO-NG-YJ4" id="3xB-sV-ID3"/>
+                        <outlet property="googleView" destination="222-t8-5Ee" id="z0s-hP-TqQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xoa-IF-zNk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -200,7 +212,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xmark" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="4UI-Fd-geq">
-                                        <rect key="frame" x="89" y="295" width="80" height="75"/>
+                                        <rect key="frame" x="88.666666666666686" y="294.66666666666669" width="80" height="74.999999999999972"/>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="80" id="C3O-zR-dmM"/>
@@ -368,6 +380,7 @@
                         <outlet property="background" destination="Kl5-Sz-0aw" id="ntY-At-g4q"/>
                         <outlet property="nextButton" destination="PzO-qw-BZX" id="XfE-I3-SBa"/>
                         <outlet property="progressBar" destination="QOY-8e-LZc" id="ls7-fl-oq5"/>
+                        <outlet property="uploadImage" destination="cy4-u9-VkW" id="aJQ-En-Xrt"/>
                         <outlet property="uploadLabel" destination="mV8-ms-sRY" id="kUc-xb-DvM"/>
                     </connections>
                 </viewController>
@@ -416,7 +429,7 @@
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="56" translatesAutoresizingMaskIntoConstraints="NO" id="UPy-Ue-gnw">
+                            <stackView opaque="NO" alpha="0.5" contentMode="scaleToFill" spacing="56" translatesAutoresizingMaskIntoConstraints="NO" id="UPy-Ue-gnw">
                                 <rect key="frame" x="143.33333333333331" y="441.66666666666669" width="141.33333333333331" height="42.666666666666686"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aFg-Yd-hiw">
@@ -435,7 +448,6 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.21568627450980393" green="0.59215686274509804" blue="0.64313725490196072" alpha="1" colorSpace="calibratedRGB"/>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="kmD-jW-LXl"/>
@@ -458,6 +470,7 @@
                         <outlet property="background" destination="egg-6I-3FS" id="DbH-gW-rq7"/>
                         <outlet property="nextButton" destination="NhH-Le-ROW" id="9mG-SD-Q4J"/>
                         <outlet property="progressBar" destination="Ovx-4g-G2i" id="Bdj-Eh-x6p"/>
+                        <outlet property="socials" destination="UPy-Ue-gnw" id="Qfj-gd-4qI"/>
                         <outlet property="socialsLabel" destination="tF4-Ia-qTs" id="uut-ub-C5M"/>
                     </connections>
                 </viewController>
@@ -728,6 +741,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" red="0.21568627450980393" green="0.59215686274509804" blue="0.64313725490196072" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
                         <outlet property="dashboardTab" destination="Zx0-zZ-lqm" id="bw8-nv-jA7"/>

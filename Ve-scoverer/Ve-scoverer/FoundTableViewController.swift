@@ -17,8 +17,6 @@ class FoundTableViewController: UITableViewController {
     var userList = [String]()
     let currentUser = ""
     var loadUser = String()
-    var section1: [ProfileUser] = []
-    var section2: [ProfileUser] = []
     let user = Auth.auth().currentUser
     var profileUser = ProfileUser()
     var userCity = ""
@@ -45,6 +43,7 @@ class FoundTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Vescovered"
+        self.tableView.rowHeight = 71.0
 
 
     }
