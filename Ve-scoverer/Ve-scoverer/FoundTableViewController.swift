@@ -103,6 +103,7 @@ class FoundTableViewController: UITableViewController {
                     //vup.viewUser.image = data?["imagepath"] as? String ?? ""
                     vup.viewUser.latitude = data?["latitude"] as? Double ?? 0
                     vup.viewUser.longitude = data?["longitude"] as? Double ?? 0
+                    vup.viewUser.verified = data?["isVerified"] as? Bool ?? false
                     vup.loadUserEmail = data?["email"] as? String ?? ""
                     
                     vup.tableView.reloadData()

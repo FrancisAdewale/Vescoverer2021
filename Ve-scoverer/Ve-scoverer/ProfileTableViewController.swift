@@ -32,6 +32,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
     var userFirstName = ""
     var profileUser = ProfileUser()
     let button = UIButton()
+    var path = ""
 
     
     var userCity = ""
@@ -41,6 +42,8 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+     
+        
         load()
                 
     }
@@ -57,7 +60,6 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         self.navigationController?.navigationBar.prefersLargeTitles = true
         title = "Account"
       
@@ -70,6 +72,8 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         tableView.register(UINib(nibName: "ImageViewCell", bundle: nil), forCellReuseIdentifier: "ImageCell")
         tableView.register(UINib(nibName: "NormalViewCell", bundle: nil), forCellReuseIdentifier: "NormalCell")
         tableView.register(UINib(nibName: "SocialsTableViewCell", bundle: nil), forCellReuseIdentifier: "SocialsCell")
+        
+        
 
     }
     
@@ -113,8 +117,8 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
     
     
     
-  
 
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.section == 0 && indexPath.row == 0 {
@@ -123,7 +127,19 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
             cell.contentView.layer.borderWidth = 0.05
             cell.layer.cornerRadius = 8
             cell.userFirstName.text = profileUser.firstName
+
             cell.userImage.sd_setImage(with: URL(fileURLWithPath: profileUser.image), completed: nil)
+            
+            if profileUser.verified == true {
+                
+                cell.verified.image = UIImage(named: "verified.png")
+                    
+                    //.sd_setImage(with: URL(fileURLWithPath: path), completed: nil)
+                
+            }
+
+            
+            
 
             return cell
         } else if indexPath.section == 0 && indexPath.row == 1 {
@@ -199,28 +215,25 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         return 100.0
     }
     
-    @IBAction func uploadImagePressed(_ sender: UIButton) {
-        present(picker, animated: true, completion: nil)
-    }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        let userImage = info[.editedImage] as! UIImage
-        let jpegImage = userImage.jpegData(compressionQuality: 1.0)
-            //.pngData()
-        let coreImage = Image(context: context)
-        coreImage.img = jpegImage
-
-        do {
-            try! context.save()
-       }
-        
-       // db.collection("users").document((user?.email!)!).collection("userimage").document("image").setData(["image": jpegImage as Any])
-
-
-        uploadImage.setImage(UIImage(data: jpegImage!), for: .normal)
-        dismiss(animated: true, completion: nil)
-
-    }
+//    @IBAction func uploadImagePressed(_ sender: UIButton) {
+//        present(picker, animated: true, completion: nil)
+//    }
+//
+//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+//        let userImage = info[.editedImage] as! UIImage
+//        let jpegImage = userImage.jpegData(compressionQuality: 1.0)
+//            //.pngData()
+//        let coreImage = Image(context: context)
+//        coreImage.img = jpegImage
+//
+//
+//       // db.collection("users").document((user?.email!)!).collection("userimage").document("image").setData(["image": jpegImage as Any])
+//
+//
+//        uploadImage.setImage(UIImage(data: jpegImage!), for: .normal)
+//        dismiss(animated: true, completion: nil)
+//
+//    }
     
     //i need to add social media lnks to USER MODEL.
     
@@ -364,16 +377,18 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
                 self.profileUser.image = data?["imagepath"] as? String ?? ""
                 self.profileUser.latitude = data?["latitude"] as? Double ?? 0
                 self.profileUser.longitude = data?["longitude"] as? Double ?? 0
+                self.profileUser.verified = data?["isVerified"] as? Bool ?? false
                 
+                let resourcePath = Bundle.main.resourcePath
+                let imgName = "verified.png"
+                self.path = "\(resourcePath!)/\(imgName)"
                 
                 let location = CLLocation(latitude: self.profileUser.latitude, longitude: self.profileUser.longitude)
                 location.fetchCityAndCountry { city, country, error in
                     guard let city = city, let country = country, error == nil else { return }
                     self.userCity = city + ", " + country
                 }
-            
-                self.section1.append(self.profileUser)
-                self.section2.append(self.profileUser)
+
                 
                 DispatchQueue.main.async {
                     self.tableView.reloadData()

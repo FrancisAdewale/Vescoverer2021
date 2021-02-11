@@ -10,6 +10,7 @@ import UIKit
 class ViewImageCell: UITableViewCell {
     
     
+    @IBOutlet weak var verified: UIImageView!
     @IBOutlet weak var imageCell: UIImageView!
     
     @IBOutlet weak var usernameCell: UILabel!

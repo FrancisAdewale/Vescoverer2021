@@ -84,10 +84,7 @@ class SocialsViewController: UIViewController {
             present(dvc, animated: true, completion: nil)
         }
 
-        
     
-
-        
     }
     
     @IBAction func instagramPressed(_ sender: UIButton) {

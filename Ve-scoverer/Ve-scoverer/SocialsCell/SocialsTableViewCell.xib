@@ -16,15 +16,22 @@
                 <rect key="frame" x="0.0" y="0.0" width="312" height="107"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="instagramProfile" translatesAutoresizingMaskIntoConstraints="NO" id="JsX-Ua-3Wr">
-                        <rect key="frame" x="66" y="29" width="68" height="49"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    </imageView>
-                    <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="twitterProfile" translatesAutoresizingMaskIntoConstraints="NO" id="WKa-nn-kWt">
-                        <rect key="frame" x="168" y="29" width="76" height="49"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    </imageView>
+                    <stackView opaque="NO" contentMode="scaleToFill" spacing="34" translatesAutoresizingMaskIntoConstraints="NO" id="62Y-ya-YN6">
+                        <rect key="frame" x="75" y="21.5" width="162" height="64"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="instagramProfile" translatesAutoresizingMaskIntoConstraints="NO" id="JsX-Ua-3Wr">
+                                <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="twitterProfile" translatesAutoresizingMaskIntoConstraints="NO" id="WKa-nn-kWt">
+                                <rect key="frame" x="98" y="0.0" width="64" height="64"/>
+                            </imageView>
+                        </subviews>
+                    </stackView>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="62Y-ya-YN6" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="AYm-FM-7Nj"/>
+                    <constraint firstItem="62Y-ya-YN6" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Bvw-hJ-Yil"/>
+                </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <point key="canvasLocation" x="-395.6521739130435" y="21.763392857142858"/>

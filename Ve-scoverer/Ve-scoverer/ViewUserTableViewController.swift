@@ -149,6 +149,16 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
                         
                         
                         cell.imageCell.sd_setImage(with: url, completed: nil)
+                        
+                        
+                        if self.viewUser.verified == true {
+                            
+                            cell.verified.image = UIImage(named: "verified.png")
+                                
+                                //.sd_setImage(with: URL(fileURLWithPath: path), completed: nil)
+                            
+                        }
+                        
                         tableView.reloadData()
                         
                     }

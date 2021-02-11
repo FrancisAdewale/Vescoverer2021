@@ -29,7 +29,11 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="d1Q-bM-Wde">
-                        <rect key="frame" x="206" y="16" width="102" height="78"/>
+                        <rect key="frame" x="224" y="16" width="102" height="78"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gN6-A5-2nu">
+                        <rect key="frame" x="215" y="55" width="32" height="33"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
                 </subviews>
@@ -38,6 +42,7 @@
             <connections>
                 <outlet property="imageCell" destination="d1Q-bM-Wde" id="pUK-Pn-N2o"/>
                 <outlet property="usernameCell" destination="ALY-Ks-hQI" id="kt7-PQ-f7a"/>
+                <outlet property="verified" destination="gN6-A5-2nu" id="RxY-d8-2FV"/>
             </connections>
             <point key="canvasLocation" x="-129" y="1"/>
         </tableViewCell>

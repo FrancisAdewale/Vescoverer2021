@@ -8,17 +8,19 @@
 import UIKit
 import SDWebImage
 
-class ImageViewCell: UITableViewCell {
+class ImageViewCell: UITableViewCell  {
 
     
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var userFirstName: UILabel!
     
+    @IBOutlet weak var verified: UIImageView!
     
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+     
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -26,5 +28,7 @@ class ImageViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+
     
 }
