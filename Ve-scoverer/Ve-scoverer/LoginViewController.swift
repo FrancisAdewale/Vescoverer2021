@@ -35,13 +35,12 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print(view.center)
-       // googleView.center = view.center
         navigationItem.hidesBackButton = true
+        title = "Login"
         background.backgroundColor = UIColor(hexString: "3797A4")
-        navigationController?.navigationBar.backgroundColor = .white
+       // navigationController?.navigationBar.backgroundColor = .white
 //        appleButton.backgroundColor = .gray
-        navigationController?.navigationBar.barTintColor = .white
+       // navigationController?.navigationBar.barTintColor = .white
         
         if let user = user {
             

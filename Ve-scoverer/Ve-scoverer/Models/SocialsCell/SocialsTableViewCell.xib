@@ -34,6 +34,10 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="instagram" destination="JsX-Ua-3Wr" id="G6N-Rr-9bh"/>
+                <outlet property="twitter" destination="WKa-nn-kWt" id="TNB-7t-Ty5"/>
+            </connections>
             <point key="canvasLocation" x="-395.6521739130435" y="21.763392857142858"/>
         </tableViewCell>
     </objects>

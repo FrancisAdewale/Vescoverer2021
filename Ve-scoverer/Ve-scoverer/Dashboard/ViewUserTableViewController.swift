@@ -18,8 +18,8 @@ import SDWebImage
 class ViewUserTableViewController: UITableViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
    
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    var editedInstagram = String()
-    var editedTwitter = String()
+    var instagramAppLink = String()
+    var twitterAppLink = String()
     let picker = UIImagePickerController()
     var expectedString = ""
     var expectedImage = UIImage()
@@ -40,8 +40,7 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
     var userImage = ""
     var userCity = ""
     
-    var section1: [ProfileUser] = []
-    var section2: [ProfileUser] = []
+
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -117,9 +116,22 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
         return vw
     }
     
+    
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let indexpath = tableView.indexPathForSelectedRow
-        tableView.deselectRow(at: indexpath!, animated: true)
+        
+        
+        if indexPath.section == 1 && indexPath.row == 1 {
+            
+            let otherCell = tableView.dequeueReusableCell(withIdentifier: "SocialsCell", for: indexPath) as! SocialsTableViewCell
+            
+            let instaTap = UITapGestureRecognizer(target: otherCell.instagram, action: #selector(tappedInsta))
+            let twitterTap = UITapGestureRecognizer(target: otherCell.twitter, action: #selector(tappedTwitter))
+            otherCell.addGestureRecognizer(instaTap)
+            otherCell.addGestureRecognizer(twitterTap)
+            
+        }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
   
@@ -198,6 +210,8 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
             return otherCell
         } else if indexPath.section == 1 && indexPath.row == 1 {
             let otherCell = tableView.dequeueReusableCell(withIdentifier: "SocialsCell", for: indexPath) as! SocialsTableViewCell
+            
+           
             //otherCell.textLabel?.text = profileUser.twitter
             //otherCell.backgroundColor = UIColor(hexString: "3797A4")!.lighten(byPercentage: self.floatNum)
 
@@ -222,6 +236,34 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
         }
         
    
+        
+    }
+    
+    @objc func tappedInsta() {
+        
+        let instaLink = viewUser.instagram
+        
+        let splitLink = instaLink.split(separator: "/")
+        print(splitLink.last!)
+        
+//        let appURL = URL(string: "instagram://user?username=\(self.editedInstagram)")!
+//               let application = UIApplication.shared
+//   
+//               if application.canOpenURL(appURL) {
+//                   application.open(appURL)
+//               } else {
+//                   let webURL = URL(string: "https://instagram.com/\(self.editedInstagram)")!
+//                   application.open(webURL)
+//               }
+        
+    }
+    
+    @objc func tappedTwitter() {
+        
+        let twitterLink = viewUser.twitter
+        
+        let splitLink = twitterLink.split(separator: "/")
+        print(splitLink.last!)
         
     }
     

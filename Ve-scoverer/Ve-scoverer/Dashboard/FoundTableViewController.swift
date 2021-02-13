@@ -106,7 +106,12 @@ class FoundTableViewController: UITableViewController {
                     vup.viewUser.verified = data?["isVerified"] as? Bool ?? false
                     vup.loadUserEmail = data?["email"] as? String ?? ""
                     
-                    vup.tableView.reloadData()
+                    
+                    DispatchQueue.main.async {
+                        vup.tableView.reloadData()
+
+                    }
+                    
    
                     let location = CLLocation(latitude: vup.viewUser.latitude, longitude: vup.viewUser.longitude)
                     location.fetchCityAndCountry { city, country, error in

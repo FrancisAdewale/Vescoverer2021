@@ -9,6 +9,9 @@ import UIKit
 
 class SocialsTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var instagram: UIImageView!
+    @IBOutlet weak var twitter: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -16,6 +19,8 @@ class SocialsTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+        
+        
 
         // Configure the view for the selected state
     }
