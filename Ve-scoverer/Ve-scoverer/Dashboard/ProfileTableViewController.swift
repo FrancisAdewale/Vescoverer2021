@@ -123,25 +123,27 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         
         if indexPath.section == 0 && indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ImageCell", for: indexPath) as! ImageViewCell
+            cell.isUserInteractionEnabled = true
             cell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
             cell.contentView.layer.borderWidth = 0.05
             cell.layer.cornerRadius = 8
             cell.userFirstName.text = profileUser.firstName
 
-            cell.userImage.sd_setImage(with: URL(fileURLWithPath: profileUser.image), completed: nil)
-            
-            if profileUser.verified == true {
+            DispatchQueue.main.async {
+                cell.userImage.sd_setImage(with: URL(fileURLWithPath: self.profileUser.image), completed: nil)
                 
-                cell.verified.image = UIImage(named: "verified.png")
+                if self.profileUser.verified == true {
                     
-                    //.sd_setImage(with: URL(fileURLWithPath: path), completed: nil)
-                
+                    cell.verified.image = UIImage(named: "verified.png")
+                        
+                        //.sd_setImage(with: URL(fileURLWithPath: path), completed: nil)
+                    
+                }
+
             }
-
-            
-            
-
             return cell
+
+     
         } else if indexPath.section == 0 && indexPath.row == 1 {
             
         

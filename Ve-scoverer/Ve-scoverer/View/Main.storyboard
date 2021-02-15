@@ -804,8 +804,8 @@
                                     <constraint firstAttribute="height" constant="348" id="GPD-PR-UB2"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HAj-0L-3R7">
-                                <rect key="frame" x="193" y="194" width="42" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan Your Vegan Object" textAlignment="center" lineBreakMode="characterWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HAj-0L-3R7">
+                                <rect key="frame" x="68" y="216" width="292" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -814,10 +814,11 @@
                         <viewLayoutGuide key="safeArea" id="hXp-Pb-K6A"/>
                         <color key="backgroundColor" red="0.21568627450980393" green="0.59215686274509804" blue="0.64313725490196072" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="HAj-0L-3R7" firstAttribute="centerX" secondItem="xbc-Cj-HKc" secondAttribute="centerX" id="9Ht-hL-flv"/>
+                            <constraint firstItem="HAj-0L-3R7" firstAttribute="leading" secondItem="hXp-Pb-K6A" secondAttribute="leading" constant="68" id="Ais-Eb-Ayr"/>
                             <constraint firstItem="xbc-Cj-HKc" firstAttribute="leading" secondItem="hXp-Pb-K6A" secondAttribute="leading" constant="44" id="Bl0-SC-Fjy"/>
-                            <constraint firstItem="HAj-0L-3R7" firstAttribute="top" secondItem="hXp-Pb-K6A" secondAttribute="top" constant="106" id="KGs-hj-hTr"/>
                             <constraint firstItem="xbc-Cj-HKc" firstAttribute="centerX" secondItem="ZR4-Ix-QJd" secondAttribute="centerX" id="LJ0-iE-QxD"/>
-                            <constraint firstItem="xbc-Cj-HKc" firstAttribute="centerX" secondItem="HAj-0L-3R7" secondAttribute="centerX" id="c6h-CY-5Hr"/>
+                            <constraint firstItem="HAj-0L-3R7" firstAttribute="top" secondItem="hXp-Pb-K6A" secondAttribute="top" constant="128" id="jCc-vS-KHM"/>
                             <constraint firstItem="hXp-Pb-K6A" firstAttribute="bottom" secondItem="xbc-Cj-HKc" secondAttribute="bottom" constant="117" id="qOc-W2-xKd"/>
                         </constraints>
                     </view>
@@ -836,7 +837,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W53-rG-lXP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3513" y="-1438"/>
+            <point key="canvasLocation" x="3511.6822429906538" y="-1438.4449244060477"/>
         </scene>
         <!--Profile Table View Controller-->
         <scene sceneID="DJJ-Ll-BHY">

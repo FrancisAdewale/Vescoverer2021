@@ -98,7 +98,7 @@ class SocialsViewController: UIViewController {
             let alert = UIAlertController(title: "Edit your @", message: "only your account name(not including @)", preferredStyle: .alert)
             
             let action = UIAlertAction(title: "Edit", style: .default) { (action) in
-                self.instagramLink += "https://instagram.com/\(textField.text!)"
+                self.instagramLink += "\(textField.text!)"
                 self.instagram = self.instagramLink
             }
             alert.addTextField { (alertTextField) in
@@ -136,7 +136,7 @@ class SocialsViewController: UIViewController {
                 
                 
                 
-                self.twitterWebLink += "https://twitter.com/\(textField.text!)"
+                self.twitterWebLink += "\(textField.text!)"
                 self.twitter = self.twitterWebLink
 
             }

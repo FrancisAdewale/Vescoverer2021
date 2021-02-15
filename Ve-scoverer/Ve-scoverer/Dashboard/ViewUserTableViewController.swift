@@ -44,8 +44,9 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-                
+        
+    
+        
     }
     
 
@@ -62,12 +63,9 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
         super.viewDidLoad()
         
         floatNum = CGFloat.random(in: 0...1)
-        
+        navigationItem.backBarButtonItem?.tintColor = UIColor(hexString: "3794AC")
 
-        
-
-
-        self.navigationController?.navigationBar.prefersLargeTitles = true
+        //self.navigationController?.navigationBar.prefersLargeTitles = true
         title = profileUser.firstName
       
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
@@ -78,8 +76,8 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
         
         tableView.register(UINib(nibName: "ViewImageCell", bundle: nil), forCellReuseIdentifier: "ViewCell")
         tableView.register(UINib(nibName: "NormalViewCell", bundle: nil), forCellReuseIdentifier: "NormalCell")
-        tableView.register(UINib(nibName: "SocialsTableViewCell", bundle: nil), forCellReuseIdentifier: "SocialsCell")
-
+        tableView.register(UINib(nibName: "ViewedSocialsTableViewCell", bundle: nil), forCellReuseIdentifier: "ViewedSocialsCell")
+    
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -121,16 +119,6 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         
-        if indexPath.section == 1 && indexPath.row == 1 {
-            
-            let otherCell = tableView.dequeueReusableCell(withIdentifier: "SocialsCell", for: indexPath) as! SocialsTableViewCell
-            
-            let instaTap = UITapGestureRecognizer(target: otherCell.instagram, action: #selector(tappedInsta))
-            let twitterTap = UITapGestureRecognizer(target: otherCell.twitter, action: #selector(tappedTwitter))
-            otherCell.addGestureRecognizer(instaTap)
-            otherCell.addGestureRecognizer(twitterTap)
-            
-        }
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
@@ -145,9 +133,7 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
             cell.contentView.layer.borderWidth = 0.05
 //            cell.backgroundColor = UIColor(hexString: "3797A4")!.lighten(byPercentage: self.floatNum)
             cell.usernameCell.text = viewUser.firstName
-            
-            print("this is the view user image \(viewUser.image)")
-            
+                        
             
             
             DispatchQueue.main.async {
@@ -157,10 +143,12 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
                 ref.downloadURL { (url, error) in
                     if let error = error {
                         print(error)
-                    } else {
+                    }
+                    
+                    else {
                         
-                        
-                        cell.imageCell.sd_setImage(with: url, completed: nil)
+                        cell.imageCell.sd_setImage(with: url, placeholderImage: UIImage(named:"placeholder"))
+                        //cell.imageCell.sd_setImage(with: url, completed: nil)
                         
                         
                         if self.viewUser.verified == true {
@@ -209,8 +197,11 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
 
             return otherCell
         } else if indexPath.section == 1 && indexPath.row == 1 {
-            let otherCell = tableView.dequeueReusableCell(withIdentifier: "SocialsCell", for: indexPath) as! SocialsTableViewCell
+            let otherCell = tableView.dequeueReusableCell(withIdentifier: "ViewedSocialsCell", for: indexPath) as! ViewedSocialsTableViewCell
+            otherCell.editedTwitter = viewUser.twitter
+            otherCell.editedInstagram = viewUser.instagram
             
+
            
             //otherCell.textLabel?.text = profileUser.twitter
             //otherCell.backgroundColor = UIColor(hexString: "3797A4")!.lighten(byPercentage: self.floatNum)
@@ -239,33 +230,7 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
         
     }
     
-    @objc func tappedInsta() {
-        
-        let instaLink = viewUser.instagram
-        
-        let splitLink = instaLink.split(separator: "/")
-        print(splitLink.last!)
-        
-//        let appURL = URL(string: "instagram://user?username=\(self.editedInstagram)")!
-//               let application = UIApplication.shared
-//   
-//               if application.canOpenURL(appURL) {
-//                   application.open(appURL)
-//               } else {
-//                   let webURL = URL(string: "https://instagram.com/\(self.editedInstagram)")!
-//                   application.open(webURL)
-//               }
-        
-    }
-    
-    @objc func tappedTwitter() {
-        
-        let twitterLink = viewUser.twitter
-        
-        let splitLink = twitterLink.split(separator: "/")
-        print(splitLink.last!)
-        
-    }
+
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
        return 60

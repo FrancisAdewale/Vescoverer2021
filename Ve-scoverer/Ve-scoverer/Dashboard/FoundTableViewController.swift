@@ -44,7 +44,7 @@ class FoundTableViewController: UITableViewController {
         super.viewDidLoad()
         title = "Vescovered"
         self.tableView.rowHeight = 71.0
-
+        navigationItem.backBarButtonItem?.tintColor = UIColor(hexString: "3794AC")
 
     }
     
@@ -82,7 +82,6 @@ class FoundTableViewController: UITableViewController {
         if let unwrappedPath = indexpath {
             tableView.deselectRow(at: unwrappedPath, animated: true)
             let user = userList[unwrappedPath.row]
-            print("i am the \(user)")
             vup.button.isHidden = true
 
             
@@ -108,6 +107,8 @@ class FoundTableViewController: UITableViewController {
                     
                     
                     DispatchQueue.main.async {
+                        
+                        
                         vup.tableView.reloadData()
 
                     }

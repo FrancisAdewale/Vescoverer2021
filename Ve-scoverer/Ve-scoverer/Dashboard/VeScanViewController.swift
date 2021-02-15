@@ -15,17 +15,14 @@ class VeScanViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     var pickedImage: CIImage?
     let imagePicker = UIImagePickerController()
-    
-    
-    
-    
+
     @IBOutlet weak var verdict: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        title = "Ve-Scan"
         imagePicker.delegate = self
         imagePicker.sourceType = .camera
         imagePicker.allowsEditing = true
@@ -37,10 +34,8 @@ class VeScanViewController: UIViewController, UIImagePickerControllerDelegate, U
         
         
         if let userPickedImage = info[.originalImage] as? UIImage {
-            
-            
+
             imageView.image = UIImage(image: userPickedImage, scaledTo: CGSize())
-            
             createClassification(for: userPickedImage)
         }
         
@@ -105,11 +100,24 @@ class VeScanViewController: UIViewController, UIImagePickerControllerDelegate, U
             if classifications.isEmpty {
                 self.verdict.text = "Nothing recognized."
             } else {
-                let topClassifications = classifications.prefix(2)
+                let topClassifications = classifications
                 let descriptions = topClassifications.map { classification in
-                    return String(format: "(%.2f) %@", classification.confidence, classification.identifier)
+                    return String(format: "%.0f %@", classification.confidence, classification.identifier)
                 }
-                self.verdict.text = descriptions.joined(separator: " |")
+                
+                let firstVerdict = descriptions.first
+                let splitVerdict = firstVerdict?.split(separator: " ")
+                
+                if splitVerdict![0] != "1"{
+                    self.verdict.text = "Not sure"
+                } else {
+                    self.verdict.text = "Vegan"
+                }
+                
+                if splitVerdict![1] == "N/A" && splitVerdict![0] == "1" {
+                    self.verdict.text = "Nope"
+                }
+
             }
         }
     }
