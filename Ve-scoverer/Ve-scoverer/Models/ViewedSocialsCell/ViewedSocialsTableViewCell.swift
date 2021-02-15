@@ -52,13 +52,13 @@ class ViewedSocialsTableViewCell: UITableViewCell {
         
         print(editedTwitter)
         
-                let appURL = URL(string: "instagram://user?username=\(self.editedTwitter)")!
+                let appURL = URL(string: "twitter://user?username=\(self.editedTwitter)")!
                 let application = UIApplication.shared
         
                 if application.canOpenURL(appURL) {
                     application.open(appURL)
                 } else {
-                    let webURL = URL(string: "https://instagram.com/\(self.editedTwitter)")!
+                    let webURL = URL(string: "https://twitter.com/\(self.editedTwitter)")!
                     application.open(webURL)
                 }
                 

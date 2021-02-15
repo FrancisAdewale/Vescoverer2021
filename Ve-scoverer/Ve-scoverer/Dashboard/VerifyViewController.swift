@@ -24,7 +24,21 @@ class VerifyViewController : UIViewController, UIImagePickerControllerDelegate &
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    
         load()
+        
+        
+        let animation = CABasicAnimation(keyPath: "position")
+        animation.duration = 0.13
+        animation.repeatCount = 4
+        animation.autoreverses = true
+        animation.fromValue = NSValue(cgPoint: CGPoint(x: userVerificationImage.center.x - 10, y: userVerificationImage.center.y))
+        animation.toValue = NSValue(cgPoint: CGPoint(x: userVerificationImage.center.x + 10, y: userVerificationImage.center.y))
+        
+        if isVerified == false {
+
+            userVerificationImage.layer.add(animation, forKey: "position")
+        }
         title = "Verify"
         
         userVerificationImage.isUserInteractionEnabled = true

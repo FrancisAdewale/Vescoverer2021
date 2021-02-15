@@ -112,6 +112,18 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let indexpath = tableView.indexPathForSelectedRow
+        
+        if indexPath.section == 0 && indexPath.row == 0 {
+            
+            let cell = tableView.cellForRow(at: indexPath) as! ImageViewCell
+            
+            if cell.userImage.isHighlighted {
+                self.present(picker, animated: true, completion: nil)
+
+            }
+        }
+        
+    
         tableView.deselectRow(at: indexpath!, animated: true)
     }
     
