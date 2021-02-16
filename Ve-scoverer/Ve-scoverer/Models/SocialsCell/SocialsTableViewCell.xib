@@ -16,27 +16,36 @@
                 <rect key="frame" x="0.0" y="0.0" width="312" height="107"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" spacing="34" translatesAutoresizingMaskIntoConstraints="NO" id="62Y-ya-YN6">
-                        <rect key="frame" x="75" y="21.5" width="162" height="64"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" spacing="39" translatesAutoresizingMaskIntoConstraints="NO" id="c9O-Xv-6aR">
+                        <rect key="frame" x="72.5" y="21.5" width="167" height="64"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="instagramProfile" translatesAutoresizingMaskIntoConstraints="NO" id="JsX-Ua-3Wr">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f2R-gX-LXi">
                                 <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
-                            </imageView>
-                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="twitterProfile" translatesAutoresizingMaskIntoConstraints="NO" id="WKa-nn-kWt">
-                                <rect key="frame" x="98" y="0.0" width="64" height="64"/>
-                            </imageView>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="11"/>
+                                <state key="normal" image="instagramProfile"/>
+                                <connections>
+                                    <action selector="instagramTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="q1D-Uh-v1k"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hdF-tY-oBc">
+                                <rect key="frame" x="103" y="0.0" width="64" height="64"/>
+                                <state key="normal" image="twitterProfile"/>
+                                <connections>
+                                    <action selector="twitterTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="DhS-vY-vEF"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="62Y-ya-YN6" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="AYm-FM-7Nj"/>
-                    <constraint firstItem="62Y-ya-YN6" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Bvw-hJ-Yil"/>
+                    <constraint firstItem="c9O-Xv-6aR" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="R9P-JT-S80"/>
+                    <constraint firstItem="c9O-Xv-6aR" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="ddG-nM-Mpe"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="instagram" destination="JsX-Ua-3Wr" id="G6N-Rr-9bh"/>
-                <outlet property="twitter" destination="WKa-nn-kWt" id="TNB-7t-Ty5"/>
+                <outlet property="instagramButton" destination="f2R-gX-LXi" id="N8l-7R-yUo"/>
+                <outlet property="twitterButton" destination="hdF-tY-oBc" id="mo4-9m-Mxm"/>
             </connections>
             <point key="canvasLocation" x="-395.6521739130435" y="21.763392857142858"/>
         </tableViewCell>

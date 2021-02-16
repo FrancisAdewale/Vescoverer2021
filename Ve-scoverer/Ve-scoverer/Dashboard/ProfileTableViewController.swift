@@ -15,7 +15,8 @@ import AuthenticationServices
 import SDWebImage
 
 
-class ProfileTableViewController: UITableViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+
+class ProfileTableViewController: UITableViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate  {
    
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var editedInstagram = String()
@@ -37,18 +38,17 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
     
     var userCity = ""
     
-    var section1: [ProfileUser] = []
-    var section2: [ProfileUser] = []
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-     
+
         
         load()
                 
     }
     
 
+    @IBOutlet var editButton: UIBarButtonItem!
     @IBOutlet weak var twitterButton: UIButton!
     @IBOutlet weak var igButton: UIButton!
     @IBOutlet weak var logOutButton: UIButton!
@@ -60,8 +60,12 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+
+
         self.navigationController?.navigationBar.prefersLargeTitles = true
         title = "Account"
+        
       
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         picker.delegate = self
@@ -120,16 +124,29 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
             if cell.userImage.isHighlighted {
                 self.present(picker, animated: true, completion: nil)
 
+            } else if cell.isEditing {
+                
             }
         }
-        
-    
+
         tableView.deselectRow(at: indexpath!, animated: true)
     }
     
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        
+        if indexPath.section == 0 && indexPath.row == 0 {
+            return true
+        }
+        
+        
+        return false
+        
+        
+    }
     
-    
-
+    override func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
+        print(indexPath.row)
+    }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -139,7 +156,9 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
             cell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
             cell.contentView.layer.borderWidth = 0.05
             cell.layer.cornerRadius = 8
-            cell.userFirstName.text = profileUser.firstName
+            cell.userNameField.text = profileUser.firstName
+                
+                //.userFirstName.text = profileUser.firstName
 
             DispatchQueue.main.async {
                 cell.userImage.sd_setImage(with: URL(fileURLWithPath: self.profileUser.image), completed: nil)
@@ -185,9 +204,10 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
             return otherCell
         } else if indexPath.section == 1 && indexPath.row == 1 {
             let otherCell = tableView.dequeueReusableCell(withIdentifier: "SocialsCell", for: indexPath) as! SocialsTableViewCell
-            //otherCell.textLabel?.text = profileUser.twitter
+            otherCell.twitterAt = profileUser.twitter
+            otherCell.instagramAt = profileUser.instagram
+            
             otherCell.accessoryType = .none
-
             //otherCell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
             otherCell.contentView.layer.borderWidth = 0.05
             otherCell.layer.cornerRadius = 8
@@ -199,11 +219,8 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
             otherCell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
             otherCell.contentView.layer.borderWidth = 0.05
             otherCell.layer.cornerRadius = 8
-            
             return otherCell
-            
         }
-        
     }
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -229,7 +246,24 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         return 100.0
     }
     
-//    @IBAction func uploadImagePressed(_ sender: UIButton) {
+    
+    
+    @IBAction func editTapped(_ sender: UIBarButtonItem) {
+        print("editTapped")
+        
+        
+        let nameCell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! ImageViewCell
+        
+        nameCell.userNameField.isUserInteractionEnabled = true
+        nameCell.userNameField.isEnabled = true
+        editButton.title = tableView.isEditing ? "Done" : "Edit"
+        editButton.style = tableView.isEditing ? .done : .plain
+        tableView.setEditing(!tableView.isEditing, animated: true)
+
+        
+    }
+    
+    //    @IBAction func uploadImagePressed(_ sender: UIButton) {
 //        present(picker, animated: true, completion: nil)
 //    }
 //
@@ -392,6 +426,8 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
                 self.profileUser.latitude = data?["latitude"] as? Double ?? 0
                 self.profileUser.longitude = data?["longitude"] as? Double ?? 0
                 self.profileUser.verified = data?["isVerified"] as? Bool ?? false
+                
+                
                 
                 let resourcePath = Bundle.main.resourcePath
                 let imgName = "verified.png"
