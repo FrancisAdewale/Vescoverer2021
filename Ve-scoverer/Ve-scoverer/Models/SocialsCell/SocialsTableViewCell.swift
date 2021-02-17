@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class SocialsTableViewCell: UITableViewCell {
 
@@ -16,6 +17,9 @@ class SocialsTableViewCell: UITableViewCell {
     var instagramAt = ""
     var twitterAt = ""
     let vc = UIApplication.shared.topMostViewController()
+    let user = Auth.auth().currentUser
+
+    let db = Firestore.firestore()
 
     
     override func awakeFromNib() {
@@ -33,13 +37,48 @@ class SocialsTableViewCell: UITableViewCell {
     
     
     @IBAction func instagramTapped(_ sender: UIButton) {
-        let alert = UIAlertController(title: instagramAt, message: "Current Instagram @", preferredStyle: .alert)
         
-        let action = UIAlertAction(title: "Done", style: .cancel, handler: nil)
-        alert.addAction(action)
-        vc!.present(alert, animated: true, completion: nil)
         
+        
+        var textField = UITextField()
     
+        if !self.isEditing {
+            let alert = UIAlertController(title: instagramAt, message: "Current Instagram @", preferredStyle: .alert)
+            let action = UIAlertAction(title: "Done", style: .cancel, handler: nil)
+            alert.addAction(action)
+            vc!.present(alert, animated: true, completion: nil)
+        } else {
+            let alert = UIAlertController(title: "Edit", message: "Current Instagram: @\(instagramAt)", preferredStyle: .alert)
+            let action = UIAlertAction(title: "Done", style: .default, handler: { action in
+                
+//                let newName = textField.text!
+                
+//                if let user = self.user {
+//                    self.db.collection("users").document(user.email!).setData(["firstName" : newName], merge: true)
+//                    DispatchQueue.main.async {
+//
+//                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//
+//                        let pvc = storyboard.instantiateViewController(identifier: "Profile") as! ProfileTableViewController
+//                        pvc.tableView.reloadData()
+//
+//                    }
+//                }
+                
+            })
+            
+            alert.addTextField { (alertField) in
+                textField = alertField
+            }
+            alert.addAction(action)
+            
+            print(textField.text!)
+            vc!.present(alert, animated: true, completion: nil)
+            
+        
+        }
+
+      
 
 
         
@@ -48,10 +87,30 @@ class SocialsTableViewCell: UITableViewCell {
     
     @IBAction func twitterTapped(_ sender: UIButton) {
         
-        let alert = UIAlertController(title: twitterAt, message: "Current Twitter @", preferredStyle: .alert)
-        let action = UIAlertAction(title: "Done", style: .cancel, handler: nil)
-        alert.addAction(action)
-        vc!.present(alert, animated: true, completion: nil)
+        var textField = UITextField()
+        
+        if !self.isEditing {
+            let alert = UIAlertController(title: twitterAt, message: "Current Twitter @", preferredStyle: .alert)
+            let action = UIAlertAction(title: "Done", style: .cancel, handler: nil)
+            alert.addAction(action)
+            vc!.present(alert, animated: true, completion: nil)
+        } else {
+            let alert = UIAlertController(title: "Edit", message: "Current Instagram: @\(twitterAt)", preferredStyle: .alert)
+            let action = UIAlertAction(title: "Done", style: .default, handler: { action in
+                
+            })
+            
+            alert.addTextField { (alertField) in
+                textField = alertField
+            }
+            alert.addAction(action)
+            
+            print(textField.text!)
+            vc!.present(alert, animated: true, completion: nil)
+            
+        }
+        
+       
 
     }
     

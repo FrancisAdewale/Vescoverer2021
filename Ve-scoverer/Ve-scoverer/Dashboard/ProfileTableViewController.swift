@@ -13,7 +13,6 @@ import ChameleonFramework
 import GoogleSignIn
 import AuthenticationServices
 import SDWebImage
-import MKToolTip
 
 
 
@@ -262,6 +261,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         
         editButton.title = tableView.isEditing ? "Done" : "Edit"
         editButton.style = tableView.isEditing ? .done : .plain
+        
 
         
     }
