@@ -13,6 +13,7 @@ import ChameleonFramework
 import GoogleSignIn
 import AuthenticationServices
 import SDWebImage
+import MKToolTip
 
 
 
@@ -61,8 +62,6 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
-
         self.navigationController?.navigationBar.prefersLargeTitles = true
         title = "Account"
         
@@ -213,6 +212,8 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
             otherCell.instagramButton.isEnabled = true
             otherCell.instagramButton.isUserInteractionEnabled = true
             otherCell.instagramAt = profileUser.instagram
+            
+            
             
             otherCell.accessoryType = .none
             //otherCell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
