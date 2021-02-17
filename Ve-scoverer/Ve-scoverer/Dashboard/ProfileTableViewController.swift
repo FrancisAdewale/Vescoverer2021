@@ -41,7 +41,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        editButton.title = "Edit"
         
         load()
                 
@@ -136,13 +136,14 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         
         if indexPath.section == 0 && indexPath.row == 0 {
             return true
+        } else if indexPath.section == 1 && indexPath.row == 1 {
+            return true
         }
-        
-        
-        return false
-        
-        
+        else {
+            return false
+        }
     }
+    
     
     override func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
         print(indexPath.row)
@@ -157,6 +158,8 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
             cell.contentView.layer.borderWidth = 0.05
             cell.layer.cornerRadius = 8
             cell.userNameField.text = profileUser.firstName
+            cell.userNameField.isEnabled = true
+            cell.userNameField.isUserInteractionEnabled = true
                 
                 //.userFirstName.text = profileUser.firstName
 
@@ -205,6 +208,10 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         } else if indexPath.section == 1 && indexPath.row == 1 {
             let otherCell = tableView.dequeueReusableCell(withIdentifier: "SocialsCell", for: indexPath) as! SocialsTableViewCell
             otherCell.twitterAt = profileUser.twitter
+            otherCell.twitterButton.isEnabled = true
+            otherCell.twitterButton.isUserInteractionEnabled = true
+            otherCell.instagramButton.isEnabled = true
+            otherCell.instagramButton.isUserInteractionEnabled = true
             otherCell.instagramAt = profileUser.instagram
             
             otherCell.accessoryType = .none
@@ -250,15 +257,10 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
     
     @IBAction func editTapped(_ sender: UIBarButtonItem) {
         print("editTapped")
+        tableView.setEditing(!tableView.isEditing, animated: true)
         
-        
-        let nameCell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! ImageViewCell
-        
-        nameCell.userNameField.isUserInteractionEnabled = true
-        nameCell.userNameField.isEnabled = true
         editButton.title = tableView.isEditing ? "Done" : "Edit"
         editButton.style = tableView.isEditing ? .done : .plain
-        tableView.setEditing(!tableView.isEditing, animated: true)
 
         
     }

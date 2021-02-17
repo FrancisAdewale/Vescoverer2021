@@ -867,7 +867,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="vl4-NZ-jZ6">
-                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="eV8-xT-4S3">
+                        <barButtonItem key="rightBarButtonItem" id="eV8-xT-4S3">
                             <color key="tintColor" red="0.21568627450980393" green="0.59215686274509804" blue="0.64313725490196072" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="editTapped:" destination="Izc-O1-HzH" id="lCU-Tk-dlV"/>

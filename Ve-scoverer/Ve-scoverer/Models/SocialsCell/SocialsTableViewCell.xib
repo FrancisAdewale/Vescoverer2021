@@ -19,15 +19,17 @@
                     <stackView opaque="NO" contentMode="scaleToFill" spacing="39" translatesAutoresizingMaskIntoConstraints="NO" id="c9O-Xv-6aR">
                         <rect key="frame" x="72.5" y="21.5" width="167" height="64"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f2R-gX-LXi">
+                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f2R-gX-LXi">
                                 <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
-                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="11"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" button="YES" summaryElement="YES"/>
+                                </accessibility>
                                 <state key="normal" image="instagramProfile"/>
                                 <connections>
                                     <action selector="instagramTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="q1D-Uh-v1k"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hdF-tY-oBc">
+                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hdF-tY-oBc">
                                 <rect key="frame" x="103" y="0.0" width="64" height="64"/>
                                 <state key="normal" image="twitterProfile"/>
                                 <connections>
