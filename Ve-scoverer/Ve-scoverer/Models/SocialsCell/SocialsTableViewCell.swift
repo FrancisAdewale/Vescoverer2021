@@ -51,37 +51,36 @@ class SocialsTableViewCell: UITableViewCell {
             let alert = UIAlertController(title: "Edit", message: "Current Instagram: @\(instagramAt)", preferredStyle: .alert)
             let action = UIAlertAction(title: "Done", style: .default, handler: { action in
                 
-//                let newName = textField.text!
+                let newInsta = textField.text!
                 
-//                if let user = self.user {
-//                    self.db.collection("users").document(user.email!).setData(["firstName" : newName], merge: true)
-//                    DispatchQueue.main.async {
-//
-//                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//
-//                        let pvc = storyboard.instantiateViewController(identifier: "Profile") as! ProfileTableViewController
-//                        pvc.tableView.reloadData()
-//
-//                    }
-//                }
+                if let user = self.user {
+                    self.db.collection("users").document(user.email!).setData(["instagram" : newInsta], merge: true)
+                    DispatchQueue.main.async {
+
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+
+                        let pvc = storyboard.instantiateViewController(identifier: "Profile") as! ProfileTableViewController
+                        pvc.tableView.reloadData()
+
+                    }
+                }
                 
             })
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+
             
             alert.addTextField { (alertField) in
                 textField = alertField
             }
             alert.addAction(action)
-            
+            alert.addAction(cancelAction)
             print(textField.text!)
             vc!.present(alert, animated: true, completion: nil)
             
         
         }
-
-      
-
-
-        
+ 
     }
     
     
@@ -97,13 +96,28 @@ class SocialsTableViewCell: UITableViewCell {
         } else {
             let alert = UIAlertController(title: "Edit", message: "Current Instagram: @\(twitterAt)", preferredStyle: .alert)
             let action = UIAlertAction(title: "Done", style: .default, handler: { action in
+                let newTwit = textField.text!
                 
+                if let user = self.user {
+                    self.db.collection("users").document(user.email!).setData(["twitter" : newTwit], merge: true)
+                    DispatchQueue.main.async {
+
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+
+                        let pvc = storyboard.instantiateViewController(identifier: "Profile") as! ProfileTableViewController
+                        pvc.tableView.reloadData()
+
+                    }
+                }
             })
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
             
             alert.addTextField { (alertField) in
                 textField = alertField
             }
             alert.addAction(action)
+            alert.addAction(cancelAction)
             
             print(textField.text!)
             vc!.present(alert, animated: true, completion: nil)

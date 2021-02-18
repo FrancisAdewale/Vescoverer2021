@@ -21,9 +21,6 @@ class ImageViewCell: UITableViewCell, UITextFieldDelegate  {
 
     let db = Firestore.firestore()
 
-    
-    
-    
     override func awakeFromNib() {
         super.awakeFromNib()
      
@@ -43,7 +40,7 @@ class ImageViewCell: UITableViewCell, UITextFieldDelegate  {
     func textFieldDidEndEditing(_ textField: UITextField) {
         
         let newName = userNameField.text!
-        
+ 
         if let user = user {
             self.db.collection("users").document(user.email!).setData(["firstName" : newName], merge: true)
             DispatchQueue.main.async {
@@ -62,20 +59,26 @@ class ImageViewCell: UITableViewCell, UITextFieldDelegate  {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
 
         print("TextField should begin editing method called")
-        return true;
+        
+        if self.isEditing {
+            return true
+
+        }
+        
+        return false
     }
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         print("TextField should end editing method called")
-        
-        return true;
+        userNameField.font = UIFont(name: "Lato", size: 20.0)
+        return true
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 
         print("TextField should return method called")
-        textField.resignFirstResponder();
-        return true;
+        textField.resignFirstResponder()
+        return true
     }
 
     

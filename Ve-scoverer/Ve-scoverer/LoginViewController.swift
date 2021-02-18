@@ -36,11 +36,10 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationItem.hidesBackButton = true
-        title = "Login"
         background.backgroundColor = UIColor(hexString: "3797A4")
        // navigationController?.navigationBar.backgroundColor = .white
 //        appleButton.backgroundColor = .gray
-       // navigationController?.navigationBar.barTintColor = .white
+        navigationController?.navigationBar.barTintColor = UIColor(hexString: "3797a4")
         
         if let user = user {
             
@@ -66,6 +65,8 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Login"
+
         setupAppleButton()
         
         //       GIDSignIn.sharedInstance()?.restorePreviousSignIn()
