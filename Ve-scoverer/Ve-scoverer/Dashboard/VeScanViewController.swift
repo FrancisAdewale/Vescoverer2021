@@ -10,12 +10,13 @@ import CoreML
 import Vision
 import Social
 
-
+///ADD A POPUP VIEW BEFORE THEY START SCANNING.
 class VeScanViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     var pickedImage: CIImage?
     let imagePicker = UIImagePickerController()
 
+    @IBOutlet var loading: UIActivityIndicatorView!
     @IBOutlet weak var verdict: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     
@@ -70,6 +71,7 @@ class VeScanViewController: UIViewController, UIImagePickerControllerDelegate, U
         
         
         verdict.text = "Ve-Scanning...."
+        loading.startAnimating()
         
         let ciImage = CIImage(image: image)
         let orientation = CGImagePropertyOrientation(rawValue: UInt32(image.imageOrientation.rawValue))
@@ -94,29 +96,54 @@ class VeScanViewController: UIViewController, UIImagePickerControllerDelegate, U
             guard let results = request.results
             else {
                 self.verdict.text = "Unable to classify image.\n\(error!.localizedDescription)"
+                self.loading.stopAnimating()
                 return
             }
             let classifications = results as! [VNClassificationObservation]
             if classifications.isEmpty {
                 self.verdict.text = "Nothing recognized."
+                self.loading.stopAnimating()
+
             } else {
                 let topClassifications = classifications
                 let descriptions = topClassifications.map { classification in
-                    return String(format: "%.0f %@", classification.confidence, classification.identifier)
+                    return String(format: "%.2f %@", classification.confidence, classification.identifier)
                 }
                 
-                let firstVerdict = descriptions.first
-                let splitVerdict = firstVerdict?.split(separator: " ")
+                let verdicts = descriptions.first
+                let splitVerdict = verdicts?.split(separator: " ")
+                let percentage = Double(splitVerdict![0])
+                let type = splitVerdict![1]
                 
-                if splitVerdict![0] != "1"{
-                    self.verdict.text = "Not sure"
-                } else {
+                print("\(type) \(String(describing: percentage))")
+                
+                if percentage! >= 0.96  && type == "Cooked" {
+                    self.verdict.text = "Vegan!"
+                    self.loading.stopAnimating()
+
+                } else if percentage! > 0.96 && type == "Raw" {
+                    self.verdict.text = "Vegan!"
+                    self.loading.stopAnimating()
+
+                } else if percentage! > 0.8 && type == "Drinks" {
                     self.verdict.text = "Vegan"
+                    self.loading.stopAnimating()
+
+                } else {
+                    self.verdict.text = "Miscellaneous"
+                    self.loading.stopAnimating()
+
                 }
                 
-                if splitVerdict![1] == "N/A" && splitVerdict![0] == "1" {
-                    self.verdict.text = "Nope"
-                }
+//                if splitVerdict![0] != "1"{
+//                    self.verdict.text = "Not sure"
+//                } else {
+//                    self.verdict.text = "Vegan"
+//                }
+//
+//                if splitVerdict![1] == "N/A" && splitVerdict![0] == "1" {
+//                    self.verdict.text = "Nope"
+//                }
 
             }
         }

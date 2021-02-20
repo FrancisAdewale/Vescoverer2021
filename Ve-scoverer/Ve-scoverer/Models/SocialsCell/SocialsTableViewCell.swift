@@ -43,12 +43,12 @@ class SocialsTableViewCell: UITableViewCell {
         var textField = UITextField()
     
         if !self.isEditing {
-            let alert = UIAlertController(title: instagramAt, message: "Current Instagram @", preferredStyle: .alert)
+            let alert = UIAlertController(title: instagramAt.capitalized, message: "Current Instagram @", preferredStyle: .alert)
             let action = UIAlertAction(title: "Done", style: .cancel, handler: nil)
             alert.addAction(action)
             vc!.present(alert, animated: true, completion: nil)
         } else {
-            let alert = UIAlertController(title: "Edit", message: "Current Instagram: @\(instagramAt)", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Edit", message: "Current Instagram: @\(instagramAt.capitalized)", preferredStyle: .alert)
             let action = UIAlertAction(title: "Done", style: .default, handler: { action in
                 
                 let newInsta = textField.text!
@@ -89,12 +89,12 @@ class SocialsTableViewCell: UITableViewCell {
         var textField = UITextField()
         
         if !self.isEditing {
-            let alert = UIAlertController(title: twitterAt, message: "Current Twitter @", preferredStyle: .alert)
+            let alert = UIAlertController(title: twitterAt.capitalized, message: "Current Twitter @", preferredStyle: .alert)
             let action = UIAlertAction(title: "Done", style: .cancel, handler: nil)
             alert.addAction(action)
             vc!.present(alert, animated: true, completion: nil)
         } else {
-            let alert = UIAlertController(title: "Edit", message: "Current Instagram: @\(twitterAt)", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Edit", message: "Current Instagram: @\(twitterAt.capitalized)", preferredStyle: .alert)
             let action = UIAlertAction(title: "Done", style: .default, handler: { action in
                 let newTwit = textField.text!
                 

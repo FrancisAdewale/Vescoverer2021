@@ -6,25 +6,41 @@
 //
 
 import UIKit
+import SwiftyToolTip
+
 
 class ViewImageCell: UITableViewCell {
     
     
-    @IBOutlet weak var verified: UIImageView!
+    @IBOutlet weak var verified: UIButton!
     @IBOutlet weak var imageCell: UIImageView!
     
     @IBOutlet weak var usernameCell: UILabel!
     
+    let vc = UIApplication.shared.topMostViewController()
+
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        imageCell.layer.cornerRadius = 0.5 * imageCell.bounds.size.width
+        imageCell.clipsToBounds = true
+        
+   
+
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+        
 
-        // Configure the view for the selected state
     }
     
+
+    @IBAction func verifiedTapped(_ sender: UIButton) {
+        
+        verified.showToolTip()
+    }
 }
+
+

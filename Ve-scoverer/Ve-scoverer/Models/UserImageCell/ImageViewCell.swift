@@ -25,6 +25,9 @@ class ImageViewCell: UITableViewCell, UITextFieldDelegate  {
         super.awakeFromNib()
      
         userNameField.delegate = self
+        
+        userImage.layer.cornerRadius = 0.5 * userImage.bounds.size.width
+        userImage.clipsToBounds = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

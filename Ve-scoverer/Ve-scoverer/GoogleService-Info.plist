@@ -19,18 +19,20 @@
 	<key>STORAGE_BUCKET</key>
 	<string>vescoverer-c60b7.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_APPINVITE_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_GCM_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>GOOGLE_APP_ID</key>
 	<string>1:647984884537:ios:63082a130a6614e3db96e8</string>
 	<key>DATABASE_URL</key>
 	<string>https://vescoverer-c60b7.firebaseio.com</string>
+	<key>CFBundleIdentifier</key>
+	<string>NetworkManager</string>
 </dict>
 </plist>

@@ -39,15 +39,7 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
 
     var userImage = ""
     var userCity = ""
-    
 
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-    
-        
-    }
     
 
     @IBOutlet weak var twitterButton: UIButton!
@@ -93,9 +85,7 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
             return 3
         }
     }
-    
-    
-    
+
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
         if (section == 0 || section == 1 )
@@ -113,16 +103,12 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
         vw.backgroundColor = UIColor(hexString: "3797A4")
         return vw
     }
-    
-    
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        
         tableView.deselectRow(at: indexPath, animated: true)
+        
     }
-    
-  
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -133,9 +119,8 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
             cell.contentView.layer.borderWidth = 0.05
 //            cell.backgroundColor = UIColor(hexString: "3797A4")!.lighten(byPercentage: self.floatNum)
             cell.usernameCell.text = viewUser.firstName
-                        
-            
-            
+            cell.verified.addToolTip(description: "Verified!")
+
             DispatchQueue.main.async {
                 let ref = self.storage.reference().child(self.loadUserEmail).child("profile/profile.jpg")
                 
@@ -153,7 +138,8 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
                         
                         if self.viewUser.verified == true {
                             
-                            cell.verified.image = UIImage(named: "verified.png")
+                            cell.verified.setImage(UIImage(named: "verified.png"), for: .normal)
+                                
                                 
                                 //.sd_setImage(with: URL(fileURLWithPath: path), completed: nil)
                             
@@ -164,9 +150,7 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
                     }
                 }
             }
-            
-            
-        
+
             return cell
         } else if indexPath.section == 0 && indexPath.row == 1 {
             
@@ -200,9 +184,7 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
             let otherCell = tableView.dequeueReusableCell(withIdentifier: "ViewedSocialsCell", for: indexPath) as! ViewedSocialsTableViewCell
             otherCell.editedTwitter = viewUser.twitter
             otherCell.editedInstagram = viewUser.instagram
-            
 
-           
             //otherCell.textLabel?.text = profileUser.twitter
             //otherCell.backgroundColor = UIColor(hexString: "3797A4")!.lighten(byPercentage: self.floatNum)
 
@@ -221,17 +203,11 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
 //            otherCell.backgroundColor = UIColor(hexString: "3797A4")!.lighten(byPercentage: self.floatNum)
 
             return otherCell
-            
-            
-            
-        }
-        
    
-        
+        }
+ 
     }
-    
 
-    
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
        return 60
     }
@@ -251,114 +227,9 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100.0
     }
-    
-    
 
     
 
-    
-
-    
-    //i need to add social media lnks to USER MODEL.
-    
-//    @IBAction func igButtonClick(_ sender: Any) {
-//
-//        var textField = UITextField()
-//
-//        let actionsheet = UIAlertController(title: "Select", message: "", preferredStyle: .actionSheet)
-//
-//        let goAction = UIAlertAction(title: "Go", style: .default) { (action) in
-//
-//            let appURL = URL(string: "instagram://user?username=\(self.editedInstagram)")!
-//            let application = UIApplication.shared
-//
-//            if application.canOpenURL(appURL) {
-//                application.open(appURL)
-//            } else {
-//                let webURL = URL(string: "https://instagram.com/\(self.editedInstagram)")!
-//                application.open(webURL)
-//            }
-//        }
-//
-//        let editAction = UIAlertAction(title: "Edit", style: .default) { (action) in
-//
-//            let alert = UIAlertController(title: "Edit your @", message: "only your account name(not including @)", preferredStyle: .alert)
-//
-//            let action = UIAlertAction(title: "Edit", style: .default) { (action) in
-//                self.editedInstagram = textField.text!
-//
-////                self.db.collection("users").document((self.user?.email!)!).collection("socials").document("instagram").setData(["insta@": self.editedInstagram])
-//
-//
-//            }
-//            alert.addTextField { (alertTextField) in
-//                textField = alertTextField
-//
-//            }
-//            alert.addAction(action)
-//
-//            self.present(alert, animated: true, completion: nil)
-//        }
-//
-//        actionsheet.addAction(goAction)
-//        actionsheet.addAction(editAction)
-//
-//        present(actionsheet, animated: true, completion: nil)
-//    }
-    
-    
-//    @IBAction func twitterButtonClicked(_ sender: Any) {
-//
-//        var textField = UITextField()
-//
-//        let actionsheet = UIAlertController(title: "Select", message: "", preferredStyle: .actionSheet)
-//
-//        let goAction = UIAlertAction(title: "Go", style: .default) { (action) in
-//
-//            let appURL = URL(string: "twitter://user?screen_name=\(self.editedTwitter)")!
-//            let application = UIApplication.shared
-//
-//            if application.canOpenURL(appURL) {
-//                application.open(appURL)
-//            } else{
-//                let webURL = URL(string: "https://twitter.com/\(self.editedTwitter)")!
-//                application.open(webURL)
-//            }
-//
-//
-//        }
-//
-//        let editAction = UIAlertAction(title: "Edit", style: .default) { (action) in
-//
-//            let alert = UIAlertController(title: "Edit your @", message: "only your account name(not including @)", preferredStyle: .alert)
-//
-//            let action = UIAlertAction(title: "Edit", style: .default) { (action) in
-//                self.editedTwitter = textField.text!
-////
-////                self.db.collection("users").document((self.user?.email!)!).collection("socials").document("twitter").setData(["twitter@": self.editedTwitter])
-//
-//
-//            }
-//            alert.addTextField { (alertTextField) in
-//                textField = alertTextField
-//
-//            }
-//            alert.addAction(action)
-//
-//            self.present(alert, animated: true, completion: nil)
-//        }
-//
-//        actionsheet.addAction(goAction)
-//        actionsheet.addAction(editAction)
-//
-//        present(actionsheet, animated: true, completion: nil)
-//
-//
-//    }
-    
-    
-    
-    
 }
 
 

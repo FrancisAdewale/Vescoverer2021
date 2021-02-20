@@ -22,13 +22,15 @@
 		763EFF9B2554558900CEAA41 /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763EFF9A2554558900CEAA41 /* DiscoverViewController.swift */; };
 		763EFFA22554573D00CEAA41 /* VerifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763EFFA12554573D00CEAA41 /* VerifyViewController.swift */; };
 		763EFFA5255457C000CEAA41 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763EFFA4255457C000CEAA41 /* ProfileTableViewController.swift */; };
-		76585EE425D81F9D00F504C9 /* VeScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76585EE325D81F9D00F504C9 /* VeScanViewController.swift */; };
+		7650FAB125E1863A003ACEB0 /* PostRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7650FAB025E1863A003ACEB0 /* PostRecipe.swift */; };
+		7650FAB425E18853003ACEB0 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7650FAB325E18853003ACEB0 /* NetworkManager.swift */; };
 		7665B5E725DABFDB00C87175 /* ViewedSocialsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7665B5E525DABFDB00C87175 /* ViewedSocialsTableViewCell.swift */; };
 		7665B5E825DABFDB00C87175 /* ViewedSocialsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7665B5E625DABFDB00C87175 /* ViewedSocialsTableViewCell.xib */; };
 		7669AE08259374F8000E2A1C /* InstagramAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7669AE07259374F8000E2A1C /* InstagramAPI.swift */; };
 		7669AE0B2593779B000E2A1C /* InstagramResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7669AE0A2593779B000E2A1C /* InstagramResponse.swift */; };
 		766CE12725C5D35900465FE9 /* ViewImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766CE12525C5D35900465FE9 /* ViewImageCell.swift */; };
 		766CE12825C5D35900465FE9 /* ViewImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 766CE12625C5D35900465FE9 /* ViewImageCell.xib */; };
+		767B256725E1725A0007A297 /* RecipeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767B256625E1725A0007A297 /* RecipeTableViewController.swift */; };
 		767E81C925A23BF400BC40EC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 767E81C825A23BF400BC40EC /* GoogleService-Info.plist */; };
 		767EAE53256EB1C600B67811 /* Lato in Resources */ = {isa = PBXBuildFile; fileRef = 767EAE52256EB1C600B67811 /* Lato */; };
 		767F0EDC2591104A00615FB5 /* NormalUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767F0EDB2591104A00615FB5 /* NormalUser.swift */; };
@@ -37,7 +39,6 @@
 		76912B612551DB1B001C38DE /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76912B602551DB1B001C38DE /* HomeViewController.swift */; };
 		76912B662551DB1B001C38DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76912B652551DB1B001C38DE /* Assets.xcassets */; };
 		76912B692551DB1B001C38DE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76912B672551DB1B001C38DE /* LaunchScreen.storyboard */; };
-		769F1A9225D998BF00E1CE76 /* VeganImageClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 769F1A9125D998BF00E1CE76 /* VeganImageClassifier.mlmodel */; };
 		76BAC65F258A7A830031A3EB /* GoogleSignIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76BAC65E258A7A830031A3EB /* GoogleSignIn.framework */; };
 		76BAC662258A7A930031A3EB /* GoogleSignInDependencies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76BAC661258A7A930031A3EB /* GoogleSignInDependencies.framework */; };
 		76BAC664258A7BC20031A3EB /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76BAC663258A7BC20031A3EB /* LocalAuthentication.framework */; };
@@ -72,13 +73,15 @@
 		763EFF9A2554558900CEAA41 /* DiscoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverViewController.swift; sourceTree = "<group>"; };
 		763EFFA12554573D00CEAA41 /* VerifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyViewController.swift; sourceTree = "<group>"; };
 		763EFFA4255457C000CEAA41 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
-		76585EE325D81F9D00F504C9 /* VeScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VeScanViewController.swift; sourceTree = "<group>"; };
+		7650FAB025E1863A003ACEB0 /* PostRecipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRecipe.swift; sourceTree = "<group>"; };
+		7650FAB325E18853003ACEB0 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		7665B5E525DABFDB00C87175 /* ViewedSocialsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewedSocialsTableViewCell.swift; sourceTree = "<group>"; };
 		7665B5E625DABFDB00C87175 /* ViewedSocialsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewedSocialsTableViewCell.xib; sourceTree = "<group>"; };
 		7669AE07259374F8000E2A1C /* InstagramAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramAPI.swift; sourceTree = "<group>"; };
 		7669AE0A2593779B000E2A1C /* InstagramResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramResponse.swift; sourceTree = "<group>"; };
 		766CE12525C5D35900465FE9 /* ViewImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewImageCell.swift; sourceTree = "<group>"; };
 		766CE12625C5D35900465FE9 /* ViewImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewImageCell.xib; sourceTree = "<group>"; };
+		767B256625E1725A0007A297 /* RecipeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeTableViewController.swift; sourceTree = "<group>"; };
 		767E81C825A23BF400BC40EC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		767EAE52256EB1C600B67811 /* Lato */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Lato; sourceTree = "<group>"; };
 		767F0EDB2591104A00615FB5 /* NormalUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NormalUser.swift; sourceTree = "<group>"; };
@@ -89,7 +92,6 @@
 		76912B652551DB1B001C38DE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		76912B682551DB1B001C38DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		76912B6A2551DB1B001C38DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		769F1A9125D998BF00E1CE76 /* VeganImageClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = VeganImageClassifier.mlmodel; path = ../../../Desktop/VeganImageClassifier.mlmodel; sourceTree = "<group>"; };
 		76BAC638258A2A7A0031A3EB /* Ve-scoverer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Ve-scoverer.entitlements"; sourceTree = "<group>"; };
 		76BAC65B258A7A730031A3EB /* GoogleSignIn.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GoogleSignIn.bundle; sourceTree = "<group>"; };
 		76BAC65E258A7A830031A3EB /* GoogleSignIn.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleSignIn.framework; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 		76585EE125D81F0000F504C9 /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
+				7650FAB325E18853003ACEB0 /* NetworkManager.swift */,
 				763EFF9A2554558900CEAA41 /* DiscoverViewController.swift */,
 				763EFFA12554573D00CEAA41 /* VerifyViewController.swift */,
 				763EFFA4255457C000CEAA41 /* ProfileTableViewController.swift */,
@@ -170,8 +173,9 @@
 				763EFF8F25530CD700CEAA41 /* DashboardTabController.swift */,
 				76D36D2825AB515300D98ED5 /* ProfileUser.swift */,
 				761A796425C472FE004C59E4 /* ViewUserTableViewController.swift */,
-				76585EE325D81F9D00F504C9 /* VeScanViewController.swift */,
+				767B256625E1725A0007A297 /* RecipeTableViewController.swift */,
 				761A796725C4AC5F004C59E4 /* ViewUser.swift */,
+				7650FAB025E1863A003ACEB0 /* PostRecipe.swift */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -253,7 +257,6 @@
 				76BAC65E258A7A830031A3EB /* GoogleSignIn.framework */,
 				76BAC65B258A7A730031A3EB /* GoogleSignIn.bundle */,
 				7625033A25570169002F92E2 /* UserCore.xcdatamodeld */,
-				769F1A9125D998BF00E1CE76 /* VeganImageClassifier.mlmodel */,
 			);
 			path = "Ve-scoverer";
 			sourceTree = "<group>";
@@ -453,17 +456,18 @@
 				7665B5E725DABFDB00C87175 /* ViewedSocialsTableViewCell.swift in Sources */,
 				7625033C25570169002F92E2 /* UserCore.xcdatamodeld in Sources */,
 				7669AE08259374F8000E2A1C /* InstagramAPI.swift in Sources */,
+				767B256725E1725A0007A297 /* RecipeTableViewController.swift in Sources */,
 				767F0EDC2591104A00615FB5 /* NormalUser.swift in Sources */,
 				763EFF94255311CE00CEAA41 /* LoginViewController.swift in Sources */,
 				763EFF9025530CD700CEAA41 /* DashboardTabController.swift in Sources */,
 				76912B612551DB1B001C38DE /* HomeViewController.swift in Sources */,
-				76585EE425D81F9D00F504C9 /* VeScanViewController.swift in Sources */,
+				7650FAB425E18853003ACEB0 /* NetworkManager.swift in Sources */,
 				763EFFA22554573D00CEAA41 /* VerifyViewController.swift in Sources */,
+				7650FAB125E1863A003ACEB0 /* PostRecipe.swift in Sources */,
 				76912B5D2551DB1B001C38DE /* AppDelegate.swift in Sources */,
 				76EAC83E258CD9B500615A9F /* GenderViewController.swift in Sources */,
 				761CBC1C258D3CD7003136FB /* SocialsViewController.swift in Sources */,
 				76912B5F2551DB1B001C38DE /* SceneDelegate.swift in Sources */,
-				769F1A9225D998BF00E1CE76 /* VeganImageClassifier.mlmodel in Sources */,
 				7669AE0B2593779B000E2A1C /* InstagramResponse.swift in Sources */,
 				76EAC838258BC76400615A9F /* NameViewController.swift in Sources */,
 				763EFFA5255457C000CEAA41 /* ProfileTableViewController.swift in Sources */,

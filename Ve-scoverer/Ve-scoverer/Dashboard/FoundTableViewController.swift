@@ -112,17 +112,13 @@ class FoundTableViewController: UITableViewController {
                         vup.tableView.reloadData()
 
                     }
-                    
-   
+
                     let location = CLLocation(latitude: vup.viewUser.latitude, longitude: vup.viewUser.longitude)
                     location.fetchCityAndCountry { city, country, error in
                         guard let city = city, let country = country, error == nil else { return }
                         vup.userCity = city + ", " + country
                     }
-                    
-                
-                    
-                    
+  
                 }
                 
             }
