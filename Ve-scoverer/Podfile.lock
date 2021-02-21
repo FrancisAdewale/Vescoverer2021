@@ -329,6 +329,7 @@ PODS:
   - SDWebImage (5.10.0):
     - SDWebImage/Core (= 5.10.0)
   - SDWebImage/Core (5.10.0)
+  - SwiftyJSON (4.3.0)
   - SwiftyToolTip (0.0.3)
 
 DEPENDENCIES:
@@ -339,6 +340,7 @@ DEPENDENCIES:
   - FirebaseFirestoreSwift
   - GoogleSignIn
   - SDWebImage (~> 5.0)
+  - SwiftyJSON (~> 4.0)
   - SwiftyToolTip
 
 SPEC REPOS:
@@ -365,6 +367,7 @@ SPEC REPOS:
     - nanopb
     - PromisesObjC
     - SDWebImage
+    - SwiftyJSON
     - SwiftyToolTip
 
 EXTERNAL SOURCES:
@@ -401,8 +404,9 @@ SPEC CHECKSUMS:
   nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
   PromisesObjC: 8c196f5a328c2cba3e74624585467a557dcb482f
   SDWebImage: 9169792e9eec3e45bba2a0c02f74bf8bd922d1ee
+  SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
   SwiftyToolTip: 40c995f88951aca99d836472cfe12be423b3ba9b
 
-PODFILE CHECKSUM: d9a1a571bdc48f1f34e8b42355cd3015a78ea052
+PODFILE CHECKSUM: 1e43228a42c5f9125028300a1d0c71e7a96e9a17
 
 COCOAPODS: 1.10.0

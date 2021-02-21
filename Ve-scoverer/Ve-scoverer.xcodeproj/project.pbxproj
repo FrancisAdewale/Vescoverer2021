@@ -23,7 +23,6 @@
 		763EFFA22554573D00CEAA41 /* VerifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763EFFA12554573D00CEAA41 /* VerifyViewController.swift */; };
 		763EFFA5255457C000CEAA41 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763EFFA4255457C000CEAA41 /* ProfileTableViewController.swift */; };
 		7650FAB125E1863A003ACEB0 /* PostRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7650FAB025E1863A003ACEB0 /* PostRecipe.swift */; };
-		7650FAB425E18853003ACEB0 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7650FAB325E18853003ACEB0 /* NetworkManager.swift */; };
 		7665B5E725DABFDB00C87175 /* ViewedSocialsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7665B5E525DABFDB00C87175 /* ViewedSocialsTableViewCell.swift */; };
 		7665B5E825DABFDB00C87175 /* ViewedSocialsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7665B5E625DABFDB00C87175 /* ViewedSocialsTableViewCell.xib */; };
 		7669AE08259374F8000E2A1C /* InstagramAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7669AE07259374F8000E2A1C /* InstagramAPI.swift */; };
@@ -39,6 +38,8 @@
 		76912B612551DB1B001C38DE /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76912B602551DB1B001C38DE /* HomeViewController.swift */; };
 		76912B662551DB1B001C38DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76912B652551DB1B001C38DE /* Assets.xcassets */; };
 		76912B692551DB1B001C38DE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76912B672551DB1B001C38DE /* LaunchScreen.storyboard */; };
+		7694844025E292CD006F807F /* RecipeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7694843E25E292CD006F807F /* RecipeViewCell.swift */; };
+		7694844125E292CD006F807F /* RecipeViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7694843F25E292CD006F807F /* RecipeViewCell.xib */; };
 		76BAC65F258A7A830031A3EB /* GoogleSignIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76BAC65E258A7A830031A3EB /* GoogleSignIn.framework */; };
 		76BAC662258A7A930031A3EB /* GoogleSignInDependencies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76BAC661258A7A930031A3EB /* GoogleSignInDependencies.framework */; };
 		76BAC664258A7BC20031A3EB /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76BAC663258A7BC20031A3EB /* LocalAuthentication.framework */; };
@@ -74,7 +75,6 @@
 		763EFFA12554573D00CEAA41 /* VerifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyViewController.swift; sourceTree = "<group>"; };
 		763EFFA4255457C000CEAA41 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
 		7650FAB025E1863A003ACEB0 /* PostRecipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRecipe.swift; sourceTree = "<group>"; };
-		7650FAB325E18853003ACEB0 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		7665B5E525DABFDB00C87175 /* ViewedSocialsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewedSocialsTableViewCell.swift; sourceTree = "<group>"; };
 		7665B5E625DABFDB00C87175 /* ViewedSocialsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewedSocialsTableViewCell.xib; sourceTree = "<group>"; };
 		7669AE07259374F8000E2A1C /* InstagramAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramAPI.swift; sourceTree = "<group>"; };
@@ -92,6 +92,8 @@
 		76912B652551DB1B001C38DE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		76912B682551DB1B001C38DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		76912B6A2551DB1B001C38DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7694843E25E292CD006F807F /* RecipeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewCell.swift; sourceTree = "<group>"; };
+		7694843F25E292CD006F807F /* RecipeViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecipeViewCell.xib; sourceTree = "<group>"; };
 		76BAC638258A2A7A0031A3EB /* Ve-scoverer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Ve-scoverer.entitlements"; sourceTree = "<group>"; };
 		76BAC65B258A7A730031A3EB /* GoogleSignIn.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GoogleSignIn.bundle; sourceTree = "<group>"; };
 		76BAC65E258A7A830031A3EB /* GoogleSignIn.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleSignIn.framework; sourceTree = "<group>"; };
@@ -165,7 +167,6 @@
 		76585EE125D81F0000F504C9 /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
-				7650FAB325E18853003ACEB0 /* NetworkManager.swift */,
 				763EFF9A2554558900CEAA41 /* DiscoverViewController.swift */,
 				763EFFA12554573D00CEAA41 /* VerifyViewController.swift */,
 				763EFFA4255457C000CEAA41 /* ProfileTableViewController.swift */,
@@ -183,6 +184,7 @@
 		76585EE225D81F4300F504C9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				7694843A25E29172006F807F /* RecipeCell */,
 				7665B5E425DABF9800C87175 /* ViewedSocialsCell */,
 				766CE12425C5D30300465FE9 /* ViewedImageCell */,
 				76F4CDAB25B3B2300039C597 /* SocialsCell */,
@@ -259,6 +261,15 @@
 				7625033A25570169002F92E2 /* UserCore.xcdatamodeld */,
 			);
 			path = "Ve-scoverer";
+			sourceTree = "<group>";
+		};
+		7694843A25E29172006F807F /* RecipeCell */ = {
+			isa = PBXGroup;
+			children = (
+				7694843E25E292CD006F807F /* RecipeViewCell.swift */,
+				7694843F25E292CD006F807F /* RecipeViewCell.xib */,
+			);
+			path = RecipeCell;
 			sourceTree = "<group>";
 		};
 		76D36D2B25AB6DFE00D98ED5 /* NormalCell */ = {
@@ -372,6 +383,7 @@
 				766CE12825C5D35900465FE9 /* ViewImageCell.xib in Resources */,
 				767EAE53256EB1C600B67811 /* Lato in Resources */,
 				76D36D2F25AB6E1F00D98ED5 /* NormalViewCell.xib in Resources */,
+				7694844125E292CD006F807F /* RecipeViewCell.xib in Resources */,
 				7665B5E825DABFDB00C87175 /* ViewedSocialsTableViewCell.xib in Resources */,
 				7626C4A525AA004800F7E4EF /* ImageViewCell.xib in Resources */,
 			);
@@ -454,6 +466,7 @@
 				761A796825C4AC5F004C59E4 /* ViewUser.swift in Sources */,
 				76EAC83B258BCE8500615A9F /* AgeViewController.swift in Sources */,
 				7665B5E725DABFDB00C87175 /* ViewedSocialsTableViewCell.swift in Sources */,
+				7694844025E292CD006F807F /* RecipeViewCell.swift in Sources */,
 				7625033C25570169002F92E2 /* UserCore.xcdatamodeld in Sources */,
 				7669AE08259374F8000E2A1C /* InstagramAPI.swift in Sources */,
 				767B256725E1725A0007A297 /* RecipeTableViewController.swift in Sources */,
@@ -461,7 +474,6 @@
 				763EFF94255311CE00CEAA41 /* LoginViewController.swift in Sources */,
 				763EFF9025530CD700CEAA41 /* DashboardTabController.swift in Sources */,
 				76912B612551DB1B001C38DE /* HomeViewController.swift in Sources */,
-				7650FAB425E18853003ACEB0 /* NetworkManager.swift in Sources */,
 				763EFFA22554573D00CEAA41 /* VerifyViewController.swift in Sources */,
 				7650FAB125E1863A003ACEB0 /* PostRecipe.swift in Sources */,
 				76912B5D2551DB1B001C38DE /* AppDelegate.swift in Sources */,

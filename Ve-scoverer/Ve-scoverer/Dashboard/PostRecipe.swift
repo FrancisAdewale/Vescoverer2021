@@ -7,21 +7,18 @@
 
 import Foundation
 
-struct Results: Decodable {
+struct X: Decodable {
     
-    let recipes: [Recipe]
+    let results: [Recipe]
     
+  
 }
-struct Recipe: Decodable, Identifiable {
+
+ 
+struct Recipe: Decodable {
     
-    var id: String {
-        return objectID
-    }
-    
-    let objectID: String
+    let id: Int
     let title: String
     let image: String
-    let missedIngredients: [String]
-    
-    
+
 }

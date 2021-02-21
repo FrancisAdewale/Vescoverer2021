@@ -6,13 +6,18 @@
 //
 
 import Foundation
+import Alamofire
 
 class NetworkManager {
     
-   var recipes = [Recipe]()
+    var recipes = [Recipe]()
+
     
     func fetchData() {
-
+        
+       
+        
+        
     }
     
 }

@@ -6,61 +6,49 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
+import SDWebImage
+
 
 class RecipeTableViewController: UITableViewController {
     
+    var recipes = [Recipe]()
     
-    var networkManager = NetworkManager()
-
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-    
-        
+        fetchData()
         title = "Recipes"
+        
+        tableView.register(UINib(nibName: "RecipeViewCell", bundle: nil), forCellReuseIdentifier: "RecipeCell")
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return recipes.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeCell", for: indexPath) as! RecipeViewCell
+        cell.recipeTitle.text = recipes[indexPath.row].title
+        let url = recipes[indexPath.row].image
+        self.tableView.rowHeight = 90.0
+
+        DispatchQueue.main.async {
+            cell.recipeImage.sd_setImage(with: try! url.asURL(), placeholderImage: UIImage(named:"placeholder"))
+        }
 
 
         return cell
     }
     
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
+    
 
     /*
     // Override to support editing the table view.
@@ -98,5 +86,15 @@ class RecipeTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    func fetchData() {
+      // 1
+      let request = AF.request("https://api.spoonacular.com/recipes/complexSearch?apiKey=e742b07ea05f4a00ade106e82a60e347&diet=vegan&number=100")
+      // 2
+        request.responseDecodable(of: X.self) { (response) in
+                guard let x = response.value else { return }
+                self.recipes = x.results
+            self.tableView.reloadData()
 
+        }
+    }
 }
