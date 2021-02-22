@@ -9,12 +9,17 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import SDWebImage
+import WebKit
+import SafariServices
 
 
 class RecipeTableViewController: UITableViewController {
     
     var recipes = [Recipe]()
     
+    let apiKey = "e742b07ea05f4a00ade106e82a60e347"
+    let webView = WKWebView()
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,8 +49,24 @@ class RecipeTableViewController: UITableViewController {
             cell.recipeImage.sd_setImage(with: try! url.asURL(), placeholderImage: UIImage(named:"placeholder"))
         }
 
+        cell.time.text = recipes[indexPath.row].readyInMinutes.description
+
 
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        if let url = URL(string: recipes[indexPath.row].spoonacularSourceUrl) {
+             let config = SFSafariViewController.Configuration()
+
+             let vc = SFSafariViewController(url: url, configuration: config)
+             present(vc, animated: true)
+         }
+
+
     }
     
     
@@ -88,13 +109,17 @@ class RecipeTableViewController: UITableViewController {
     */
     func fetchData() {
       // 1
-      let request = AF.request("https://api.spoonacular.com/recipes/complexSearch?apiKey=e742b07ea05f4a00ade106e82a60e347&diet=vegan&number=100")
+        let request = AF.request("https://api.spoonacular.com/recipes/complexSearch?apiKey=e742b07ea05f4a00ade106e82a60e347&diet=vegan&number=100&addRecipeInformation=True")
       // 2
         request.responseDecodable(of: X.self) { (response) in
                 guard let x = response.value else { return }
                 self.recipes = x.results
+            print(self.recipes)
             self.tableView.reloadData()
 
         }
     }
+    
+    
+
 }

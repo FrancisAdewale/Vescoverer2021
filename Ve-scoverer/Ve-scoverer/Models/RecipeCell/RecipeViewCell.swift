@@ -6,16 +6,28 @@
 //
 
 import UIKit
+import WebKit
 
 class RecipeViewCell: UITableViewCell {
 
     @IBOutlet var recipeImage: UIImageView!
     @IBOutlet var recipeTitle: UILabel!
-    @IBOutlet var score: UILabel!
+    @IBOutlet var readyIn: UILabel!
+    @IBOutlet var time: UILabel!
+    
+    
+    @IBAction func recipeTapped(_ sender: UIButton) {
+        
+        
+    }
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        
+    
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -23,5 +35,7 @@ class RecipeViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+
     
 }
