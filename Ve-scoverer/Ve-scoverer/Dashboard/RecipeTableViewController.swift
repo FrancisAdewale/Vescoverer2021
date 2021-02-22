@@ -17,16 +17,33 @@ class RecipeTableViewController: UITableViewController {
     
     var recipes = [Recipe]()
     
+    var filteredData = [Recipe]()
+
+    let searchController = UISearchController(searchResultsController: nil)
+
     let apiKey = "e742b07ea05f4a00ade106e82a60e347"
-    let webView = WKWebView()
 
-
+    @IBOutlet var searchBar: UISearchBar!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchData()
         title = "Recipes"
         
         tableView.register(UINib(nibName: "RecipeViewCell", bundle: nil), forCellReuseIdentifier: "RecipeCell")
+        
+        filteredData = recipes
+        
+
+        searchBar.placeholder = "Search Recipe"
+        //searchBar.delegate = self
+        //searchBar.showsCancelButton = true
+        searchController.searchResultsUpdater = self
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.dimsBackgroundDuringPresentation = false
+        //tableView.tableHeaderView = searchController.searchBar
+
+
 
     }
 
@@ -69,44 +86,10 @@ class RecipeTableViewController: UITableViewController {
 
     }
     
+
     
 
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
 
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
     func fetchData() {
       // 1
         let request = AF.request("https://api.spoonacular.com/recipes/complexSearch?apiKey=e742b07ea05f4a00ade106e82a60e347&diet=vegan&number=100&addRecipeInformation=True")
@@ -114,6 +97,7 @@ class RecipeTableViewController: UITableViewController {
         request.responseDecodable(of: X.self) { (response) in
                 guard let x = response.value else { return }
                 self.recipes = x.results
+            self.recipes.shuffle()
             print(self.recipes)
             self.tableView.reloadData()
 
@@ -122,4 +106,54 @@ class RecipeTableViewController: UITableViewController {
     
     
 
+}
+
+
+//MARK: - Search bar method
+extension RecipeTableViewController: UISearchBarDelegate {
+    
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        print("cancel")
+    }
+
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
+        //RealmSwift Version            //predicate below(query)
+     print("search")
+        
+        //core data version
+//        let request: NSFetchRequest<Item> = Item.fetchRequest()
+//
+//        let predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text!)
+//
+//        request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
+//
+//        loadItems(to: request, predicate: predicate)
+ 
+
+
+    }
+   
+
+}
+
+
+
+extension RecipeTableViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        
+        if let searchText = searchController.searchBar.text, !searchText.isEmpty {
+                 recipes = recipes.filter { recipe in
+                    return recipe.title.lowercased().contains(searchText.lowercased())
+                 }
+                 
+        } else {
+            fetchData()
+            
+        }
+        
+    }
+    
+    
 }

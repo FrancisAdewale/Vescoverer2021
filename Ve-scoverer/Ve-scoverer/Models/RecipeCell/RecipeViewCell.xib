@@ -43,9 +43,9 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ygR-dt-WEY">
-                        <rect key="frame" x="286" y="51" width="11" height="11"/>
+                        <rect key="frame" x="287" y="51" width="10" height="10"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" name="Lato-Italic" family="Lato" pointSize="9"/>
+                        <fontDescription key="fontDescription" name="Lato-Italic" family="Lato" pointSize="8"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
