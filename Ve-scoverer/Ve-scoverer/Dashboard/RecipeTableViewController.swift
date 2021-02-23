@@ -20,14 +20,22 @@ class RecipeTableViewController: UITableViewController {
     var filteredData = [Recipe]()
 
     let searchController = UISearchController(searchResultsController: nil)
-
-    let apiKey = "e742b07ea05f4a00ade106e82a60e347"
-
-    @IBOutlet var searchBar: UISearchBar!
     
+    var isSearchBarEmpty: Bool {
+      return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    
+    var isFiltering: Bool {
+      return searchController.isActive && !isSearchBarEmpty
+    }
+
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchData()
+
         title = "Recipes"
         
         tableView.register(UINib(nibName: "RecipeViewCell", bundle: nil), forCellReuseIdentifier: "RecipeCell")
@@ -35,14 +43,12 @@ class RecipeTableViewController: UITableViewController {
         filteredData = recipes
         
 
-        searchBar.placeholder = "Search Recipe"
-        //searchBar.delegate = self
-        //searchBar.showsCancelButton = true
         searchController.searchResultsUpdater = self
+        navigationItem.searchController = searchController
         searchController.hidesNavigationBarDuringPresentation = false
-        searchController.dimsBackgroundDuringPresentation = false
-        //tableView.tableHeaderView = searchController.searchBar
-
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Recipes"
+        definesPresentationContext = true
 
 
     }
@@ -51,22 +57,32 @@ class RecipeTableViewController: UITableViewController {
 
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
+        if isFiltering {
+          return filteredData.count
+        }
+          
         return recipes.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeCell", for: indexPath) as! RecipeViewCell
-        cell.recipeTitle.text = recipes[indexPath.row].title
-        let url = recipes[indexPath.row].image
+        
+        let recipe: Recipe
+          if isFiltering {
+            recipe = filteredData[indexPath.row]
+          } else {
+            recipe = recipes[indexPath.row]
+          }
+        cell.recipeTitle.text = recipe.title
+        let url = recipe.image
         self.tableView.rowHeight = 90.0
 
         DispatchQueue.main.async {
             cell.recipeImage.sd_setImage(with: try! url.asURL(), placeholderImage: UIImage(named:"placeholder"))
         }
 
-        cell.time.text = recipes[indexPath.row].readyInMinutes.description
+        cell.time.text = recipe.readyInMinutes.description
 
 
         return cell
@@ -87,71 +103,51 @@ class RecipeTableViewController: UITableViewController {
     }
     
 
-    
-
-
     func fetchData() {
+    
       // 1
         let request = AF.request("https://api.spoonacular.com/recipes/complexSearch?apiKey=e742b07ea05f4a00ade106e82a60e347&diet=vegan&number=100&addRecipeInformation=True")
       // 2
         request.responseDecodable(of: X.self) { (response) in
                 guard let x = response.value else { return }
                 self.recipes = x.results
-            self.recipes.shuffle()
+            //self.recipes.shuffle()
             print(self.recipes)
             self.tableView.reloadData()
 
         }
     }
     
-    
-
-}
-
-
-//MARK: - Search bar method
-extension RecipeTableViewController: UISearchBarDelegate {
-    
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        print("cancel")
+    func filterContentForSearchText(_ searchText: String,
+                                    category: Recipe? = nil) {
+      filteredData = recipes.filter { (recipe : Recipe) -> Bool in
+        return recipe.title.lowercased().contains(searchText.lowercased())
+      }
+      
+      tableView.reloadData()
     }
 
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        
-        //RealmSwift Version            //predicate below(query)
-     print("search")
-        
-        //core data version
-//        let request: NSFetchRequest<Item> = Item.fetchRequest()
-//
-//        let predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text!)
-//
-//        request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
-//
-//        loadItems(to: request, predicate: predicate)
- 
-
-
-    }
-   
 
 }
-
 
 
 extension RecipeTableViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         
-        if let searchText = searchController.searchBar.text, !searchText.isEmpty {
-                 recipes = recipes.filter { recipe in
-                    return recipe.title.lowercased().contains(searchText.lowercased())
-                 }
-                 
-        } else {
-            fetchData()
-            
-        }
+        
+        let searchBar = searchController.searchBar
+        searchBar.tintColor = UIColor(hexString: "3797a4")
+        filterContentForSearchText(searchBar.text!)
+
+        
+//        if let searchText = searchController.searchBar.text, !searchText.isEmpty {
+//                 recipes = recipes.filter { recipe in
+//                    return recipe.title.lowercased().contains(searchText.lowercased())
+//                 }
+//
+//        } else {
+//            recipes.shuffle()
+//        }
         
     }
     
