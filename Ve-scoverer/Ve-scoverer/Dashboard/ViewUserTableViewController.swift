@@ -50,12 +50,15 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
     @IBOutlet weak var uploadImage: UIButton!
     @IBOutlet weak var tab: UITabBarItem!
     
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationItem.backBarButtonItem?.tintColor = UIColor(hexString: "3794AC")
+
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
         floatNum = CGFloat.random(in: 0...1)
-        navigationItem.backBarButtonItem?.tintColor = UIColor(hexString: "3794AC")
 
         //self.navigationController?.navigationBar.prefersLargeTitles = true
         title = profileUser.firstName

@@ -18,6 +18,8 @@ class RecipeTableViewController: UITableViewController {
     var recipes = [Recipe]()
     
     var filteredData = [Recipe]()
+    
+    var activityItem = ""
 
     let searchController = UISearchController(searchResultsController: nil)
     
@@ -25,13 +27,9 @@ class RecipeTableViewController: UITableViewController {
       return searchController.searchBar.text?.isEmpty ?? true
     }
     
-    
     var isFiltering: Bool {
       return searchController.isActive && !isSearchBarEmpty
     }
-
-
-
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchData()
@@ -41,26 +39,24 @@ class RecipeTableViewController: UITableViewController {
         tableView.register(UINib(nibName: "RecipeViewCell", bundle: nil), forCellReuseIdentifier: "RecipeCell")
         
         filteredData = recipes
-        
-
+    
         searchController.searchResultsUpdater = self
         navigationItem.searchController = searchController
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search Recipes"
         definesPresentationContext = true
-
-
+        navigationItem.rightBarButtonItem = .init(barButtonSystemItem: .action, target: self, action: #selector(recommendTapped))
+        navigationItem.rightBarButtonItem?.tintColor = UIColor(hexString: "3797a4")
     }
 
     // MARK: - Table view data source
 
-
+ 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isFiltering {
           return filteredData.count
         }
-          
         return recipes.count
     }
 
@@ -84,7 +80,6 @@ class RecipeTableViewController: UITableViewController {
 
         cell.time.text = recipe.readyInMinutes.description
 
-
         return cell
     }
     
@@ -92,13 +87,31 @@ class RecipeTableViewController: UITableViewController {
         
         tableView.deselectRow(at: indexPath, animated: true)
         
-        if let url = URL(string: recipes[indexPath.row].spoonacularSourceUrl) {
-             let config = SFSafariViewController.Configuration()
+        let alert = UIAlertController(title: "Options", message: "Select", preferredStyle: .actionSheet)
+        
+        let goAction = UIAlertAction(title: "More Details", style: .default) { (action) in
+            if let url = URL(string: self.recipes[indexPath.row].spoonacularSourceUrl) {
+                 let config = SFSafariViewController.Configuration()
 
-             let vc = SFSafariViewController(url: url, configuration: config)
-             present(vc, animated: true)
-         }
+                 let vc = SFSafariViewController(url: url, configuration: config)
+                self.present(vc, animated: true)
+             }
 
+        }
+        
+        let shareAction = UIAlertAction(title: "Share Recipe", style: .default) { (action) in
+            self.activityItem = self.recipes[indexPath.row].spoonacularSourceUrl
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        
+        alert.addAction(goAction)
+        alert.addAction(shareAction)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true, completion: nil)
+  
 
     }
     
@@ -106,7 +119,7 @@ class RecipeTableViewController: UITableViewController {
     func fetchData() {
     
       // 1
-        let request = AF.request("https://api.spoonacular.com/recipes/complexSearch?apiKey=e742b07ea05f4a00ade106e82a60e347&diet=vegan&number=100&addRecipeInformation=True")
+        let request = AF.request("https://api.spoonacular.com/recipes/complexSearch?apiKey=e37fd98195e0427ba55710ad55eb4609&diet=vegan&number=100&addRecipeInformation=True")
       // 2
         request.responseDecodable(of: X.self) { (response) in
                 guard let x = response.value else { return }
@@ -127,6 +140,24 @@ class RecipeTableViewController: UITableViewController {
       tableView.reloadData()
     }
 
+    @objc func recommendTapped() {
+        
+        
+        let item = activityItem
+
+        let avc = UIActivityViewController(activityItems: [item], applicationActivities: [])
+        avc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
+        present(avc, animated: true, completion: nil)
+    }
+
+    
+//    func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
+//        if activityType == .postToTwitter {
+//            return "Download #Ve-scoverer via @appstore."
+//        } else {
+//            return "Download Ve-scoverer from App Store"
+//        }
+//    }
 
 }
 
@@ -151,5 +182,5 @@ extension RecipeTableViewController: UISearchResultsUpdating {
         
     }
     
-    
+
 }

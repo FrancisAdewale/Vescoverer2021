@@ -97,10 +97,7 @@ class VerifyViewController : UIViewController, UIImagePickerControllerDelegate &
                 self.label.text = "Verified!"
                 self.verifiedImage.image = UIImage(systemName: "checkmark")
                 self.viewWillAppear(true)
-            } else {
-                self.label.text = "Upload clear spoon selfie"
             }
-            print(self.isVerified)
         }
         
     }

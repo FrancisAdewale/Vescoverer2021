@@ -136,6 +136,9 @@ extension DiscoverViewController: MKMapViewDelegate {
                 }
             }
         }
+        
+        let cancelAction = UIAlertAction(title: "Nvm", style: .cancel, handler: nil)
+        alert.addAction(cancelAction)
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
       
