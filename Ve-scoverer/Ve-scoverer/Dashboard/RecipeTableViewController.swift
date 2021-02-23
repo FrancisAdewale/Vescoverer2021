@@ -101,6 +101,10 @@ class RecipeTableViewController: UITableViewController {
         
         let shareAction = UIAlertAction(title: "Share Recipe", style: .default) { (action) in
             self.activityItem = self.recipes[indexPath.row].spoonacularSourceUrl
+            
+            self.navigationItem.rightBarButtonItem?.addToolTip(description: "Added")
+            self.navigationItem.rightBarButtonItem?.showToolTip()
+            
         }
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
