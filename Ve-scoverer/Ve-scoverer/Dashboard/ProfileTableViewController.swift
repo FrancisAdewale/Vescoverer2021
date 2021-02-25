@@ -152,7 +152,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         if indexPath.section == 0 && indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ImageCell", for: indexPath) as! ImageViewCell
             cell.isUserInteractionEnabled = true
-            cell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
+//            cell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
             cell.contentView.layer.borderWidth = 0.05
             cell.layer.cornerRadius = 8
             cell.userNameField.text = profileUser.firstName
@@ -181,24 +181,24 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
             
             let otherCell = tableView.dequeueReusableCell(withIdentifier: "NormalCell", for: indexPath) as! NormalViewCell
             otherCell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
-            otherCell.fillerInfo.text = profileUser.age.description
+            otherCell.fillerInfo.text = "\(profileUser.age.description) Years Old"
             otherCell.contentView.layer.borderWidth = 0.05
             otherCell.layer.cornerRadius = 8
             
             return otherCell
         } else if indexPath.section == 0 && indexPath.row == 2 {
             let otherCell = tableView.dequeueReusableCell(withIdentifier: "NormalCell", for: indexPath) as! NormalViewCell
-            otherCell.fillerInfo.text = profileUser.veganSince
+            otherCell.fillerInfo.text = "Vegan For: \(profileUser.veganSince)"
             otherCell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
             otherCell.contentView.layer.borderWidth = 0.05
             otherCell.layer.cornerRadius = 8
             
             return otherCell
         } else if indexPath.section == 1 && indexPath.row == 0 {
-            let otherCell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-            otherCell.textLabel?.text = profileUser.gender
+            let otherCell = tableView.dequeueReusableCell(withIdentifier: "NormalCell", for: indexPath) as! NormalViewCell
+            otherCell.fillerInfo.text = profileUser.gender
             otherCell.accessoryType = .none
-            otherCell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
+            otherCell.fillerInfo.font = UIFont(name: "Lato", size: 20.0)
             otherCell.contentView.layer.borderWidth = 0.05
             otherCell.layer.cornerRadius = 8
             
@@ -212,18 +212,16 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
             otherCell.instagramButton.isUserInteractionEnabled = true
             otherCell.instagramAt = profileUser.instagram
             
-            
-            
             otherCell.accessoryType = .none
             //otherCell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
             otherCell.contentView.layer.borderWidth = 0.05
             otherCell.layer.cornerRadius = 8
             return otherCell
         } else {
-            let otherCell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-            otherCell.textLabel?.text = userCity
+            let otherCell = tableView.dequeueReusableCell(withIdentifier: "NormalCell", for: indexPath) as! NormalViewCell
+            otherCell.fillerInfo.text = userCity
             otherCell.accessoryType = .none
-            otherCell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
+            otherCell.fillerInfo.font = UIFont(name: "Lato", size: 20.0)
             otherCell.contentView.layer.borderWidth = 0.05
             otherCell.layer.cornerRadius = 8
             return otherCell
@@ -237,13 +235,8 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let footerView = UIView()
         if section == 1 {
-            footerView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height:
-                                        100)
-            button.frame = CGRect(x: 20, y: 10, width: 300, height: 50)
-            button.setTitle("Logout", for: .normal)
-            button.setTitleColor(.black, for: .normal)
-            button.addTarget(self, action: #selector(didTapSignOut(_:)), for: .touchUpInside)
-            footerView.addSubview(button)
+            footerView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height:100)
+
         }
         return footerView
         
@@ -355,12 +348,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         
     }
     
-    
-    
-    
-    
-    
-    
+ 
 }
 
 extension CLLocation {

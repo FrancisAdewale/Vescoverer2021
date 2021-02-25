@@ -13,14 +13,22 @@ import AuthenticationServices
 import GoogleSignIn
 import CryptoKit
 
+
 class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignInDelegate {
+
+    let appleView = ASAuthorizationAppleIDButton(type: .signIn, style: .black)
+
     
     let context = (UIApplication.shared.delegate as! AppDelegate)
     fileprivate var currentNonce: String?
+
     
-    @IBOutlet weak var appleView: ASAuthorizationAppleIDButton!
+   // @IBOutlet var appleView: ASAuthorizationAppleIDButton!
     @IBOutlet weak var googleView: GIDSignInButton!
     @IBOutlet weak var background: UIImageView!
+    
+    @IBOutlet var titleLabel: UILabel!
+    
     let db = Firestore.firestore()
     var location = CLLocation()
     private let locationManager = CLLocationManager()
@@ -31,19 +39,19 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
     var userlocation = CLLocationCoordinate2D()
     var hasCompletedRegistration: Bool?
 
-//    let appleButton = ASAuthorizationAppleIDButton(type: .continue, style: .black)
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         navigationItem.hidesBackButton = true
         background.backgroundColor = UIColor(hexString: "3797A4")
        // navigationController?.navigationBar.backgroundColor = .white
 //        appleButton.backgroundColor = .gray
-        navigationController?.navigationBar.barTintColor = UIColor(hexString: "3797a4")
+        navigationController?.navigationBar.barTintColor = .white
         
-        if let user = user {
+        if let user = user?.email {
             
-            self.db.collection("users").document(user.email!).getDocument { (document, error) in
+            self.db.collection("users").document(user).getDocument { (document, error) in
                 
                 if let err = error {
                     print(err)
@@ -52,9 +60,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
                         self.hasCompletedRegistration = (dataDescription["completedRegistration"] as! Bool)
                         print(self.hasCompletedRegistration!)
                     }
-                    
-                    
-                    
+ 
                 }
             }
             
@@ -65,9 +71,23 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
 
     override func viewDidLoad() {
         super.viewDidLoad()
+      
         title = "Login"
+        titleLabel.text = ""
+        var charIndex = 0.0
+        let titleText = "Vescoverer"
+        
+        
+        for l in titleText {
+            Timer.scheduledTimer(withTimeInterval: 0.1 * charIndex, repeats: false) { (timer) in
+                self.titleLabel.text?.append(l)
+            }
+            charIndex += 1
+
+        }
 
         setupAppleButton()
+        setupGoogleButton()
         
         //       GIDSignIn.sharedInstance()?.restorePreviousSignIn()
         
@@ -93,14 +113,29 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
     
     
     func setupAppleButton() {
+
         appleView.addTarget(self, action: #selector(startSignInWithAppleFlow), for: .touchUpInside)
-        appleView.frame = CGRect(x: 117.0, y: 200, width: 194.0, height: 48.0)
+        appleView.frame = CGRect(x: 117.0, y: 200, width: 184.0, height: 42.0)
         appleView.center = view.center
+       appleView.cornerRadius = 0
+        self.view.addSubview(appleView)
+    
       
     }
     
+    func setupGoogleButton() {
+        
+        let y = self.view.center.y
+        
+        let center = self.view.center
+        googleView.frame = CGRect(x: 117.0, y: 200.0, width: 184.0, height: 42.0)
+        googleView.center = .init(x: center.x, y: y - CGFloat(50))
+    }
     
-
+    
+    
+    
+  
     
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -231,6 +266,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
         
     }
     
+
     
 
    }
@@ -436,3 +472,5 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
     }
 
 }
+
+

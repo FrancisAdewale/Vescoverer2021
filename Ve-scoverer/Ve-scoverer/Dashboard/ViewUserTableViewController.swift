@@ -160,14 +160,14 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
         
             let otherCell = tableView.dequeueReusableCell(withIdentifier: "NormalCell", for: indexPath) as! NormalViewCell
             otherCell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
-            otherCell.fillerInfo.text = viewUser.age.description
+            otherCell.fillerInfo.text = "\(viewUser.age.description) Years Old"
 //            otherCell.backgroundColor = UIColor(hexString: "3797A4")!.lighten(byPercentage: self.floatNum)
 
             otherCell.contentView.layer.borderWidth = 0.05
             return otherCell
         } else if indexPath.section == 0 && indexPath.row == 2 {
             let otherCell = tableView.dequeueReusableCell(withIdentifier: "NormalCell", for: indexPath) as! NormalViewCell
-            otherCell.fillerInfo.text = viewUser.veganSince
+            otherCell.fillerInfo.text = "Vegan For: \(viewUser.veganSince)"
             otherCell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
             otherCell.contentView.layer.borderWidth = 0.05
 //            otherCell.backgroundColor = UIColor(hexString: "3797A4")!.lighten(byPercentage: self.floatNum)

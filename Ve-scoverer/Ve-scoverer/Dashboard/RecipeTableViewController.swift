@@ -79,6 +79,12 @@ class RecipeTableViewController: UITableViewController {
         }
 
         cell.time.text = recipe.readyInMinutes.description
+        
+        if isSearchBarEmpty == false {
+            cell.isUserInteractionEnabled = false
+        } else {
+            cell.isUserInteractionEnabled = true
+        }
 
         return cell
     }

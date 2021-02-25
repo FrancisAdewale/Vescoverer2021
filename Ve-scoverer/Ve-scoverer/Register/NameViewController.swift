@@ -56,6 +56,8 @@ class NameViewController: UIViewController, UITextFieldDelegate {
 
     }
     
+
+    
     func hideKeyboardWhenTappedAround() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         tap.cancelsTouchesInView = false
@@ -66,10 +68,13 @@ class NameViewController: UIViewController, UITextFieldDelegate {
         view.endEditing(true)
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField) {
-
+    @IBAction func done(_ sender: UITextField) {
+        sender.resignFirstResponder()
     }
     
+    @IBAction func done2(_ sender: UITextField) {
+        sender.resignFirstResponder()
+    }
     @IBAction func next(_ sender: Any) {
         
         let avc = storyboard?.instantiateViewController(withIdentifier: "Age") as! AgeViewController

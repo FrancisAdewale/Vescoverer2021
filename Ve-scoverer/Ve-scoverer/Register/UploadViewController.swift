@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import SwiftyToolTip
 
 class UploadViewController: UIViewController,UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     
@@ -27,7 +28,8 @@ class UploadViewController: UIViewController,UIImagePickerControllerDelegate & U
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        uploadImage.addToolTip(description: "Uploaded")
+
         picker.delegate = self
         picker.allowsEditing = true
         picker.sourceType = .photoLibrary
@@ -79,8 +81,12 @@ class UploadViewController: UIViewController,UIImagePickerControllerDelegate & U
             }
         }
 
+        
+        dismiss(animated: true) {
+            self.uploadImage.showToolTip()
 
-        dismiss(animated: true, completion: nil)
+        }
+
 
     }
     
@@ -103,6 +109,7 @@ class UploadViewController: UIViewController,UIImagePickerControllerDelegate & U
             svc.currentuser = user
             if let path = imagePath {
                 db.collection("users").document(currentuser).setData(["imagepath" : path], merge: true)
+                
             }
             
             svc.modalPresentationStyle = .overFullScreen
@@ -117,5 +124,7 @@ class UploadViewController: UIViewController,UIImagePickerControllerDelegate & U
             
         }
     }
+    
+    
     
 }
