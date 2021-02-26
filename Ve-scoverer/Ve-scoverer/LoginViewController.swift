@@ -79,7 +79,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
         
         
         for l in titleText {
-            Timer.scheduledTimer(withTimeInterval: 0.1 * charIndex, repeats: false) { (timer) in
+            Timer.scheduledTimer(withTimeInterval: 0.1555 * charIndex, repeats: false) { (timer) in
                 self.titleLabel.text?.append(l)
             }
             charIndex += 1

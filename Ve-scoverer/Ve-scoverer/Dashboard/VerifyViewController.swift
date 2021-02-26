@@ -22,8 +22,21 @@ class VerifyViewController : UIViewController, UIImagePickerControllerDelegate &
     @IBOutlet weak var verifiedImage: UIImageView!
     @IBOutlet weak var label: UILabel!
     
+    @IBOutlet var arrow: UIImageView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(self.arrow.frame)
+        let animation = CABasicAnimation(keyPath: "position")
+        animation.duration = 0.70
+        animation.repeatCount = 4
+        animation.autoreverses = true
+        animation.fromValue = NSValue(cgPoint: CGPoint(x: view.center.x, y: view.center.y - 10))
+        animation.toValue = NSValue(cgPoint: CGPoint(x:view.center.x, y: view.center.y + 10))
+        
+        
+        arrow.layer.add(animation, forKey: "position")
     
         load()
         
@@ -83,7 +96,7 @@ class VerifyViewController : UIViewController, UIImagePickerControllerDelegate &
         }
 
         dismiss(animated: true, completion: nil)
-
+      
     }
     
     func load() {
@@ -95,6 +108,9 @@ class VerifyViewController : UIViewController, UIImagePickerControllerDelegate &
             
             if self.isVerified == true {
                 self.label.text = "Verified!"
+                self.userVerificationImage.isUserInteractionEnabled = false
+                self.userVerificationImage.alpha = 0.5
+                self.arrow.isHidden = true
                 self.verifiedImage.image = UIImage(systemName: "checkmark")
                 self.viewWillAppear(true)
             }
