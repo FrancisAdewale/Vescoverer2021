@@ -71,7 +71,6 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
 
     override func viewDidLoad() {
         super.viewDidLoad()
-      
         title = "Login"
         titleLabel.text = ""
         var charIndex = 0.0
@@ -133,11 +132,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
     }
     
     
-    
-    
-  
-    
-    
+
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         location = locations.last!
         

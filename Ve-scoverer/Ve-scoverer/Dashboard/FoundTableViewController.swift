@@ -44,9 +44,11 @@ class FoundTableViewController: UITableViewController {
         super.viewDidLoad()
         title = "Vescovered"
         self.tableView.rowHeight = 71.0
-        navigationItem.backBarButtonItem?.tintColor = UIColor(hexString: "3794AC")
+        tableView.register(UINib(nibName: "FoundUserTableViewCell", bundle: nil), forCellReuseIdentifier: "FoundCell")
 
     }
+    
+ 
     
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -56,9 +58,21 @@ class FoundTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reusableCell", for: indexPath)
-        let label = userList[indexPath.row]
-        cell.textLabel?.text = label
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FoundCell", for: indexPath) as! FoundUserTableViewCell
+        let userLabel = userList[indexPath.row]
+        
+        db.collection("users").document(userLabel).getDocument(completion: { (snapShot, err) in
+            if let err = err {
+                print(err)
+            } else {
+                if let document = snapShot!.data() {
+                    cell.nameLabel.text = (document["firstName"] as? String)
+                    let age = (document["age"] as? Int)
+                    cell.ageLabel.text = age?.description
+                    //self.lastNameTextField.text = (document["secondName"] as? String)
+                }
+            }
+        })
         cell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
         cell.backgroundColor = UIColor(hexString: "57AAB7")
         cell.textLabel?.textColor = .black
@@ -105,10 +119,9 @@ class FoundTableViewController: UITableViewController {
                     vup.viewUser.verified = data?["isVerified"] as? Bool ?? false
                     vup.loadUserEmail = data?["email"] as? String ?? ""
                     
-                    
+
                     DispatchQueue.main.async {
-                        
-                        
+
                         vup.tableView.reloadData()
 
                     }

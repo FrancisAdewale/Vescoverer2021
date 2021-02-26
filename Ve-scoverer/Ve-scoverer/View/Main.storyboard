@@ -1057,6 +1057,7 @@
             <point key="canvasLocation" x="2357" y="5917"/>
         </scene>
     </scenes>
+    <color key="tintColor" red="0.21568627450980393" green="0.59215686274509804" blue="0.64313725490196072" alpha="1" colorSpace="calibratedRGB"/>
     <resources>
         <image name="arrow.up" catalog="system" width="120" height="128"/>
         <image name="checkmark" catalog="system" width="128" height="114"/>

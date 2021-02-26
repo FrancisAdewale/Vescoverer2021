@@ -13,6 +13,9 @@
 		761CBC18258D343D003136FB /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761CBC17258D343D003136FB /* UploadViewController.swift */; };
 		761CBC1C258D3CD7003136FB /* SocialsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761CBC1B258D3CD7003136FB /* SocialsViewController.swift */; };
 		761F19DA25E944B6003FA016 /* LoadingViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761F19D925E944B6003FA016 /* LoadingViewViewController.swift */; };
+		761F19DD25E94AA3003FA016 /* AppStoreReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761F19DC25E94AA3003FA016 /* AppStoreReviewManager.swift */; };
+		761F19E325E96535003FA016 /* FoundUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761F19E125E96535003FA016 /* FoundUserTableViewCell.swift */; };
+		761F19E425E96535003FA016 /* FoundUserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 761F19E225E96535003FA016 /* FoundUserTableViewCell.xib */; };
 		762503212555D8DB002F92E2 /* FoundTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762503202555D8DB002F92E2 /* FoundTableViewController.swift */; };
 		7625033C25570169002F92E2 /* UserCore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7625033A25570169002F92E2 /* UserCore.xcdatamodeld */; };
 		7626C4A425AA004800F7E4EF /* ImageViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7626C4A225AA004800F7E4EF /* ImageViewCell.swift */; };
@@ -66,6 +69,9 @@
 		761CBC17258D343D003136FB /* UploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
 		761CBC1B258D3CD7003136FB /* SocialsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialsViewController.swift; sourceTree = "<group>"; };
 		761F19D925E944B6003FA016 /* LoadingViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewViewController.swift; sourceTree = "<group>"; };
+		761F19DC25E94AA3003FA016 /* AppStoreReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppStoreReviewManager.swift; path = "/Users/francisadewale/Vegan2021/Ve-scoverer/Ve-scoverer/AppStoreReviewManager.swift"; sourceTree = "<absolute>"; };
+		761F19E125E96535003FA016 /* FoundUserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundUserTableViewCell.swift; sourceTree = "<group>"; };
+		761F19E225E96535003FA016 /* FoundUserTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoundUserTableViewCell.xib; sourceTree = "<group>"; };
 		762503202555D8DB002F92E2 /* FoundTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundTableViewController.swift; sourceTree = "<group>"; };
 		7625033B25570169002F92E2 /* UserCore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserCore.xcdatamodel; sourceTree = "<group>"; };
 		7626C4A225AA004800F7E4EF /* ImageViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewCell.swift; sourceTree = "<group>"; };
@@ -157,6 +163,15 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		761F19DF25E95A10003FA016 /* FoundUserCell */ = {
+			isa = PBXGroup;
+			children = (
+				761F19E125E96535003FA016 /* FoundUserTableViewCell.swift */,
+				761F19E225E96535003FA016 /* FoundUserTableViewCell.xib */,
+			);
+			path = FoundUserCell;
+			sourceTree = "<group>";
+		};
 		7626C4A125AA000100F7E4EF /* UserImageCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -186,6 +201,7 @@
 		76585EE225D81F4300F504C9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				761F19DF25E95A10003FA016 /* FoundUserCell */,
 				7694843A25E29172006F807F /* RecipeCell */,
 				7665B5E425DABF9800C87175 /* ViewedSocialsCell */,
 				766CE12425C5D30300465FE9 /* ViewedImageCell */,
@@ -243,6 +259,7 @@
 		76912B5B2551DB1B001C38DE /* Ve-scoverer */ = {
 			isa = PBXGroup;
 			children = (
+				761F19DC25E94AA3003FA016 /* AppStoreReviewManager.swift */,
 				76EAC831258B9D3500615A9F /* Register */,
 				76BAC638258A2A7A0031A3EB /* Ve-scoverer.entitlements */,
 				767EAE51256EB1AC00B67811 /* fonts */,
@@ -379,6 +396,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				767E81C925A23BF400BC40EC /* GoogleService-Info.plist in Resources */,
+				761F19E425E96535003FA016 /* FoundUserTableViewCell.xib in Resources */,
 				76912B692551DB1B001C38DE /* LaunchScreen.storyboard in Resources */,
 				76F4CDAF25B3B25A0039C597 /* SocialsTableViewCell.xib in Resources */,
 				76E0D21E25C35B0300D6F40D /* Main.storyboard in Resources */,
@@ -461,6 +479,7 @@
 				76EAC834258B9D7600615A9F /* VeganViewController.swift in Sources */,
 				761CBC18258D343D003136FB /* UploadViewController.swift in Sources */,
 				76D36D2925AB515300D98ED5 /* ProfileUser.swift in Sources */,
+				761F19E325E96535003FA016 /* FoundUserTableViewCell.swift in Sources */,
 				76D36D2E25AB6E1F00D98ED5 /* NormalViewCell.swift in Sources */,
 				766CE12725C5D35900465FE9 /* ViewImageCell.swift in Sources */,
 				76F4CDAE25B3B25A0039C597 /* SocialsTableViewCell.swift in Sources */,
@@ -478,6 +497,7 @@
 				763EFF9025530CD700CEAA41 /* DashboardTabController.swift in Sources */,
 				761F19DA25E944B6003FA016 /* LoadingViewViewController.swift in Sources */,
 				76912B612551DB1B001C38DE /* HomeViewController.swift in Sources */,
+				761F19DD25E94AA3003FA016 /* AppStoreReviewManager.swift in Sources */,
 				763EFFA22554573D00CEAA41 /* VerifyViewController.swift in Sources */,
 				7650FAB125E1863A003ACEB0 /* PostRecipe.swift in Sources */,
 				76912B5D2551DB1B001C38DE /* AppDelegate.swift in Sources */,

@@ -20,6 +20,7 @@ class DiscoverViewController: UIViewController {
     let db = Firestore.firestore()
     var geoPoints = [GeoPoint]()
     let user = Auth.auth().currentUser?.email
+    var name = ""
 
     @IBOutlet weak private var nearbyUsers: MKMapView!
     
@@ -59,6 +60,8 @@ class DiscoverViewController: UIViewController {
                     let longitude = data["longitude"] as! Double
                     
                     let email = data["email"] as! String
+                    
+                    
                     
                     let annotation = MKPointAnnotation()
                     
@@ -104,8 +107,25 @@ extension DiscoverViewController: CLLocationManagerDelegate {
 extension DiscoverViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        let name = view.annotation!.title!
+
+        DispatchQueue.main.async {
+            self.db.collection("users").document(name!).getDocument(completion: { (snapShot, err) in
+                    if let err = err {
+                        print(err)
+                    } else {
+                        if let document = snapShot!.data() {
+                            self.name = ((document["firstName"] as? String)!)
+                        }
+                    }
+                })
+
+            
+        }
+
         
-        let alert = UIAlertController(title: "View User", message: "", preferredStyle: .alert)
+        
+        let alert = UIAlertController(title: "Add \(self.name)", message: "", preferredStyle: .alert)
         
         let action = UIAlertAction(title: "Add", style: .default) { (action) in
             if let user = view.annotation?.title {
@@ -113,6 +133,8 @@ extension DiscoverViewController: MKMapViewDelegate {
                 self.db.collection("users").document(self.user!).collection("found").document(user!).setData(["latitude":Double((view.annotation?.coordinate.longitude)!), "longitude": Double((view.annotation?.coordinate.latitude)!), "email":user!
                                                                                                               
                 ])
+                
+                
                 
                 if let tabItems = self.tabBarController?.tabBar.items {
                     // In this case we want to modify the badge number of the third tab:
@@ -126,6 +148,8 @@ extension DiscoverViewController: MKMapViewDelegate {
         alert.addAction(cancelAction)
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
+        alert.view.tintColor = UIColor(hexString: "3797A4")
+
       
     }
 }

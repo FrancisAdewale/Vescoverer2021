@@ -77,6 +77,8 @@ class SocialsTableViewCell: UITableViewCell {
             alert.addAction(cancelAction)
             print(textField.text!)
             vc!.present(alert, animated: true, completion: nil)
+            alert.view.tintColor = UIColor(hexString: "3797A4")
+
             
         
         }
@@ -119,9 +121,9 @@ class SocialsTableViewCell: UITableViewCell {
             alert.addAction(action)
             alert.addAction(cancelAction)
             
-            print(textField.text!)
-            vc!.present(alert, animated: true, completion: nil)
-            
+            vc!.present(alert, animated: true){
+                alert.view.tintColor = UIColor(hexString: "3797A4")
+            }
         }
         
        

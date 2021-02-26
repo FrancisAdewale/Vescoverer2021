@@ -100,6 +100,8 @@ class RecipeTableViewController: UITableViewController {
                  let config = SFSafariViewController.Configuration()
 
                  let vc = SFSafariViewController(url: url, configuration: config)
+                vc.view.tintColor = UIColor(hexString: "3797a4")
+
                 self.present(vc, animated: true)
              }
 
@@ -121,7 +123,8 @@ class RecipeTableViewController: UITableViewController {
         alert.addAction(cancelAction)
         
         present(alert, animated: true, completion: nil)
-  
+        alert.view.tintColor = UIColor(hexString: "3797A4")
+
 
     }
     

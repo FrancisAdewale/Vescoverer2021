@@ -130,6 +130,7 @@ class SocialsViewController: UIViewController {
             alert.addAction(action)
             
             self.present(alert, animated: true, completion: nil)
+            alert.view.tintColor = UIColor(hexString: "3797A4")
         }
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -139,7 +140,8 @@ class SocialsViewController: UIViewController {
 
         
         present(actionsheet, animated: true, completion: nil)
-        
+        actionsheet.view.tintColor = UIColor(hexString: "3797A4")
+
       
         
     }
@@ -173,6 +175,8 @@ class SocialsViewController: UIViewController {
             alert.addAction(action)
             
             self.present(alert, animated: true, completion: nil)
+            alert.view.tintColor = UIColor(hexString: "3797A4")
+
         }
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -181,7 +185,8 @@ class SocialsViewController: UIViewController {
         actionsheet.addAction(cancelAction)
 
         present(actionsheet, animated: true,completion: nil)
-        
+        actionsheet.view.tintColor = UIColor(hexString: "3797A4")
+
 
         
         

@@ -259,25 +259,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         
     }
     
-    
-    @IBAction func didTapSignOut(_ sender: AnyObject) {
         
-        print("signed out \(String(describing: user?.email))")
-        
-        let firebaseAuth = Auth.auth()
-        do {
-            try firebaseAuth.signOut()
-            let lvc = storyboard?.instantiateViewController(identifier: "Login") as! LoginViewController
-            lvc.modalPresentationStyle = .fullScreen
-            present(lvc, animated: true, completion: nil)
-            
-            
-        } catch let signOutError as NSError {
-            print ("Error signing out: %@", signOutError)
-        }
-        
-    }
-    
     
     
     func load() {

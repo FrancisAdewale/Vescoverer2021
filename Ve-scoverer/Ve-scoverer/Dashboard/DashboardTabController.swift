@@ -25,6 +25,8 @@ class DashboardTabController: UITabBarController {
         super.viewDidLoad()
         title = "Ve-scoverer"
         
+        AppStoreReviewManager.requestReviewIfAppropriate()
+        
     }
     
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {

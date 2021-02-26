@@ -52,7 +52,6 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationItem.backBarButtonItem?.tintColor = UIColor(hexString: "3794AC")
 
     }
     override func viewDidLoad() {
@@ -62,8 +61,8 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
 
         //self.navigationController?.navigationBar.prefersLargeTitles = true
         title = profileUser.firstName
-      
-        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+        
+       print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         picker.delegate = self
         picker.allowsEditing = true
         picker.sourceType = .photoLibrary
