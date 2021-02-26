@@ -12,6 +12,7 @@
 		761A796825C4AC5F004C59E4 /* ViewUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761A796725C4AC5F004C59E4 /* ViewUser.swift */; };
 		761CBC18258D343D003136FB /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761CBC17258D343D003136FB /* UploadViewController.swift */; };
 		761CBC1C258D3CD7003136FB /* SocialsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761CBC1B258D3CD7003136FB /* SocialsViewController.swift */; };
+		761F19DA25E944B6003FA016 /* LoadingViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761F19D925E944B6003FA016 /* LoadingViewViewController.swift */; };
 		762503212555D8DB002F92E2 /* FoundTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762503202555D8DB002F92E2 /* FoundTableViewController.swift */; };
 		7625033C25570169002F92E2 /* UserCore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7625033A25570169002F92E2 /* UserCore.xcdatamodeld */; };
 		7626C4A425AA004800F7E4EF /* ImageViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7626C4A225AA004800F7E4EF /* ImageViewCell.swift */; };
@@ -64,6 +65,7 @@
 		761A796725C4AC5F004C59E4 /* ViewUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewUser.swift; sourceTree = "<group>"; };
 		761CBC17258D343D003136FB /* UploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
 		761CBC1B258D3CD7003136FB /* SocialsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialsViewController.swift; sourceTree = "<group>"; };
+		761F19D925E944B6003FA016 /* LoadingViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewViewController.swift; sourceTree = "<group>"; };
 		762503202555D8DB002F92E2 /* FoundTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundTableViewController.swift; sourceTree = "<group>"; };
 		7625033B25570169002F92E2 /* UserCore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserCore.xcdatamodel; sourceTree = "<group>"; };
 		7626C4A225AA004800F7E4EF /* ImageViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewCell.swift; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 			children = (
 				76912B672551DB1B001C38DE /* LaunchScreen.storyboard */,
 				76E0D21D25C35B0300D6F40D /* Main.storyboard */,
+				761F19D925E944B6003FA016 /* LoadingViewViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -473,6 +476,7 @@
 				767F0EDC2591104A00615FB5 /* NormalUser.swift in Sources */,
 				763EFF94255311CE00CEAA41 /* LoginViewController.swift in Sources */,
 				763EFF9025530CD700CEAA41 /* DashboardTabController.swift in Sources */,
+				761F19DA25E944B6003FA016 /* LoadingViewViewController.swift in Sources */,
 				76912B612551DB1B001C38DE /* HomeViewController.swift in Sources */,
 				763EFFA22554573D00CEAA41 /* VerifyViewController.swift in Sources */,
 				7650FAB125E1863A003ACEB0 /* PostRecipe.swift in Sources */,

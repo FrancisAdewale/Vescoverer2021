@@ -71,6 +71,8 @@ class SocialsViewController: UIViewController {
         animation.toValue = NSValue(cgPoint: CGPoint(x: socials.center.x + 10, y: socials.center.y))
         
         let dvc = storyboard?.instantiateViewController(withIdentifier: "Dashboard") as! DashboardTabController
+        let lvc = storyboard?.instantiateViewController(withIdentifier: "Loading") as! LoadingViewViewController
+        lvc.modalPresentationStyle = .overFullScreen
      
         
         if instagram == nil || twitter == nil {
@@ -87,8 +89,15 @@ class SocialsViewController: UIViewController {
            
             dvc.modalPresentationStyle = .currentContext
             
-        
-            present(dvc, animated: true, completion: nil)
+        //PRESENT LAUNCHPAD SCREEN AGAIN BEFORE PRESENTING DVC // also add random ratings popup.
+            present(lvc, animated: true) {
+                
+                Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { (timer) in
+                    self.dismiss(animated: true) {
+                        self.present(dvc, animated: true, completion: nil)
+                    }
+                }
+            }
 
         }
         

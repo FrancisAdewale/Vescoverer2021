@@ -199,13 +199,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Please Upload a spoon pic, yes a spoon pic." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VSr-Zh-cd1">
-                                <rect key="frame" x="20" y="436" width="281" height="18"/>
+                                <rect key="frame" x="19.5" y="435.5" width="281" height="18"/>
                                 <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="15"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xmark" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="4UI-Fd-geq">
-                                <rect key="frame" x="151" y="479" width="18" height="15"/>
+                                <rect key="frame" x="151" y="478.5" width="18" height="15.5"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" image="spoonpic" translatesAutoresizingMaskIntoConstraints="NO" id="Teb-Zh-AmX">
@@ -216,7 +216,7 @@
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow.up" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="C2R-qc-fWP">
-                                <rect key="frame" x="152" y="339" width="17" height="18"/>
+                                <rect key="frame" x="151.5" y="338.5" width="17" height="18"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
                         </subviews>
@@ -579,7 +579,7 @@
                                 <color key="trackTintColor" red="0.21568627450980393" green="0.59215686274509804" blue="0.64313725490196072" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </progressView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wIk-Tf-6pk">
-                                <rect key="frame" x="25" y="32" width="50" height="70"/>
+                                <rect key="frame" x="25" y="32" width="53" height="70"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="70" id="h18-Ud-Hqn"/>
                                 </constraints>
@@ -1029,6 +1029,32 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QRD-nV-4YU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3266" y="-1154"/>
+        </scene>
+        <!--Loading View View Controller-->
+        <scene sceneID="XdY-Xb-9g5">
+            <objects>
+                <viewController storyboardIdentifier="Loading" id="34g-BH-UYX" customClass="LoadingViewViewController" customModule="Ve_scoverer" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="IdX-09-8d2">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.89999997615814209" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vescoverer" highlightedImage="vescoverer" translatesAutoresizingMaskIntoConstraints="NO" id="8AS-nL-GCF">
+                                <rect key="frame" x="9" y="125" width="302" height="289"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="G1g-dZ-B0z"/>
+                        <color key="backgroundColor" red="0.10980392160000001" green="0.26274509800000001" blue="0.28235294119999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="8AS-nL-GCF" firstAttribute="centerX" secondItem="IdX-09-8d2" secondAttribute="centerX" id="5Lt-ra-wmP"/>
+                            <constraint firstItem="8AS-nL-GCF" firstAttribute="top" secondItem="G1g-dZ-B0z" secondAttribute="top" constant="125" id="MWd-pi-3rJ"/>
+                            <constraint firstItem="8AS-nL-GCF" firstAttribute="leading" secondItem="G1g-dZ-B0z" secondAttribute="leading" constant="9" id="aaV-X0-ySj"/>
+                            <constraint firstItem="G1g-dZ-B0z" firstAttribute="bottom" secondItem="8AS-nL-GCF" secondAttribute="bottom" constant="154" id="s32-Hc-sxm"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kYo-K1-TAC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2357" y="5917"/>
         </scene>
     </scenes>
     <resources>
