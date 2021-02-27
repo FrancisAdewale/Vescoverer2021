@@ -70,15 +70,16 @@ class RecipeTableViewController: UITableViewController {
           } else {
             recipe = recipes[indexPath.row]
           }
-        cell.recipeTitle.text = recipe.title
         let url = recipe.image
         self.tableView.rowHeight = 90.0
 
         DispatchQueue.main.async {
+            cell.recipeTitle.text = recipe.title
             cell.recipeImage.sd_setImage(with: try! url.asURL(), placeholderImage: UIImage(named:"placeholder"))
+            cell.time.text = recipe.readyInMinutes.description
+
         }
 
-        cell.time.text = recipe.readyInMinutes.description
         
         if isSearchBarEmpty == false {
             cell.isUserInteractionEnabled = false

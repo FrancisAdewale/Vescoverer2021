@@ -127,7 +127,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
         let y = self.view.center.y
         
         let center = self.view.center
-        googleView.frame = CGRect(x: 117.0, y: 200.0, width: 184.0, height: 42.0)
+        googleView.frame = CGRect(x: 117.0, y: 200.0, width: 191.0, height: 42.0)
         googleView.center = .init(x: center.x, y: y - CGFloat(50))
     }
     

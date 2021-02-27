@@ -19,8 +19,8 @@ class VerifyViewController : UIViewController, UIImagePickerControllerDelegate &
     let picker = UIImagePickerController()
 
     @IBOutlet weak var userVerificationImage: UIImageView!
-    @IBOutlet weak var verifiedImage: UIImageView!
     @IBOutlet weak var label: UILabel!
+    @IBOutlet var bottomLabel: UILabel!
     
     @IBOutlet var arrow: UIImageView!
     
@@ -32,8 +32,8 @@ class VerifyViewController : UIViewController, UIImagePickerControllerDelegate &
         animation.duration = 0.70
         animation.repeatCount = 4
         animation.autoreverses = true
-        animation.fromValue = NSValue(cgPoint: CGPoint(x: view.center.x, y: view.center.y - 10))
-        animation.toValue = NSValue(cgPoint: CGPoint(x:view.center.x, y: view.center.y + 10))
+        animation.fromValue = NSValue(cgPoint: CGPoint(x: arrow.center.x, y: arrow.center.y - 10))
+        animation.toValue = NSValue(cgPoint: CGPoint(x:arrow.center.x, y: arrow.center.y + 10))
         
         
         arrow.layer.add(animation, forKey: "position")
@@ -53,7 +53,6 @@ class VerifyViewController : UIViewController, UIImagePickerControllerDelegate &
 //            userVerificationImage.layer.add(animation, forKey: "position")
 //        }
         title = "Verify"
-        
         userVerificationImage.isUserInteractionEnabled = true
         let tap = UITapGestureRecognizer(target: self, action: #selector(takeSelfie))
         tap.numberOfTapsRequired = 1
@@ -84,6 +83,9 @@ class VerifyViewController : UIViewController, UIImagePickerControllerDelegate &
                 // Uh-oh, an error occurred!
                 return
               }
+            
+            self.label.text = "Verifying...."
+            self.bottomLabel.text = "Check back later"
             // Metadata contains file metadata such as size, content-type.
            // let size = metadata.size
             // You can also access to download URL after upload.
@@ -108,10 +110,10 @@ class VerifyViewController : UIViewController, UIImagePickerControllerDelegate &
             
             if self.isVerified == true {
                 self.label.text = "Verified!"
+                self.bottomLabel.text = nil
                 self.userVerificationImage.isUserInteractionEnabled = false
                 self.userVerificationImage.alpha = 0.5
                 self.arrow.isHidden = true
-                self.verifiedImage.image = UIImage(systemName: "checkmark")
                 self.viewWillAppear(true)
             }
         }

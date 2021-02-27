@@ -75,7 +75,7 @@ class SocialsViewController: UIViewController {
         lvc.modalPresentationStyle = .overFullScreen
      
         
-        if instagram == nil || twitter == nil {
+        if instagram == nil && twitter == nil {
             socials.layer.add(animation, forKey: "position")
 
         } else {

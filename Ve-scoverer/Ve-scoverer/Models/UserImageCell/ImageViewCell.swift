@@ -26,8 +26,11 @@ class ImageViewCell: UITableViewCell, UITextFieldDelegate  {
      
         userNameField.delegate = self
         
-        userImage.layer.cornerRadius = 0.5 * userImage.bounds.size.width
+        userImage.layer.cornerRadius = (userImage.frame.size.width) / 2
         userImage.clipsToBounds = true
+        userImage.layer.borderWidth = 0.5
+        userImage.layer.borderColor = UIColor.gray.cgColor
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

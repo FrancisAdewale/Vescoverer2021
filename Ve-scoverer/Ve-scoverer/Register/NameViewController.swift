@@ -19,6 +19,7 @@ class NameViewController: UIViewController, UITextFieldDelegate {
     var usersid = ""
 
 
+    @IBOutlet var fullName: UIStackView!
     @IBOutlet weak var background: UIImageView!
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var progressBar: UIProgressView!
@@ -31,7 +32,6 @@ class NameViewController: UIViewController, UITextFieldDelegate {
         
         self.view.insertSubview(self.background, at: 0)
         background.backgroundColor = UIColor(hexString: "3797A4")
-
         db.collection("users").document((user?.email)!).getDocument(completion: { (snapShot, err) in
             if let err = err {
                 print(err)
@@ -77,6 +77,14 @@ class NameViewController: UIViewController, UITextFieldDelegate {
     }
     @IBAction func next(_ sender: Any) {
         
+        let animation = CABasicAnimation(keyPath: "position")
+        animation.duration = 0.07
+        animation.repeatCount = 4
+        animation.autoreverses = true
+        animation.fromValue = NSValue(cgPoint: CGPoint(x: fullName.center.x - 10, y: fullName.center.y))
+        animation.toValue = NSValue(cgPoint: CGPoint(x: fullName.center.x + 10, y: fullName.center.y))
+        
+        
         let avc = storyboard?.instantiateViewController(withIdentifier: "Age") as! AgeViewController
         let user = Auth.auth().currentUser
         
@@ -92,11 +100,8 @@ class NameViewController: UIViewController, UITextFieldDelegate {
 
             } else {
                 if firstNameTextField.text!.isEmpty || lastNameTextField.text!.isEmpty {
-                    firstNameTextField.backgroundColor = .red
-                    lastNameTextField.backgroundColor = .red
-                } else  {
-                    lastNameTextField.backgroundColor = .lightGray
-                    firstNameTextField.backgroundColor = .lightGray
+                    fullName.layer.add(animation, forKey: "position")
+
                 }
             }
 

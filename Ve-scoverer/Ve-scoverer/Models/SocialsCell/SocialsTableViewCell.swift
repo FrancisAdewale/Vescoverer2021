@@ -14,8 +14,8 @@ class SocialsTableViewCell: UITableViewCell {
     @IBOutlet var instagramButton: UIButton!
     @IBOutlet var twitterButton: UIButton!
     
-    var instagramAt = ""
-    var twitterAt = ""
+    var instagramAt: String?
+    var twitterAt: String?
     let vc = UIApplication.shared.topMostViewController()
     let user = Auth.auth().currentUser
 
@@ -29,26 +29,22 @@ class SocialsTableViewCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
-        
-        
+
         // Configure the view for the selected state
     }
-    
-    
+
     @IBAction func instagramTapped(_ sender: UIButton) {
-        
-        
-        
+
         var textField = UITextField()
     
         if !self.isEditing {
-            let alert = UIAlertController(title: instagramAt.capitalized, message: "Current Instagram @", preferredStyle: .alert)
+            let alert = UIAlertController(title: instagramAt?.capitalized ?? "Add Instagram @", message: "Current Instagram @", preferredStyle: .alert)
             let action = UIAlertAction(title: "Done", style: .cancel, handler: nil)
             alert.addAction(action)
             vc!.present(alert, animated: true, completion: nil)
+            alert.view.tintColor =  UIColor(hexString: "3797A4")
         } else {
-            let alert = UIAlertController(title: "Edit", message: "Current Instagram: @\(instagramAt.capitalized)", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Edit", message: "Current Instagram: @\(instagramAt?.capitalized ?? "Add Instagram")", preferredStyle: .alert)
             let action = UIAlertAction(title: "Done", style: .default, handler: { action in
                 
                 let newInsta = textField.text!
@@ -69,7 +65,6 @@ class SocialsTableViewCell: UITableViewCell {
             
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
 
-            
             alert.addTextField { (alertField) in
                 textField = alertField
             }
@@ -79,24 +74,21 @@ class SocialsTableViewCell: UITableViewCell {
             vc!.present(alert, animated: true, completion: nil)
             alert.view.tintColor = UIColor(hexString: "3797A4")
 
-            
-        
         }
- 
     }
-    
-    
+
     @IBAction func twitterTapped(_ sender: UIButton) {
         
         var textField = UITextField()
         
         if !self.isEditing {
-            let alert = UIAlertController(title: twitterAt.capitalized, message: "Current Twitter @", preferredStyle: .alert)
+            let alert = UIAlertController(title: twitterAt?.capitalized ?? "Add Twitter", message: "Current Twitter @", preferredStyle: .alert)
             let action = UIAlertAction(title: "Done", style: .cancel, handler: nil)
             alert.addAction(action)
             vc!.present(alert, animated: true, completion: nil)
+            alert.view.tintColor = UIColor(hexString: "3797A4")
         } else {
-            let alert = UIAlertController(title: "Edit", message: "Current Instagram: @\(twitterAt.capitalized)", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Edit", message: "Twitter Instagram: @\(twitterAt?.capitalized ?? "Add Twitter")", preferredStyle: .alert)
             let action = UIAlertAction(title: "Done", style: .default, handler: { action in
                 let newTwit = textField.text!
                 

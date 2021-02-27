@@ -21,7 +21,7 @@ class GenderViewController: UIViewController,  UIPickerViewDataSource, UIPickerV
     @IBOutlet weak var nextButton: UIButton!
     
     @IBOutlet weak var genderLabel: UILabel!
-    let gender = ["Male","Female","Trans"]
+    let gender = ["Male","Female"]
 
     override func viewDidLoad() {
         super.viewDidLoad()

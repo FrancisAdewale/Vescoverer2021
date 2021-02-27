@@ -23,9 +23,12 @@ class ViewImageCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        imageCell.layer.cornerRadius = 0.5 * imageCell.bounds.size.width
+        //imageCell.layer.cornerRadius = 0.5 * imageCell.bounds.size.width
         imageCell.clipsToBounds = true
         
+        imageCell.layer.cornerRadius = (imageCell.frame.size.width) / 2
+        imageCell.layer.borderWidth = 0.5
+        imageCell.layer.borderColor = UIColor.black.cgColor
    
 
     }

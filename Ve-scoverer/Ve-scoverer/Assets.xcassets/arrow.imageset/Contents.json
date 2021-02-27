@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "84-845619_svg-free-download-onlinewebfonts-up-arrow-png-clipart.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "84-845619_svg-free-download-onlinewebfonts-up-arrow-png-clipart-1.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "84-845619_svg-free-download-onlinewebfonts-up-arrow-png-clipart-2.png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
