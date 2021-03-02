@@ -16,7 +16,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="391" height="110"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MeAvatar" id="GtI-8F-b52">
+                    <imageView clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MeAvatar" id="GtI-8F-b52">
                         <rect key="frame" x="298" y="19" width="67" height="72"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                         <accessibility key="accessibilityConfiguration">

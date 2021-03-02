@@ -28,7 +28,7 @@ class ImageViewCell: UITableViewCell, UITextFieldDelegate  {
         
         userImage.layer.cornerRadius = (userImage.frame.size.width) / 2
         userImage.clipsToBounds = true
-        userImage.layer.borderWidth = 0.5
+        userImage.layer.borderWidth = 1.5
         userImage.layer.borderColor = UIColor.gray.cgColor
         
     }

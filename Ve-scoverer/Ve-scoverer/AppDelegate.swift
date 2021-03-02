@@ -19,20 +19,27 @@ import UserNotifications
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var signedIn = false
-    
+
+
 
         
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
-        
+
         FirebaseApp.configure()
         
+        
+        var storyboard = UIStoryboard(name: "Main", bundle: nil)
+        storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let lvc = storyboard.instantiateViewController(withIdentifier: "Login") as! LoginViewController
         let db = Firestore.firestore()
+
        // GIDSignIn.sharedInstance().clientID = "452250904688-duk6irc1fadc7l6suokch7d2aifor27n.apps.googleusercontent.com"
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         registerForPushNotifications()
         
-        
+
+   
 
         return true
     }

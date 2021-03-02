@@ -106,7 +106,7 @@ class VerifyViewController : UIViewController, UIImagePickerControllerDelegate &
         db.collection("users").document((user?.email)!).addSnapshotListener { (snapShot, error) in
             let data = snapShot?.data()!
             
-            self.isVerified = data!["isVerified"] as! Bool
+            self.isVerified = data?["isVerified"] as! Bool
             
             if self.isVerified == true {
                 self.label.text = "Verified!"

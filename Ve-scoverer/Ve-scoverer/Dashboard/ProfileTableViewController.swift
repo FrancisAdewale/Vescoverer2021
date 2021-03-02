@@ -236,6 +236,13 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         let footerView = UIView()
         if section == 1 {
             footerView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height:100)
+            let button = UIButton(frame: CGRect(x: 0, y: 0, width: 130, height: 44))
+            button.setTitle("Sign out", for: .normal)
+            button.center = footerView.center
+            button.titleLabel?.font = UIFont(name: "Lato", size: 20.0)
+            button.addTarget(self, action: #selector(signOut), for: .touchUpInside)
+            button.setTitleColor(UIColor(hexString: "3797A4"), for: .normal)
+            footerView.addSubview(button)
 
         }
         return footerView
@@ -259,9 +266,32 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         
     }
     
+    @objc func signOut() {
+        let lvc = storyboard?.instantiateViewController(withIdentifier: "Login") as! LoginViewController
+        let loadingVC = storyboard?.instantiateViewController(withIdentifier: "Loading") as! LoadingViewViewController
         
-    
-    
+        loadingVC.modalPresentationStyle = .overFullScreen
+        lvc.modalPresentationStyle = .overFullScreen
+        
+        
+        do {
+            try Auth.auth().signOut()
+            print("signed out")
+            present(loadingVC, animated: true) {
+                
+                Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { (timer) in
+                    self.dismiss(animated: true) {
+                        self.present(lvc, animated: true, completion: nil)
+                        //lvc.user = nil
+                    }
+                }
+            }
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
+ 
+    }
+
     func load() {
         
         
