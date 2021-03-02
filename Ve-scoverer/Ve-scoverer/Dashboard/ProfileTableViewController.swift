@@ -140,11 +140,14 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         else {
             return false
         }
+        
+        
     }
     
     
     override func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
-        print(indexPath.row)
+
+
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -242,11 +245,36 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
             button.titleLabel?.font = UIFont(name: "Lato", size: 20.0)
             button.addTarget(self, action: #selector(signOut), for: .touchUpInside)
             button.setTitleColor(UIColor(hexString: "3797A4"), for: .normal)
-            footerView.addSubview(button)
+            
+            let delButton = UIButton(frame: CGRect(x: 0, y: 0, width: 130, height: 44))
+            
+            delButton.setTitle("Delete Account", for: .normal)
+            delButton.center = CGPoint(x:footerView.center.x, y: footerView.center.y - 37.0 )
+            delButton.titleLabel?.font = UIFont(name: "Lato", size: 20.0)
+            delButton.addTarget(self, action: #selector(deleteAcc), for: .touchUpInside)
+            delButton.setTitleColor(UIColor(ciColor: .red), for: .normal)
+            if self.tableView.isEditing {
+                delButton.isEnabled = true
+                delButton.isUserInteractionEnabled = true
+                delButton.alpha = 1.0
 
+
+            } else {
+                delButton.isEnabled = false
+                delButton.isUserInteractionEnabled = false
+                delButton.alpha = 0.2
+
+            }
+           
+            footerView.addSubview(delButton)
+            footerView.addSubview(button)
+            
+         
+            
         }
+
         return footerView
-        
+
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -258,7 +286,9 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
     @IBAction func editTapped(_ sender: UIBarButtonItem) {
         print("editTapped")
         tableView.setEditing(!tableView.isEditing, animated: true)
-        
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
         editButton.title = tableView.isEditing ? "Done" : "Edit"
         editButton.style = tableView.isEditing ? .done : .plain
         
@@ -266,23 +296,78 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         
     }
     
+    @objc func deleteAcc() {
+        
+        let alert = UIAlertController(title: "Delete Account", message: "Permanently Delete Account?", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Yes", style: .destructive, handler: { action in
+            
+            let user = Auth.auth().currentUser
+
+            user?.delete { error in
+              if let error = error {
+                // An error happened.
+              } else {
+                self.db.collection("users").document((user?.email)!).delete() { err in
+                    if let err = err {
+                        print("Error removing document: \(err)")
+                    } else {
+                        print("Document successfully removed!")
+                    }
+                }
+                let lvc = self.storyboard?.instantiateViewController(withIdentifier: "Login") as! LoginViewController
+                let loadingVC = self.storyboard?.instantiateViewController(withIdentifier: "Loading") as! LoadingViewViewController
+                loadingVC.modalPresentationStyle = .overFullScreen
+                lvc.modalPresentationStyle = .overFullScreen
+                self.present(loadingVC, animated: true) {
+                print("deleted account")
+                    Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { (timer) in
+                        self.dismiss(animated: true) {
+                            
+                            self.present(lvc, animated: true) {
+                                print(Auth.auth().currentUser)
+
+                            }
+                        }
+                    }
+                }
+
+              }
+            }
+            
+        })
+
+        
+        let cancel = UIAlertAction(title: "No", style: .cancel, handler: nil)
+        
+        alert.addAction(action)
+        alert.addAction(cancel)
+        self.present(alert, animated: true, completion: nil)
+        alert.view.tintColor =  UIColor(hexString: "3797A4")
+
+    }
+    
     @objc func signOut() {
+        
+
         let lvc = storyboard?.instantiateViewController(withIdentifier: "Login") as! LoginViewController
         let loadingVC = storyboard?.instantiateViewController(withIdentifier: "Loading") as! LoadingViewViewController
         
+
         loadingVC.modalPresentationStyle = .overFullScreen
         lvc.modalPresentationStyle = .overFullScreen
-        
+
         
         do {
-            try Auth.auth().signOut()
-            print("signed out")
             present(loadingVC, animated: true) {
-                
+            print("signed out")
                 Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { (timer) in
                     self.dismiss(animated: true) {
-                        self.present(lvc, animated: true, completion: nil)
-                        //lvc.user = nil
+                        
+                        self.present(lvc, animated: true) {
+                            try! Auth.auth().signOut()
+                            print(Auth.auth().currentUser)
+
+                        }
                     }
                 }
             }

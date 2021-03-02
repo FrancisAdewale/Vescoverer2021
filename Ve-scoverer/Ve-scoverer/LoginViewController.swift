@@ -28,6 +28,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
     
     @IBOutlet var titleLabel: UILabel!
     
+    var handle: AuthStateDidChangeListenerHandle?
     let db = Firestore.firestore()
     var location = CLLocation()
     private let locationManager = CLLocationManager()
@@ -40,6 +41,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
         
         navigationItem.hidesBackButton = true
         background.backgroundColor = UIColor(hexString: "3797A4")
@@ -47,49 +49,28 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
 //        appleButton.backgroundColor = .gray
         navigationController?.navigationBar.barTintColor = .white
         
-          if let user = user {
-            // User is signed in.
-       
-            self.db.collection("users").document(user.email!).getDocument { (document, error) in
-                
+
+        
+
+
+        if let user = user?.email {
+
+            self.db.collection("users").document(user).getDocument { (document, error) in
+
                 if let err = error {
                     print("this is the login viewwillappear eror \(err)")
                 } else {
                     if let dataDescription = document!.data() {
-                        
                         self.hasCompletedRegistration = (dataDescription["completedRegistration"] as! Bool)
-                        print("this is the statelistener \(self.hasCompletedRegistration!)")
+                        print(self.hasCompletedRegistration!)
+                        print(user)
 
                     }
- 
+
                 }
             }
-            
-          } else {
-            self.hasCompletedRegistration = false
-            
-          }
-        
 
-     
-//        if let user = user?.email {
-//
-//            self.db.collection("users").document(user).getDocument { (document, error) in
-//
-//                if let err = error {
-//                    print("this is the login viewwillappear eror \(err)")
-//                } else {
-//                    if let dataDescription = document!.data() {
-//                        self.hasCompletedRegistration = (dataDescription["completedRegistration"] as! Bool)
-//                        print(self.hasCompletedRegistration!)
-//                        print(user)
-//
-//                    }
-//
-//                }
-//            }
-//
-//        }
+        }
         
         
     }
@@ -131,6 +112,11 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
         }
         
     }
+
+//    override func viewWillDisappear(_ animated: Bool) {
+//        Auth.auth().removeStateDidChangeListener(handle!)
+//
+//    }
     
     
     
@@ -171,6 +157,8 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!,
               withError error: Error!) {
         
+        
+        
         let googleUser = user.profile
         
         if let user = googleUser {
@@ -183,7 +171,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
                          if let dataDescription = document!.data() {
                              
                              self.hasCompletedRegistration = (dataDescription["completedRegistration"] as! Bool)
-                             print("this is the statelistener \(self.hasCompletedRegistration!)")
+                             print("this is the google button \(self.hasCompletedRegistration!)")
 
                          }
       
@@ -192,10 +180,6 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
         }
 
 
-        
-    
-        
-        
         if let error = error {
             if (error as NSError).code == GIDSignInErrorCode.hasNoAuthInKeychain.rawValue {
                 print("The user has not signed in before or they have since signed out.")
@@ -370,7 +354,8 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                          if let dataDescription = document!.data() {
                              
                              self.hasCompletedRegistration = (dataDescription["completedRegistration"] as! Bool)
-                             print("this is the statelistener \(self.hasCompletedRegistration!)")
+                             print("this is the apple login \(self.hasCompletedRegistration!)")
+                            print(email)
 
                          }
       

@@ -9,6 +9,7 @@ import UIKit
 import CoreData
 import ChameleonFramework
 import GoogleSignIn
+import Firebase
 
 
 
@@ -28,13 +29,23 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         dismiss(animated: false, completion: nil)
+        
+     
 
         load()
         
         let lvc = storyboard?.instantiateViewController(withIdentifier: "Login")
         if !vegan.isEmpty {
             lvc!.modalPresentationStyle = .fullScreen
-            present(lvc!, animated: true, completion: nil)
+            present(lvc!, animated: true) {
+                Auth.auth().addStateDidChangeListener { auth, user in
+                    if let user = user {
+                        print("\(user.email) is signed in.")
+                    } else {
+                        print("\(String(describing: user?.email)) is signed out.")
+                    }
+                }
+            }
         }
         
     }
