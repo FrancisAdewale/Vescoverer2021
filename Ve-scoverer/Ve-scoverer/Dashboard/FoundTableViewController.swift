@@ -36,8 +36,6 @@ class FoundTableViewController: UITableViewController {
             }
         }
 
-
-
     }
     
     override func viewDidLoad() {

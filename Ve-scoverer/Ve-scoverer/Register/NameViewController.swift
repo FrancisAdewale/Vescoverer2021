@@ -76,7 +76,16 @@ class NameViewController: UIViewController, UITextFieldDelegate {
         sender.resignFirstResponder()
     }
     @IBAction func next(_ sender: Any) {
+
+        let user = Auth.auth().currentUser
         
+        if let user = user?.email {
+            self.db.collection("users").document(user).setData(["firstName" : self.firstNameTextField.text!,"secondName": self.lastNameTextField.text!], merge: true)
+
+        }
+    }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         let animation = CABasicAnimation(keyPath: "position")
         animation.duration = 0.07
         animation.repeatCount = 4
@@ -84,26 +93,18 @@ class NameViewController: UIViewController, UITextFieldDelegate {
         animation.fromValue = NSValue(cgPoint: CGPoint(x: fullName.center.x - 10, y: fullName.center.y))
         animation.toValue = NSValue(cgPoint: CGPoint(x: fullName.center.x + 10, y: fullName.center.y))
         
-        
-        let avc = storyboard?.instantiateViewController(withIdentifier: "Age") as! AgeViewController
-        let user = Auth.auth().currentUser
-        
-        if let user = user?.email {
-            avc.currentuser = user
-            self.db.collection("users").document(user).setData(["firstName" : self.firstNameTextField.text!,"secondName": self.lastNameTextField.text!], merge: true)
-
-                avc.modalPresentationStyle = .overFullScreen
+        if firstNameTextField.text!.isEmpty || lastNameTextField.text!.isEmpty {
             
+            fullName.layer.add(animation, forKey: "position")
+
+            return false
+            //present(avc, animated: true, completion: nil)
+
+        } else {
             if !firstNameTextField.text!.isEmpty && !lastNameTextField.text!.isEmpty {
-                
-                present(avc, animated: true, completion: nil)
-
-            } else {
-                if firstNameTextField.text!.isEmpty || lastNameTextField.text!.isEmpty {
-                    fullName.layer.add(animation, forKey: "position")
-
-                }
+                self.performSegue(withIdentifier: "goToAge", sender: self)
             }
+            return true
 
         }
     }

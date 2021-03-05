@@ -18,6 +18,7 @@ import SDWebImage
 
 class ProfileTableViewController: UITableViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate  {
     
+    
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var editedInstagram = String()
     var editedTwitter = String()
@@ -196,6 +197,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
             otherCell.contentView.layer.borderWidth = 0.05
             otherCell.layer.cornerRadius = 8
             
+            
             return otherCell
         } else if indexPath.section == 1 && indexPath.row == 0 {
             let otherCell = tableView.dequeueReusableCell(withIdentifier: "NormalCell", for: indexPath) as! NormalViewCell
@@ -249,7 +251,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
             let delButton = UIButton(frame: CGRect(x: 0, y: 0, width: 130, height: 44))
             
             delButton.setTitle("Delete Account", for: .normal)
-            delButton.center = CGPoint(x:footerView.center.x, y: footerView.center.y - 37.0 )
+            delButton.center = CGPoint(x: footerView.center.x, y: footerView.center.y - 27.0)
             delButton.titleLabel?.font = UIFont(name: "Lato", size: 20.0)
             delButton.addTarget(self, action: #selector(deleteAcc), for: .touchUpInside)
             delButton.setTitleColor(UIColor(ciColor: .red), for: .normal)
@@ -268,9 +270,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
            
             footerView.addSubview(delButton)
             footerView.addSubview(button)
-            
-         
-            
+ 
         }
 
         return footerView
@@ -298,41 +298,71 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
     
     @objc func deleteAcc() {
         
+        let lvc = self.storyboard?.instantiateViewController(withIdentifier: "Login") as! LoginViewController
+        let loadingVC = self.storyboard?.instantiateViewController(withIdentifier: "Loading") as! LoadingViewViewController
+        loadingVC.modalPresentationStyle = .overFullScreen
+        lvc.modalPresentationStyle = .overFullScreen
+
+        
         let alert = UIAlertController(title: "Delete Account", message: "Permanently Delete Account?", preferredStyle: .alert)
         let action = UIAlertAction(title: "Yes", style: .destructive, handler: { action in
-            
-            let user = Auth.auth().currentUser
+           
+//            Auth.auth().addStateDidChangeListener { (auth, user) in
+//
+//                user?.delete(completion: { (error) in
+//                    if let error = error {
+//                      // An error happened.
+//                      print(error.localizedDescription)
+//                    } else {
+//                      self.db.collection("users").document((self.user!.email)!).delete() { err in
+//                          if let err = err {
+//                              print("Error removing document: \(err)")
+//                          } else {
+//                              print("Document successfully removed!")
+//                              self.present(loadingVC, animated: true) {
+//                              print("deleted account")
+//                                  Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { (timer) in
+//                                      self.dismiss(animated: true) {
+//
+//                                          self.navigationController!.popToViewController(lvc, animated: true)
+//
+//                                          }
+//                                      }
+//                                  }
+//                          }
+//                      }
+//                    }
+//                })
+//            }
 
-            user?.delete { error in
+            self.user?.delete { error in
               if let error = error {
                 // An error happened.
+                print(error.localizedDescription)
               } else {
-                self.db.collection("users").document((user?.email)!).delete() { err in
+                self.db.collection("users").document((self.user!.email)!).delete() { err in
                     if let err = err {
                         print("Error removing document: \(err)")
                     } else {
                         print("Document successfully removed!")
+                        self.present(loadingVC, animated: true) {
+                        print("deleted account")
+                            Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { (timer) in
+                                self.dismiss(animated: true) {
+
+                                    self.navigationController!.show(lvc, sender: self)
+
+                                    }
+                                }
+                            }
                     }
                 }
-                let lvc = self.storyboard?.instantiateViewController(withIdentifier: "Login") as! LoginViewController
-                let loadingVC = self.storyboard?.instantiateViewController(withIdentifier: "Loading") as! LoadingViewViewController
-                loadingVC.modalPresentationStyle = .overFullScreen
-                lvc.modalPresentationStyle = .overFullScreen
-                self.present(loadingVC, animated: true) {
-                print("deleted account")
-                    Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { (timer) in
-                        self.dismiss(animated: true) {
-                            
-                            self.present(lvc, animated: true) {
-                                print(Auth.auth().currentUser)
 
-                            }
-                        }
-                    }
+
                 }
 
               }
-            }
+            
             
         })
 
@@ -346,38 +376,51 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
 
     }
     
+    
     @objc func signOut() {
-        
+
 
         let lvc = storyboard?.instantiateViewController(withIdentifier: "Login") as! LoginViewController
         let loadingVC = storyboard?.instantiateViewController(withIdentifier: "Loading") as! LoadingViewViewController
-        
+
 
         loadingVC.modalPresentationStyle = .overFullScreen
         lvc.modalPresentationStyle = .overFullScreen
 
-        
+
         do {
+            try Auth.auth().signOut()
+
             present(loadingVC, animated: true) {
-            print("signed out")
+
                 Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { (timer) in
                     self.dismiss(animated: true) {
-                        
-                        self.present(lvc, animated: true) {
-                            try! Auth.auth().signOut()
-                            print(Auth.auth().currentUser)
 
-                        }
+
+                        self.navigationController?.present(lvc, animated: true, completion: nil)
+
+
+
                     }
                 }
             }
         } catch let signOutError as NSError {
             print ("Error signing out: %@", signOutError)
         }
- 
+
     }
 
     func load() {
+        
+//       var email = ""
+//
+//        Auth.auth().addStateDidChangeListener { (auth, user) in
+//            if user != nil {
+//                let checkUser = user
+//                email = (checkUser?.email)!
+//            }
+//
+//        }
         
         
         db.collection("users").document((user?.email)!).addSnapshotListener { (snapShot, err) in
@@ -397,7 +440,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
                 self.profileUser.latitude = data?["latitude"] as? Double ?? 0
                 self.profileUser.longitude = data?["longitude"] as? Double ?? 0
                 self.profileUser.verified = data?["isVerified"] as? Bool ?? false
-                
+                self.profileUser.hasCompletedRegistration = data?["completedRegistration"] as? Bool ?? true
                 
                 
                 let resourcePath = Bundle.main.resourcePath

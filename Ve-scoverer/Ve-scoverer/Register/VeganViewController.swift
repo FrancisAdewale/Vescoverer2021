@@ -24,9 +24,11 @@ class VeganViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
     @IBOutlet weak var veganQuestion: UILabel!
     let times = ["<20 years","<10 years","<5 years","<2 years", "<1 year", "<6 months" ]
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        navigationController?.navigationBar.isHidden = false
+        title = "Register"
         self.view.insertSubview(self.background, at: 0)
         background.backgroundColor = UIColor(hexString: "3797A4")
 
@@ -81,22 +83,26 @@ class VeganViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
     }
     
     @IBAction func next(_ sender: Any) {
-        let nvc = storyboard?.instantiateViewController(withIdentifier: "Name") as! NameViewController
         
 
         let user = Auth.auth().currentUser
                             
         if let user = user?.email {
-            nvc.usersid = user
             self.db.collection("users").document(user).setData(["veganSince" : selectedRow], merge: true)
+//
+//            nvc.modalPresentationStyle = .overFullScreen
+//            present(nvc, animated: true, completion: nil)
+//
+//
+            self.performSegue(withIdentifier: "goToName", sender: self)
 
-            nvc.modalPresentationStyle = .overFullScreen
-            present(nvc, animated: true, completion: nil)
-            
-            
 
         }
         
+    }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        return true
     }
     
 }

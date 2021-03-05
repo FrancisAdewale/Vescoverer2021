@@ -70,19 +70,23 @@ class AgeViewController: UIViewController {
     
     @IBAction func next(_ sender: UIButton) {
         
-        let gvc = storyboard?.instantiateViewController(withIdentifier: "Gender") as! GenderViewController
-        
         let user = Auth.auth().currentUser
         
         if let user = user?.email {
-            gvc.currentuser = user
             self.db.collection("users").document(user).setData(["age" : Int(age.text!)!], merge: true)
 
-            gvc.modalPresentationStyle = .overFullScreen
-            present(gvc, animated: true, completion: nil)
+//            gvc.modalPresentationStyle = .overFullScreen
+//            present(gvc, animated: true, completion: nil)
+            
+            self.performSegue(withIdentifier: "goToGender", sender: self)
+
 
         }
 
         
+    }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        return true
     }
 }

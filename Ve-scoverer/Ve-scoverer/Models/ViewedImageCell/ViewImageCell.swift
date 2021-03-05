@@ -28,7 +28,7 @@ class ViewImageCell: UITableViewCell {
         
         imageCell.layer.cornerRadius = (imageCell.frame.size.width) / 2
         imageCell.layer.borderWidth = 1.5
-        imageCell.layer.borderColor = UIColor.black.cgColor
+        imageCell.layer.borderColor = UIColor(hexString: "3797a4")?.cgColor
    
 
     }
@@ -42,7 +42,10 @@ class ViewImageCell: UITableViewCell {
 
     @IBAction func verifiedTapped(_ sender: UIButton) {
         
-        verified.showToolTip()
+        if verified.isHidden == false {
+            verified.showToolTip()
+
+        }
     }
 }
 

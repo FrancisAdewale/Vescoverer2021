@@ -39,8 +39,7 @@ class VerifyViewController : UIViewController, UIImagePickerControllerDelegate &
         arrow.layer.add(animation, forKey: "position")
     
         load()
-        
-        
+     
 //        let animation = CABasicAnimation(keyPath: "position")
 //        animation.duration = 0.13
 //        animation.repeatCount = 4
@@ -104,18 +103,21 @@ class VerifyViewController : UIViewController, UIImagePickerControllerDelegate &
     func load() {
         
         db.collection("users").document((user?.email)!).addSnapshotListener { (snapShot, error) in
-            let data = snapShot?.data()!
-            
-            self.isVerified = data?["isVerified"] as! Bool
-            
-            if self.isVerified == true {
-                self.label.text = "Verified!"
-                self.bottomLabel.text = nil
-                self.userVerificationImage.isUserInteractionEnabled = false
-                self.userVerificationImage.alpha = 0.5
-                self.arrow.isHidden = true
-                self.viewWillAppear(true)
+            if let data = snapShot?.data() {
+                self.isVerified = data["isVerified"] as! Bool
+                
+                if self.isVerified == true {
+                    self.label.text = "Verified!"
+                    self.label.font = UIFont(name: "Lato-Black", size: 15)
+                    self.bottomLabel.text = ""
+                    self.userVerificationImage.isUserInteractionEnabled = false
+                    self.userVerificationImage.alpha = 0.5
+                    self.arrow.isHidden = true
+                    self.viewWillAppear(true)
+                }
             }
+            
+   
         }
         
     }

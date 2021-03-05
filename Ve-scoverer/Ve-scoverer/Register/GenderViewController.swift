@@ -55,16 +55,30 @@ class GenderViewController: UIViewController,  UIPickerViewDataSource, UIPickerV
 
     @IBAction func next(_ sender: UIButton) {
         
-        let uvc = storyboard?.instantiateViewController(withIdentifier: "Upload") as! UploadViewController
+   
         
+//        let user = Auth.auth().currentUser
+//
+//        if let user = user?.email {
+//            uvc.currentuser = user
+//            db.collection("users").document(currentuser).setData(["gender" : selectedGender], merge: true)
+            self.performSegue(withIdentifier: "goToUpload", sender: self)
+
+        //}
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let user = Auth.auth().currentUser
         
         if let user = user?.email {
-            uvc.currentuser = user
-            db.collection("users").document(currentuser).setData(["gender" : selectedGender], merge: true)
-            uvc.modalPresentationStyle = .overFullScreen
-            present(uvc, animated: true, completion: nil)
+            db.collection("users").document(user).setData(["gender" : selectedGender], merge: true)
         }
     }
-
+    
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        return true
+    }
+    
 }

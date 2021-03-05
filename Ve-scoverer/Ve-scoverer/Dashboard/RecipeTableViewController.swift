@@ -16,7 +16,6 @@ import SafariServices
 class RecipeTableViewController: UITableViewController {
     
     var recipes = [Recipe]()
-    
     var filteredData = [Recipe]()
     
     var activityItem = ""
@@ -140,6 +139,7 @@ class RecipeTableViewController: UITableViewController {
                 self.recipes = x.results
             //self.recipes.shuffle()
             print(self.recipes)
+            self.recipes.shuffle()
             self.tableView.reloadData()
 
         }

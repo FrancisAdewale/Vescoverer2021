@@ -15,14 +15,14 @@ import CryptoKit
 
 
 class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignInDelegate {
-
+    
     let appleView = ASAuthorizationAppleIDButton(type: .signIn, style: .black)
-
+    
     let context = (UIApplication.shared.delegate as! AppDelegate)
     fileprivate var currentNonce: String?
-
     
-   // @IBOutlet var appleView: ASAuthorizationAppleIDButton!
+    
+    // @IBOutlet var appleView: ASAuthorizationAppleIDButton!
     @IBOutlet weak var googleView: GIDSignInButton!
     @IBOutlet weak var background: UIImageView!
     
@@ -38,70 +38,89 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
     var user = Auth.auth().currentUser
     var userlocation = CLLocationCoordinate2D()
     var hasCompletedRegistration: Bool?
-
+    
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
         
         navigationItem.hidesBackButton = true
         background.backgroundColor = UIColor(hexString: "3797A4")
-       // navigationController?.navigationBar.backgroundColor = .white
-//        appleButton.backgroundColor = .gray
+        // navigationController?.navigationBar.backgroundColor = .white
+        //        appleButton.backgroundColor = .gray
         navigationController?.navigationBar.barTintColor = .white
-        
+       
+       
+       handle = Auth.auth().addStateDidChangeListener { (auth, user) in
+            if let unwrappedUser = user?.email {
+                self.db.collection("users").document(unwrappedUser).getDocument { (document, error) in
 
-        
-
-
-        if let user = user?.email {
-
-            self.db.collection("users").document(user).getDocument { (document, error) in
-
-                if let err = error {
-                    print("this is the login viewwillappear eror \(err)")
-                } else {
-                    if let dataDescription = document!.data() {
-                        self.hasCompletedRegistration = (dataDescription["completedRegistration"] as! Bool)
-                        print(self.hasCompletedRegistration!)
-                        print(user)
+                    if let err = error {
+                        print("this is the login viewwillappear eror \(err)")
+                    } else {
+                        if let dataDescription = document!.data() {
+                            self.hasCompletedRegistration = (dataDescription["completedRegistration"] as! Bool)
+                            
+                            if self.hasCompletedRegistration == true {
+                                
+                                self.performSegue(withIdentifier: "goToDash", sender: self)
+                            } else {
+                                self.performSegue(withIdentifier: "goToVegan", sender: self)
+                            }
+                        }
 
                     }
-
+                    
+                   
                 }
             }
-
         }
-        
-        
-    }
 
+    
+            
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-
+//
+//        if let unwrappedUser = user?.email {
+//            self.db.collection("users").document(unwrappedUser).getDocument { (document, error) in
+//
+//                if let err = error {
+//                    print("this is the login viewwillappear eror \(err)")
+//                } else {
+//                    if let dataDescription = document!.data() {
+//                        self.hasCompletedRegistration = (dataDescription["completedRegistration"] as! Bool)
+//                        print("login view did load \(self.hasCompletedRegistration)")
+//                        print(unwrappedUser)
+//
+//                    }
+//
+//                }
+//            }
+//        }
+//
         title = "Login"
         titleLabel.text = ""
         var charIndex = 0.0
         let titleText = "Vescoverer"
 
-        
-        
         for l in titleText {
             Timer.scheduledTimer(withTimeInterval: 0.1555 * charIndex, repeats: false) { (timer) in
                 self.titleLabel.text?.append(l)
             }
             charIndex += 1
-
         }
-
+        
         setupAppleButton()
         setupGoogleButton()
         
         //       GIDSignIn.sharedInstance()?.restorePreviousSignIn()
         
         GIDSignIn.sharedInstance()?.presentingViewController = self
-        GIDSignIn.sharedInstance()?.delegate = self
-        
+        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()!.options.clientID
+        GIDSignIn.sharedInstance().delegate = self
         locationManager.requestAlwaysAuthorization()
         locationManager.requestWhenInUseAuthorization()
         
@@ -112,24 +131,23 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
         }
         
     }
-
-//    override func viewWillDisappear(_ animated: Bool) {
-//        Auth.auth().removeStateDidChangeListener(handle!)
-//
-//    }
+    
+        override func viewWillDisappear(_ animated: Bool) {
+            Auth.auth().removeStateDidChangeListener(handle!)
+    
+        }
     
     
     
     
     func setupAppleButton() {
-
+        
         appleView.addTarget(self, action: #selector(startSignInWithAppleFlow), for: .touchUpInside)
         appleView.frame = CGRect(x: 117.0, y: 200, width: 184.0, height: 42.0)
         appleView.center = view.center
-       appleView.cornerRadius = 0
+        appleView.cornerRadius = 0
         self.view.addSubview(appleView)
-    
-      
+  
     }
     
     func setupGoogleButton() {
@@ -140,8 +158,6 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
         googleView.frame = CGRect(x: 117.0, y: 200.0, width: 191.0, height: 42.0)
         googleView.center = .init(x: center.x, y: y - CGFloat(50))
     }
-    
-    
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         location = locations.last!
@@ -157,29 +173,6 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!,
               withError error: Error!) {
         
-        
-        
-        let googleUser = user.profile
-        
-        if let user = googleUser {
-            
-            self.db.collection("users").document(user.email).getDocument { (document, error) in
-                     
-                     if let err = error {
-                         print("this is the login viewwillappear eror \(err)")
-                     } else {
-                         if let dataDescription = document!.data() {
-                             
-                             self.hasCompletedRegistration = (dataDescription["completedRegistration"] as! Bool)
-                             print("this is the google button \(self.hasCompletedRegistration!)")
-
-                         }
-      
-                     }
-                 }
-        }
-
-
         if let error = error {
             if (error as NSError).code == GIDSignInErrorCode.hasNoAuthInKeychain.rawValue {
                 print("The user has not signed in before or they have since signed out.")
@@ -193,68 +186,195 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
         guard let authentication = user.authentication else { return }
         let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
                                                        accessToken: authentication.accessToken)
-
         
-        var storyboard = UIStoryboard(name: "Main", bundle: nil)
-        storyboard = UIStoryboard(name: "Main", bundle: nil)
         
-         if self.hasCompletedRegistration == true {
-            Auth.auth().signIn(with: credential) {(authResult, error) in
-                if let error = error {
-                    print("Error occurs when authenticate with Firebase: \(error.localizedDescription)")
-                }
-                let dvc = storyboard.instantiateViewController(withIdentifier: "Dashboard") as! DashboardTabController
-                
-                dvc.modalPresentationStyle = .overFullScreen
-                
-                self.present(dvc, animated: true, completion: nil)
-            }
-            
-        }
-        else if self.hasCompletedRegistration == false || self.hasCompletedRegistration == nil {
-            Auth.auth().signIn(with: credential) {(authResult, error) in
-                if let error = error {
-                    print("Error occurs when authenticate with Firebase: \(error.localizedDescription)")
-                } else  {
-                    let user = user.profile
+        
+        if let unwrappedUser = user?.profile {
+            self.db.collection("users").document(unwrappedUser.email!).getDocument { (document, error) in
 
-                    self.firstName = (user?.givenName)!
-                    self.secondName = (user?.familyName)!
-                    self.emailId = (user?.email)!
-                    self.userlocation = self.location.coordinate
+                if let err = error {
+                    print("this is the login viewwillappear eror \(err)")
+                } else {
+                    if let dataDescription = document!.data() {
+                        self.hasCompletedRegistration = (dataDescription["completedRegistration"] as! Bool)
+                        print("login view will appear \(self.hasCompletedRegistration)")
+                        
+                        
+                        if self.hasCompletedRegistration == nil {
+                            
+                            Auth.auth().signIn(with: credential) {(authResult, error) in
+                                if let error = error {
+                                    print("Error occurs when authenticate with Firebase: \(error.localizedDescription)")
+                                } else  {
+                                    
 
-                    self.db.collection("users").document((user?.email)!).setData([
-                        "email": self.emailId,
-                        "firstName": self.firstName,
-                        "secondName": self.secondName,
-                        "longitude": Double(self.userlocation.longitude),
-                        "latitude": Double(self.userlocation.latitude),
-                        "completedRegistration": false
-                    ]) { err in
-                        if let err = err {
-                            print("Error writing document: \(err)")
-                        } else {
-                            //NotificationCenter.default.post(name: .signInGoogleCompleted, object: nil)
-                            let vVc = storyboard.instantiateViewController(withIdentifier: "Vegan") as! VeganViewController
-                            vVc.modalPresentationStyle = .overFullScreen
-                            self.present(vVc, animated: true, completion: nil)
-                            print("Document successfully written! and was false")
+                                    self.firstName = (unwrappedUser.givenName)!
+                                    self.secondName = (unwrappedUser.familyName)!
+                                    self.emailId = (unwrappedUser.email)!
+                                    self.userlocation = self.location.coordinate
+                                    
+                                    self.db.collection("users").document((unwrappedUser.email)!).setData([
+                                        "email": self.emailId,
+                                        "firstName": self.firstName,
+                                        "secondName": self.secondName,
+                                        "longitude": Double(self.userlocation.longitude),
+                                        "latitude": Double(self.userlocation.latitude),
+                                        "completedRegistration": false
+                                    ]) { err in
+                                        if let err = err {
+                                            print("Error writing document: \(err)")
+                                        } else {
+                                            NotificationCenter.default.post(name: .signInGoogleCompleted, object: nil)
+                                        
+                                            
+                                            self.performSegue(withIdentifier: "goToVegan", sender: self)
+                                         
+                                        }
+                                    }
+                                    
+                                }
+                                
+                            }
+                        }  else if self.hasCompletedRegistration == true {
+                            // Sign in with Firebase.
+                            Auth.auth().signIn(with: credential) { (authResult, error) in
+                                if (error != nil) {
+                                    
+                                    
+                                    // Error. If error.code == .MissingOrInvalidNonce, make sure
+                                    // you're sending the SHA256-hashed nonce as a hex string with
+                                    // your request to Apple.
+                                    print(error!.localizedDescription)
+                                    return
+                                } else {
+
+                                    
+                                    self.performSegue(withIdentifier: "goToDash", sender: self)
+                                }
+                                
+                            }
+                            
+                        } else if self.hasCompletedRegistration == false {
+                            
+                            Auth.auth().signIn(with: credential) {(authResult, error) in
+                                if let error = error {
+                                    print("Error occurs when authenticate with Firebase: \(error.localizedDescription)")
+                                } else  {
+                                    
+                                    
+                                    
+                                    self.firstName = (unwrappedUser.givenName)!
+                                    self.secondName = (unwrappedUser.familyName)!
+                                    self.emailId = (unwrappedUser.email)!
+                                    self.userlocation = self.location.coordinate
+                                    
+                                    self.db.collection("users").document((unwrappedUser.email)!).setData([
+                                        "email": self.emailId,
+                                        "firstName": self.firstName,
+                                        "secondName": self.secondName,
+                                        "longitude": Double(self.userlocation.longitude),
+                                        "latitude": Double(self.userlocation.latitude),
+                                        "completedRegistration": false
+                                    ]) { err in
+                                        if let err = err {
+                                            print("Error writing document: \(err)")
+                                        } else {
+                                            NotificationCenter.default.post(name: .signInGoogleCompleted, object: nil)
+                                        
+                                            
+                                            self.performSegue(withIdentifier: "goToVegan", sender: self)
+
+                                        }
+                                    }
+                                    
+                                }
+                                
+                            }
+
                         }
+
+                    } else {
+                        Auth.auth().signIn(with: credential) {(authResult, error) in
+                            if let error = error {
+                                print("Error occurs when authenticate with Firebase: \(error.localizedDescription)")
+                            } else  {
+                                
+
+                                self.firstName = (unwrappedUser.givenName)!
+                                self.secondName = (unwrappedUser.familyName)!
+                                self.emailId = (unwrappedUser.email)!
+                                self.userlocation = self.location.coordinate
+                                
+                                self.db.collection("users").document((unwrappedUser.email)!).setData([
+                                    "email": self.emailId,
+                                    "firstName": self.firstName,
+                                    "secondName": self.secondName,
+                                    "longitude": Double(self.userlocation.longitude),
+                                    "latitude": Double(self.userlocation.latitude),
+                                    "completedRegistration": false
+                                ]) { err in
+                                    if let err = err {
+                                        print("Error writing document: \(err)")
+                                    } else {
+                                        NotificationCenter.default.post(name: .signInGoogleCompleted, object: nil)
+                                    
+                                        
+                                        self.performSegue(withIdentifier: "goToVegan", sender: self)
+                                     
+                                    }
+                                }
+                                
+                            }
+                            
+                        }
+
                     }
 
                 }
-
             }
         }
         
+        
+
         
         
     }
     
-
+  
     
-
-   }
+//    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+//
+//        if identifier == "goToVegan" {
+//            if let user = self.user?.email {
+//
+//                self.db.collection("users").document(user).getDocument { (document, error) in
+//
+//                    if let err = error {
+//                        print("this is the login viewwillappear eror \(err)")
+//                    } else {
+//                        if let dataDescription = document!.data() {
+//                            self.hasCompletedRegistration = (dataDescription["completedRegistration"] as! Bool)
+//                            print("should perform method: \(self.hasCompletedRegistration)")
+//
+//
+//                        }
+//
+//                    }
+//                }
+//
+//            }
+//
+//        }
+//
+//        if self.hasCompletedRegistration == true {
+//            return false
+//        } else {
+//            return true
+//        }
+//    }
+    
+    
+}
 
 
 
@@ -262,12 +382,12 @@ extension LoginViewController: ASAuthorizationControllerPresentationContextProvi
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         return self.view.window!
     }
-
-
+    
+    
 }
 
 extension Notification.Name {
-
+    
     /// Notification when user successfully sign in using Google
     static var signInGoogleCompleted: Notification.Name {
         return .init(rawValue: #function)
@@ -281,35 +401,35 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
     
     // Adapted from https://auth0.com/docs/api-auth/tutorials/nonce#generate-a-cryptographically-random-nonce
     private func randomNonceString(length: Int = 32) -> String {
-      precondition(length > 0)
-      let charset: Array<Character> =
-          Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
-      var result = ""
-      var remainingLength = length
-
-      while remainingLength > 0 {
-        let randoms: [UInt8] = (0 ..< 16).map { _ in
-          var random: UInt8 = 0
-          let errorCode = SecRandomCopyBytes(kSecRandomDefault, 1, &random)
-          if errorCode != errSecSuccess {
-            fatalError("Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)")
-          }
-          return random
+        precondition(length > 0)
+        let charset: Array<Character> =
+            Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
+        var result = ""
+        var remainingLength = length
+        
+        while remainingLength > 0 {
+            let randoms: [UInt8] = (0 ..< 16).map { _ in
+                var random: UInt8 = 0
+                let errorCode = SecRandomCopyBytes(kSecRandomDefault, 1, &random)
+                if errorCode != errSecSuccess {
+                    fatalError("Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)")
+                }
+                return random
+            }
+            
+            randoms.forEach { random in
+                if remainingLength == 0 {
+                    return
+                }
+                
+                if random < charset.count {
+                    result.append(charset[Int(random)])
+                    remainingLength -= 1
+                }
+            }
         }
-
-        randoms.forEach { random in
-          if remainingLength == 0 {
-            return
-          }
-
-          if random < charset.count {
-            result.append(charset[Int(random)])
-            remainingLength -= 1
-          }
-        }
-      }
-
-      return result
+        
+        return result
     }
     
     @available(iOS 13, *)
@@ -328,134 +448,129 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
         authorizationController.performRequests()
         
     }
-
+    
     @available(iOS 13, *)
     private func sha256(_ input: String) -> String {
-      let inputData = Data(input.utf8)
-      let hashedData = SHA256.hash(data: inputData)
-      let hashString = hashedData.compactMap {
-        return String(format: "%02x", $0)
-      }.joined()
-
-      return hashString
+        let inputData = Data(input.utf8)
+        let hashedData = SHA256.hash(data: inputData)
+        let hashString = hashedData.compactMap {
+            return String(format: "%02x", $0)
+        }.joined()
+        
+        return hashString
     }
-
-
-  func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
-    if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
-        
-        if let email = appleIDCredential.email {
+    
+    
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
             
-            self.db.collection("users").document(email).getDocument { (document, error) in
-                     
-                     if let err = error {
-                         print("this is the login viewwillappear eror \(err)")
-                     } else {
-                         if let dataDescription = document!.data() {
-                             
-                             self.hasCompletedRegistration = (dataDescription["completedRegistration"] as! Bool)
-                             print("this is the apple login \(self.hasCompletedRegistration!)")
+            if let email = appleIDCredential.email {
+                
+                self.db.collection("users").document(email).getDocument { (document, error) in
+                    
+                    if let err = error {
+                        print("this is the login viewwillappear eror \(err)")
+                    } else {
+                        if let dataDescription = document!.data() {
+                            
+                            self.hasCompletedRegistration = (dataDescription["completedRegistration"] as! Bool)
+                            print("this is the apple login \(self.hasCompletedRegistration)")
                             print(email)
-
-                         }
-      
-                     }
-                 }
-
-        }
-        
-        
-        
-      guard let nonce = currentNonce else {
-        fatalError("Invalid state: A login callback was received, but no login request was sent.")
-      }
-      guard let appleIDToken = appleIDCredential.identityToken else {
-        print("Unable to fetch identity token")
-        return
-      }
-      guard let idTokenString = String(data: appleIDToken, encoding: .utf8) else {
-        print("Unable to serialize token string from data: \(appleIDToken.debugDescription)")
-        return
-      }
-      // Initialize a Firebase credential.
-      let credential = OAuthProvider.credential(withProviderID: "apple.com",
-                                                idToken: idTokenString,
-                                                rawNonce: nonce)
-        
-        
-        
-        
-        
-        if self.hasCompletedRegistration == true {
-            // Sign in with Firebase.
-            Auth.auth().signIn(with: credential) { (authResult, error) in
-                if (error != nil) {
-
-
-                    // Error. If error.code == .MissingOrInvalidNonce, make sure
-                    // you're sending the SHA256-hashed nonce as a hex string with
-                    // your request to Apple.
-                    print(error!.localizedDescription)
-                    return
-                } else {
+                            
+                        }
+                        
+                    }
+                }
+                
+            }
             
-                        let dvc = self.storyboard!.instantiateViewController(withIdentifier: "Dashboard") as! DashboardTabController
+            
+            
+            guard let nonce = currentNonce else {
+                fatalError("Invalid state: A login callback was received, but no login request was sent.")
+            }
+            guard let appleIDToken = appleIDCredential.identityToken else {
+                print("Unable to fetch identity token")
+                return
+            }
+            guard let idTokenString = String(data: appleIDToken, encoding: .utf8) else {
+                print("Unable to serialize token string from data: \(appleIDToken.debugDescription)")
+                return
+            }
+            // Initialize a Firebase credential.
+            let credential = OAuthProvider.credential(withProviderID: "apple.com",
+                                                      idToken: idTokenString,
+                                                      rawNonce: nonce)
+            
+            
+            
+            
+            
+            if self.hasCompletedRegistration == false {
+                // Sign in with Firebase.
+                
+                Auth.auth().signIn(with: credential) {(authResult, error) in
+                    if let error = error {
+                        print("Error occurs when authenticate with Firebase: \(error.localizedDescription)")
+                    } else  {
+                        guard let user = authResult?.user else { return }
+                        let email = user.email ?? ""
                         
-                        dvc.modalPresentationStyle = .overFullScreen
+                        self.userlocation = self.location.coordinate
                         
-                        self.present(dvc, animated: true, completion: nil)
+                        self.db.collection("users").document(email).setData([
+                            "email": email,
+                            "firstName": " ",
+                            "secondName":" ",
+                            "longitude": Double(self.userlocation.longitude),
+                            "latitude": Double(self.userlocation.latitude),
+                            "completedRegistration": false
+                        ]) { err in
+                            if let err = err {
+                                print("Error writing document: \(err)")
+                            } else {
+                                self.performSegue(withIdentifier: "goToVegan", sender: self)
+                            }
+                        }
+                        
                     }
                     
                 }
-
                 
-              
+                
+                
             }
-   
-        else if self.hasCompletedRegistration == false || self.hasCompletedRegistration == nil{
             
-          
-            Auth.auth().signIn(with: credential) {(authResult, error) in
-                if let error = error {
-                    print("Error occurs when authenticate with Firebase: \(error.localizedDescription)")
-                } else  {
-                    guard let user = authResult?.user else { return }
-                    let email = user.email ?? ""
-
-                    self.userlocation = self.location.coordinate
-
-                    self.db.collection("users").document(email).setData([
-                        "email": email,
-                        "firstName": " ",
-                        "secondName":" ",
-                        "longitude": Double(self.userlocation.longitude),
-                        "latitude": Double(self.userlocation.latitude),
-                        "completedRegistration": false
-                    ]) { err in
-                        if let err = err {
-                            print("Error writing document: \(err)")
-                        } else {
-                            let vVc = self.storyboard!.instantiateViewController(withIdentifier: "Vegan") as! VeganViewController
-                            vVc.modalPresentationStyle = .overFullScreen
-                            self.present(vVc, animated: true, completion: nil)
-                            print("Document successfully written!")
-                        }
+            else if self.hasCompletedRegistration == true {
+                
+                Auth.auth().signIn(with: credential) { (authResult, error) in
+                    if (error != nil) {
+                        
+                        
+                        // Error. If error.code == .MissingOrInvalidNonce, make sure
+                        // you're sending the SHA256-hashed nonce as a hex string with
+                        // your request to Apple.
+                        print(error!.localizedDescription)
+                        return
+                    } else {
+                        
+                        self.performSegue(withIdentifier: "goToDash", sender: self)
                     }
-
+                    
                 }
-
+                
+        
             }
+            
         }
-
+        
     }
-    
-  }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-      // Handle error.
-      print("Sign in with Apple errored: \(error)")
+        // Handle error.
+        print("Sign in with Apple errored: \(error)")
     }
-
+    
 }
 
 

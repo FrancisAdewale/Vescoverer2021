@@ -50,16 +50,16 @@
                                         <rect key="frame" x="0.0" y="236" width="200" height="194.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Are You Vegan?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="thh-Xx-Mvb">
-                                                <rect key="frame" x="23.5" y="0.0" width="153.5" height="26.5"/>
+                                                <rect key="frame" x="22.5" y="0.0" width="155" height="26"/>
                                                 <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="22"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </label>
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" preferredStyle="sliding" translatesAutoresizingMaskIntoConstraints="NO" id="SeK-TS-D71">
-                                                <rect key="frame" x="75.5" y="62.5" width="51" height="31"/>
+                                                <rect key="frame" x="75.5" y="62" width="51" height="31"/>
                                             </switch>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o5E-4P-hUE">
-                                                <rect key="frame" x="74.5" y="129.5" width="51" height="65"/>
+                                                <rect key="frame" x="75" y="129" width="50" height="65.5"/>
                                                 <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="21"/>
                                                 <state key="normal" title="Done">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -165,6 +165,8 @@
                         <outlet property="background" destination="obO-NG-YJ4" id="3xB-sV-ID3"/>
                         <outlet property="googleView" destination="222-t8-5Ee" id="z0s-hP-TqQ"/>
                         <outlet property="titleLabel" destination="Kzt-8S-tbi" id="fWp-O6-8zt"/>
+                        <segue destination="13E-tF-3Ld" kind="presentation" identifier="goToVegan" modalPresentationStyle="fullScreen" id="YOQ-G9-2IS"/>
+                        <segue destination="paf-GN-kaX" kind="presentation" identifier="goToDash" modalPresentationStyle="fullScreen" id="tg6-BV-3S3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xoa-IF-zNk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -205,14 +207,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" image="spoonpic" translatesAutoresizingMaskIntoConstraints="NO" id="Teb-Zh-AmX">
-                                <rect key="frame" x="60" y="99.5" width="200" height="200"/>
+                                <rect key="frame" x="60" y="100" width="200" height="200"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="9BD-cH-mcP"/>
                                     <constraint firstAttribute="height" constant="200" id="Psp-q7-qOe"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow" translatesAutoresizingMaskIntoConstraints="NO" id="C2R-qc-fWP">
-                                <rect key="frame" x="110" y="340.5" width="100" height="100"/>
+                                <rect key="frame" x="110" y="341" width="100" height="100"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="G8z-lk-mGy"/>
@@ -220,7 +222,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XyU-cy-GbD">
-                                <rect key="frame" x="69" y="479.5" width="182" height="18"/>
+                                <rect key="frame" x="80.5" y="480" width="159" height="18"/>
                                 <string key="text">"Yes, a selfie with a spoon"
         </string>
                                 <fontDescription key="fontDescription" name="Lato-Italic" family="Lato" pointSize="15"/>
@@ -296,6 +298,7 @@
                                 </state>
                                 <connections>
                                     <action selector="next:" destination="UtU-I1-FsP" eventType="touchUpInside" id="yEW-6H-wFo"/>
+                                    <segue destination="bmP-7c-sYl" kind="presentation" identifier="goToUpload" modalPresentationStyle="fullScreen" id="WRU-yc-DGj"/>
                                 </connections>
                             </button>
                             <pickerView alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Oi-rp-SKx">
@@ -328,7 +331,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3BV-wg-Plh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2374.766355140187" y="3463.2829373650111"/>
+            <point key="canvasLocation" x="2372" y="3532"/>
         </scene>
         <!--Upload View Controller-->
         <scene sceneID="Ti2-0G-oni">
@@ -360,6 +363,7 @@
                                     <action selector="next:" destination="13E-tF-3Ld" eventType="touchUpInside" id="Ufe-HD-8xF"/>
                                     <action selector="next:" destination="bmP-7c-sYl" eventType="touchUpInside" id="WXO-tG-DdX"/>
                                     <action selector="next:" destination="UtU-I1-FsP" eventType="touchUpInside" id="up2-Sa-WlL"/>
+                                    <segue destination="uhU-hq-lhX" kind="presentation" identifier="goToSocials" modalPresentationStyle="fullScreen" id="Jik-PW-1mK"/>
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Upload Image" textAlignment="natural" lineBreakMode="characterWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mV8-ms-sRY">
@@ -405,7 +409,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zQN-XM-hV8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2374.766355140187" y="4189.6328293736506"/>
+            <point key="canvasLocation" x="2374" y="4283"/>
         </scene>
         <!--Socials View Controller-->
         <scene sceneID="xkK-Rd-vsY">
@@ -497,7 +501,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yf8-Y9-1sg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2373.3644859813085" y="4941.2526997840178"/>
+            <point key="canvasLocation" x="2374" y="5068"/>
         </scene>
         <!--Vegan View Controller-->
         <scene sceneID="sJe-rw-XWy">
@@ -537,6 +541,7 @@
                                 </state>
                                 <connections>
                                     <action selector="next:" destination="13E-tF-3Ld" eventType="touchUpInside" id="J2d-Wc-kJw"/>
+                                    <segue destination="m5d-2d-hhg" kind="presentation" identifier="goToName" modalPresentationStyle="fullScreen" id="iw7-aV-t0c"/>
                                 </connections>
                             </button>
                             <pickerView alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aye-ik-tDU">
@@ -559,6 +564,7 @@
                             <constraint firstItem="srd-dn-Dl4" firstAttribute="leading" secondItem="aZa-SB-mF1" secondAttribute="leadingMargin" constant="-22" id="gbg-Zv-I4m"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="j3w-Zp-wr0"/>
                     <connections>
                         <outlet property="background" destination="srd-dn-Dl4" id="tKO-lO-SGQ"/>
                         <outlet property="nextButton" destination="15n-mL-MoG" id="N7o-LV-dXT"/>
@@ -635,6 +641,7 @@
                                 <connections>
                                     <action selector="next:" destination="m5d-2d-hhg" eventType="touchUpInside" id="Jeq-40-EC0"/>
                                     <action selector="next:" destination="13E-tF-3Ld" eventType="touchUpInside" id="Zub-WC-Hb7"/>
+                                    <segue destination="kre-u1-MDP" kind="presentation" identifier="goToAge" modalPresentationStyle="fullScreen" id="hId-Re-8DR"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -665,7 +672,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oqp-fK-tgI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2357.9439252336447" y="2007.9913606911448"/>
+            <point key="canvasLocation" x="2357" y="2048"/>
         </scene>
         <!--Age View Controller-->
         <scene sceneID="GgW-1L-6ME">
@@ -720,6 +727,7 @@
                                 <connections>
                                     <action selector="next:" destination="13E-tF-3Ld" eventType="touchUpInside" id="chh-Xd-HpA"/>
                                     <action selector="next:" destination="kre-u1-MDP" eventType="touchUpInside" id="cuO-yX-mnQ"/>
+                                    <segue destination="UtU-I1-FsP" kind="presentation" identifier="goToGender" modalPresentationStyle="fullScreen" id="yKe-Ec-G2O"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="20" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g68-8y-k3j">
@@ -746,6 +754,7 @@
                             <constraint firstItem="11G-eK-CRn" firstAttribute="trailing" secondItem="wsx-WC-wTj" secondAttribute="trailing" constant="215" id="sf3-sN-wr1"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="sNI-Mr-BHj"/>
                     <connections>
                         <outlet property="age" destination="g68-8y-k3j" id="fFd-gH-GxN"/>
                         <outlet property="ageLabel" destination="wsx-WC-wTj" id="Dft-op-gsg"/>
@@ -758,7 +767,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FDu-D6-JID" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2380.3738317757006" y="2719.4384449244062"/>
+            <point key="canvasLocation" x="2357" y="2768"/>
         </scene>
         <!--Dashboard Tab Controller-->
         <scene sceneID="Hbp-2N-VWv">

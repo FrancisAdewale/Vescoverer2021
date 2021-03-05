@@ -88,7 +88,7 @@ class SocialsTableViewCell: UITableViewCell {
             vc!.present(alert, animated: true, completion: nil)
             alert.view.tintColor = UIColor(hexString: "3797A4")
         } else {
-            let alert = UIAlertController(title: "Edit", message: "Twitter Instagram: @\(twitterAt?.capitalized ?? "Add Twitter")", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Edit", message: "Twitter: @\(twitterAt?.capitalized ?? "Add Twitter")", preferredStyle: .alert)
             let action = UIAlertAction(title: "Done", style: .default, handler: { action in
                 let newTwit = textField.text!
                 
@@ -113,12 +113,12 @@ class SocialsTableViewCell: UITableViewCell {
             alert.addAction(action)
             alert.addAction(cancelAction)
             
-            vc!.present(alert, animated: true){
-                alert.view.tintColor = UIColor(hexString: "3797A4")
-            }
+            vc!.present(alert, animated: true,completion: nil)
+            alert.view.tintColor = UIColor(hexString: "3797A4")
+            
         }
         
-       
+        
 
     }
     

@@ -92,6 +92,19 @@ class UploadViewController: UIViewController,UIImagePickerControllerDelegate & U
     
     
     @IBAction func next(_ sender: Any) {
+
+        let user = Auth.auth().currentUser
+        
+        if let user = user?.email {
+            if let path = imagePath {
+                db.collection("users").document(user).setData(["imagepath" : path], merge: true)
+                
+            }
+   
+        }
+    }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         
         let animation = CABasicAnimation(keyPath: "position")
         animation.duration = 0.07
@@ -101,26 +114,15 @@ class UploadViewController: UIViewController,UIImagePickerControllerDelegate & U
         animation.toValue = NSValue(cgPoint: CGPoint(x: uploadImage.center.x + 10, y: uploadImage.center.y))
         
         
-        let svc = storyboard?.instantiateViewController(withIdentifier: "Social") as! SocialsViewController
-        
-        let user = Auth.auth().currentUser
-        
-        if let user = user?.email {
-            svc.currentuser = user
-            if let path = imagePath {
-                db.collection("users").document(currentuser).setData(["imagepath" : path], merge: true)
-                
-            }
+        if imagePath == nil {
+            uploadImage.layer.add(animation, forKey: "position")
+            return false
             
-            svc.modalPresentationStyle = .overFullScreen
+        } else {
             
-            if imagePath == nil {
-                uploadImage.layer.add(animation, forKey: "position")
-                
-            } else {
-                present(svc, animated: true, completion: nil)
-                
-            }
+            performSegue(withIdentifier: "goToSocials", sender: self)
+            return true
+            //present(svc, animated: true, completion: nil)
             
         }
     }

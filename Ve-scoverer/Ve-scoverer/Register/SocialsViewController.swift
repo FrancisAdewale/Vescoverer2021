@@ -31,6 +31,7 @@ class SocialsViewController: UIViewController {
     var editedTwitter = String()
     var currentuser = ""
     let db = Firestore.firestore()
+    let profileUser = ProfileUser()
     
 
     override func viewDidLoad() {
@@ -80,13 +81,18 @@ class SocialsViewController: UIViewController {
 
         } else {
             
-            db.collection("users").document(currentuser).setData([
-                "instagram": instagram,
-                "twitter": twitter,
-                "completedRegistration": true,
-                "isVerified": false
-            ], merge: true)
-           
+            let user = Auth.auth().currentUser
+            
+            if let user = user?.email {
+                db.collection("users").document(user).setData([
+                    "instagram": instagram,
+                    "twitter": twitter,
+                    "completedRegistration": true,
+                    "isVerified": false
+                ], merge: true)
+            }
+            
+         
             dvc.modalPresentationStyle = .currentContext
             
         //PRESENT LAUNCHPAD SCREEN AGAIN BEFORE PRESENTING DVC // also add random ratings popup.
@@ -100,9 +106,7 @@ class SocialsViewController: UIViewController {
             }
 
         }
-        
 
-    
     }
     
     @IBAction func instagramPressed(_ sender: UIButton) {
@@ -118,7 +122,6 @@ class SocialsViewController: UIViewController {
             let action = UIAlertAction(title: "Add", style: .default) { (action) in
                 self.instagramLink += "\(textField.text!)"
                 self.instagram = self.instagramLink
-                self.instaButton.addToolTip(description: textField.text!)
 
                     
             }
@@ -139,7 +142,10 @@ class SocialsViewController: UIViewController {
         actionsheet.addAction(cancelAction)
 
         
-        present(actionsheet, animated: true, completion: nil)
+        present(actionsheet, animated: true) {
+            self.instaButton.addToolTip(description: textField.text!)
+
+        }
         actionsheet.view.tintColor = UIColor(hexString: "3797A4")
 
       
@@ -162,7 +168,6 @@ class SocialsViewController: UIViewController {
   
                 self.twitterWebLink += "\(textField.text!)"
                 self.twitter = self.twitterWebLink
-                self.twitterButton.addToolTip(description: textField.text!)
 
 
 
@@ -184,7 +189,10 @@ class SocialsViewController: UIViewController {
         actionsheet.addAction(editAction)
         actionsheet.addAction(cancelAction)
 
-        present(actionsheet, animated: true,completion: nil)
+        present(actionsheet, animated: true) {
+            self.twitterButton.addToolTip(description: textField.text!)
+
+        }
         actionsheet.view.tintColor = UIColor(hexString: "3797A4")
 
 
