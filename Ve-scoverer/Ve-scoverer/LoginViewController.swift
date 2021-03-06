@@ -462,30 +462,11 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
     
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        
         if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
-            
-            if let email = appleIDCredential.email {
-                
-                self.db.collection("users").document(email).getDocument { (document, error) in
                     
-                    if let err = error {
-                        print("this is the login viewwillappear eror \(err)")
-                    } else {
-                        if let dataDescription = document!.data() {
-                            
-                            self.hasCompletedRegistration = (dataDescription["completedRegistration"] as! Bool)
-                            print("this is the apple login \(self.hasCompletedRegistration)")
-                            print(email)
-                            
-                        }
-                        
-                    }
-                }
-                
-            }
-            
-            
-            
+
+
             guard let nonce = currentNonce else {
                 fatalError("Invalid state: A login callback was received, but no login request was sent.")
             }
@@ -501,14 +482,13 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
             let credential = OAuthProvider.credential(withProviderID: "apple.com",
                                                       idToken: idTokenString,
                                                       rawNonce: nonce)
+
+
+      
             
-            
-            
-            
-            
-            if self.hasCompletedRegistration == false {
+
                 // Sign in with Firebase.
-                
+
                 Auth.auth().signIn(with: credential) {(authResult, error) in
                     if let error = error {
                         print("Error occurs when authenticate with Firebase: \(error.localizedDescription)")
@@ -516,60 +496,145 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                         guard let user = authResult?.user else { return }
                         let email = user.email ?? ""
                         
-                        self.userlocation = self.location.coordinate
                         
-                        self.db.collection("users").document(email).setData([
-                            "email": email,
-                            "firstName": " ",
-                            "secondName":" ",
-                            "longitude": Double(self.userlocation.longitude),
-                            "latitude": Double(self.userlocation.latitude),
-                            "completedRegistration": false
-                        ]) { err in
-                            if let err = err {
-                                print("Error writing document: \(err)")
+                        self.db.collection("users").document(email).getDocument { (document, error) in
+                            
+                            if let err = error {
+                                print("this is the login viewwillappear eror \(err)")
                             } else {
-                                self.performSegue(withIdentifier: "goToVegan", sender: self)
+                                if let dataDescription = document!.data() {
+                                    
+                                    self.hasCompletedRegistration = (dataDescription["completedRegistration"] as! Bool)
+
+                                    if self.hasCompletedRegistration == nil {
+                                        
+                                           self.userlocation = self.location.coordinate
+
+                                           self.db.collection("users").document(email).setData([
+                                               "email": email,
+                                               "firstName": "",
+                                               "secondName":"",
+                                               "longitude": Double(self.userlocation.longitude),
+                                               "latitude": Double(self.userlocation.latitude),
+                                               "completedRegistration": false
+                                           ]) { err in
+                                               if let err = err {
+                                                   print("Error writing document: \(err)")
+                                               } else {
+                                                   self.performSegue(withIdentifier: "goToVegan", sender: self)
+                                               }
+                                           }
+                                        
+                                    }
+                                    else if self.hasCompletedRegistration == true {
+
+                                        Auth.auth().signIn(with: credential) { (authResult, error) in
+                                            if (error != nil) {
+
+
+                                                // Error. If error.code == .MissingOrInvalidNonce, make sure
+                                                // you're sending the SHA256-hashed nonce as a hex string with
+                                                // your request to Apple.
+                                                print(error!.localizedDescription)
+                                                return
+                                            } else {
+
+                                                self.performSegue(withIdentifier: "goToDash", sender: self)
+                                            }
+
+                                        }
+
+
+                                    } else if self.hasCompletedRegistration == false {
+                                                   Auth.auth().signIn(with: credential) {(authResult, error) in
+                                                       if let error = error {
+                                                           print("Error occurs when authenticate with Firebase: \(error.localizedDescription)")
+                                                       } else  {
+
+
+                                                           guard let user = authResult?.user else { return }
+                                                           let email = user.email ?? ""
+
+                                                           self.userlocation = self.location.coordinate
+
+                                                           self.db.collection("users").document(email).setData([
+                                                               "email": email,
+                                                               "firstName": "",
+                                                               "secondName":"",
+                                                               "longitude": Double(self.userlocation.longitude),
+                                                               "latitude": Double(self.userlocation.latitude),
+                                                               "completedRegistration": false
+                                                           ]) { err in
+                                                               if let err = err {
+                                                                   print("Error writing document: \(err)")
+                                                               } else {
+                                                                   self.performSegue(withIdentifier: "goToVegan", sender: self)
+                                                               }
+                                                           }
+
+                                                       }
+
+                                                   }
+                                               } else {
+                                                Auth.auth().signIn(with: credential) {(authResult, error) in
+                                                    if let error = error {
+                                                        print("Error occurs when authenticate with Firebase: \(error.localizedDescription)")
+                                                    } else  {
+
+
+                                                        guard let user = authResult?.user else { return }
+                                                        let email = user.email ?? ""
+
+                                                        self.userlocation = self.location.coordinate
+
+                                                        self.db.collection("users").document(email).setData([
+                                                            "email": email,
+                                                            "firstName": "",
+                                                            "secondName":"",
+                                                            "longitude": Double(self.userlocation.longitude),
+                                                            "latitude": Double(self.userlocation.latitude),
+                                                            "completedRegistration": false
+                                                        ]) { err in
+                                                            if let err = err {
+                                                                print("Error writing document: \(err)")
+                                                            } else {
+                                                                self.performSegue(withIdentifier: "goToVegan", sender: self)
+                                                            }
+                                                        }
+
+                                                    }
+
+                                                }
+                                            }
+
+                                          
+                                }
+                                
+                 
                             }
+                            
                         }
                         
+                
+
                     }
-                    
+
                 }
-                
-                
-                
-            }
-            
-            else if self.hasCompletedRegistration == true {
-                
-                Auth.auth().signIn(with: credential) { (authResult, error) in
-                    if (error != nil) {
-                        
-                        
-                        // Error. If error.code == .MissingOrInvalidNonce, make sure
-                        // you're sending the SHA256-hashed nonce as a hex string with
-                        // your request to Apple.
-                        print(error!.localizedDescription)
-                        return
-                    } else {
-                        
-                        self.performSegue(withIdentifier: "goToDash", sender: self)
-                    }
-                    
-                }
-                
-        
+
+
+
+
             }
             
         }
         
-    }
+    
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
         // Handle error.
         print("Sign in with Apple errored: \(error)")
     }
+
     
 }
 
