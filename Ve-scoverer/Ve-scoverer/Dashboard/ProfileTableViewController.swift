@@ -307,33 +307,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         let alert = UIAlertController(title: "Delete Account", message: "Permanently Delete Account?", preferredStyle: .alert)
         let action = UIAlertAction(title: "Yes", style: .destructive, handler: { action in
            
-//            Auth.auth().addStateDidChangeListener { (auth, user) in
-//
-//                user?.delete(completion: { (error) in
-//                    if let error = error {
-//                      // An error happened.
-//                      print(error.localizedDescription)
-//                    } else {
-//                      self.db.collection("users").document((self.user!.email)!).delete() { err in
-//                          if let err = err {
-//                              print("Error removing document: \(err)")
-//                          } else {
-//                              print("Document successfully removed!")
-//                              self.present(loadingVC, animated: true) {
-//                              print("deleted account")
-//                                  Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { (timer) in
-//                                      self.dismiss(animated: true) {
-//
-//                                          self.navigationController!.popToViewController(lvc, animated: true)
-//
-//                                          }
-//                                      }
-//                                  }
-//                          }
-//                      }
-//                    }
-//                })
-//            }
+
 
             self.user?.delete { error in
               if let error = error {

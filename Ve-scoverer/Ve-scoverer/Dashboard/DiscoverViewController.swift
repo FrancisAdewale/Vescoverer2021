@@ -107,49 +107,44 @@ extension DiscoverViewController: CLLocationManagerDelegate {
 extension DiscoverViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        let name = view.annotation!.title!
 
         DispatchQueue.main.async {
+            let name = view.annotation!.title!
+
             self.db.collection("users").document(name!).getDocument(completion: { (snapShot, err) in
                     if let err = err {
                         print(err)
                     } else {
                         if let document = snapShot!.data() {
                             self.name = ((document["firstName"] as? String)!)
+                            
+                            let alert = UIAlertController(title: "Add \(self.name)", message: "", preferredStyle: .alert)
+                            
+                            let action = UIAlertAction(title: "Add", style: .default) { (action) in
+                                if let user = view.annotation?.title {
+                                    
+                                    self.db.collection("users").document(self.user!).collection("found").document(user!).setData(["latitude":Double((view.annotation?.coordinate.longitude)!), "longitude": Double((view.annotation?.coordinate.latitude)!), "email":user!
+                                                                                                                                  
+                                    ])
+             
+                                    if let tabItems = self.tabBarController?.tabBar.items {
+                                        // In this case we want to modify the badge number of the third tab:
+                                        let tabItem = tabItems[3]
+                                        tabItem.badgeValue = "1"
+                                    }
+                                }
+                            }
+                            
+                            let cancelAction = UIAlertAction(title: "Nvm", style: .cancel, handler: nil)
+                            alert.addAction(cancelAction)
+                            alert.addAction(action)
+                            self.present(alert, animated: true, completion: nil)
+                            alert.view.tintColor = UIColor(hexString: "3797A4")
                         }
                     }
                 })
-
-            
+    
         }
-
-        
-        
-        let alert = UIAlertController(title: "Add \(self.name)", message: "", preferredStyle: .alert)
-        
-        let action = UIAlertAction(title: "Add", style: .default) { (action) in
-            if let user = view.annotation?.title {
-                
-                self.db.collection("users").document(self.user!).collection("found").document(user!).setData(["latitude":Double((view.annotation?.coordinate.longitude)!), "longitude": Double((view.annotation?.coordinate.latitude)!), "email":user!
-                                                                                                              
-                ])
-                
-                
-                
-                if let tabItems = self.tabBarController?.tabBar.items {
-                    // In this case we want to modify the badge number of the third tab:
-                    let tabItem = tabItems[3]
-                    tabItem.badgeValue = "1"
-                }
-            }
-        }
-        
-        let cancelAction = UIAlertAction(title: "Nvm", style: .cancel, handler: nil)
-        alert.addAction(cancelAction)
-        alert.addAction(action)
-        present(alert, animated: true, completion: nil)
-        alert.view.tintColor = UIColor(hexString: "3797A4")
-
-      
+ 
     }
 }

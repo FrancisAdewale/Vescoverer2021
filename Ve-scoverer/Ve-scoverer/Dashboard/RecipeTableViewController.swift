@@ -29,9 +29,14 @@ class RecipeTableViewController: UITableViewController {
     var isFiltering: Bool {
       return searchController.isActive && !isSearchBarEmpty
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchData()
+
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchData()
 
         title = "Recipes"
         
@@ -131,9 +136,11 @@ class RecipeTableViewController: UITableViewController {
 
     func fetchData() {
     
-      // 1
+      // 1          CHANGE API KEY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         let request = AF.request("https://api.spoonacular.com/recipes/complexSearch?apiKey=e37fd98195e0427ba55710ad55eb4609&diet=vegan&number=100&addRecipeInformation=True")
       // 2
+        
+        
         request.responseDecodable(of: X.self) { (response) in
                 guard let x = response.value else { return }
                 self.recipes = x.results
