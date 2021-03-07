@@ -350,7 +350,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
                             Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { (timer) in
                                 self.dismiss(animated: true) {
 
-                                    self.navigationController!.show(lvc, sender: self)
+                                    self.present(lvc, animated: true, completion: nil)
 
                                     }
                                 }

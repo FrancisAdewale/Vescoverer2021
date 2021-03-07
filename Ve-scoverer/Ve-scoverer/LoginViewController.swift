@@ -38,6 +38,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
     var user = Auth.auth().currentUser
     var userlocation = CLLocationCoordinate2D()
     var hasCompletedRegistration: Bool?
+    var appleUser = ""
     
     
     
@@ -50,12 +51,12 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
         // navigationController?.navigationBar.backgroundColor = .white
         //        appleButton.backgroundColor = .gray
         navigationController?.navigationBar.barTintColor = .white
-       
-       
-       handle = Auth.auth().addStateDidChangeListener { (auth, user) in
+        
+        
+        handle = Auth.auth().addStateDidChangeListener { (auth, user) in
             if let unwrappedUser = user?.email {
                 self.db.collection("users").document(unwrappedUser).getDocument { (document, error) in
-
+                    
                     if let err = error {
                         print("this is the login viewwillappear eror \(err)")
                     } else {
@@ -69,43 +70,43 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
                                 self.performSegue(withIdentifier: "goToVegan", sender: self)
                             }
                         }
-
+                        
                     }
                     
-                   
+                    
                 }
             }
         }
-
-    
-            
+        
+        
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//
-//        if let unwrappedUser = user?.email {
-//            self.db.collection("users").document(unwrappedUser).getDocument { (document, error) in
-//
-//                if let err = error {
-//                    print("this is the login viewwillappear eror \(err)")
-//                } else {
-//                    if let dataDescription = document!.data() {
-//                        self.hasCompletedRegistration = (dataDescription["completedRegistration"] as! Bool)
-//                        print("login view did load \(self.hasCompletedRegistration)")
-//                        print(unwrappedUser)
-//
-//                    }
-//
-//                }
-//            }
-//        }
-//
+        //
+        //        if let unwrappedUser = user?.email {
+        //            self.db.collection("users").document(unwrappedUser).getDocument { (document, error) in
+        //
+        //                if let err = error {
+        //                    print("this is the login viewwillappear eror \(err)")
+        //                } else {
+        //                    if let dataDescription = document!.data() {
+        //                        self.hasCompletedRegistration = (dataDescription["completedRegistration"] as! Bool)
+        //                        print("login view did load \(self.hasCompletedRegistration)")
+        //                        print(unwrappedUser)
+        //
+        //                    }
+        //
+        //                }
+        //            }
+        //        }
+        //
         title = "Login"
         titleLabel.text = ""
         var charIndex = 0.0
         let titleText = "Vescoverer"
-
+        
         for l in titleText {
             Timer.scheduledTimer(withTimeInterval: 0.1555 * charIndex, repeats: false) { (timer) in
                 self.titleLabel.text?.append(l)
@@ -132,10 +133,10 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
         
     }
     
-        override func viewWillDisappear(_ animated: Bool) {
-            Auth.auth().removeStateDidChangeListener(handle!)
-    
-        }
+    override func viewWillDisappear(_ animated: Bool) {
+        Auth.auth().removeStateDidChangeListener(handle!)
+        
+    }
     
     
     
@@ -147,7 +148,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
         appleView.center = view.center
         appleView.cornerRadius = 0
         self.view.addSubview(appleView)
-  
+        
     }
     
     func setupGoogleButton() {
@@ -158,7 +159,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
         googleView.frame = CGRect(x: 117.0, y: 200.0, width: 191.0, height: 42.0)
         googleView.center = .init(x: center.x, y: y - CGFloat(50))
     }
-
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         location = locations.last!
         
@@ -191,7 +192,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
         
         if let unwrappedUser = user?.profile {
             self.db.collection("users").document(unwrappedUser.email!).getDocument { (document, error) in
-
+                
                 if let err = error {
                     print("this is the login viewwillappear eror \(err)")
                 } else {
@@ -207,7 +208,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
                                     print("Error occurs when authenticate with Firebase: \(error.localizedDescription)")
                                 } else  {
                                     
-
+                                    
                                     self.firstName = (unwrappedUser.givenName)!
                                     self.secondName = (unwrappedUser.familyName)!
                                     self.emailId = (unwrappedUser.email)!
@@ -225,10 +226,10 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
                                             print("Error writing document: \(err)")
                                         } else {
                                             NotificationCenter.default.post(name: .signInGoogleCompleted, object: nil)
-                                        
+                                            
                                             
                                             self.performSegue(withIdentifier: "goToVegan", sender: self)
-                                         
+                                            
                                         }
                                     }
                                     
@@ -247,7 +248,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
                                     print(error!.localizedDescription)
                                     return
                                 } else {
-
+                                    
                                     
                                     self.performSegue(withIdentifier: "goToDash", sender: self)
                                 }
@@ -280,26 +281,26 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
                                             print("Error writing document: \(err)")
                                         } else {
                                             NotificationCenter.default.post(name: .signInGoogleCompleted, object: nil)
-                                        
+                                            
                                             
                                             self.performSegue(withIdentifier: "goToVegan", sender: self)
-
+                                            
                                         }
                                     }
                                     
                                 }
                                 
                             }
-
+                            
                         }
-
+                        
                     } else {
                         Auth.auth().signIn(with: credential) {(authResult, error) in
                             if let error = error {
                                 print("Error occurs when authenticate with Firebase: \(error.localizedDescription)")
                             } else  {
                                 
-
+                                
                                 self.firstName = (unwrappedUser.givenName)!
                                 self.secondName = (unwrappedUser.familyName)!
                                 self.emailId = (unwrappedUser.email)!
@@ -317,61 +318,61 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
                                         print("Error writing document: \(err)")
                                     } else {
                                         NotificationCenter.default.post(name: .signInGoogleCompleted, object: nil)
-                                    
+                                        
                                         
                                         self.performSegue(withIdentifier: "goToVegan", sender: self)
-                                     
+                                        
                                     }
                                 }
                                 
                             }
                             
                         }
-
+                        
                     }
-
+                    
                 }
             }
         }
         
         
-
+        
         
         
     }
     
-  
     
-//    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-//
-//        if identifier == "goToVegan" {
-//            if let user = self.user?.email {
-//
-//                self.db.collection("users").document(user).getDocument { (document, error) in
-//
-//                    if let err = error {
-//                        print("this is the login viewwillappear eror \(err)")
-//                    } else {
-//                        if let dataDescription = document!.data() {
-//                            self.hasCompletedRegistration = (dataDescription["completedRegistration"] as! Bool)
-//                            print("should perform method: \(self.hasCompletedRegistration)")
-//
-//
-//                        }
-//
-//                    }
-//                }
-//
-//            }
-//
-//        }
-//
-//        if self.hasCompletedRegistration == true {
-//            return false
-//        } else {
-//            return true
-//        }
-//    }
+    
+    //    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+    //
+    //        if identifier == "goToVegan" {
+    //            if let user = self.user?.email {
+    //
+    //                self.db.collection("users").document(user).getDocument { (document, error) in
+    //
+    //                    if let err = error {
+    //                        print("this is the login viewwillappear eror \(err)")
+    //                    } else {
+    //                        if let dataDescription = document!.data() {
+    //                            self.hasCompletedRegistration = (dataDescription["completedRegistration"] as! Bool)
+    //                            print("should perform method: \(self.hasCompletedRegistration)")
+    //
+    //
+    //                        }
+    //
+    //                    }
+    //                }
+    //
+    //            }
+    //
+    //        }
+    //
+    //        if self.hasCompletedRegistration == true {
+    //            return false
+    //        } else {
+    //            return true
+    //        }
+    //    }
     
     
 }
@@ -442,10 +443,13 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
         request.requestedScopes = [.fullName, .email]
         request.nonce = sha256(nonce)
         
+        
+        
         let authorizationController = ASAuthorizationController(authorizationRequests: [request])
         authorizationController.delegate = self
         authorizationController.presentationContextProvider = self
         authorizationController.performRequests()
+        
         
     }
     
@@ -464,9 +468,8 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         
         if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
-                    
-
-
+            
+            
             guard let nonce = currentNonce else {
                 fatalError("Invalid state: A login callback was received, but no login request was sent.")
             }
@@ -482,19 +485,38 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
             let credential = OAuthProvider.credential(withProviderID: "apple.com",
                                                       idToken: idTokenString,
                                                       rawNonce: nonce)
-
-
-      
             
-
+//            if let user = Auth.auth().currentUser?.email {
+//                
+//                self.db.collection("users").document(user).getDocument { (document, error) in
+//                    
+//                    if let err = error {
+//                        print("this is the login viewwillappear eror \(err)")
+//                    } else {
+//                        if let dataDescription = document!.data() {
+//                            self.hasCompletedRegistration = (dataDescription["completedRegistration"] as! Bool)
+//                            print("login view will appear \(self.hasCompletedRegistration)")
+//                
+//                        }
+//                    }
+//                }
+//            }
+//            
+//            
+//       
+            
+            
+            
+                
                 // Sign in with Firebase.
-
+                
                 Auth.auth().signIn(with: credential) {(authResult, error) in
                     if let error = error {
                         print("Error occurs when authenticate with Firebase: \(error.localizedDescription)")
                     } else  {
                         guard let user = authResult?.user else { return }
                         let email = user.email ?? ""
+                        self.appleUser = email
                         
                         
                         self.db.collection("users").document(email).getDocument { (document, error) in
@@ -505,136 +527,145 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                                 if let dataDescription = document!.data() {
                                     
                                     self.hasCompletedRegistration = (dataDescription["completedRegistration"] as! Bool)
-
+                                    
                                     if self.hasCompletedRegistration == nil {
                                         
-                                           self.userlocation = self.location.coordinate
-
-                                           self.db.collection("users").document(email).setData([
-                                               "email": email,
-                                               "firstName": "",
-                                               "secondName":"",
-                                               "longitude": Double(self.userlocation.longitude),
-                                               "latitude": Double(self.userlocation.latitude),
-                                               "completedRegistration": false
-                                           ]) { err in
-                                               if let err = err {
-                                                   print("Error writing document: \(err)")
-                                               } else {
-                                                   self.performSegue(withIdentifier: "goToVegan", sender: self)
-                                               }
-                                           }
+                                        self.userlocation = self.location.coordinate
+                                        
+                                        self.db.collection("users").document(email).setData([
+                                            "email": email,
+                                            "firstName": "",
+                                            "secondName":"",
+                                            "longitude": Double(self.userlocation.longitude),
+                                            "latitude": Double(self.userlocation.latitude),
+                                            "completedRegistration": false
+                                        ]) { err in
+                                            if let err = err {
+                                                print("Error writing document: \(err)")
+                                            } else {
+                                                self.performSegue(withIdentifier: "goToVegan", sender: self)
+                                            }
+                                        }
                                         
                                     }
                                     else if self.hasCompletedRegistration == true {
-
-                                        Auth.auth().signIn(with: credential) { (authResult, error) in
-                                            if (error != nil) {
-
-
-                                                // Error. If error.code == .MissingOrInvalidNonce, make sure
-                                                // you're sending the SHA256-hashed nonce as a hex string with
-                                                // your request to Apple.
-                                                print(error!.localizedDescription)
-                                                return
-                                            } else {
-
-                                                self.performSegue(withIdentifier: "goToDash", sender: self)
-                                            }
-
+                                        
+                                        
+                                        
+                                        self.performSegue(withIdentifier: "goToDash", sender: self)
+                                        
+                                        
+                                    }
+                                    
+                                    
+                                } else if self.hasCompletedRegistration == false {
+                                    
+                                    
+                                    
+                                    guard let user = authResult?.user else { return }
+                                    let email = user.email ?? ""
+                                    
+                                    
+                                    
+                                    self.userlocation = self.location.coordinate
+                                    
+                                    self.db.collection("users").document(email).setData([
+                                        "email": email,
+                                        "firstName": "",
+                                        "secondName":"",
+                                        "longitude": Double(self.userlocation.longitude),
+                                        "latitude": Double(self.userlocation.latitude),
+                                        "completedRegistration": false
+                                    ]) { err in
+                                        if let err = err {
+                                            print("Error writing document: \(err)")
+                                        } else {
                                         }
+                                    }
+                                    
+                                    
+                                    
+                                } else {
+                                    
+                                    
+                                    guard let user = authResult?.user else { return }
+                                    let email = user.email ?? ""
+                                    
+                                    
+                                    
+                                    self.userlocation = self.location.coordinate
+                                    
+                                    self.db.collection("users").document(email).setData([
+                                        "email": email,
+                                        "firstName": "",
+                                        "secondName":"",
+                                        "longitude": Double(self.userlocation.longitude),
+                                        "latitude": Double(self.userlocation.latitude),
+                                        "completedRegistration": false
+                                    ]) { err in
+                                        if let err = err {
+                                            print("Error writing document: \(err)")
+                                        } else {
+                                        }
+                                    }
 
+                                    self.performSegue(withIdentifier: "goToVegan", sender: self)
 
-                                    } else if self.hasCompletedRegistration == false {
-                                                   Auth.auth().signIn(with: credential) {(authResult, error) in
-                                                       if let error = error {
-                                                           print("Error occurs when authenticate with Firebase: \(error.localizedDescription)")
-                                                       } else  {
-
-
-                                                           guard let user = authResult?.user else { return }
-                                                           let email = user.email ?? ""
-
-                                                           self.userlocation = self.location.coordinate
-
-                                                           self.db.collection("users").document(email).setData([
-                                                               "email": email,
-                                                               "firstName": "",
-                                                               "secondName":"",
-                                                               "longitude": Double(self.userlocation.longitude),
-                                                               "latitude": Double(self.userlocation.latitude),
-                                                               "completedRegistration": false
-                                                           ]) { err in
-                                                               if let err = err {
-                                                                   print("Error writing document: \(err)")
-                                                               } else {
-                                                                   self.performSegue(withIdentifier: "goToVegan", sender: self)
-                                                               }
-                                                           }
-
-                                                       }
-
-                                                   }
-                                               } else {
-                                                Auth.auth().signIn(with: credential) {(authResult, error) in
-                                                    if let error = error {
-                                                        print("Error occurs when authenticate with Firebase: \(error.localizedDescription)")
-                                                    } else  {
-
-
-                                                        guard let user = authResult?.user else { return }
-                                                        let email = user.email ?? ""
-
-                                                        self.userlocation = self.location.coordinate
-
-                                                        self.db.collection("users").document(email).setData([
-                                                            "email": email,
-                                                            "firstName": "",
-                                                            "secondName":"",
-                                                            "longitude": Double(self.userlocation.longitude),
-                                                            "latitude": Double(self.userlocation.latitude),
-                                                            "completedRegistration": false
-                                                        ]) { err in
-                                                            if let err = err {
-                                                                print("Error writing document: \(err)")
-                                                            } else {
-                                                                self.performSegue(withIdentifier: "goToVegan", sender: self)
-                                                            }
-                                                        }
-
-                                                    }
-
-                                                }
-                                            }
-
-                                          
                                 }
-                                
-                 
                             }
-                            
+                            //                                   else {
+                            //
+                            //
+                            //
+                            //                                                        guard let user = authResult?.user else { return }
+                            //                                                        let email = user.email ?? ""
+                            //
+                            //                                                        self.userlocation = self.location.coordinate
+                            //
+                            //                                                        self.db.collection("users").document(email).setData([
+                            //                                                            "email": email,
+                            //                                                            "firstName": "",
+                            //                                                            "secondName":"",
+                            //                                                            "longitude": Double(self.userlocation.longitude),
+                            //                                                            "latitude": Double(self.userlocation.latitude),
+                            //                                                            "completedRegistration": false
+                            //                                                        ]) { err in
+                            //                                                            if let err = err {
+                            //                                                                print("Error writing document: \(err)")
+                            //                                                            } else {
+                            //                                                                self.performSegue(withIdentifier: "goToVegan", sender: self)
+                            //                                                            }
+                            //                                                        }
+                            //
+                            //
+                            //
+                            //
+                            //                                                }
                         }
                         
-                
-
+                        
                     }
-
+                    
+                    
                 }
-
-
-
-
-            }
+            
             
         }
         
+        
+        
+    }
+    
+    
+    
+    
     
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
         // Handle error.
         print("Sign in with Apple errored: \(error)")
     }
-
+    
     
 }
 
