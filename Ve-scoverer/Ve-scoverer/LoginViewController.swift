@@ -46,6 +46,8 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
         super.viewWillAppear(animated)
         
         
+        
+        
         navigationItem.hidesBackButton = true
         background.backgroundColor = UIColor(hexString: "3797A4")
         // navigationController?.navigationBar.backgroundColor = .white
@@ -157,7 +159,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
         
         let center = self.view.center
         googleView.frame = CGRect(x: 117.0, y: 200.0, width: 191.0, height: 42.0)
-        googleView.center = .init(x: center.x, y: y - CGFloat(50))
+        googleView.center = .init(x: center.x, y: y - CGFloat(45))
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {

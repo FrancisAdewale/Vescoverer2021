@@ -11,7 +11,6 @@ import UserNotifications
 
 class DashboardTabController: UITabBarController, UNUserNotificationCenterDelegate  {
     
-    
     @IBOutlet weak var dashboardTab: UITabBar!
     let unselectedColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1.0)
     
@@ -24,25 +23,17 @@ class DashboardTabController: UITabBarController, UNUserNotificationCenterDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        
         title = "Ve-scoverer"
         
-        AppStoreReviewManager.requestReviewIfAppropriate()
-        let center = UNUserNotificationCenter.current()
-        center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
-            
-            if let error = error {
-                // Handle the error here.
-            }
-            
-            
-        }
+   
         
     }
     
-    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+
         
-        
-    }
     
     func scheduleNotification() {
         let center = UNUserNotificationCenter.current()
@@ -99,7 +90,7 @@ class DashboardTabController: UITabBarController, UNUserNotificationCenterDelega
         center.setNotificationCategories([category])
     }
 
-    
+
     
 }
 

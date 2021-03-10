@@ -37,6 +37,7 @@ class RecipeTableViewController: UITableViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        AppStoreReviewManager.requestReviewIfAppropriate()
 
         title = "Recipes"
         
@@ -169,6 +170,7 @@ class RecipeTableViewController: UITableViewController {
         let avc = UIActivityViewController(activityItems: [item], applicationActivities: [])
         avc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
         present(avc, animated: true, completion: nil)
+
     }
 
     

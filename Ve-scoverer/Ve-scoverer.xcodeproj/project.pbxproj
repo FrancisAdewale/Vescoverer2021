@@ -26,6 +26,7 @@
 		763EFF9B2554558900CEAA41 /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763EFF9A2554558900CEAA41 /* DiscoverViewController.swift */; };
 		763EFFA22554573D00CEAA41 /* VerifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763EFFA12554573D00CEAA41 /* VerifyViewController.swift */; };
 		763EFFA5255457C000CEAA41 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763EFFA4255457C000CEAA41 /* ProfileTableViewController.swift */; };
+		7642250D25F7E38C00C428F3 /* AnimatedTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7642250C25F7E38C00C428F3 /* AnimatedTabBarController.swift */; };
 		7650FAB125E1863A003ACEB0 /* PostRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7650FAB025E1863A003ACEB0 /* PostRecipe.swift */; };
 		7665B5E725DABFDB00C87175 /* ViewedSocialsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7665B5E525DABFDB00C87175 /* ViewedSocialsTableViewCell.swift */; };
 		7665B5E825DABFDB00C87175 /* ViewedSocialsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7665B5E625DABFDB00C87175 /* ViewedSocialsTableViewCell.xib */; };
@@ -82,6 +83,7 @@
 		763EFF9A2554558900CEAA41 /* DiscoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverViewController.swift; sourceTree = "<group>"; };
 		763EFFA12554573D00CEAA41 /* VerifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyViewController.swift; sourceTree = "<group>"; };
 		763EFFA4255457C000CEAA41 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
+		7642250C25F7E38C00C428F3 /* AnimatedTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedTabBarController.swift; sourceTree = "<group>"; };
 		7650FAB025E1863A003ACEB0 /* PostRecipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRecipe.swift; sourceTree = "<group>"; };
 		7665B5E525DABFDB00C87175 /* ViewedSocialsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewedSocialsTableViewCell.swift; sourceTree = "<group>"; };
 		7665B5E625DABFDB00C87175 /* ViewedSocialsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewedSocialsTableViewCell.xib; sourceTree = "<group>"; };
@@ -184,11 +186,13 @@
 		76585EE125D81F0000F504C9 /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
+				761F19DC25E94AA3003FA016 /* AppStoreReviewManager.swift */,
 				763EFF9A2554558900CEAA41 /* DiscoverViewController.swift */,
 				763EFFA12554573D00CEAA41 /* VerifyViewController.swift */,
 				763EFFA4255457C000CEAA41 /* ProfileTableViewController.swift */,
 				762503202555D8DB002F92E2 /* FoundTableViewController.swift */,
 				763EFF8F25530CD700CEAA41 /* DashboardTabController.swift */,
+				7642250C25F7E38C00C428F3 /* AnimatedTabBarController.swift */,
 				76D36D2825AB515300D98ED5 /* ProfileUser.swift */,
 				761A796425C472FE004C59E4 /* ViewUserTableViewController.swift */,
 				767B256625E1725A0007A297 /* RecipeTableViewController.swift */,
@@ -259,7 +263,6 @@
 		76912B5B2551DB1B001C38DE /* Ve-scoverer */ = {
 			isa = PBXGroup;
 			children = (
-				761F19DC25E94AA3003FA016 /* AppStoreReviewManager.swift */,
 				76EAC831258B9D3500615A9F /* Register */,
 				76BAC638258A2A7A0031A3EB /* Ve-scoverer.entitlements */,
 				767EAE51256EB1AC00B67811 /* fonts */,
@@ -485,6 +488,7 @@
 				76F4CDAE25B3B25A0039C597 /* SocialsTableViewCell.swift in Sources */,
 				761A796525C472FE004C59E4 /* ViewUserTableViewController.swift in Sources */,
 				762503212555D8DB002F92E2 /* FoundTableViewController.swift in Sources */,
+				7642250D25F7E38C00C428F3 /* AnimatedTabBarController.swift in Sources */,
 				761A796825C4AC5F004C59E4 /* ViewUser.swift in Sources */,
 				76EAC83B258BCE8500615A9F /* AgeViewController.swift in Sources */,
 				7665B5E725DABFDB00C87175 /* ViewedSocialsTableViewCell.swift in Sources */,

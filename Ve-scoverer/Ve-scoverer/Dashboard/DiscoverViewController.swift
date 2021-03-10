@@ -10,6 +10,7 @@ import MapKit
 import CoreLocation
 import Firebase
 import GoogleSignIn
+import UserNotifications
 
 class DiscoverViewController: UIViewController {
     //MARK: - Properties
@@ -21,11 +22,21 @@ class DiscoverViewController: UIViewController {
     var geoPoints = [GeoPoint]()
     let user = Auth.auth().currentUser?.email
     var name = ""
+    var count = 0
 
     @IBOutlet weak private var nearbyUsers: MKMapView!
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+      
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+   
+     
         self.nearbyUsers.isRotateEnabled = false
 
         title = "Vescover"
@@ -33,7 +44,8 @@ class DiscoverViewController: UIViewController {
         view.backgroundColor = UIColor(hexString: "8bcdcd")
         setStartingPosition()
         getLocations()
-        
+        UNUserNotificationCenter.current().delegate = self
+
         nearbyUsers.delegate = self
         locationManager.requestAlwaysAuthorization()
         locationManager.requestWhenInUseAuthorization()
@@ -53,6 +65,8 @@ class DiscoverViewController: UIViewController {
                 print("Error getting documents: \(err)")
             } else {
                 
+                
+                
                 for document in querySnapshot!.documents {
                     
                     let data = document.data()
@@ -71,7 +85,7 @@ class DiscoverViewController: UIViewController {
                         self.nearbyUsers.addAnnotation(annotation)
                         self.annoationsArray.append(annotation)
                         self.nearbyUsers.showAnnotations(self.annoationsArray, animated: true)
-
+                        self.count += 1
                     }
                 
                     
@@ -135,11 +149,11 @@ extension DiscoverViewController: MKMapViewDelegate {
                                 }
                             }
                             
-                            let cancelAction = UIAlertAction(title: "Nvm", style: .cancel, handler: nil)
+                            let cancelAction = UIAlertAction(title: "Nevermind", style: .cancel, handler: nil)
                             alert.addAction(cancelAction)
                             alert.addAction(action)
                             self.present(alert, animated: true, completion: nil)
-                            alert.view.tintColor = UIColor(hexString: "3797A4")
+//                            alert.view.tintColor = UIColor(hexString: "3797A4")
                         }
                     }
                 })
@@ -147,4 +161,9 @@ extension DiscoverViewController: MKMapViewDelegate {
         }
  
     }
+}
+
+extension DiscoverViewController: UNUserNotificationCenterDelegate {
+    
+    
 }

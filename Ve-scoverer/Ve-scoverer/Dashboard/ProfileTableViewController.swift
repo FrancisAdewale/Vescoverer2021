@@ -39,6 +39,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
     var imagePath: String?
 
 
+
     
     var userCity = ""
     
@@ -64,7 +65,6 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.navigationController?.navigationBar.prefersLargeTitles = true
         title = "Account"
         
@@ -112,6 +112,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
         let vw = UIView()
         return vw
     }
@@ -346,7 +347,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         alert.addAction(action)
         alert.addAction(cancel)
         self.present(alert, animated: true, completion: nil)
-        alert.view.tintColor =  UIColor(hexString: "3797A4")
+//        alert.view.tintColor =  UIColor(hexString: "3797A4")
 
     }
     

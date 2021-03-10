@@ -19,27 +19,29 @@ import UserNotifications
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-
+    
+    var count = 0
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-
+        
         FirebaseApp.configure()
-      
+        
         let db = Firestore.firestore()
-
-       // GIDSignIn.sharedInstance().clientID = "452250904688-duk6irc1fadc7l6suokch7d2aifor27n.apps.googleusercontent.com"
+        
+        // GIDSignIn.sharedInstance().clientID = "452250904688-duk6irc1fadc7l6suokch7d2aifor27n.apps.googleusercontent.com"
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
+        
         registerForPushNotifications()
         
-       
-     
+
     
+    
+
     return true
+ 
+}
 
-   
-
-    }
-
-    // MARK: UISceneSession Lifecycle
+// MARK: UISceneSession Lifecycle
 
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         // Called when a new scene session is being created.
@@ -58,7 +60,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       return GIDSignIn.sharedInstance().handle(url)
     }
     
- 
 
 //    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
 // 
@@ -119,10 +120,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
    
     func registerForPushNotifications() {
+        let db = Firestore.firestore()
+
+        db.collection("users").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+
+                for document in querySnapshot!.documents {
+                    
+                    let data = document.data()
+                    
+                    self.count = data.count
+    
+                }
+                
+            }
+        }
       //1
       UNUserNotificationCenter.current()
         //2
-        .requestAuthorization(  options: [.alert, .sound, .badge]) { [weak self] granted, _ in
+        .requestAuthorization(  options: [ .badge]) { [weak self] granted, _ in
             print("Permission granted: \(granted)")
             guard granted else { return }
             self?.getNotificationSettings()
@@ -130,11 +148,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func getNotificationSettings() {
+        
+       
       UNUserNotificationCenter.current().getNotificationSettings { settings in
         print("Notification settings: \(settings)")
         guard settings.authorizationStatus == .authorized else { return }
         DispatchQueue.main.async {
-          UIApplication.shared.registerForRemoteNotifications()
+            UIApplication.shared.applicationIconBadgeNumber = 5
         }
 
 

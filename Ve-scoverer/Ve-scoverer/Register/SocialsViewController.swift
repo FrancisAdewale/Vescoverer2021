@@ -76,7 +76,7 @@ class SocialsViewController: UIViewController {
         lvc.modalPresentationStyle = .overFullScreen
      
         
-        if instagram == nil && twitter == nil {
+        if (instagram == nil && twitter == nil) || (instagram == "" || twitter == "") {
             socials.layer.add(animation, forKey: "position")
 
         } else {
@@ -120,7 +120,7 @@ class SocialsViewController: UIViewController {
             let alert = UIAlertController(title: "Add your @", message: "only the suffix", preferredStyle: .alert)
             
             let action = UIAlertAction(title: "Add", style: .default) { (action) in
-                self.instagramLink += "\(textField.text!)"
+                self.instagramLink = "\(textField.text!)"
                 self.instagram = self.instagramLink
 
                     
@@ -133,7 +133,7 @@ class SocialsViewController: UIViewController {
             alert.addAction(action)
             
             self.present(alert, animated: true, completion: nil)
-            alert.view.tintColor = UIColor(hexString: "3797A4")
+//            alert.view.tintColor = UIColor(hexString: "3797A4")
         }
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -146,7 +146,7 @@ class SocialsViewController: UIViewController {
             self.instaButton.addToolTip(description: textField.text!)
 
         }
-        actionsheet.view.tintColor = UIColor(hexString: "3797A4")
+//        actionsheet.view.tintColor = UIColor(hexString: "3797A4")
 
       
         
@@ -166,7 +166,7 @@ class SocialsViewController: UIViewController {
             
             let action = UIAlertAction(title: "Add", style: .default) { (action) in
   
-                self.twitterWebLink += "\(textField.text!)"
+                self.twitterWebLink = "\(textField.text!)"
                 self.twitter = self.twitterWebLink
 
 
@@ -180,7 +180,7 @@ class SocialsViewController: UIViewController {
             alert.addAction(action)
             
             self.present(alert, animated: true, completion: nil)
-            alert.view.tintColor = UIColor(hexString: "3797A4")
+//            alert.view.tintColor = UIColor(hexString: "3797A4")
 
         }
         
@@ -193,7 +193,7 @@ class SocialsViewController: UIViewController {
             self.twitterButton.addToolTip(description: textField.text!)
 
         }
-        actionsheet.view.tintColor = UIColor(hexString: "3797A4")
+//        actionsheet.view.tintColor = UIColor(hexString: "3797A4")
 
 
         

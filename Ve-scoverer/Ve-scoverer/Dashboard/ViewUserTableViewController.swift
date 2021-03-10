@@ -110,6 +110,7 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
         
         tableView.deselectRow(at: indexPath, animated: true)
         
+        
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

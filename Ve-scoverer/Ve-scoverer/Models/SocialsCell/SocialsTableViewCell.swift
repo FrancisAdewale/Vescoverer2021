@@ -42,7 +42,7 @@ class SocialsTableViewCell: UITableViewCell {
             let action = UIAlertAction(title: "Done", style: .cancel, handler: nil)
             alert.addAction(action)
             vc!.present(alert, animated: true, completion: nil)
-            alert.view.tintColor =  UIColor(hexString: "3797A4")
+//            alert.view.tintColor =  UIColor(hexString: "3797A4")
         } else {
             let alert = UIAlertController(title: "Edit", message: "Current Instagram: @\(instagramAt?.capitalized ?? "Add Instagram")", preferredStyle: .alert)
             let action = UIAlertAction(title: "Done", style: .default, handler: { action in
@@ -72,7 +72,7 @@ class SocialsTableViewCell: UITableViewCell {
             alert.addAction(cancelAction)
             print(textField.text!)
             vc!.present(alert, animated: true, completion: nil)
-            alert.view.tintColor = UIColor(hexString: "3797A4")
+//            alert.view.tintColor = UIColor(hexString: "3797A4")
 
         }
     }
@@ -86,7 +86,7 @@ class SocialsTableViewCell: UITableViewCell {
             let action = UIAlertAction(title: "Done", style: .cancel, handler: nil)
             alert.addAction(action)
             vc!.present(alert, animated: true, completion: nil)
-            alert.view.tintColor = UIColor(hexString: "3797A4")
+//            alert.view.tintColor = UIColor(hexString: "3797A4")
         } else {
             let alert = UIAlertController(title: "Edit", message: "Twitter: @\(twitterAt?.capitalized ?? "Add Twitter")", preferredStyle: .alert)
             let action = UIAlertAction(title: "Done", style: .default, handler: { action in
@@ -114,7 +114,7 @@ class SocialsTableViewCell: UITableViewCell {
             alert.addAction(cancelAction)
             
             vc!.present(alert, animated: true,completion: nil)
-            alert.view.tintColor = UIColor(hexString: "3797A4")
+//            alert.view.tintColor = UIColor(hexString: "3797A4")
             
         }
         
