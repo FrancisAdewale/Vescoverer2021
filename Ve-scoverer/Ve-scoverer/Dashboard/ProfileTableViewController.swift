@@ -157,7 +157,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         if indexPath.section == 0 && indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ImageCell", for: indexPath) as! ImageViewCell
             cell.isUserInteractionEnabled = true
-//            cell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
+            cell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
             cell.contentView.layer.borderWidth = 0.05
             cell.layer.cornerRadius = 8
             cell.userNameField.text = profileUser.firstName
@@ -292,9 +292,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         }
         editButton.title = tableView.isEditing ? "Done" : "Edit"
         editButton.style = tableView.isEditing ? .done : .plain
-        
-        
-        
+  
     }
     
     @objc func deleteAcc() {

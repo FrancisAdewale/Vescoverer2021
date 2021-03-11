@@ -63,7 +63,6 @@ class ImageViewCell: UITableViewCell, UITextFieldDelegate  {
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        userNameField.font = UIFont(name: "Lato", size: 20.0)
 
         print("TextField should begin editing method called")
         
@@ -77,7 +76,7 @@ class ImageViewCell: UITableViewCell, UITextFieldDelegate  {
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         print("TextField should end editing method called")
-        userNameField.font = UIFont(name: "Lato", size: 20.0)
+            // userNameField.font = UIFont(name: "Lato", size: 20.0)
         return true
     }
     

@@ -11,6 +11,8 @@ import CoreData
 import GoogleSignIn
 import CryptoKit
 import UserNotifications
+import GoogleMobileAds
+
 
 
 
@@ -30,7 +32,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         
         
-        
+        GADMobileAds.sharedInstance().start(completionHandler: nil)
+
         // GIDSignIn.sharedInstance().clientID = "452250904688-duk6irc1fadc7l6suokch7d2aifor27n.apps.googleusercontent.com"
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         
@@ -169,7 +172,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         
                         for e in data {
                             let data = e.data()
-                            UIApplication.shared.applicationIconBadgeNumber = data["badgeCount"] as! Int
+                            UIApplication.shared.applicationIconBadgeNumber = data["badgeCount"] as! Int - 1
                         }
                         
                     }

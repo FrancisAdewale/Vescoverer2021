@@ -13,9 +13,10 @@ import ChameleonFramework
 import GoogleSignIn
 import AuthenticationServices
 import SDWebImage
+import GoogleMobileAds
 
 
-class ViewUserTableViewController: UITableViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+class ViewUserTableViewController: UITableViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate, GADBannerViewDelegate  {
    
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var instagramAppLink = String()
@@ -36,6 +37,8 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
     let storage = Storage.storage()
     var loadUserEmail = ""
     var floatNum = CGFloat()
+    var bannerView: GADBannerView!
+
 
     var userImage = ""
     var userCity = ""
@@ -57,6 +60,18 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        bannerView = GADBannerView(adSize: kGADAdSizeBanner)
+
+        addBannerViewToView(bannerView)
+        
+        
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView.rootViewController = self
+        bannerView.delegate = self
+
+        bannerView.load(GADRequest())
+
+        
         floatNum = CGFloat.random(in: 0...1)
 
         //self.navigationController?.navigationBar.prefersLargeTitles = true
@@ -73,6 +88,27 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
         tableView.register(UINib(nibName: "ViewedSocialsTableViewCell", bundle: nil), forCellReuseIdentifier: "ViewedSocialsCell")
     
     }
+    
+    func addBannerViewToView(_ bannerView: GADBannerView) {
+      bannerView.translatesAutoresizingMaskIntoConstraints = false
+      view.addSubview(bannerView)
+      view.addConstraints(
+        [NSLayoutConstraint(item: bannerView,
+                            attribute: .bottom,
+                            relatedBy: .equal,
+                            toItem: bottomLayoutGuide,
+                            attribute: .top,
+                            multiplier: 1,
+                            constant: 0),
+         NSLayoutConstraint(item: bannerView,
+                            attribute: .centerX,
+                            relatedBy: .equal,
+                            toItem: view,
+                            attribute: .centerX,
+                            multiplier: 1,
+                            constant: 0)
+        ])
+     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
