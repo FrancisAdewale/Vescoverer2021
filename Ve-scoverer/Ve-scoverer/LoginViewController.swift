@@ -222,7 +222,9 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
                                         "secondName": self.secondName,
                                         "longitude": Double(self.userlocation.longitude),
                                         "latitude": Double(self.userlocation.latitude),
-                                        "completedRegistration": false
+                                        "completedRegistration": false,
+                                        "badge": "0"
+                                        
                                     ]) { err in
                                         if let err = err {
                                             print("Error writing document: \(err)")
@@ -277,7 +279,9 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
                                         "secondName": self.secondName,
                                         "longitude": Double(self.userlocation.longitude),
                                         "latitude": Double(self.userlocation.latitude),
-                                        "completedRegistration": false
+                                        "completedRegistration": false,
+                                        "badge": "0"
+
                                     ]) { err in
                                         if let err = err {
                                             print("Error writing document: \(err)")
@@ -314,7 +318,9 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
                                     "secondName": self.secondName,
                                     "longitude": Double(self.userlocation.longitude),
                                     "latitude": Double(self.userlocation.latitude),
-                                    "completedRegistration": false
+                                    "completedRegistration": false,
+                                    "badge": "0"
+
                                 ]) { err in
                                     if let err = err {
                                         print("Error writing document: \(err)")
@@ -540,7 +546,9 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                                             "secondName":"",
                                             "longitude": Double(self.userlocation.longitude),
                                             "latitude": Double(self.userlocation.latitude),
-                                            "completedRegistration": false
+                                            "completedRegistration": false,
+                                            "badge": "0"
+
                                         ]) { err in
                                             if let err = err {
                                                 print("Error writing document: \(err)")
@@ -577,7 +585,9 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                                         "secondName":"",
                                         "longitude": Double(self.userlocation.longitude),
                                         "latitude": Double(self.userlocation.latitude),
-                                        "completedRegistration": false
+                                        "completedRegistration": false,
+                                        "badge": "0"
+
                                     ]) { err in
                                         if let err = err {
                                             print("Error writing document: \(err)")
@@ -603,7 +613,9 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                                         "secondName":"",
                                         "longitude": Double(self.userlocation.longitude),
                                         "latitude": Double(self.userlocation.latitude),
-                                        "completedRegistration": false
+                                        "completedRegistration": false,
+                                        "badge": "0"
+
                                     ]) { err in
                                         if let err = err {
                                             print("Error writing document: \(err)")

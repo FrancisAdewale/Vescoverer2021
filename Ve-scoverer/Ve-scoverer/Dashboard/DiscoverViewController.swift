@@ -35,7 +35,7 @@ class DiscoverViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-   
+   //addddddd tabbar badge which will connect to app badge!!!!!//////////-----------------------
      
         self.nearbyUsers.isRotateEnabled = false
 
@@ -85,7 +85,6 @@ class DiscoverViewController: UIViewController {
                         self.nearbyUsers.addAnnotation(annotation)
                         self.annoationsArray.append(annotation)
                         self.nearbyUsers.showAnnotations(self.annoationsArray, animated: true)
-                        self.count += 1
                     }
                 
                     
