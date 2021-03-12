@@ -11,18 +11,16 @@ import Firebase
 
 class AgeViewController: UIViewController {
     
-    var currentuser = ""
-
-    var calculatedAge = Int()
-    let db = Firestore.firestore()
+    private var calculatedAge = Int()
+    private let db = Firestore.firestore()
     
     
-    @IBOutlet weak var background: UIImageView!
-    @IBOutlet weak var nextButton: UIButton!
-    @IBOutlet weak var ageLabel: UILabel!
-    @IBOutlet weak var progressBar: UIProgressView!
-    @IBOutlet weak var ageSelector: UIDatePicker!
-    @IBOutlet weak var age: UILabel!
+    @IBOutlet weak private var background: UIImageView!
+    @IBOutlet weak private var nextButton: UIButton!
+    @IBOutlet weak private var ageLabel: UILabel!
+    @IBOutlet weak private var progressBar: UIProgressView!
+    @IBOutlet weak private var ageSelector: UIDatePicker!
+    @IBOutlet weak private var age: UILabel!
     
     lazy var dateFormatter : DateFormatter = {
             let formatter = DateFormatter()
@@ -36,8 +34,7 @@ class AgeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-    
+
         let date = dateFormatter.string(from: ageSelector.date)
 
         let birthday = dateFormatter.date(from: date)
@@ -47,15 +44,9 @@ class AgeViewController: UIViewController {
         background.backgroundColor = UIColor(hexString: "3797A4")
         self.view.insertSubview(self.background, at: 0)
 
-
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-    }
-    
-    @IBAction func selectedAge(_ sender: UIDatePicker) {
+    @IBAction private func selectedAge(_ sender: UIDatePicker) {
         
         let date = dateFormatter.string(from: sender.date)
 
@@ -68,22 +59,17 @@ class AgeViewController: UIViewController {
          
     }
     
-    @IBAction func next(_ sender: UIButton) {
+    @IBAction private func next(_ sender: UIButton) {
         
         let user = Auth.auth().currentUser
         
         if let user = user?.email {
             self.db.collection("users").document(user).setData(["age" : Int(age.text!)!], merge: true)
 
-//            gvc.modalPresentationStyle = .overFullScreen
-//            present(gvc, animated: true, completion: nil)
-            
             self.performSegue(withIdentifier: "goToGender", sender: self)
 
-
         }
-
-        
+  
     }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {

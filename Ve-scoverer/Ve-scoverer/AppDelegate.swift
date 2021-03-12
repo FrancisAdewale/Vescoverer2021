@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-       //UIApplication.shared.applicationIconBadgeNumber = 0
+//        UIApplication.shared.applicationIconBadgeNumber = 0
         
         FirebaseApp.configure()
         
@@ -137,50 +137,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         let db = Firestore.firestore()
-        
-        db.collection("users").getDocuments() { (querySnapshot, err) in
-            if let err = err {
-                print("Error getting documents: \(err)")
-            } else {
 
-                for document in querySnapshot!.documents {
-
-                    self.count += 1
-
-            }
-        }
-
-        
-        
-    
-        
-        db.collection("badge").document("badge")
-            .setData(["badgeCount": self.count]
-                     , merge: true)
             
             UNUserNotificationCenter.current().getNotificationSettings { settings in
                 print("Notification settings: \(settings)")
                 guard settings.authorizationStatus == .authorized else { return }
-                
-                
-                db.collection("badge").getDocuments { (snapShot, err) in
+     
+                if let user = Auth.auth().currentUser {
+                    
+                    db.collection("users").document(user.email!).getDocument { (snapShot, err) in
+                        
                     if let error = err {
                         print(error.localizedDescription)
                     } else {
                         
-                        let data = snapShot!.documents
+                        let data = snapShot!.data()
                         
-                        for e in data {
-                            let data = e.data()
-                            UIApplication.shared.applicationIconBadgeNumber = data["badgeCount"] as! Int - 1
-                        }
+                        UIApplication.shared.applicationIconBadgeNumber = (data?["badge"] as! NSString).integerValue
+                        
                         
                     }
                 }
                 
             }
-            
         }
+        
     }
 
     func application(
@@ -198,6 +179,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     ) {
       print("Failed to register: \(error)")
     }
+    
+ 
 
 
 }

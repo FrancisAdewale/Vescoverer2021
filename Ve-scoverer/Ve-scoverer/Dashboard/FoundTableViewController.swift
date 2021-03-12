@@ -12,31 +12,29 @@ import CoreLocation
 
 class FoundTableViewController: UITableViewController {
     
-    let db = Firestore.firestore()
-    var userArray = [[String:Any]]()
-    var userList = [String]()
-    let currentUser = ""
-    var loadUser = String()
-    let user = Auth.auth().currentUser
-    var profileUser = ProfileUser()
-    var userCity = ""
-    
-    
-    
-    
-    
+    private let db = Firestore.firestore()
+    private var userList = [String]()
+
+    private let user = Auth.auth().currentUser
+    private var profileUser = ProfileUser()
+    private var userCity = ""
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        self.db.collection("users").document(user!.email!).setData(["badge": "0"], merge: true)
+
         
         load()
         view.backgroundColor = UIColor(hexString: "57AAB7")
         
+        let dvc = storyboard?.instantiateViewController(withIdentifier: "Discover") as! DiscoverViewController
+        
         if let tabItems = self.tabBarController?.tabBar.items {
             // In this case we want to modify the badge number of the third tab:
             let tabItem = tabItems[3]
-            if tabItem.badgeValue == "1" {
+            if tabItem.badgeValue != nil {
                 tabItem.badgeValue = nil
+
             }
         }
         
@@ -118,7 +116,6 @@ class FoundTableViewController: UITableViewController {
         if let unwrappedPath = indexpath {
             tableView.deselectRow(at: unwrappedPath, animated: true)
             let user = userList[unwrappedPath.row]
-            vup.button.isHidden = true
             
             
             db.collection("users").document(user)
@@ -171,7 +168,7 @@ class FoundTableViewController: UITableViewController {
         }
     }
     
-    func load() {
+    private func load() {
         
         let user = Auth.auth().currentUser
         

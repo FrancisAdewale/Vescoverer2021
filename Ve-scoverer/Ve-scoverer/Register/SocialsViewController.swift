@@ -12,26 +12,21 @@ import SwiftyToolTip
 
 class SocialsViewController: UIViewController {
     
-    var instagramLink = ""
-    var twitterWebLink = ""
-    var instagram: String?
-    var twitter: String?
+    private var instagramLink = ""
+    private var twitterWebLink = ""
+    private var instagram: String?
+    private var twitter: String?
     
     
-    @IBOutlet var twitterButton: UIButton!
-    @IBOutlet var instaButton: UIButton!
-    @IBOutlet weak var socials: UIStackView!
-    @IBOutlet weak var background: UIImageView!
-    @IBOutlet weak var nextButton: UIButton!
-    @IBOutlet weak var socialsLabel: UILabel!
-    @IBOutlet weak var progressBar: UIProgressView!
-    @IBOutlet weak var fullInstagramLink: UILabel!
-    @IBOutlet weak var fullTwitterLink: UILabel!
-    var editedInstagram = String()
-    var editedTwitter = String()
-    var currentuser = ""
-    let db = Firestore.firestore()
-    let profileUser = ProfileUser()
+    @IBOutlet weak private var twitterButton: UIButton!
+    @IBOutlet weak private var instaButton: UIButton!
+    @IBOutlet weak private var socials: UIStackView!
+    @IBOutlet weak private var background: UIImageView!
+    @IBOutlet weak private var nextButton: UIButton!
+    @IBOutlet weak private var socialsLabel: UILabel!
+    @IBOutlet weak private var progressBar: UIProgressView!
+    private let db = Firestore.firestore()
+    private var count = 0
     
 
     override func viewDidLoad() {
@@ -62,7 +57,7 @@ class SocialsViewController: UIViewController {
         view.endEditing(true)
     }
     
-    @IBAction func completeRegistration(_ sender: UIButton) {
+    @IBAction private func completeRegistration(_ sender: UIButton) {
         
         let animation = CABasicAnimation(keyPath: "position")
         animation.duration = 0.07
@@ -92,6 +87,12 @@ class SocialsViewController: UIViewController {
                 ], merge: true)
             }
             
+            count += 1
+            
+            db.collection("badge").document("badge")
+                .setData(["badgeCount": count]
+                         , merge: true)
+            
          
             dvc.modalPresentationStyle = .currentContext
             
@@ -109,7 +110,7 @@ class SocialsViewController: UIViewController {
 
     }
     
-    @IBAction func instagramPressed(_ sender: UIButton) {
+    @IBAction private func instagramPressed(_ sender: UIButton) {
         
         var textField = UITextField()
         
@@ -133,7 +134,6 @@ class SocialsViewController: UIViewController {
             alert.addAction(action)
             
             self.present(alert, animated: true, completion: nil)
-//            alert.view.tintColor = UIColor(hexString: "3797A4")
         }
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -146,14 +146,13 @@ class SocialsViewController: UIViewController {
             self.instaButton.addToolTip(description: textField.text!)
 
         }
-//        actionsheet.view.tintColor = UIColor(hexString: "3797A4")
 
       
         
     }
     
     
-    @IBAction func twitterPressed(_ sender: UIButton) {
+    @IBAction private func twitterPressed(_ sender: UIButton) {
         
         var textField = UITextField()
         
@@ -180,7 +179,6 @@ class SocialsViewController: UIViewController {
             alert.addAction(action)
             
             self.present(alert, animated: true, completion: nil)
-//            alert.view.tintColor = UIColor(hexString: "3797A4")
 
         }
         
@@ -193,7 +191,6 @@ class SocialsViewController: UIViewController {
             self.twitterButton.addToolTip(description: textField.text!)
 
         }
-//        actionsheet.view.tintColor = UIColor(hexString: "3797A4")
 
 
         

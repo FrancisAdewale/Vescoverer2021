@@ -12,20 +12,19 @@ import GoogleSignIn
 
 class NameViewController: UIViewController, UITextFieldDelegate {
     
-    let db  = Firestore.firestore()
-    var firstName = ""
-    var lastName = ""
-    let user = Auth.auth().currentUser
-    var usersid = ""
+    private let db  = Firestore.firestore()
+    private var firstName = ""
+    private var lastName = ""
+    private let user = Auth.auth().currentUser
 
 
-    @IBOutlet var fullName: UIStackView!
-    @IBOutlet weak var background: UIImageView!
-    @IBOutlet weak var nextButton: UIButton!
-    @IBOutlet weak var progressBar: UIProgressView!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var firstNameTextField: UITextField!
-    @IBOutlet weak var lastNameTextField: UITextField!
+    @IBOutlet weak private var fullName: UIStackView!
+    @IBOutlet weak private var background: UIImageView!
+    @IBOutlet weak private var nextButton: UIButton!
+    @IBOutlet weak private var progressBar: UIProgressView!
+    @IBOutlet weak private var nameLabel: UILabel!
+    @IBOutlet weak private var firstNameTextField: UITextField!
+    @IBOutlet weak private var lastNameTextField: UITextField!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -58,7 +57,7 @@ class NameViewController: UIViewController, UITextFieldDelegate {
     
 
     
-    func hideKeyboardWhenTappedAround() {
+    private func hideKeyboardWhenTappedAround() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
@@ -68,14 +67,14 @@ class NameViewController: UIViewController, UITextFieldDelegate {
         view.endEditing(true)
     }
     
-    @IBAction func done(_ sender: UITextField) {
+    @IBAction private func done(_ sender: UITextField) {
         sender.resignFirstResponder()
     }
     
-    @IBAction func done2(_ sender: UITextField) {
+    @IBAction private func done2(_ sender: UITextField) {
         sender.resignFirstResponder()
     }
-    @IBAction func next(_ sender: Any) {
+    @IBAction private func next(_ sender: Any) {
 
         let user = Auth.auth().currentUser
         

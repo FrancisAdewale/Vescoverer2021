@@ -15,14 +15,14 @@ import Firebase
 
 class HomeViewController: UIViewController {
     
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    var vegan: [UserCore] = []
+    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    private var vegan: [UserCore] = []
 
 
-    @IBOutlet weak var logo: UIImageView!
-    @IBOutlet weak var doneButton: UIButton!
-    @IBOutlet weak var veganLabel: UILabel!
-    @IBOutlet weak var isVegan: UISwitch!
+    @IBOutlet private weak var logo: UIImageView!
+    @IBOutlet private weak var doneButton: UIButton!
+    @IBOutlet private weak var veganLabel: UILabel!
+    @IBOutlet private weak var isVegan: UISwitch!
     
 
     
@@ -34,18 +34,20 @@ class HomeViewController: UIViewController {
 
         load()
         
-        let lvc = storyboard?.instantiateViewController(withIdentifier: "Login")
-        if !vegan.isEmpty {
-            lvc!.modalPresentationStyle = .fullScreen
-            present(lvc!, animated: true) {
-                Auth.auth().addStateDidChangeListener { auth, user in
-                    if let user = user {
-                        print("\(user.email) is signed in.")
-                    } else {
-                        print("\(String(describing: user?.email)) is signed out.")
+        if let lvc = storyboard?.instantiateViewController(withIdentifier: "Login") {
+            if !vegan.isEmpty {
+                lvc.modalPresentationStyle = .fullScreen
+                present(lvc, animated: true) {
+                    Auth.auth().addStateDidChangeListener { auth, user in
+                        if let user = user {
+                            print("\(user.email) is signed in.")
+                        } else {
+                            print("\(String(describing: user?.email)) is signed out.")
+                        }
                     }
                 }
             }
+
         }
         
     }
@@ -70,7 +72,7 @@ class HomeViewController: UIViewController {
 
     }
     
-    @objc func animate() {
+   @objc private func animate() {
         
         logo.animationImages = animatedImages(for: "false")
         logo.animationDuration = 0.2
@@ -82,7 +84,7 @@ class HomeViewController: UIViewController {
     }
     
     
-    func animatedImages(for name: String) -> [UIImage] {
+    private func animatedImages(for name: String) -> [UIImage] {
         var i = 0
         var images = [UIImage]()
         
@@ -109,7 +111,7 @@ class HomeViewController: UIViewController {
         return false
     }
     
-    func save() {
+    private func save() {
         do {
             try context.save()
         } catch {
@@ -117,7 +119,7 @@ class HomeViewController: UIViewController {
         }
     }
     
-    func load() {
+    private func load() {
         let fetch = NSFetchRequest<UserCore>(entityName: "UserCore")
         do {
             let request  = try context.fetch(fetch)

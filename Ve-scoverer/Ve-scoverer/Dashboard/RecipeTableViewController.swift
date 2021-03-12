@@ -15,18 +15,15 @@ import SafariServices
 
 class RecipeTableViewController: UITableViewController {
     
-    var recipes = [Recipe]()
-    var filteredData = [Recipe]()
-    
-    var activityItem = ""
-
-    let searchController = UISearchController(searchResultsController: nil)
-    
-    var isSearchBarEmpty: Bool {
+    private var recipes = [Recipe]()
+    private var filteredData = [Recipe]()
+    private var activityItem = ""
+    private let searchController = UISearchController(searchResultsController: nil)
+    private var isSearchBarEmpty: Bool {
       return searchController.searchBar.text?.isEmpty ?? true
     }
-    
-    var isFiltering: Bool {
+
+    private var isFiltering: Bool {
       return searchController.isActive && !isSearchBarEmpty
     }
     
@@ -106,7 +103,6 @@ class RecipeTableViewController: UITableViewController {
                  let config = SFSafariViewController.Configuration()
 
                  let vc = SFSafariViewController(url: url, configuration: config)
-//                vc.view.tintColor = UIColor(hexString: "3797a4")
 
                 self.present(vc, animated: true)
              }
@@ -129,13 +125,12 @@ class RecipeTableViewController: UITableViewController {
         alert.addAction(cancelAction)
         
         present(alert, animated: true, completion: nil)
-//        alert.view.tintColor = UIColor(hexString: "3797A4")
 
 
     }
     
 
-    func fetchData() {
+    private func fetchData() {
     
       // 1          CHANGE API KEY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         let request = AF.request("https://api.spoonacular.com/recipes/complexSearch?apiKey=e37fd98195e0427ba55710ad55eb4609&diet=vegan&number=100&addRecipeInformation=True")
@@ -153,7 +148,7 @@ class RecipeTableViewController: UITableViewController {
         }
     }
     
-    func filterContentForSearchText(_ searchText: String,
+    private func filterContentForSearchText(_ searchText: String,
                                     category: Recipe? = nil) {
       filteredData = recipes.filter { (recipe : Recipe) -> Bool in
         return recipe.title.lowercased().contains(searchText.lowercased())
@@ -162,7 +157,7 @@ class RecipeTableViewController: UITableViewController {
       tableView.reloadData()
     }
 
-    @objc func recommendTapped() {
+    @objc private func recommendTapped() {
         
         
         let item = activityItem
@@ -173,14 +168,6 @@ class RecipeTableViewController: UITableViewController {
 
     }
 
-    
-//    func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
-//        if activityType == .postToTwitter {
-//            return "Download #Ve-scoverer via @appstore."
-//        } else {
-//            return "Download Ve-scoverer from App Store"
-//        }
-//    }
 
 }
 
@@ -193,15 +180,6 @@ extension RecipeTableViewController: UISearchResultsUpdating {
         searchBar.tintColor = UIColor(hexString: "3797a4")
         filterContentForSearchText(searchBar.text!)
 
-        
-//        if let searchText = searchController.searchBar.text, !searchText.isEmpty {
-//                 recipes = recipes.filter { recipe in
-//                    return recipe.title.lowercased().contains(searchText.lowercased())
-//                 }
-//
-//        } else {
-//            recipes.shuffle()
-//        }
         
     }
     

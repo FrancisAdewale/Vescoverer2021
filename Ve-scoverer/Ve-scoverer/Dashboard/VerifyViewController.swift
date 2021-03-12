@@ -12,17 +12,17 @@ import Firebase
 //could change to a calander to schedule meetups. minimum of 6 people more females than male.
 class VerifyViewController : UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     
-    let db  = Firestore.firestore()
-    let storage = Storage.storage()
-    let user = Auth.auth().currentUser
-    var isVerified = false
-    let picker = UIImagePickerController()
+    private let db  = Firestore.firestore()
+    private let storage = Storage.storage()
+    private let user = Auth.auth().currentUser
+    private var isVerified = false
+    private let picker = UIImagePickerController()
 
-    @IBOutlet weak var userVerificationImage: UIImageView!
-    @IBOutlet weak var label: UILabel!
-    @IBOutlet var bottomLabel: UILabel!
+    @IBOutlet weak private var userVerificationImage: UIImageView!
+    @IBOutlet weak private var label: UILabel!
+    @IBOutlet private var bottomLabel: UILabel!
     
-    @IBOutlet var arrow: UIImageView!
+    @IBOutlet private var arrow: UIImageView!
     
     
     override func viewDidLoad() {
@@ -40,17 +40,7 @@ class VerifyViewController : UIViewController, UIImagePickerControllerDelegate &
     
         load()
      
-//        let animation = CABasicAnimation(keyPath: "position")
-//        animation.duration = 0.13
-//        animation.repeatCount = 4
-//        animation.autoreverses = true
-//        animation.fromValue = NSValue(cgPoint: CGPoint(x: userVerificationImage.center.x - 10, y: userVerificationImage.center.y))
-//        animation.toValue = NSValue(cgPoint: CGPoint(x: userVerificationImage.center.x + 10, y: userVerificationImage.center.y))
-//        
-//        if isVerified == false {
-//
-//            userVerificationImage.layer.add(animation, forKey: "position")
-//        }
+
         title = "Verify"
         userVerificationImage.isUserInteractionEnabled = true
         let tap = UITapGestureRecognizer(target: self, action: #selector(takeSelfie))
@@ -63,7 +53,7 @@ class VerifyViewController : UIViewController, UIImagePickerControllerDelegate &
 //        let user = Auth.auth().currentUser
     }
     
-    @objc func takeSelfie() {
+    @objc private func takeSelfie() {
         present(picker, animated: true, completion: nil)
     }
     
@@ -100,7 +90,7 @@ class VerifyViewController : UIViewController, UIImagePickerControllerDelegate &
       
     }
     
-    func load() {
+    private func load() {
         
         db.collection("users").document((user?.email)!).addSnapshotListener { (snapShot, error) in
             if let data = snapShot?.data() {

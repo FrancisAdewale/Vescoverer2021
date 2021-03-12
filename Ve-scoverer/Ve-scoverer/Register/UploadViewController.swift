@@ -11,20 +11,17 @@ import SwiftyToolTip
 
 class UploadViewController: UIViewController,UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     
-    let picker = UIImagePickerController()
-    
-    var currentuser = ""
-    
-    var imagePath: String?
-    let storage = Storage.storage()
+    private let picker = UIImagePickerController()
+    private var imagePath: String?
+    private let storage = Storage.storage()
 
-    let db = Firestore.firestore()
+    private let db = Firestore.firestore()
     
-    @IBOutlet weak var uploadImage: UIButton!
-    @IBOutlet weak var progressBar: UIProgressView!
-    @IBOutlet weak var uploadLabel: UILabel!
-    @IBOutlet weak var nextButton: UIButton!
-    @IBOutlet weak var background: UIImageView!
+    @IBOutlet weak private var uploadImage: UIButton!
+    @IBOutlet weak private var progressBar: UIProgressView!
+    @IBOutlet weak private var uploadLabel: UILabel!
+    @IBOutlet weak private var nextButton: UIButton!
+    @IBOutlet weak private var background: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +40,7 @@ class UploadViewController: UIViewController,UIImagePickerControllerDelegate & U
     }
     
 
-    @IBAction func uploadPressed(_ sender: UIButton) {
+    @IBAction private func uploadPressed(_ sender: UIButton) {
 
         present(picker, animated: true, completion: nil)
     }
@@ -91,7 +88,7 @@ class UploadViewController: UIViewController,UIImagePickerControllerDelegate & U
     }
     
     
-    @IBAction func next(_ sender: Any) {
+    @IBAction private func next(_ sender: Any) {
 
         let user = Auth.auth().currentUser
         

@@ -10,18 +10,17 @@ import Firebase
 
 class GenderViewController: UIViewController,  UIPickerViewDataSource, UIPickerViewDelegate {
 
-    let db = Firestore.firestore()
-    var currentuser = ""
+    private let db = Firestore.firestore()
     
-    var selectedGender = ""
+    private var selectedGender = ""
     
-    @IBOutlet weak var background: UIImageView!
-    @IBOutlet weak var progressBar: UIProgressView!
-    @IBOutlet weak var genderPicker: UIPickerView!
-    @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak private var background: UIImageView!
+    @IBOutlet weak private var progressBar: UIProgressView!
+    @IBOutlet weak private var genderPicker: UIPickerView!
+    @IBOutlet weak private var nextButton: UIButton!
     
-    @IBOutlet weak var genderLabel: UILabel!
-    let gender = ["Male","Female"]
+    @IBOutlet weak private var genderLabel: UILabel!
+    private let gender = ["Male","Female"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +29,6 @@ class GenderViewController: UIViewController,  UIPickerViewDataSource, UIPickerV
         self.view.insertSubview(self.background, at: 0)
         background.backgroundColor = UIColor(hexString: "3797A4")
 
-        // Do any additional setup after loading the view.
     }
     
     
@@ -53,18 +51,10 @@ class GenderViewController: UIViewController,  UIPickerViewDataSource, UIPickerV
     }
     
 
-    @IBAction func next(_ sender: UIButton) {
+    @IBAction private func next(_ sender: UIButton) {
         
-   
-        
-//        let user = Auth.auth().currentUser
-//
-//        if let user = user?.email {
-//            uvc.currentuser = user
-//            db.collection("users").document(currentuser).setData(["gender" : selectedGender], merge: true)
             self.performSegue(withIdentifier: "goToUpload", sender: self)
 
-        //}
     }
     
     

@@ -11,6 +11,7 @@ import Firebase
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    let db = Firestore.firestore()
 
 
 
@@ -24,7 +25,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func sceneDidDisconnect(_ scene: UIScene) {
         
-        
+
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.
         // Release any resources associated with this scene that can be re-created the next time the scene connects.
@@ -34,6 +35,25 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneDidBecomeActive(_ scene: UIScene) {
         // Called when the scene has moved from an inactive state to an active state.
         // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
+        
+        if let user = Auth.auth().currentUser {
+            self.db.collection("users").document(user.email!).getDocument { (snapShot, err) in
+                if let error = err {
+                    print(error.localizedDescription)
+                } else {
+                    
+                    let data = snapShot?.data()
+                    
+                    let count = data?["badge"] as! String
+                    
+                    UIApplication.shared.applicationIconBadgeNumber = (count as! NSString).integerValue
+
+                }
+            }
+        }
+ 
+        print("Hi HO hi HO")
+
     }
 
     func sceneWillResignActive(_ scene: UIScene) {
@@ -50,6 +70,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Called as the scene transitions from the foreground to the background.
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
+        
     }
     
     func windowScene(_ windowScene: UIWindowScene, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {

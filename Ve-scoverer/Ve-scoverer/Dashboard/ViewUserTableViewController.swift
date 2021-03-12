@@ -17,66 +17,28 @@ import GoogleMobileAds
 
 
 class ViewUserTableViewController: UITableViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate, GADBannerViewDelegate  {
-   
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    var instagramAppLink = String()
-    var twitterAppLink = String()
+
     let picker = UIImagePickerController()
-    var expectedString = ""
-    var expectedImage = UIImage()
-    var buttonIsEnabled = true
-    var expectedBool = Bool()
-    var isUserVerified = Bool()
-    let user = Auth.auth().currentUser
-    let db = Firestore.firestore()
-    var imagefilepath: URL? = nil
-    var userFirstName = ""
-    var profileUser = ProfileUser()
+    private let user = Auth.auth().currentUser
+    private let db = Firestore.firestore()
     var viewUser = ViewUser()
-    let button = UIButton()
-    let storage = Storage.storage()
+    private let storage = Storage.storage()
     var loadUserEmail = ""
-    var floatNum = CGFloat()
-    var bannerView: GADBannerView!
-
-
-    var userImage = ""
+    private var bannerView: GADBannerView!
     var userCity = ""
 
     
-
-    @IBOutlet weak var twitterButton: UIButton!
-    @IBOutlet weak var igButton: UIButton!
-    @IBOutlet weak var logOutButton: UIButton!
-    @IBOutlet weak var isVerified: UIImageView!
-    @IBOutlet weak var profileName: UILabel!
-    @IBOutlet weak var uploadImage: UIButton!
-    @IBOutlet weak var tab: UITabBarItem!
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
         bannerView = GADBannerView(adSize: kGADAdSizeBanner)
-
         addBannerViewToView(bannerView)
-        
-        
         bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
         bannerView.rootViewController = self
         bannerView.delegate = self
 
         bannerView.load(GADRequest())
 
-        
-        floatNum = CGFloat.random(in: 0...1)
-
-        //self.navigationController?.navigationBar.prefersLargeTitles = true
-        title = profileUser.firstName
-        
        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         picker.delegate = self
         picker.allowsEditing = true
@@ -156,7 +118,7 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
             let cell = tableView.dequeueReusableCell(withIdentifier: "ViewCell", for: indexPath) as! ViewImageCell
             cell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
             cell.contentView.layer.borderWidth = 0.05
-//            cell.backgroundColor = UIColor(hexString: "3797A4")!.lighten(byPercentage: self.floatNum)
+
             cell.usernameCell.text = viewUser.firstName
             cell.verified.addToolTip(description: "Verified!")
 
@@ -170,22 +132,11 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
                     }
                     
                     else {
-                        
                         cell.imageCell.sd_setImage(with: url, placeholderImage: UIImage(named:"placeholder"))
-                        //cell.imageCell.sd_setImage(with: url, completed: nil)
-                        
-                        
                         if self.viewUser.verified == true {
-                            
                             cell.verified.setImage(UIImage(named: "verified.png"), for: .normal)
-                                
-                                
-                                //.sd_setImage(with: URL(fileURLWithPath: path), completed: nil)
-                            
                         }
-                        
                         tableView.reloadData()
-                        
                     }
                 }
             }
@@ -197,7 +148,6 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
             let otherCell = tableView.dequeueReusableCell(withIdentifier: "NormalCell", for: indexPath) as! NormalViewCell
             otherCell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
             otherCell.fillerInfo.text = "\(viewUser.age.description) Years Old"
-//            otherCell.backgroundColor = UIColor(hexString: "3797A4")!.lighten(byPercentage: self.floatNum)
 
             otherCell.contentView.layer.borderWidth = 0.05
             return otherCell
@@ -206,12 +156,10 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
             otherCell.fillerInfo.text = "Vegan For: \(viewUser.veganSince)"
             otherCell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
             otherCell.contentView.layer.borderWidth = 0.05
-//            otherCell.backgroundColor = UIColor(hexString: "3797A4")!.lighten(byPercentage: self.floatNum)
 
             return otherCell
         } else if indexPath.section == 1 && indexPath.row == 0 {
             let otherCell = tableView.dequeueReusableCell(withIdentifier: "NormalCell", for: indexPath) as! NormalViewCell
-//            otherCell.backgroundColor = UIColor(hexString: "3797A4")!.lighten(byPercentage: self.floatNum)
 
             otherCell.textLabel?.text = viewUser.gender
             otherCell.accessoryType = .none
@@ -224,12 +172,9 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
             otherCell.editedTwitter = viewUser.twitter
             otherCell.editedInstagram = viewUser.instagram
 
-            //otherCell.textLabel?.text = profileUser.twitter
-            //otherCell.backgroundColor = UIColor(hexString: "3797A4")!.lighten(byPercentage: self.floatNum)
 
             otherCell.accessoryType = .none
 
-            //otherCell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
             otherCell.contentView.layer.borderWidth = 0.05
             return otherCell
         } else {
@@ -239,7 +184,6 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
             otherCell.accessoryType = .none
             otherCell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
             otherCell.contentView.layer.borderWidth = 0.05
-//            otherCell.backgroundColor = UIColor(hexString: "3797A4")!.lighten(byPercentage: self.floatNum)
 
             return otherCell
    
@@ -257,7 +201,6 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
             footerView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height:
             100)
          
-//            footerView.backgroundColor = UIColor(hexString: "3797A4")
         }
         return footerView
 
@@ -265,6 +208,39 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100.0
+    }
+    
+    /// Tells the delegate an ad request loaded an ad.
+    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+      print("adViewDidReceiveAd")
+    }
+
+    /// Tells the delegate an ad request failed.
+    func adView(_ bannerView: GADBannerView,
+        didFailToReceiveAdWithError error: GADRequestError) {
+      print("adView:didFailToReceiveAdWithError: \(error.localizedDescription)")
+    }
+
+    /// Tells the delegate that a full-screen view will be presented in response
+    /// to the user clicking on an ad.
+    func adViewWillPresentScreen(_ bannerView: GADBannerView) {
+      print("adViewWillPresentScreen")
+    }
+
+    /// Tells the delegate that the full-screen view will be dismissed.
+    func adViewWillDismissScreen(_ bannerView: GADBannerView) {
+      print("adViewWillDismissScreen")
+    }
+
+    /// Tells the delegate that the full-screen view has been dismissed.
+    func adViewDidDismissScreen(_ bannerView: GADBannerView) {
+      print("adViewDidDismissScreen")
+    }
+
+    /// Tells the delegate that a user click will open another app (such as
+    /// the App Store), backgrounding the current app.
+    func adViewWillLeaveApplication(_ bannerView: GADBannerView) {
+      print("adViewWillLeaveApplication")
     }
 
     

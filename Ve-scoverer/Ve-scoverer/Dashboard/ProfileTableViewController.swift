@@ -19,49 +19,50 @@ import SDWebImage
 class ProfileTableViewController: UITableViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate  {
     
     
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    var editedInstagram = String()
-    var editedTwitter = String()
-    let picker = UIImagePickerController()
-    var expectedString = ""
-    var expectedImage = UIImage()
-    var buttonIsEnabled = true
-    var expectedBool = Bool()
-    var isUserVerified = Bool()
-    let user = Auth.auth().currentUser
-    let db = Firestore.firestore()
-    var imagefilepath = ""
-    var userFirstName = ""
-    var profileUser = ProfileUser()
-    let button = UIButton()
-    var path = ""
-    let storage = Storage.storage()
-    var imagePath: String?
-
-
-
+    private let picker = UIImagePickerController()
+    private let user = Auth.auth().currentUser
+    private let db = Firestore.firestore()
+    private var profileUser = ProfileUser()
+    private let button = UIButton()
+    private var path = ""
+    private let storage = Storage.storage()
+    private var imagePath: String?
+    private var userCity = ""
     
-    var userCity = ""
     
+    @IBOutlet var editButton: UIBarButtonItem!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         editButton.title = "Edit"
         
+        db.collection("users").document((user?.email)!).getDocument(completion: { (snapShot, err) in
+            if let err = err {
+                print(err.localizedDescription)
+            } else {
+                
+                let data = snapShot?.data()
+                
+                if let tabItems = self.tabBarController?.tabBar.items {
+                    // In this case we want to modify the badge number of the third tab:
+                    let tabItem = tabItems[3]
+                    tabItem.badgeValue = data?["badge"] as! String
+                    
+                    if tabItem.badgeValue == "0" {
+                       self.tabBarItem.badgeValue = nil
+                   }
+
+                }
+            }
+            
+        })
+        
+        
+        
+        
         load()
         
     }
-    
-    
-    @IBOutlet var editButton: UIBarButtonItem!
-    @IBOutlet weak var twitterButton: UIButton!
-    @IBOutlet weak var igButton: UIButton!
-    @IBOutlet weak var logOutButton: UIButton!
-    @IBOutlet weak var isVerified: UIImageView!
-    @IBOutlet weak var profileName: UILabel!
-    @IBOutlet weak var uploadImage: UIButton!
-    @IBOutlet weak var tab: UITabBarItem!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -284,7 +285,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
     
     
     
-    @IBAction func editTapped(_ sender: UIBarButtonItem) {
+    @IBAction private func editTapped(_ sender: UIBarButtonItem) {
         print("editTapped")
         tableView.setEditing(!tableView.isEditing, animated: true)
         DispatchQueue.main.async {
@@ -295,7 +296,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
   
     }
     
-    @objc func deleteAcc() {
+    @objc private func deleteAcc() {
         
         let lvc = self.storyboard?.instantiateViewController(withIdentifier: "Login") as! LoginViewController
         let loadingVC = self.storyboard?.instantiateViewController(withIdentifier: "Loading") as! LoadingViewViewController
@@ -350,7 +351,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
     }
     
     
-    @objc func signOut() {
+    @objc private func signOut() {
 
 
         let lvc = storyboard?.instantiateViewController(withIdentifier: "Login") as! LoginViewController
@@ -383,7 +384,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
 
     }
 
-    func load() {
+   private func load() {
         
 //       var email = ""
 //

@@ -16,38 +16,34 @@ import CryptoKit
 
 class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignInDelegate {
     
-    let appleView = ASAuthorizationAppleIDButton(type: .signIn, style: .black)
+    private let appleView = ASAuthorizationAppleIDButton(type: .signIn, style: .black)
     
-    let context = (UIApplication.shared.delegate as! AppDelegate)
     fileprivate var currentNonce: String?
     
     
-    // @IBOutlet var appleView: ASAuthorizationAppleIDButton!
-    @IBOutlet weak var googleView: GIDSignInButton!
-    @IBOutlet weak var background: UIImageView!
+    @IBOutlet private weak var googleView: GIDSignInButton!
+    @IBOutlet private weak var background: UIImageView!
     
-    @IBOutlet var titleLabel: UILabel!
+    @IBOutlet private weak var titleLabel: UILabel!
     
-    var handle: AuthStateDidChangeListenerHandle?
-    let db = Firestore.firestore()
-    var location = CLLocation()
+    private var handle: AuthStateDidChangeListenerHandle?
+    private let db = Firestore.firestore()
+    private var location = CLLocation()
     private let locationManager = CLLocationManager()
-    var firstName = ""
-    var secondName = ""
-    var emailId = ""
-    var user = Auth.auth().currentUser
-    var userlocation = CLLocationCoordinate2D()
-    var hasCompletedRegistration: Bool?
-    var appleUser = ""
+    internal var firstName = ""
+    internal var secondName = ""
+    private var emailId = ""
+    private var user = Auth.auth().currentUser
+    private var userlocation = CLLocationCoordinate2D()
+    private var hasCompletedRegistration: Bool?
+    private var appleUser = ""
     
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        
-        
-        
+ 
         navigationItem.hidesBackButton = true
         background.backgroundColor = UIColor(hexString: "3797A4")
         // navigationController?.navigationBar.backgroundColor = .white
@@ -74,36 +70,16 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
                         }
                         
                     }
-                    
-                    
+      
                 }
             }
         }
-        
-        
-        
+  
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //
-        //        if let unwrappedUser = user?.email {
-        //            self.db.collection("users").document(unwrappedUser).getDocument { (document, error) in
-        //
-        //                if let err = error {
-        //                    print("this is the login viewwillappear eror \(err)")
-        //                } else {
-        //                    if let dataDescription = document!.data() {
-        //                        self.hasCompletedRegistration = (dataDescription["completedRegistration"] as! Bool)
-        //                        print("login view did load \(self.hasCompletedRegistration)")
-        //                        print(unwrappedUser)
-        //
-        //                    }
-        //
-        //                }
-        //            }
-        //        }
-        //
+
         title = "Login"
         titleLabel.text = ""
         var charIndex = 0.0
@@ -139,11 +115,8 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
         Auth.auth().removeStateDidChangeListener(handle!)
         
     }
-    
-    
-    
-    
-    func setupAppleButton() {
+
+    private func setupAppleButton() {
         
         appleView.addTarget(self, action: #selector(startSignInWithAppleFlow), for: .touchUpInside)
         appleView.frame = CGRect(x: 117.0, y: 200, width: 184.0, height: 42.0)
@@ -153,7 +126,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
         
     }
     
-    func setupGoogleButton() {
+    private func setupGoogleButton() {
         
         let y = self.view.center.y
         
@@ -173,7 +146,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
     
     
     
-    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!,
+    internal func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!,
               withError error: Error!) {
         
         if let error = error {
@@ -343,46 +316,10 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
             }
         }
         
-        
-        
-        
-        
+    
     }
     
-    
-    
-    //    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-    //
-    //        if identifier == "goToVegan" {
-    //            if let user = self.user?.email {
-    //
-    //                self.db.collection("users").document(user).getDocument { (document, error) in
-    //
-    //                    if let err = error {
-    //                        print("this is the login viewwillappear eror \(err)")
-    //                    } else {
-    //                        if let dataDescription = document!.data() {
-    //                            self.hasCompletedRegistration = (dataDescription["completedRegistration"] as! Bool)
-    //                            print("should perform method: \(self.hasCompletedRegistration)")
-    //
-    //
-    //                        }
-    //
-    //                    }
-    //                }
-    //
-    //            }
-    //
-    //        }
-    //
-    //        if self.hasCompletedRegistration == true {
-    //            return false
-    //        } else {
-    //            return true
-    //        }
-    //    }
-    
-    
+
 }
 
 
@@ -473,7 +410,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
     }
     
     
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+    internal func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         
         if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
             
@@ -493,26 +430,6 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
             let credential = OAuthProvider.credential(withProviderID: "apple.com",
                                                       idToken: idTokenString,
                                                       rawNonce: nonce)
-            
-//            if let user = Auth.auth().currentUser?.email {
-//                
-//                self.db.collection("users").document(user).getDocument { (document, error) in
-//                    
-//                    if let err = error {
-//                        print("this is the login viewwillappear eror \(err)")
-//                    } else {
-//                        if let dataDescription = document!.data() {
-//                            self.hasCompletedRegistration = (dataDescription["completedRegistration"] as! Bool)
-//                            print("login view will appear \(self.hasCompletedRegistration)")
-//                
-//                        }
-//                    }
-//                }
-//            }
-//            
-//            
-//       
-            
             
             
                 
@@ -559,24 +476,16 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                                         
                                     }
                                     else if self.hasCompletedRegistration == true {
-                                        
-                                        
-                                        
+      
                                         self.performSegue(withIdentifier: "goToDash", sender: self)
-                                        
-                                        
+                       
                                     }
-                                    
-                                    
+ 
                                 } else if self.hasCompletedRegistration == false {
-                                    
-                                    
-                                    
+ 
                                     guard let user = authResult?.user else { return }
                                     let email = user.email ?? ""
-                                    
-                                    
-                                    
+
                                     self.userlocation = self.location.coordinate
                                     
                                     self.db.collection("users").document(email).setData([
@@ -587,24 +496,17 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                                         "latitude": Double(self.userlocation.latitude),
                                         "completedRegistration": false,
                                         "badge": "0"
-
+                                        
                                     ]) { err in
                                         if let err = err {
                                             print("Error writing document: \(err)")
-                                        } else {
                                         }
                                     }
-                                    
-                                    
-                                    
                                 } else {
-                                    
                                     
                                     guard let user = authResult?.user else { return }
                                     let email = user.email ?? ""
-                                    
-                                    
-                                    
+    
                                     self.userlocation = self.location.coordinate
                                     
                                     self.db.collection("users").document(email).setData([
@@ -627,60 +529,21 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
 
                                 }
                             }
-                            //                                   else {
-                            //
-                            //
-                            //
-                            //                                                        guard let user = authResult?.user else { return }
-                            //                                                        let email = user.email ?? ""
-                            //
-                            //                                                        self.userlocation = self.location.coordinate
-                            //
-                            //                                                        self.db.collection("users").document(email).setData([
-                            //                                                            "email": email,
-                            //                                                            "firstName": "",
-                            //                                                            "secondName":"",
-                            //                                                            "longitude": Double(self.userlocation.longitude),
-                            //                                                            "latitude": Double(self.userlocation.latitude),
-                            //                                                            "completedRegistration": false
-                            //                                                        ]) { err in
-                            //                                                            if let err = err {
-                            //                                                                print("Error writing document: \(err)")
-                            //                                                            } else {
-                            //                                                                self.performSegue(withIdentifier: "goToVegan", sender: self)
-                            //                                                            }
-                            //                                                        }
-                            //
-                            //
-                            //
-                            //
-                            //                                                }
+                    
                         }
-                        
-                        
+                 
                     }
-                    
-                    
+                
                 }
-            
-            
+    
         }
-        
-        
-        
+  
     }
-    
-    
-    
-    
-    
-    
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+    internal func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
         // Handle error.
         print("Sign in with Apple errored: \(error)")
     }
-    
-    
+  
 }
 
 

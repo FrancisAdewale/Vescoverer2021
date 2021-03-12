@@ -14,27 +14,21 @@ import UserNotifications
 
 class DiscoverViewController: UIViewController {
     //MARK: - Properties
-    let startingLocation = CLLocation(latitude: 37.773972, longitude: -122.431297)
+    private let startingLocation = CLLocation(latitude: 37.773972, longitude: -122.431297)
     private let locationManager = CLLocationManager()
-    let radius: CLLocationDistance = 500
-    var annoationsArray = [MKPointAnnotation]()
-    let db = Firestore.firestore()
-    var geoPoints = [GeoPoint]()
-    let user = Auth.auth().currentUser?.email
-    var name = ""
-    var count = 0
+    private let radius: CLLocationDistance = 500
+    private var annoationsArray = [MKPointAnnotation]()
+    private let db = Firestore.firestore()
+    private let user = Auth.auth().currentUser?.email
+    private var name = ""
+    private var addedUsers = [String]()
+    private var set: Set<String>?
+    
 
     @IBOutlet weak private var nearbyUsers: MKMapView!
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-      
-    }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
    //addddddd tabbar badge which will connect to app badge!!!!!//////////-----------------------
      
         self.nearbyUsers.isRotateEnabled = false
@@ -55,6 +49,12 @@ class DiscoverViewController: UIViewController {
             locationManager.desiredAccuracy = kCLLocationAccuracyReduced
             locationManager.startUpdatingLocation()
         }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        set = nil
+        addedUsers = []
+
         
     }
     
@@ -64,9 +64,7 @@ class DiscoverViewController: UIViewController {
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
-                
-                
-                
+
                 for document in querySnapshot!.documents {
                     
                     let data = document.data()
@@ -74,9 +72,7 @@ class DiscoverViewController: UIViewController {
                     let longitude = data["longitude"] as! Double
                     
                     let email = data["email"] as! String
-                    
-                    
-                    
+
                     let annotation = MKPointAnnotation()
                     
                     if email != self.user {
@@ -86,10 +82,7 @@ class DiscoverViewController: UIViewController {
                         self.annoationsArray.append(annotation)
                         self.nearbyUsers.showAnnotations(self.annoationsArray, animated: true)
                     }
-                
-                    
-                  
-                    
+  
                 }
             }
         }
@@ -136,23 +129,49 @@ extension DiscoverViewController: MKMapViewDelegate {
                             let action = UIAlertAction(title: "Add", style: .default) { (action) in
                                 if let user = view.annotation?.title {
                                     
-                                    self.db.collection("users").document(self.user!).collection("found").document(user!).setData(["latitude":Double((view.annotation?.coordinate.longitude)!), "longitude": Double((view.annotation?.coordinate.latitude)!), "email":user!
-                                                                                                                                  
-                                    ])
+                                    self.db.collection("users").document(self.user!).collection("found").document(user!).setData(["latitude":Double((view.annotation?.coordinate.longitude)!), "longitude": Double((view.annotation?.coordinate.latitude)!), "email":user!])
              
                                     if let tabItems = self.tabBarController?.tabBar.items {
                                         // In this case we want to modify the badge number of the third tab:
                                         let tabItem = tabItems[3]
-                                        tabItem.badgeValue = "1"
+                                        self.addedUsers.append(user!)
+                                        
+                                        self.db.collection("users").document(self.user!).setData(["badge": "\(Set(self.addedUsers).count)"], merge: true)
+                                        
+                                        self.db.collection("users").document(self.user!).getDocument { (snapShot, err) in
+                                            if let error = err {
+                                                print(error.localizedDescription)
+                                            } else {
+                                                
+                                                let data = snapShot?.data()
+                                                
+                                                let count = data?["badge"] as! String
+                                                
+                                                tabItem.badgeValue = count
+                                                    
+
+
+                                            }
+                                        }
+                 
+                                        
+
+                                        //self.added += 1
+                                        
                                     }
+                                  
+                                    
+                                    
                                 }
                             }
                             
                             let cancelAction = UIAlertAction(title: "Nevermind", style: .cancel, handler: nil)
                             alert.addAction(cancelAction)
                             alert.addAction(action)
-                            self.present(alert, animated: true, completion: nil)
-//                            alert.view.tintColor = UIColor(hexString: "3797A4")
+                            
+                            self.present(alert, animated: true,completion: nil)
+
+                            
                         }
                     }
                 })

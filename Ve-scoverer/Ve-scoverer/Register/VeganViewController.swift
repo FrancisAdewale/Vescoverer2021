@@ -11,18 +11,17 @@ import Firebase
 
 class VeganViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
-    var selectedRow = ""
-    var currentuser = ""
+    private var selectedRow = ""
     
-    let db =  Firestore.firestore()
+    private let db =  Firestore.firestore()
 
-    @IBOutlet weak var background: UIImageView!
-    @IBOutlet weak var veganLabel: UILabel!
-    @IBOutlet weak var nextButton: UIButton!
-    @IBOutlet weak var progressBar: UIProgressView!
-    @IBOutlet weak var veganSince: UIPickerView!
-    @IBOutlet weak var veganQuestion: UILabel!
-    let times = ["<20 years","<10 years","<5 years","<2 years", "<1 year", "<6 months" ]
+    @IBOutlet private weak var background: UIImageView!
+    @IBOutlet private weak var veganLabel: UILabel!
+    @IBOutlet private weak var nextButton: UIButton!
+    @IBOutlet private weak var progressBar: UIProgressView!
+    @IBOutlet private weak var veganSince: UIPickerView!
+    @IBOutlet private weak var veganQuestion: UILabel!
+    private let times = ["<20 years","<10 years","<5 years","<2 years", "<1 year", "<6 months" ]
     
     
     override func viewDidLoad() {
@@ -32,27 +31,6 @@ class VeganViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
         self.view.insertSubview(self.background, at: 0)
         background.backgroundColor = UIColor(hexString: "3797A4")
 
-
-        //print("\(progressBar.frame)")
-        
-//        db.collection("users").getDocuments { (snapShot, err) in
-//            if let err = err {
-//                print(err)
-//            } else {
-//                let documents = snapShot?.documents
-//                for document in documents! {
-//                    let data = document.data()
-//                    for (k,v) in data {
-//                        if k == "email" {
-//                            self.currentuser = v as! String
-//                            print(self.currentuser)
-//                        }
-//
-//                    }
-//
-//                }
-//            }
-//        }
         veganSince.dataSource = self
         veganSince.delegate = self
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
@@ -82,18 +60,14 @@ class VeganViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
         return 50.0
     }
     
-    @IBAction func next(_ sender: Any) {
+    @IBAction private func next(_ sender: Any) {
         
 
         let user = Auth.auth().currentUser
                             
         if let user = user?.email {
             self.db.collection("users").document(user).setData(["veganSince" : selectedRow], merge: true)
-//
-//            nvc.modalPresentationStyle = .overFullScreen
-//            present(nvc, animated: true, completion: nil)
-//
-//
+
             self.performSegue(withIdentifier: "goToName", sender: self)
 
 
