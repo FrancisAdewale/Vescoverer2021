@@ -22,6 +22,17 @@ class GenderViewController: UIViewController,  UIPickerViewDataSource, UIPickerV
     @IBOutlet weak private var genderLabel: UILabel!
     private let gender = ["Male","Female"]
 
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .darkContent
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        genderPicker.setValue(UIColor.black, forKeyPath: "textColor")
+
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         genderPicker.delegate = self

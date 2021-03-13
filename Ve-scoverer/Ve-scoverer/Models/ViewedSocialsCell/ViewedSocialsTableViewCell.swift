@@ -18,7 +18,10 @@ class ViewedSocialsTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        instagram.clipsToBounds = true
+        twitter.clipsToBounds = true
+        instagram.layer.cornerRadius = 13
+        twitter.layer.cornerRadius = 10
 
         // Initialization code
     }

@@ -44,9 +44,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     
                     let data = snapShot?.data()
                     
-                    let count = data?["badge"] as! String
+                    if let count = data?["badge"] {
+                        UIApplication.shared.applicationIconBadgeNumber = (count as! NSString).integerValue
+
+                    }
                     
-                    UIApplication.shared.applicationIconBadgeNumber = (count as! NSString).integerValue
 
                 }
             }

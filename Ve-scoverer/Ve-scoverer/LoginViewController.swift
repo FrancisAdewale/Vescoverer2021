@@ -38,6 +38,9 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
     private var hasCompletedRegistration: Bool?
     private var appleUser = ""
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .darkContent
+    }
     
     
     override func viewWillAppear(_ animated: Bool) {

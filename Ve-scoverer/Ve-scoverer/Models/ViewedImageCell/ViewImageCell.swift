@@ -44,6 +44,7 @@ class ViewImageCell: UITableViewCell {
         
         if verified.isHidden == false {
             verified.showToolTip()
+            
 
         }
     }

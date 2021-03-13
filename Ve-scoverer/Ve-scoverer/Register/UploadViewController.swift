@@ -23,6 +23,11 @@ class UploadViewController: UIViewController,UIImagePickerControllerDelegate & U
     @IBOutlet weak private var nextButton: UIButton!
     @IBOutlet weak private var background: UIImageView!
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .darkContent
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         uploadImage.addToolTip(description: "Uploaded")

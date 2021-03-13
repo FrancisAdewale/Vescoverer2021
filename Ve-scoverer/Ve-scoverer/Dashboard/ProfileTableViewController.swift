@@ -36,30 +36,34 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         super.viewWillAppear(animated)
         editButton.title = "Edit"
         
-        db.collection("users").document((user?.email)!).getDocument(completion: { (snapShot, err) in
-            if let err = err {
-                print(err.localizedDescription)
-            } else {
-                
-                let data = snapShot?.data()
-                
-                if let tabItems = self.tabBarController?.tabBar.items {
-                    // In this case we want to modify the badge number of the third tab:
-                    let tabItem = tabItems[3]
-                    tabItem.badgeValue = data?["badge"] as! String
+        if let user = user {
+            db.collection("users").document(user.email!).getDocument(completion: { (snapShot, err) in
+                if let err = err {
+                    print(err.localizedDescription)
+                } else {
                     
-                    if tabItem.badgeValue == "0" {
-                       self.tabBarItem.badgeValue = nil
-                   }
+                    let data = snapShot?.data()
+                    
+                    if let tabItems = self.tabBarController?.tabBar.items {
+                        // In this case we want to modify the badge number of the third tab:
+                        let tabItem = tabItems[3]
+                        
+                        if let value = data?["badge"] {
+                            tabItem.badgeValue = (value as! String)
 
+                        }
+                        
+                        else if tabItem.badgeValue == "0" {
+                           tabItem.badgeValue = nil
+                       }
+
+                    }
                 }
-            }
+                
+            })
             
-        })
-        
-        
-        
-        
+        }
+ 
         load()
         
     }

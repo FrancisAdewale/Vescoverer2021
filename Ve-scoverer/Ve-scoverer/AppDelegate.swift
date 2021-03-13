@@ -151,11 +151,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         print(error.localizedDescription)
                     } else {
                         
-                        let data = snapShot!.data()
                         
-                        UIApplication.shared.applicationIconBadgeNumber = (data?["badge"] as! NSString).integerValue
+                        let data = snapShot?.data()
                         
-                        
+                        if let unwrappedInt = (data?["badge"]) {
+                            UIApplication.shared.applicationIconBadgeNumber = (unwrappedInt as! NSString).integerValue
+
+                        }
+   
                     }
                 }
                 

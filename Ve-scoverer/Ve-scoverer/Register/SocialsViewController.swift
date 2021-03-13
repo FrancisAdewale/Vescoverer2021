@@ -28,6 +28,11 @@ class SocialsViewController: UIViewController {
     private let db = Firestore.firestore()
     private var count = 0
     
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .darkContent
+    }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,8 +46,6 @@ class SocialsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-
 
     }
     

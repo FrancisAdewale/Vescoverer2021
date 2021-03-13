@@ -58,7 +58,7 @@ class DiscoverViewController: UIViewController {
         
     }
     
-    func getLocations(){
+   private func getLocations(){
         
         db.collection("users").getDocuments() { (querySnapshot, err) in
             if let err = err {
@@ -89,7 +89,7 @@ class DiscoverViewController: UIViewController {
     }
     
     
-    func setStartingPosition(){
+    private func setStartingPosition(){
         let position =  MKCoordinateRegion(center: startingLocation.coordinate, latitudinalMeters: radius, longitudinalMeters: radius)
         nearbyUsers.setRegion(position, animated: true)
     }
@@ -125,9 +125,12 @@ extension DiscoverViewController: MKMapViewDelegate {
                             self.name = ((document["firstName"] as? String)!)
                             
                             let alert = UIAlertController(title: "Add \(self.name)", message: "", preferredStyle: .alert)
-                            
+                            //I NEED TO MAKE SURE AN ALERT POPS  UP IF THEY RE ADD A USER 
                             let action = UIAlertAction(title: "Add", style: .default) { (action) in
                                 if let user = view.annotation?.title {
+                                    
+                                    
+                                    
                                     
                                     self.db.collection("users").document(self.user!).collection("found").document(user!).setData(["latitude":Double((view.annotation?.coordinate.longitude)!), "longitude": Double((view.annotation?.coordinate.latitude)!), "email":user!])
              

@@ -24,6 +24,11 @@ class SocialsTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        instagramButton.clipsToBounds = true
+        twitterButton.clipsToBounds = true
+        instagramButton.layer.cornerRadius = 13
+        twitterButton.layer.cornerRadius = 10
        
     }
     

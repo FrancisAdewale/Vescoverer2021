@@ -32,6 +32,17 @@ class AgeViewController: UIViewController {
     @IBOutlet weak var questionLabel: UILabel!
     
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .darkContent
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        ageSelector.setValue(UIColor.black, forKeyPath: "textColor")
+
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
