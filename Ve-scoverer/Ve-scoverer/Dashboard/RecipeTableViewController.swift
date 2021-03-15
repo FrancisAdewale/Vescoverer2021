@@ -132,8 +132,8 @@ class RecipeTableViewController: UITableViewController {
 
     private func fetchData() {
     
-      // 1          CHANGE API KEY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        let request = AF.request("https://api.spoonacular.com/recipes/complexSearch?apiKey=e37fd98195e0427ba55710ad55eb4609&diet=vegan&number=100&addRecipeInformation=True")
+      // 1          
+        let request = AF.request("https://api.spoonacular.com/recipes/complexSearch?apiKey=e742b07ea05f4a00ade106e82a60e347&diet=vegan&number=100&addRecipeInformation=True")
       // 2
         
         

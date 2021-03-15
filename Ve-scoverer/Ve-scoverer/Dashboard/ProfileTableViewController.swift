@@ -50,20 +50,20 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
                         
                         if let value = data?["badge"] {
                             tabItem.badgeValue = (value as! String)
-
+                            
                         }
                         
                         else if tabItem.badgeValue == "0" {
-                           tabItem.badgeValue = nil
-                       }
-
+                            tabItem.badgeValue = nil
+                        }
+                        
                     }
                 }
                 
             })
             
         }
- 
+        
         load()
         
     }
@@ -124,21 +124,16 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-
+        
         if indexPath.section == 0 && indexPath.row == 0 {
             
             let cell = tableView.cellForRow(at: indexPath) as! ImageViewCell
-            
             if cell.userImage.isHighlighted {
                 self.present(picker, animated: true, completion: nil)
-                
             }
         }
-        
     }
-    
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        
         if indexPath.section == 0 && indexPath.row == 0 {
             return true
         } else if indexPath.section == 1 && indexPath.row == 1 {
@@ -147,14 +142,12 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         else {
             return false
         }
-        
-        
+
     }
-    
-    
+
     override func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
-
-
+        
+        
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -256,6 +249,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
             
             let delButton = UIButton(frame: CGRect(x: 0, y: 0, width: 130, height: 44))
             
+            
             delButton.setTitle("Delete Account", for: .normal)
             delButton.center = CGPoint(x: footerView.center.x, y: footerView.center.y - 27.0)
             delButton.titleLabel?.font = UIFont(name: "Lato", size: 20.0)
@@ -265,30 +259,28 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
                 delButton.isEnabled = true
                 delButton.isUserInteractionEnabled = true
                 delButton.alpha = 1.0
-
-
+                
+                
             } else {
                 delButton.isEnabled = false
                 delButton.isUserInteractionEnabled = false
                 delButton.alpha = 0.2
-
+                
             }
-           
+            
             footerView.addSubview(delButton)
             footerView.addSubview(button)
- 
+            
         }
-
         return footerView
-
+        
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100.0
     }
     
-    
-    
+
     @IBAction private func editTapped(_ sender: UIBarButtonItem) {
         print("editTapped")
         tableView.setEditing(!tableView.isEditing, animated: true)
@@ -297,154 +289,142 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         }
         editButton.title = tableView.isEditing ? "Done" : "Edit"
         editButton.style = tableView.isEditing ? .done : .plain
-  
     }
     
     @objc private func deleteAcc() {
+        
+        let reauthenticateAlert = UIAlertController(title: "Sign-in again", message: "reauthenticate to delete account", preferredStyle: .alert)
+
+        let reauthAction = UIAlertAction(title: "Yes", style: .destructive, handler: { action in
+            self.signOut()
+        })
+        
+        let reauthCancel = UIAlertAction(title: "No", style: .cancel, handler: nil)
+
+        
+        reauthenticateAlert.addAction(reauthAction)
+        reauthenticateAlert.addAction(reauthCancel)
+
         
         let lvc = self.storyboard?.instantiateViewController(withIdentifier: "Login") as! LoginViewController
         let loadingVC = self.storyboard?.instantiateViewController(withIdentifier: "Loading") as! LoadingViewViewController
         loadingVC.modalPresentationStyle = .overFullScreen
         lvc.modalPresentationStyle = .overFullScreen
 
-        
         let alert = UIAlertController(title: "Delete Account", message: "Permanently Delete Account?", preferredStyle: .alert)
         let action = UIAlertAction(title: "Yes", style: .destructive, handler: { action in
-           
+            
+            if let user = self.user {
+                user.delete { error in
+                    if let error = error {
+                        // An error happened.
+                        print("This is the detlete error \(error.localizedDescription)")
+                        self.present(reauthenticateAlert, animated: true, completion: nil)
 
-
-            self.user?.delete { error in
-              if let error = error {
-                // An error happened.
-                print(error.localizedDescription)
-              } else {
-                self.db.collection("users").document((self.user!.email)!).delete() { err in
-                    if let err = err {
-                        print("Error removing document: \(err)")
                     } else {
-                        print("Document successfully removed!")
-                        self.present(loadingVC, animated: true) {
-                        print("deleted account")
-                            Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { (timer) in
-                                self.dismiss(animated: true) {
+                        self.db.collection("users").document((self.user!.email)!).delete() { err in
+                            if let err = err {
+                                print("Error removing document: \(err)")
+                                
 
-                                    self.present(lvc, animated: true, completion: nil)
-
+                            } else {
+                                print("Document successfully removed!")
+                                self.present(loadingVC, animated: true) {
+                                    print("deleted account")
+                                    Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { (timer) in
+                                        self.dismiss(animated: true) {
+                                            self.present(lvc, animated: true, completion: nil)
+                                        }
                                     }
                                 }
                             }
+                        }
                     }
                 }
+            }
 
 
-                }
-
-              }
-            
             
         })
-
+        
         
         let cancel = UIAlertAction(title: "No", style: .cancel, handler: nil)
         
         alert.addAction(action)
         alert.addAction(cancel)
         self.present(alert, animated: true, completion: nil)
-//        alert.view.tintColor =  UIColor(hexString: "3797A4")
-
+        //        alert.view.tintColor =  UIColor(hexString: "3797A4")
     }
     
     
     @objc private func signOut() {
-
-
         let lvc = storyboard?.instantiateViewController(withIdentifier: "Login") as! LoginViewController
         let loadingVC = storyboard?.instantiateViewController(withIdentifier: "Loading") as! LoadingViewViewController
-
-
+        
         loadingVC.modalPresentationStyle = .overFullScreen
         lvc.modalPresentationStyle = .overFullScreen
-
-
+        
         do {
             try Auth.auth().signOut()
-
+            
             present(loadingVC, animated: true) {
-
+                
                 Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { (timer) in
                     self.dismiss(animated: true) {
-
-
                         self.navigationController?.present(lvc, animated: true, completion: nil)
-
-
-
                     }
                 }
             }
         } catch let signOutError as NSError {
             print ("Error signing out: %@", signOutError)
         }
-
-    }
-
-   private func load() {
-        
-//       var email = ""
-//
-//        Auth.auth().addStateDidChangeListener { (auth, user) in
-//            if user != nil {
-//                let checkUser = user
-//                email = (checkUser?.email)!
-//            }
-//
-//        }
-        
-        
-        db.collection("users").document((user?.email)!).addSnapshotListener { (snapShot, err) in
-            if let err = err {
-                print(err)
-            } else {
-                
-                let data = snapShot?.data()
-                
-                self.profileUser.firstName = data?["firstName"] as? String ?? ""
-                self.profileUser.veganSince = data?["veganSince"] as? String ?? ""
-                self.profileUser.age = data?["age"] as? Int ?? 0
-                self.profileUser.gender = data?["gender"] as? String ?? ""
-                self.profileUser.instagram = data?["instagram"] as? String ?? ""
-                self.profileUser.twitter = data?["twitter"] as? String ?? ""
-                self.profileUser.image = data?["imagepath"] as? String ?? ""
-                self.profileUser.latitude = data?["latitude"] as? Double ?? 0
-                self.profileUser.longitude = data?["longitude"] as? Double ?? 0
-                self.profileUser.verified = data?["isVerified"] as? Bool ?? false
-                self.profileUser.hasCompletedRegistration = data?["completedRegistration"] as? Bool ?? true
-                
-                
-                let resourcePath = Bundle.main.resourcePath
-                let imgName = "verified.png"
-                self.path = "\(resourcePath!)/\(imgName)"
-                
-                let location = CLLocation(latitude: self.profileUser.latitude, longitude: self.profileUser.longitude)
-                location.fetchCityAndCountry { city, country, error in
-                    guard let city = city, let country = country, error == nil else { return }
-                    self.userCity = city + ", " + country
-                }
-                
-                
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-            }
-            
-        }
         
     }
     
+    private func load() {
+        
+        
+        if let user = Auth.auth().currentUser {
+            db.collection("users").document(user.email!).addSnapshotListener { (snapShot, err) in
+                if let err = err {
+                    print(err)
+                } else {
+                    
+                    let data = snapShot?.data()
+                    
+                    self.profileUser.firstName = data?["firstName"] as? String ?? ""
+                    self.profileUser.veganSince = data?["veganSince"] as? String ?? ""
+                    self.profileUser.age = data?["age"] as? Int ?? 0
+                    self.profileUser.gender = data?["gender"] as? String ?? ""
+                    self.profileUser.instagram = data?["instagram"] as? String ?? ""
+                    self.profileUser.twitter = data?["twitter"] as? String ?? ""
+                    self.profileUser.image = data?["imagepath"] as? String ?? ""
+                    self.profileUser.latitude = data?["latitude"] as? Double ?? 0
+                    self.profileUser.longitude = data?["longitude"] as? Double ?? 0
+                    self.profileUser.verified = data?["isVerified"] as? Bool ?? false
+                    self.profileUser.hasCompletedRegistration = data?["completedRegistration"] as? Bool ?? true
+   
+                    let resourcePath = Bundle.main.resourcePath
+                    let imgName = "verified.png"
+                    self.path = "\(resourcePath!)/\(imgName)"
+                    
+                    let location = CLLocation(latitude: self.profileUser.latitude, longitude: self.profileUser.longitude)
+                    location.fetchCityAndCountry { city, country, error in
+                        guard let city = city, let country = country, error == nil else { return }
+                        self.userCity = city + ", " + country
+                    }
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+                }
+            }
+        }
+ 
+    }
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-                
+        
         let userImage = info[.imageURL]
-        let profileStorage = info[.originalImage] as! UIImage
         
         let url = userImage as! URL
         
@@ -460,13 +440,10 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
                     self.tableView.reloadData()
                 }
             }
-            
         }
         dismiss(animated: true, completion: nil)
         
     }
-    
- 
 }
 
 extension CLLocation {

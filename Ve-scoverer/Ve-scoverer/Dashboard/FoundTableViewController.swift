@@ -26,9 +26,7 @@ class FoundTableViewController: UITableViewController {
         
         load()
         view.backgroundColor = UIColor(hexString: "57AAB7")
-        
-        let dvc = storyboard?.instantiateViewController(withIdentifier: "Discover") as! DiscoverViewController
-        
+                
         if let tabItems = self.tabBarController?.tabBar.items {
             // In this case we want to modify the badge number of the third tab:
             let tabItem = tabItems[3]

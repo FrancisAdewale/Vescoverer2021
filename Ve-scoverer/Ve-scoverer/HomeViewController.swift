@@ -40,7 +40,7 @@ class HomeViewController: UIViewController {
                 present(lvc, animated: true) {
                     Auth.auth().addStateDidChangeListener { auth, user in
                         if let user = user {
-                            print("\(user.email) is signed in.")
+                            print("\(String(describing: user.email)) is signed in.")
                         } else {
                             print("\(String(describing: user?.email)) is signed out.")
                         }

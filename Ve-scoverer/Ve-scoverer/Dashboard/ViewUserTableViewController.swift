@@ -33,7 +33,7 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
         
         bannerView = GADBannerView(adSize: kGADAdSizeBanner)
         addBannerViewToView(bannerView)
-        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView.adUnitID = "ca-app-pub-5752925768003309~8805739283"
         bannerView.rootViewController = self
         bannerView.delegate = self
 
@@ -58,7 +58,7 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
         [NSLayoutConstraint(item: bannerView,
                             attribute: .bottom,
                             relatedBy: .equal,
-                            toItem: bottomLayoutGuide,
+                            toItem: view.safeAreaLayoutGuide.bottomAnchor,
                             attribute: .top,
                             multiplier: 1,
                             constant: 0),
@@ -213,6 +213,10 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
     /// Tells the delegate an ad request loaded an ad.
     func adViewDidReceiveAd(_ bannerView: GADBannerView) {
       print("adViewDidReceiveAd")
+        bannerView.alpha = 0
+        UIView.animate(withDuration: 1, animations: {
+          bannerView.alpha = 1
+        })
     }
 
     /// Tells the delegate an ad request failed.
@@ -243,7 +247,7 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
       print("adViewWillLeaveApplication")
     }
 
-    
+ 
 
 }
 

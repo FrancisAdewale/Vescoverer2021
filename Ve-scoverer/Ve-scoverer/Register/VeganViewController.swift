@@ -42,8 +42,6 @@ class VeganViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         veganSince.setValue(UIColor.black, forKeyPath: "textColor")
-
-
     }
 
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -56,8 +54,6 @@ class VeganViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         selectedRow = times[row]
-        
-        
         return times[row]
     }
     

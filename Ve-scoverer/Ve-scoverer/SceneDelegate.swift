@@ -12,6 +12,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     let db = Firestore.firestore()
+    var credential: AuthCredential?
 
 
 
@@ -52,6 +53,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
                 }
             }
+            
+                        
+      
         }
  
         print("Hi HO hi HO")
@@ -75,11 +79,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
     }
     
-    func windowScene(_ windowScene: UIWindowScene, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
-        
-        
-        
-        
-    }
+
 }
 

@@ -303,6 +303,7 @@
                             </button>
                             <pickerView alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Oi-rp-SKx">
                                 <rect key="frame" x="0.0" y="176" width="320" height="216"/>
+                                <color key="tintColor" systemColor="labelColor"/>
                             </pickerView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="bYZ-ei-wUA"/>
@@ -546,7 +547,7 @@
                             </button>
                             <pickerView alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aye-ik-tDU">
                                 <rect key="frame" x="0.0" y="176" width="320" height="216"/>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" systemColor="labelColor"/>
                             </pickerView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="8uX-9e-gjO"/>
@@ -706,7 +707,7 @@
                             </label>
                             <datePicker alpha="0.90000000000000002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="wheels" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WfU-3H-C2p">
                                 <rect key="frame" x="0.0" y="176" width="320" height="216"/>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" systemColor="labelColor"/>
                                 <date key="date" timeIntervalSinceReferenceDate="-1232696.5633989573">
                                     <!--2000-12-17 17:35:03 +0000-->
                                 </date>
@@ -1083,7 +1084,7 @@
             <point key="canvasLocation" x="2357" y="5917"/>
         </scene>
     </scenes>
-    <color key="tintColor" red="0.21568627450980393" green="0.59215686274509804" blue="0.64313725490196072" alpha="1" colorSpace="calibratedRGB"/>
+    <color key="tintColor" systemColor="labelColor"/>
     <resources>
         <image name="arrow" width="493.5" height="1219.5"/>
         <image name="checkmark" catalog="system" width="128" height="114"/>
@@ -1097,6 +1098,9 @@
         <image name="twitterProfile" width="64" height="64"/>
         <image name="upload" width="256" height="256"/>
         <image name="vescoverer" width="512" height="512"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -83,18 +83,14 @@ class SocialsViewController: UIViewController {
             
             if let user = user?.email {
                 db.collection("users").document(user).setData([
-                    "instagram": instagram,
-                    "twitter": twitter,
+                    "instagram": instagram ?? "",
+                    "twitter": twitter ?? "",
                     "completedRegistration": true,
                     "isVerified": false
                 ], merge: true)
             }
             
-            count += 1
-            
-            db.collection("badge").document("badge")
-                .setData(["badgeCount": count]
-                         , merge: true)
+          
             
          
             dvc.modalPresentationStyle = .currentContext

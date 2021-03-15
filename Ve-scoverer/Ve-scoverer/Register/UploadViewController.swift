@@ -67,8 +67,8 @@ class UploadViewController: UIViewController,UIImagePickerControllerDelegate & U
         guard let imageData = profileStorage.jpegData(compressionQuality: 0.5) else { return }
         
         let imageRef = storageRef.child("\((user.email)!)").child("profile/profile.jpg")
-        let uploadTask = imageRef.putData(imageData, metadata: nil) { (metadata, error) in
-            guard let metadata = metadata else {
+        _ = imageRef.putData(imageData, metadata: nil) { (metadata, error) in
+            guard metadata != nil else {
                 // Uh-oh, an error occurred!
                 return
               }
@@ -76,7 +76,7 @@ class UploadViewController: UIViewController,UIImagePickerControllerDelegate & U
            // let size = metadata.size
             // You can also access to download URL after upload.
             imageRef.downloadURL { (url, error) in
-              guard let downloadURL = url else {
+                guard url != nil else {
                 // Uh-oh, an error occurred!
                 return
               }

@@ -37,14 +37,10 @@ class AgeViewController: UIViewController {
     }
     
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        ageSelector.setValue(UIColor.black, forKeyPath: "textColor")
 
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        ageSelector.setValue(UIColor.black, forKeyPath: "textColor")
 
         let date = dateFormatter.string(from: ageSelector.date)
 
@@ -65,7 +61,6 @@ class AgeViewController: UIViewController {
         let timeInterval = birthday?.timeIntervalSinceNow
         calculatedAge = abs(Int(timeInterval! / 31556926.0))
         
-        print(calculatedAge)
         age.text = calculatedAge.description
          
     }

@@ -26,7 +26,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
     
     @IBOutlet private weak var titleLabel: UILabel!
     
-    private var handle: AuthStateDidChangeListenerHandle?
+    var handle: AuthStateDidChangeListenerHandle?
     private let db = Firestore.firestore()
     private var location = CLLocation()
     private let locationManager = CLLocationManager()
@@ -45,19 +45,23 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        setupBar()
  
         navigationItem.hidesBackButton = true
         background.backgroundColor = UIColor(hexString: "3797A4")
         // navigationController?.navigationBar.backgroundColor = .white
         //        appleButton.backgroundColor = .gray
-        navigationController?.navigationBar.barTintColor = .white
+        navigationController?.navigationBar.barTintColor = UIColor(complementaryFlatColorOf: .lightGray, withAlpha: 0.7)
         
+
         
         handle = Auth.auth().addStateDidChangeListener { (auth, user) in
+            
+
+            
+            
             if let unwrappedUser = user?.email {
                 self.db.collection("users").document(unwrappedUser).getDocument { (document, error) in
-                    
                     if let err = error {
                         print("this is the login viewwillappear eror \(err)")
                     } else {
@@ -66,6 +70,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
                             
                             if self.hasCompletedRegistration == true {
                                 
+                
                                 self.performSegue(withIdentifier: "goToDash", sender: self)
                             } else {
                                 self.performSegue(withIdentifier: "goToVegan", sender: self)
@@ -114,11 +119,21 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
         
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        Auth.auth().removeStateDidChangeListener(handle!)
-        
-    }
+//    override func viewWillDisappear(_ animated: Bool) {
+//
+//
+//        Auth.auth().removeStateDidChangeListener(handle!)
+//
+//    }
 
+    
+    func setupBar() {
+        var preferredStatusBarStyle: UIStatusBarStyle {
+            return .darkContent
+        }
+    }
+    
+    
     private func setupAppleButton() {
         
         appleView.addTarget(self, action: #selector(startSignInWithAppleFlow), for: .touchUpInside)
@@ -172,11 +187,10 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
             self.db.collection("users").document(unwrappedUser.email!).getDocument { (document, error) in
                 
                 if let err = error {
-                    print("this is the login viewwillappear eror \(err)")
+                    print("Google sign in error \(err.localizedDescription)")
                 } else {
                     if let dataDescription = document!.data() {
                         self.hasCompletedRegistration = (dataDescription["completedRegistration"] as! Bool)
-                        print("login view will appear \(self.hasCompletedRegistration)")
                         
                         
                         if self.hasCompletedRegistration == nil {
@@ -185,8 +199,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
                                 if let error = error {
                                     print("Error occurs when authenticate with Firebase: \(error.localizedDescription)")
                                 } else  {
-                                    
-                                    
+                                
                                     self.firstName = (unwrappedUser.givenName)!
                                     self.secondName = (unwrappedUser.familyName)!
                                     self.emailId = (unwrappedUser.email)!
