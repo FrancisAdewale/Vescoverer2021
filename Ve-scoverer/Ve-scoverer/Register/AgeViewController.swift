@@ -32,15 +32,15 @@ class AgeViewController: UIViewController {
     @IBOutlet weak var questionLabel: UILabel!
     
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .darkContent
-    }
+//    override var preferredStatusBarStyle: UIStatusBarStyle {
+//        return .darkContent
+//    }
+//    
     
-    
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        ageSelector.setValue(UIColor.black, forKeyPath: "textColor")
 
         let date = dateFormatter.string(from: ageSelector.date)
 

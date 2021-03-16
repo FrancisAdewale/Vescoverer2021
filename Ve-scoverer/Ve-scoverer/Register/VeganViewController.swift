@@ -23,9 +23,9 @@ class VeganViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
     @IBOutlet private weak var veganQuestion: UILabel!
     private let times = ["<20 years","<10 years","<5 years","<2 years", "<1 year", "<6 months" ]
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .darkContent
-    }
+//    override var preferredStatusBarStyle: UIStatusBarStyle {
+//        return .darkContent
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,7 +41,7 @@ class VeganViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        veganSince.setValue(UIColor.black, forKeyPath: "textColor")
+       // veganSince.setValue(UIColor.black, forKeyPath: "textColor")
     }
 
     func numberOfComponents(in pickerView: UIPickerView) -> Int {

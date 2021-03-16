@@ -29,10 +29,10 @@ class SocialsViewController: UIViewController {
     private var count = 0
     
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .darkContent
-    }
-    
+//    override var preferredStatusBarStyle: UIStatusBarStyle {
+//        return .darkContent
+//    }
+//    
 
     override func viewDidLoad() {
         super.viewDidLoad()

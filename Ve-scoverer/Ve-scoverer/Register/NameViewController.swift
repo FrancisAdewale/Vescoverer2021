@@ -55,10 +55,10 @@ class NameViewController: UIViewController, UITextFieldDelegate {
 
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .darkContent
-    }
-    
+//    override var preferredStatusBarStyle: UIStatusBarStyle {
+//        return .darkContent
+//    }
+//    
     
     private func hideKeyboardWhenTappedAround() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
@@ -82,7 +82,7 @@ class NameViewController: UIViewController, UITextFieldDelegate {
         let user = Auth.auth().currentUser
         
         if let user = user?.email {
-            self.db.collection("users").document(user).setData(["firstName" : self.firstNameTextField.text!,"secondName": self.lastNameTextField.text!], merge: true)
+            self.db.collection("users").document(user).setData(["firstName" : self.firstNameTextField.text!.capitalized,"secondName": self.lastNameTextField.text!.capitalized], merge: true)
 
         }
     }

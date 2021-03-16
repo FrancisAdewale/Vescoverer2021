@@ -23,14 +23,13 @@ class GenderViewController: UIViewController,  UIPickerViewDataSource, UIPickerV
     private let gender = ["Male","Female"]
 
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .darkContent
-    }
-    
+//    override var preferredStatusBarStyle: UIStatusBarStyle {
+//        return .darkContent
+//    }
+//    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        genderPicker.setValue(UIColor.black, forKeyPath: "textColor")
 
     }
     override func viewDidLoad() {

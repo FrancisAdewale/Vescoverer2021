@@ -38,21 +38,22 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
     private var hasCompletedRegistration: Bool?
     private var appleUser = ""
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .darkContent
-    }
-    
+//    override var preferredStatusBarStyle: UIStatusBarStyle {
+//        return .darkContent
+//    }
+//    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setupBar()
+        
+                
  
         navigationItem.hidesBackButton = true
         background.backgroundColor = UIColor(hexString: "3797A4")
         // navigationController?.navigationBar.backgroundColor = .white
         //        appleButton.backgroundColor = .gray
-        navigationController?.navigationBar.barTintColor = UIColor(complementaryFlatColorOf: .lightGray, withAlpha: 0.7)
-        
+//        navigationController?.navigationBar.barTintColor = UIColor(complementaryFlatColorOf: .lightGray, withAlpha: 0.7)
+//        
 
         
         handle = Auth.auth().addStateDidChangeListener { (auth, user) in
@@ -127,11 +128,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GIDSignI
 //    }
 
     
-    func setupBar() {
-        var preferredStatusBarStyle: UIStatusBarStyle {
-            return .darkContent
-        }
-    }
+  
     
     
     private func setupAppleButton() {

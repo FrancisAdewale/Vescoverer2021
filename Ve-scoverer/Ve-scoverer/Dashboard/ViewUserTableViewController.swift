@@ -58,7 +58,7 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
         [NSLayoutConstraint(item: bannerView,
                             attribute: .bottom,
                             relatedBy: .equal,
-                            toItem: view.safeAreaLayoutGuide.bottomAnchor,
+                            toItem: view.safeAreaLayoutGuide,
                             attribute: .top,
                             multiplier: 1,
                             constant: 0),
