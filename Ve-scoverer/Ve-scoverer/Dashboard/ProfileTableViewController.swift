@@ -184,7 +184,14 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
             
             let otherCell = tableView.dequeueReusableCell(withIdentifier: "NormalCell", for: indexPath) as! NormalViewCell
             otherCell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
-            otherCell.fillerInfo.text = "\(profileUser.age.description) Years Old"
+            
+            if profileUser.age == 0 {
+                otherCell.fillerInfo.text = "Age Not Revealed"
+
+            } else {
+                otherCell.fillerInfo.text = "\(profileUser.age.description) Years Old"
+            }
+            
             otherCell.contentView.layer.borderWidth = 0.05
             otherCell.layer.cornerRadius = 8
             
@@ -200,9 +207,17 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
             return otherCell
         } else if indexPath.section == 1 && indexPath.row == 0 {
             let otherCell = tableView.dequeueReusableCell(withIdentifier: "NormalCell", for: indexPath) as! NormalViewCell
-            otherCell.fillerInfo.text = profileUser.gender
-            otherCell.accessoryType = .none
             otherCell.fillerInfo.font = UIFont(name: "Lato", size: 20.0)
+
+            if profileUser.gender == "" {
+                otherCell.fillerInfo.text = "Gender Not Revealed"
+
+
+            } else {
+
+                otherCell.fillerInfo.text = profileUser.gender
+            }
+            otherCell.accessoryType = .none
             otherCell.contentView.layer.borderWidth = 0.05
             otherCell.layer.cornerRadius = 8
             
@@ -395,7 +410,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
                     self.profileUser.firstName = data?["firstName"] as? String ?? ""
                     self.profileUser.veganSince = data?["veganSince"] as? String ?? ""
                     self.profileUser.age = data?["age"] as? Int ?? 0
-                    self.profileUser.gender = data?["gender"] as? String ?? ""
+                    self.profileUser.gender = data?["gender"] as? String ?? "Gender Not Revealed"
                     self.profileUser.instagram = data?["instagram"] as? String ?? ""
                     self.profileUser.twitter = data?["twitter"] as? String ?? ""
                     self.profileUser.image = data?["imagepath"] as? String ?? ""

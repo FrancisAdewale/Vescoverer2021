@@ -15,6 +15,7 @@ class AgeViewController: UIViewController {
     private let db = Firestore.firestore()
     
     
+    @IBOutlet var ageSwitch: UISwitch!
     @IBOutlet weak private var background: UIImageView!
     @IBOutlet weak private var nextButton: UIButton!
     @IBOutlet weak private var ageLabel: UILabel!
@@ -41,6 +42,13 @@ class AgeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        ageSwitch.onTintColor = UIColor.white
+        ageSwitch.isOn = false
+        ageSelector.isEnabled = false
+        ageSelector.isUserInteractionEnabled = false
+        age.isHidden = true
+      
+    
 
         let date = dateFormatter.string(from: ageSelector.date)
 
@@ -68,17 +76,39 @@ class AgeViewController: UIViewController {
     @IBAction private func next(_ sender: UIButton) {
         
         let user = Auth.auth().currentUser
-        
-        if let user = user?.email {
-            self.db.collection("users").document(user).setData(["age" : Int(age.text!)!], merge: true)
 
-            self.performSegue(withIdentifier: "goToGender", sender: self)
+        if ageSwitch.isOn == true {
+            
+            if let user = user?.email {
+                self.db.collection("users").document(user).setData(["age" : Int(age.text!)!], merge: true)
 
+                self.performSegue(withIdentifier: "goToGender", sender: self)
+
+            }
+        } else {
+            
+                self.performSegue(withIdentifier: "goToGender", sender: self)
+
+            
         }
-  
+
     }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         return true
+    }
+    @IBAction func switchTapped(_ sender: UISwitch) {
+        
+        if ageSwitch.isOn == false {
+            ageSelector.isEnabled = false
+            ageSelector.isUserInteractionEnabled = false
+            age.isHidden = true
+        }
+        else if ageSwitch.isOn == true {
+            ageSelector.isEnabled = true
+            ageSelector.isUserInteractionEnabled = true
+            age.isHidden = false
+        }
+        
     }
 }

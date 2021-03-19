@@ -29,10 +29,7 @@ class SocialsViewController: UIViewController {
     private var count = 0
     
     
-//    override var preferredStatusBarStyle: UIStatusBarStyle {
-//        return .darkContent
-//    }
-//    
+  
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,11 +71,6 @@ class SocialsViewController: UIViewController {
         lvc.modalPresentationStyle = .overFullScreen
      
         
-        if (instagram == nil && twitter == nil) || (instagram == "" || twitter == "") {
-            socials.layer.add(animation, forKey: "position")
-
-        } else {
-            
             let user = Auth.auth().currentUser
             
             if let user = user?.email {
@@ -105,7 +97,7 @@ class SocialsViewController: UIViewController {
                 }
             }
 
-        }
+        
 
     }
     

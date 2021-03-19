@@ -14,6 +14,7 @@ class GenderViewController: UIViewController,  UIPickerViewDataSource, UIPickerV
     
     private var selectedGender = ""
     
+    @IBOutlet var genderSwitch: UISwitch!
     @IBOutlet weak private var background: UIImageView!
     @IBOutlet weak private var progressBar: UIProgressView!
     @IBOutlet weak private var genderPicker: UIPickerView!
@@ -30,6 +31,10 @@ class GenderViewController: UIViewController,  UIPickerViewDataSource, UIPickerV
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        genderSwitch.isOn = false
+        genderPicker.isUserInteractionEnabled = false
+        genderPicker.isHidden = true
+
 
     }
     override func viewDidLoad() {
@@ -63,22 +68,43 @@ class GenderViewController: UIViewController,  UIPickerViewDataSource, UIPickerV
 
     @IBAction private func next(_ sender: UIButton) {
         
+        let user = Auth.auth().currentUser
+        
+        if genderSwitch.isOn == true  {
+            
+            if let user = user?.email {
+                db.collection("users").document(user).setData(["gender" : selectedGender], merge: true)
+            }
+
+        } else {
+            
             self.performSegue(withIdentifier: "goToUpload", sender: self)
+
+        }
+        
 
     }
     
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let user = Auth.auth().currentUser
-        
-        if let user = user?.email {
-            db.collection("users").document(user).setData(["gender" : selectedGender], merge: true)
-        }
-    }
+     
+    
     
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         return true
     }
     
+    @IBAction func switchTapped(_ sender: Any) {
+        
+        if genderSwitch.isOn == false {
+            genderPicker.isUserInteractionEnabled = false
+            genderPicker.isHidden = true
+        
+        }
+        else if genderSwitch.isOn == true {
+            genderPicker.isUserInteractionEnabled = true
+            genderPicker.isHidden = false
+        }
+        
+    }
 }

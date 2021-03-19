@@ -147,7 +147,14 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
         
             let otherCell = tableView.dequeueReusableCell(withIdentifier: "NormalCell", for: indexPath) as! NormalViewCell
             otherCell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
-            otherCell.fillerInfo.text = "\(viewUser.age.description) Years Old"
+            
+            if viewUser.age == 0 {
+                otherCell.fillerInfo.text = "Age Not Revealed"
+
+            } else {
+                otherCell.fillerInfo.text = "\(viewUser.age.description) Years Old"
+
+            }
 
             otherCell.contentView.layer.borderWidth = 0.05
             return otherCell
@@ -160,10 +167,17 @@ class ViewUserTableViewController: UITableViewController, UIImagePickerControlle
             return otherCell
         } else if indexPath.section == 1 && indexPath.row == 0 {
             let otherCell = tableView.dequeueReusableCell(withIdentifier: "NormalCell", for: indexPath) as! NormalViewCell
-
-            otherCell.textLabel?.text = viewUser.gender
-            otherCell.accessoryType = .none
             otherCell.textLabel?.font = UIFont(name: "Lato", size: 20.0)
+            
+            if viewUser.gender == "" {
+                otherCell.textLabel?.text = "Gender Not Revealed"
+
+            } else {
+                otherCell.textLabel?.text = viewUser.gender
+
+            }
+
+            otherCell.accessoryType = .none
             otherCell.contentView.layer.borderWidth = 0.05
 
             return otherCell
